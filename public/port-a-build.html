@@ -1,0 +1,1418 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Carry-Factor.com - LoL Stats Command Center.  Stats, Counterpicks, and Cooldowns</title>
+        <link rel="shortcut icon" href="website/diamond_i_favicon.png">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="Pre-game Lobby Stats for League of Legends">
+        <meta name="keywords" content="pre-game lobby stats, League of Legends, Champion Select, Statistics, Summoner info">
+
+		<link rel="stylesheet" type="text/css" href="/stylesheets/bronzodia.css">
+        <link rel="stylesheet" type="text/css" href="/stylesheets/bronzodia_Dark.css" id='dark-styles'>        
+        <link rel="stylesheet" type="text/css" href="/stylesheets/bronzodia_Light.css" id='light-styles'>     
+		
+
+        
+        <script src="/src/jquery-ui-1.12.1.custom/external/jquery/jquery.js"></script>
+        <script src="/src/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
+
+        <script src="/src/mdl/material.js"></script>
+        <!--<script src="src/jquery/jquery-2.2.4.min.js"></script>
+        <script src="src/jquery/jquery-sortable.js"></script>-->
+		<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+        <link rel="stylesheet" href="src/mdl/material.css">
+		
+		<script language="javascript" type="text/javascript" src="src/flot/jquery.js"></script>
+		<script language="javascript" type="text/javascript" src="src/flot/jquery.flot.js"></script>
+		<script language="javascript" type="text/javascript" src="src/flot/jquery.flot.fillbetween.js"></script>
+		<script language="javascript" type="text/javascript" src="src/flot/jquery.flot.crosshair.js"></script>
+		
+		
+        <!-- Google Analytics Tracking Script -->
+        <script>
+            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+            })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+            ga('create', 'UA-60328206-5', 'auto');
+            ga('send', 'pageview');
+
+        </script>
+		
+		<style>
+		div.appContainer {
+			width: 100%;
+			background-color: #111111;
+			color: #EEEEEE;
+		}
+		
+		.upperLeft {
+
+			vertical-align: text-top;
+		}
+		
+		.invisible {
+			display: none;
+		}
+		
+		table.masteriesHolder {
+			background-color: #888888;
+			position: fixed;
+			top: 5vw;
+			left: 20vw;
+			opacity: .9;
+		}
+		
+		td.masteriesHolder {
+			width: 20vw;
+			//height: 30vw;
+		}
+		
+		.ferocity {
+			background-color: #660000;
+			text-align: center;
+			display: inline-block;
+		}
+		
+		.cunning {
+			background-color: #660066;
+			text-align: center;
+			display: inline-block;
+		}
+		
+		.resolve {
+			background-color: #006600;
+			text-align: center;
+			display: inline-block;
+		}
+		
+		.center {
+			margin: 0 auto;
+		}
+		
+		.selected {
+			background-color: #BBBBFF;
+		}
+		</style>
+    </head>
+    <body>
+        <div id="main_content_div" align="center">
+            <div style='width: 100%;' class='brown'><a href="index.html"><img class='banner' style='width:57.65%' src='website/banner-carry-factor.png' alt='Carry-factor: LoL Stats Command Center.  Stats, Counterpicks, and Cooldowns'></a></div>
+            <br>
+
+			<div class="appContainer">Stuff!</div>
+
+
+			<button class="ledon-button mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" onclick="clearData()">Clear Data</button>
+			
+			<div>Stuff!</div>
+			
+			<div id="patch">No patch found.</div>
+			
+			<table>
+				<tbody>
+					<tr>
+						<td class="upperLeft">
+							<div>Runes</div>
+							<div>Reds</div>
+							<div id ="runeShopReds"></div>
+							<div>Yellows</div>
+							<div id ="runeShopYellows"></div>
+							<div>Blues</div>
+							<div id ="runeShopBlues"></div>
+							<div>Quints</div>
+							<div id ="runeShopQuints"></div>
+						</td>
+						<td class="upperLeft">
+							<div><span>Health </span><input type="checkbox" id="checkHealth" onchange="loadItems()"></div>
+							<div><span>Attack Damage </span><input type="checkbox" id="checkAD" onchange="loadItems()"></div>
+							<div><span>Armor </span><input type="checkbox" id="checkAr" onchange="loadItems()"></div>
+							<div><span>Magic Resist </span><input type="checkbox" id="checkMR" onchange="loadItems()"></div>
+							<div><span>Item Search: </span><input type="text" name="itemSearch" id="itemSearch" onkeydown="loadItems()" value=""></div>
+							<div id="tableHolder"></div>
+						</td>
+						<td class="upperLeft">	
+							<div id="inventoryHolder" class="upperLeft"><p>My Inventory!</p></div>
+							
+							<div >More stuff</div>
+							
+							<div>Champions</div>
+							<span><select id="champSelector" onchange="getChampStats()"></select></span> Level <span><select id="levelSelector" onchange="getChampStats()"></select></span>
+							
+							<div>Masteries</div>
+							<button id="editMasteries" onclick="showMasteries()" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored"><span id="ferocityCountButton">0</span><span>&nbsp;&nbsp;/&nbsp;&nbsp;</span><span id="cunningCountButton">0</span><span>&nbsp;&nbsp;/&nbsp;&nbsp;</span><span id="resolveCountButton">0</span></button>
+							
+							<button style="float:right;" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect" onclick="addItemInventory();"><i class="material-icons">add</i></button>
+							
+							<div>Runes</div>
+							<table><tbody id="runeInventoryReds" data-total-count="0"></tbody></table>
+							<table><tbody id="runeInventoryYellows" data-total-count="0"></tbody></table>
+							<table><tbody id="runeInventoryBlues" data-total-count="0"></tbody></table>
+							<table><tbody id="runeInventoryQuints" data-total-count="0"></tbody></table>
+							<div id="itemInventoriesHolder"></div>
+							
+							<!--
+							<table>
+								<thead>
+									<tr>	
+										<td colspan="3"><span>Gold Cost: </span><span id="goldCost">0</span></td>
+									</tr>
+								</thead>
+								<tbody>									
+									<tr>
+										<td id="slotWorking1"><img src="/champicons/blank_square_0.png" width="64px"></td>
+										<td id="slotWorking2"><img src="/champicons/blank_square_0.png" width="64px"></td>
+										<td id="slotWorking3"><img src="/champicons/blank_square_0.png" width="64px"></td>
+									</tr>
+									<tr>
+										<td id="slotWorking4"><img src="/champicons/blank_square_0.png" width="64px"></td>
+										<td id="slotWorking5"><img src="/champicons/blank_square_0.png" width="64px"></td>
+										<td id="slotWorking6"><img src="/champicons/blank_square_0.png" width="64px"></td>
+									</tr>
+								</tbody>
+							</table>
+							-->
+							
+							
+							<div>
+								<table id="masteriesHolder" class="masteriesHolder" style="visibility: hidden;">
+									<tbody>
+										<tr><td style="text-align: center;"><h5 style="display: inline-block;">Masteries</h5><button style="float:right; display: inline-block;" onclick="hideMasteries();" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect"><i class="material-icons">close</i></button></td></tr>
+										<tr>
+											<td class="masteriesHolder ferocity">
+												<div>Ferocity</div>
+												<div id="ferocityHolder" style="text-align: center;"></div>
+												<!--<div style="padding-top: 8vw; text-align: left; padding-left: 5vw; top: 5vs; left: 5vw;">More Content</div>-->
+											</td>
+											<td class="masteriesHolder cunning">
+												<div>Cunning</div>
+												<div id="cunningHolder"></div>
+											</td>
+											<td class="masteriesHolder resolve">
+												<div>Resolve</div>
+												<div id="resolveHolder"></div>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+														
+							
+							<div>Champ Vital Stats</div>
+							<div>Health: <span id="healthDisplay">0</span></div>
+							<div>Attack Damage: <span id="attackDamageDisplay">0</span></div>							
+							
+							<div></div>
+						</td>
+					</td>
+				</tbody>
+			</table>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<div style='width: 100%;' class="brown"><table><tr><td><img src="website/diamond_i.png" alt='diamond_i.png'></td><td style='width: 100%; font-size: 36px; text-align: center; color: #FFFFFF'></td><td><img src="website/diamond_i.png" alt='diamond_i.png' style="filter: fliph"></td></tr></table></div>
+        <table style='text-align: center' align='center'><tr><td><a href='aboutus.html'>About us</a></td><td><a href="contact.html">Contact</a></td><td><a href="privacy_policy.html">Privacy Policy</a></td><td><a href="terms_of_use.html">Terms of Use</a></td></tr></table>
+
+        </div>
+		
+		<script src="src/port-a-build_Functions.js">
+			//Contents:
+			//Masteries:
+			//addMasteryPoint(key)
+			//drawMastery(key)
+			//loadMasteries(key)		
+			
+			//Runes:
+			//addRuneToColor(rune, inventoryColor, color, max)
+			//buyRune(rune)
+			//calculateRunes()
+			//loadRunes
+			//multiplyRunes(rune, count)
+			//sellRune(obj)			
+
+			//Champs:
+			//getChampsList()
+			//getStat(base, perLevelCoeff, level)			
+		</script>
+		<script src="src/standardFunctions.js">
+			//Contents: 
+			//getUrlParameter(sParam) //Extracts a parameter from a URL and returns it.
+			//getCookie(cookieLoad) //Gets a cookie.
+			//String.prototype.replaceAll(search, replace) //Replaces all instances of a search string.
+			//String.prototype.removeMarkups() //Remove HTML markups (e.g. <, >)
+		</script>
+		<script>
+		
+			var patchGlobal;
+			var itemsGlobalJSON;
+			var champsGlobalJSON;
+			var runesGlobalJSON;
+			var masteriesGlobalJSON;
+			
+			var runeStatsGlobal = {};		//List of the sum of all Rune bonus stats (float)
+			
+			var runesListGlobal = {};		//List of all assigned runes (discrete)
+			
+			var masteriesAssigned = {};		//List of all assigned masteries (discrete)
+			
+			var itemsPurchasedByLevel = {};	//List of all purchased items, by level.
+		
+			$(document).ready(function(){
+				
+				//Startup routine, loads Patch and Items/Champs JSON, and probably others when I make them.
+				$("#patch").load("datadragon/patchFull.txt", function(){
+					var patch = document.getElementById("patch").innerHTML;
+					
+					patchGlobal = patch;
+					
+					$.getJSON( "datadragon/" + patch + "/data/en_US/item.json", function( dataItems ) {
+						itemsGlobalJSON = dataItems;
+						
+						$( "<pre/>", {
+								"class": "my-new-list",
+									html: JSON.stringify(itemsGlobalJSON, null, '\t')
+						}).appendTo( "body" );
+						
+						$.getJSON( "datadragon/" + patch + "/data/en_US/championFull.json", function( dataChamps ) {
+							champsGlobalJSON = dataChamps;
+							
+							$.getJSON( "datadragon/" + patch + "/data/en_US/rune.json", function( dataRunes ) {
+								runesGlobalJSON = dataRunes;
+
+								$( "<pre/>", {
+										"class": "my-new-list",
+											html: JSON.stringify(runesGlobalJSON, null, '\t')
+								}).appendTo( "body" );
+								
+								$.getJSON( "datadragon/" + patch + "/data/en_US/mastery.json", function( dataMasteries ) {
+									masteriesGlobalJSON = dataMasteries;
+								
+									var load = false;
+									
+									var champLoadString;
+									var masteriesLoadString;
+									var runesLoadString;
+									var itemsLoadString;
+									
+									var params;
+									
+									if (getUrlParameter("champ") != undefined) {
+										console.log("Loading from URL!");
+										
+										//console.log(getUrlParameter("champ"));
+										//console.log(getUrlParameter("masteries"));
+										//console.log(getUrlParameter("runes"));
+										//console.log(getUrlParameter("items"));
+										
+										champLoadString = getUrlParameter("champ");
+										masteriesLoadString = getUrlParameter("masteries");
+										runesLoadString = getUrlParameter("runes");
+										itemsLoadString = getUrlParameter("items");
+										
+										params = decodeURIComponent(window.location.search.substring(1));
+										
+										console.log(params);
+										
+										load = true;
+										
+									} else if (getCookie("url") != undefined) {
+										console.log("Loading from Cookie!");
+										
+										//console.log(getCookie("url"));
+										
+										//console.log("Cookie:");
+										
+										//console.log(getCookie("url"));
+										
+										var url = getCookie("url");
+										
+										var searchFor = "port-a-build.html?";
+										
+										
+										load = true;	
+
+										params = url.substring(url.indexOf(searchFor) + searchFor.length, url.length);
+										
+										console.log(params);
+										
+
+									} else {
+										console.log("Loading empty file!");
+															
+									}									
+									
+									//Attempt to clone the stats, re-initilaze all fields to zero
+									$.each(runesGlobalJSON.basic.stats, function(key, val) {
+										runeStatsGlobal[key] = 0;
+										
+
+									}); 
+
+									//Run the functions once the JSON is loaded.
+									loadRunes();
+									loadMasteries();
+									loadItems();
+									getChampsList();	
+									
+									if (load) {
+										loadBuild(params);
+									} else {
+										addItemInventory();
+										
+										//Select the first slot by default.
+										selectItemInventory(document.getElementById('itemInventoriesHolder').childNodes[0]);
+										
+										getChampStats();									
+									}
+									
+									//Select the first slot by default.
+									selectItemInventory(document.getElementById('itemInventoriesHolder').childNodes[0]);
+									
+									getChampStats();
+
+								});
+							});
+							
+						});
+					});
+				});
+				
+			
+
+			});
+			
+			
+			function loadBuild(params) {
+				//console.log(params);
+				
+				var segments = params.split("&");
+				
+				var champ = segments[0].split("=")[1];
+				var masteriesString = segments[1].split("=")[1].split(",");
+				var runesString = segments[2].split("=")[1];
+				var itemsString = segments[3].split("=")[1];
+				
+				//console.log(runesString);
+				//console.log(itemsString);				
+				
+				var runes = runesString.length > 2 ? JSON.parse(runesString) : {};
+				var items = itemsString.length > 2 ? JSON.parse(itemsString) : {};
+				
+				//console.log(runes);
+				console.log(items);
+				
+				//Load the Champ!
+				document.getElementById("champSelector").value = champ;
+				
+				//Load the masteries!
+				var j = 0;
+				$.each(masteriesGlobalJSON.data, function (key, val) {
+					//console.log(key);
+					//console.log(val);
+					
+					for (var i = 0; i < masteriesString[j]; i++) {
+						addMasteryPoint(key);
+						//console.log("Added: " + i + ", index " + j + ", key" + key);
+					}
+					
+					j++;
+					
+				});
+				
+				//Load the Runes!
+				$.each(runes, function(key, val) {
+					for (var i = 0; i < val; i++) {
+						buyRune(key);
+					}
+				});
+				
+				
+				//Load the Items!
+				var j = 0;
+				$.each(items, function(key, val) {
+					addItemInventory();
+					
+					$.each(document.getElementById("itemInventoriesHolder").getElementsByTagName("table"), function (key, val){
+						val.getElementsByClassName("levelInventory")[0].value = 1;
+					});
+					
+				});
+				
+				
+				$.each(items, function(key, val) {
+					//console.log(document.getElementById("itemInventoriesHolder").getElementsByTagName("table"));
+					
+					console.log(key);
+					console.log(val);
+					
+					document.getElementById("itemInventoriesHolder").getElementsByTagName("table")[j].getElementsByClassName("levelInventory")[0].value = val["level"];
+					
+					j++;
+				
+				});
+				
+				reorderLevelInventories();
+				
+				j = 0;
+				$.each(items, function(key, val) {
+					selectItemInventory(document.getElementById("itemInventoriesHolder").getElementsByTagName("table")[j]);
+				
+					for (var i = 0; i < 6; i++) {
+						if (val[i] != undefined && val[i].length > 1) {
+							buy(val[i]);
+						}
+					}
+					j++;
+				});
+				
+				
+				
+				
+				//console.log(runes);
+				//console.log(items);
+				
+				
+			}
+			
+			
+			function addItemInventory() {
+			
+				var level = 1;
+			
+				var tableContents = '' + 				
+					'<thead>' +
+						'<tr>' +
+							'<td colspan="3"><span>Gold Cost: </span><span class="goldCost">0</span><span style="float: right;">Level: <select class="levelInventory" onchange="reorderLevelInventories(); getChampStats();"></select></span></td>' +
+						'</tr>' +
+					'</thead>' +
+					'<tbody>' +
+						'<tr>' +
+							'<td class="slotWorking1"><img src="/champicons/blank_square_0.png" width="64px"></td>' +
+							'<td class="slotWorking2"><img src="/champicons/blank_square_0.png" width="64px"></td>' +
+							'<td class="slotWorking3"><img src="/champicons/blank_square_0.png" width="64px"></td>' +
+						'</tr>' +
+						'<tr>' +
+							'<td class="slotWorking4"><img src="/champicons/blank_square_0.png" width="64px"></td>' +
+							'<td class="slotWorking5"><img src="/champicons/blank_square_0.png" width="64px"></td>' +
+							'<td class="slotWorking6"><img src="/champicons/blank_square_0.png" width="64px"></td>' +
+						'</tr>' +
+						'<tr>' + 
+							'<td colspan="3">' +
+								'<div>Health: <span class="healthDisplay">0</span><button style="float:right;" onclick="removeInventory(this)">X</button></div>' +
+								'<div>AD: <span class="attackDamageDisplay">0</span><span style="float:right;">AP: <span class="abilityPowerDisplay">0</span><span></div>' +
+								'<div>Ar: <span class="armorDisplay">0</span><span style="float:right;">MR: <span class="magicResistDisplay">0</span></span></div>' +
+								'<div>EH (Ar): <span class="effectiveHealthArmorDisplay">0</span><span style="float:right;">EH (MR): <span class="effectiveHealthMagicResistDisplay">0</span></span></div>' +
+								'<div>Combo: <span class="comboDamageDisplay">0</span></div>' +
+							'</td>' +
+					'</tbody>';			
+				
+				var table = $('<table/>', {
+					html: tableContents,
+				}).appendTo('#itemInventoriesHolder');
+
+				
+				
+				for (var i = 1; i <= 18; i++) {
+					var option = document.createElement("option");
+					
+					option.innerHTML = i;
+					option.value = i;
+					
+					document.getElementById("itemInventoriesHolder").getElementsByClassName("levelInventory")[document.getElementById("itemInventoriesHolder").childNodes.length - 1].appendChild(option);
+				}			
+
+				var maxLevel = 1;
+				
+				$.each(document.getElementById('itemInventoriesHolder').childNodes, function(key, val){
+					if (val.getElementsByClassName("levelInventory")[0].value > maxLevel) {
+						maxLevel = parseInt(val.getElementsByClassName("levelInventory")[0].value);
+					}
+					
+					//console.log(maxLevel);
+					
+					val.addEventListener("click", function () {
+						selectItemInventory(val);
+					}, true);
+				});
+				
+				//console.log(maxLevel);
+				
+				if (document.getElementById('itemInventoriesHolder').childNodes.length > 1) {
+					maxLevel = maxLevel + 1 > 18 ? 18 : maxLevel + 1;
+				}
+				
+				
+				//console.log(maxLevel);
+				
+				//console.log(document.getElementById('itemInventoriesHolder').childNodes);
+				
+				document.getElementById("itemInventoriesHolder").getElementsByClassName("levelInventory")[document.getElementById('itemInventoriesHolder').childNodes.length - 1].value = maxLevel;
+				
+				reorderLevelInventories();
+				
+				getChampStats();
+
+										
+			}
+			
+			function removeInventory(obj) {
+				obj.parentNode.parentNode.parentNode.parentNode.parentNode.remove();
+			}
+			
+			function selectItemInventory(obj) {
+
+				$.each(document.getElementById('itemInventoriesHolder').childNodes, function(key, val){
+					$(val).removeClass('selected');
+				});
+				
+				$(obj).addClass('selected');
+			}
+			
+			function reorderLevelInventories() {
+				var elem = $('#itemInventoriesHolder').find('table').sort(sortMe);
+				$(itemInventoriesHolder).append(elem);		
+			}
+			
+			function sortMe(a, b) {
+				return a.getElementsByClassName("levelInventory")[0].selectedIndex > b.getElementsByClassName("levelInventory")[0].selectedIndex;
+			}
+			
+			//'Saving' the build.  Copy all parts of the build to a URL, and save the build to a cookie.
+			function encodeURL() {
+
+				var masteriesOut = [];
+				
+				//Compress Masteries into an output string.
+				$.each(masteriesAssigned['points'], function(key, val){
+					masteriesOut.push(val);
+				});
+				
+				//Combine the set of item inventories into an output variable.
+				itemsPurchasedByLevel = {};
+				
+				var j = 0;
+				
+				$.each(document.getElementById('itemInventoriesHolder').childNodes, function (key, val) {
+					var level = val.getElementsByClassName('levelInventory')[0].options[val.getElementsByClassName('levelInventory')[0].selectedIndex].value;
+					
+					itemsPurchasedByLevel[j] = {};
+					
+					itemsPurchasedByLevel[j]["level"] = level;
+					
+					//console.log(val);
+					
+					for (var i = 0; i < 6; i++) {
+						var img = val.getElementsByClassName("slotWorking" + (i + 1))[0].getElementsByTagName('img')[0];
+					
+						if (img.name != undefined) {
+							itemsPurchasedByLevel[j][i] = img.name;
+						}					
+					}
+					
+					j++;
+					
+					
+				});
+				
+				//Parameters for Masteries, Runes, and Items.
+				var champ = document.getElementById("champSelector").options[document.getElementById("champSelector").selectedIndex].value;
+				var masteries = masteriesOut.toString();
+				var runes = JSON.stringify(runesListGlobal);
+				var items = JSON.stringify(itemsPurchasedByLevel);
+				
+				/*
+				console.log(champ);
+				console.log(runes);
+				console.log(masteries);
+				console.log(items);
+				*/
+				
+				var params = "port-a-build.html?champ=" + champ + "&masteries=" + masteries + "&runes=" + runes + "&items=" + items;
+				
+				var url = document.location.toString().substring(0, document.location.toString().indexOf("port-a-build.html")) + params;
+
+				//console.log(url);
+				
+                window.history.pushState({"html":'response.html',"pageTitle":'response.pageTitle'},"", url);
+				
+				document.cookie = "url=" + url + "; expires=Thu, 19 Dec 2025 12:00:00 UTC;";
+				
+				//console.log(document.cookie);
+			}			
+			
+			
+			
+			
+			function loadItems() {
+				/*
+				console.log(patchGlobal);
+				console.log(itemsGlobalJSON);
+				console.log(champsGlobalJSON);
+				*/
+				
+				/*
+				//Print Item List.
+				$( "<pre/>", {
+						"class": "my-new-list",
+							html: JSON.stringify(itemsGlobalJSON, null, '\t')
+				}).appendTo( "body" );				
+				*/
+				
+				var patch = patchGlobal;
+				
+				//Load stuff here!
+				
+				var arrayItems = [];
+				
+				$.each(itemsGlobalJSON.data, function(key, val) {
+					if (val.maps["11"] == true) {
+					
+						if (key != "3903" && key != "3902" && key != "3901" && key != "2054" && key != "3641" && key != "3649" && key != "3648" && key != "3647" && key != "3643" && key != "3642" && key != "3641" && key != "3640" 
+								&& key != "3636" && key != "3635" && key != "3632"  && key != "3455" && key != "3416" && key != "3410" && key != "3175" && key != "2052" && key != "2050" && key != "3634" && key != "3645" && key != "3341"
+								&& key != "3362" && key != "3252" && key != "3073" && key != "3671" && key != "3673" && key != "3672" && key != "3675" && key != "3008" && key != "3029" &&key != "3361" && key != "3599" && key != "3631" 
+								&& key != "3043" && key != "3048") {
+							val.id = key;
+							
+							arrayItems.push(val);
+						}
+					}
+				
+				});
+				
+				arrayItems.sort(function(a,b) {return (a.gold.total > b.gold.total) ? 1 : ((b.gold.total > a.gold.total) ? -1 : 0);} );
+
+				var table = $('<table></table>').addClass('foo');
+				
+				var i = 0;
+				var j = 0;
+				var rowString = 0;
+				
+				$.each(arrayItems, function(key, val) {
+				
+					//console.log(val.tags.includes("Health"));
+					//console.log(val.name.toLowerCase().indexOf(document.getElementById("itemSearch").innerHTML.toLowerCase()));
+					
+					//26*6 + 4 purchasable items (160)
+					
+					//Maps 8, 10, 11, 12, 14
+					// 8 has most of the items, but also has some that aren't needed. (140)
+					//10 has most of the items, but also has some that aren't needed. (146)
+					//11 has enough items, and some extras. (180)  I think this is Summoner's Rift.
+					//12 has most of the items, but also has some that aren't needed. (138)
+					//14 doesn't have any items.
+					
+					/*
+					if (val.name == "Titanic Hydra") {
+						console.log("Titanic Hydra!");
+						console.log((val.stats.FlatPhysicalDamageMod) > 0 || val.tags.includes("Damage"));
+						console.log(!(document.getElementById("checkAD").checked && !(parseInt(val.stats.FlatPhysicalDamageMod) > 0 || val.tags.includes("Damage"))));
+						console.log(!(document.getElementById("checkHealth").checked && !(parseInt(val.stats.FlatHPPoolMod) > 0 || val.tags.includes("Health"))));
+						console.log(val.name.toLowerCase().indexOf(document.getElementById("itemSearch").value.toLowerCase()) != -1);
+						console.log(val.maps["11"] == true);
+					}*/
+					
+					if (val.maps["11"] == true && val.name.toLowerCase().indexOf(document.getElementById("itemSearch").value.toLowerCase()) != -1
+							&& !(document.getElementById("checkHealth").checked && !(parseInt(val.stats.FlatHPPoolMod) > 0 || val.tags.includes("Health")))
+							&& !(document.getElementById("checkAr").checked && !(parseInt(val.stats.FlatArmorMod) > 0 || val.tags.includes("Armor")))
+							&& !(document.getElementById("checkMR").checked && !(parseInt(val.stats.FlatSpellBlockMod) > 0 || val.tags.includes("SpellBlock")))
+							&& !(document.getElementById("checkAD").checked && !(parseInt(val.stats.FlatPhysicalDamageMod) > 0 || val.tags.includes("Damage")))) {
+						//console.log("Found one!");
+						
+						if (i == 0) {
+							var description = val.description.replaceAll("<br>","\n");				
+							description = description.removeMarkups();								
+							var imgSrc = "datadragon/" + patch + "/img/item/" + val.image.full;
+							var title = val.name + " (" + val.gold.total + " Gold)\n" + description;
+							//var td = '<td><img src=\"' +  imgSrc + '\" alt=\"' + imgSrc + '\" title=\"' + title + '\" onclick=\"buy(' + val.id + ')\" class=\"mdl-js-ripple-effect\"></td>';
+							var td = '<td><img src=\"' +  imgSrc + '\" alt=\"' + imgSrc + '\" title=\"' + title + '\" onclick=\"buy(' + val.id + ')\"></td>';
+							rowString = td;
+							i++;
+						
+						} else if (i > 0 && i < 5) {
+							var description = val.description.replaceAll("<br>","\n");				
+							description = description.removeMarkups();								
+							var imgSrc = "datadragon/" + patch + "/img/item/" + val.image.full;
+							var title = val.name + " (" + val.gold.total + " Gold)\n" + description;
+							var td = '<td><img src=\"' +  imgSrc + '\" alt=\"' + imgSrc + '\" title=\"' + title + '\" onclick=\"buy(' + val.id + ')\"></td>';
+							rowString += td;
+							i++;
+						} else {
+							var description = val.description.replaceAll("<br>","\n");				
+							description = description.removeMarkups();								
+							var imgSrc = "datadragon/" + patch + "/img/item/" + val.image.full;
+							var title = val.name + " (" + val.gold.total + " Gold)\n" + description;
+							var td = '<td><img src=\"' +  imgSrc + '\" alt=\"' + imgSrc + '\" title=\"' + title + '\" onclick=\"buy(' + val.id + ')\"></td>';
+							rowString += td;
+
+
+							i = 0;
+								
+							var row = $('<tr></tr>').addClass('bar').html(rowString + "<td>" + j + "</td>");
+							j++;
+							
+							table.append(row);
+						}								
+						
+
+					}
+					
+				});
+				
+				//Put any extras at the end.
+				if (i != 0) {
+					var row = $('<tr></tr>').addClass('bar').html(rowString + "<td>" + j + "</td>");
+					j++;
+					
+					table.append(row);						
+				}
+				
+				//Remove all previous tables.
+				var myNode = document.getElementById("tableHolder");
+				while (myNode.firstChild) {
+					myNode.removeChild(myNode.firstChild);
+				}
+				
+				$('#tableHolder').append(table);
+				
+			
+						
+			}
+			
+
+			function buy(item) {
+				
+				
+				var patch = patchGlobal;
+				
+				//Load stuff here!
+				/*
+				for (var i = 1; i <= 6; i++) {
+					var slot = document.getElementById("slotWorking" + i);
+					
+					//console.log(slot.childNodes);
+					
+					if (slot.childNodes[0].src.indexOf("blank_square_0")!= -1) {
+						var itemImage = document.createElement("img");
+						itemImage.src = "datadragon/" + patch + "/img/item/" + itemsGlobalJSON.data[item].image.full;
+						//itemImage.onclick = function(){ sell(item, i)};
+						itemImage.addEventListener("click", function () {
+							sell(item, i);
+						}, true);
+						itemImage.setAttribute("name", item);
+
+						//Set description
+						var description = itemsGlobalJSON.data[item].description.replaceAll("<br>","\n");				
+						description = description.removeMarkups();								
+						var title = itemsGlobalJSON.data[item].name + " (" + itemsGlobalJSON.data[item].gold.total + " Gold)\n" + description;							
+						
+						itemImage.title = title;
+						
+						//document.body.insertBefore();
+						slot.removeChild(slot.firstChild);
+						
+						slot.appendChild(itemImage);
+						
+						var totalGold = parseInt(document.getElementById("goldCost").innerHTML);
+						
+						totalGold += parseInt(itemsGlobalJSON.data[item].gold.total);
+						
+						document.getElementById("goldCost").innerHTML = totalGold;	
+						
+						
+						break;
+					}
+				}*/
+				
+				$.each(document.getElementById('itemInventoriesHolder').childNodes, function(key, val){
+					
+					if ($(val).hasClass("selected")) {
+						for (var i = 1; i <= 6; i++) {
+							var slot = val.getElementsByClassName("slotWorking" + i)[0];
+							
+							//console.log(slot.childNodes);
+							
+							//Make sure the item slot isn't blank.
+							if (slot.childNodes[0].src.indexOf("blank_square_0")!= -1) {
+								var itemImage = document.createElement("img");
+								itemImage.src = "datadragon/" + patch + "/img/item/" + itemsGlobalJSON.data[item].image.full;
+								itemImage.onclick = function(){ sell(item, i)};
+								itemImage.setAttribute("name", item);
+
+								//Set description
+								var description = itemsGlobalJSON.data[item].description.replaceAll("<br>","\n");				
+								description = description.removeMarkups();								
+								var title = itemsGlobalJSON.data[item].name + " (" + itemsGlobalJSON.data[item].gold.total + " Gold)\n" + description;							
+								
+								itemImage.title = title;
+								
+								//document.body.insertBefore();
+								slot.removeChild(slot.firstChild);
+								
+								slot.appendChild(itemImage);
+								
+								var totalGold = parseInt(val.getElementsByClassName("goldCost")[0].innerHTML);
+								
+								totalGold += parseInt(itemsGlobalJSON.data[item].gold.total);
+								
+								val.getElementsByClassName("goldCost")[0].innerHTML = totalGold;	
+								
+								
+								break;
+							}
+						}
+					
+					}
+					
+				});
+				
+				getChampStats();
+			}					
+			
+			function sell(item, i) {
+			
+				/*
+				var patch = patchGlobal;
+				
+				var slot = document.getElementById("slotWorking" + i);
+			
+				var itemImage = document.createElement("img");
+				itemImage.src = "/champicons/blank_square_0.png";
+				itemImage.width = 64;
+				
+				slot.removeChild(slot.firstChild);
+				
+				slot.appendChild(itemImage);
+				
+				var totalGold = parseInt(document.getElementById("goldCost").innerHTML);
+				
+				totalGold -= parseInt(itemsGlobalJSON.data[item].gold.total);
+				
+				document.getElementById("goldCost").innerHTML = totalGold;	
+				*/
+				
+				$.each(document.getElementById('itemInventoriesHolder').childNodes, function(key, val){
+					
+					if ($(val).hasClass("selected")) {
+						var slot = val.getElementsByClassName("slotWorking" + i)[0];
+					
+						var itemImage = document.createElement("img");
+						itemImage.src = "/champicons/blank_square_0.png";
+						itemImage.width = 64;
+						
+						slot.removeChild(slot.firstChild);
+						
+						slot.appendChild(itemImage);
+						
+						var totalGold = parseInt(val.getElementsByClassName("goldCost")[0].innerHTML);
+						
+						totalGold -= parseInt(itemsGlobalJSON.data[item].gold.total);
+						
+						val.getElementsByClassName("goldCost")[0].innerHTML = totalGold;						
+					}
+				});
+				
+				
+				
+				getChampStats();
+			}
+			
+			
+
+			
+			function getChampStats() {
+
+				var patch = patchGlobal;
+
+				var select = document.getElementById("champSelector");
+			
+				//var champ = data.data[select.options[select.selectedIndex].value]];
+				var champ = select.options[select.selectedIndex].value;
+				
+				var stats = champsGlobalJSON.data[champ].stats;
+				
+				var level = document.getElementById("levelSelector").options[document.getElementById("levelSelector").selectedIndex].value;
+				
+				/*
+				//Get base health.
+				var baseHealth = getStat(stats.hp, stats.hpperlevel, level);
+				var baseAttackDamage = getStat(stats.attackdamage, stats.attackdamageperlevel, level);
+				
+				var bonusHealth = 0;
+				var bonusAttackDamage = 0;
+				
+				//console.log(stats);
+				
+				var healthDisplay = document.getElementById("healthDisplay");
+				var attackDamageDisplay = document.getElementById("attackDamageDisplay");
+				
+				//Loop through inventory to add item stats to base stats.
+				for (var i = 1; i <= 6; i++) {
+					var slot = document.getElementById("slotWorking" + i);
+					
+					var img = slot.childNodes[0];
+					
+					//Continue loop if there is no item in the slot.
+					if (img.name == "" || img.name == null || img.name == undefined) {
+						continue;
+					}
+					
+					console.log(itemsGlobalJSON.data[img.name].stats);
+					
+					//Stats to calculate.
+					//Health
+					bonusHealth += itemsGlobalJSON.data[img.name].stats.FlatHPPoolMod > 0 ? itemsGlobalJSON.data[img.name].stats.FlatHPPoolMod : 0;
+					//Attack Damage
+					bonusAttackDamage += itemsGlobalJSON.data[img.name].stats.FlatPhysicalDamageMod > 0 ? itemsGlobalJSON.data[img.name].stats.FlatPhysicalDamageMod : 0;					
+				}
+				
+				//Add stats from runes.
+				bonusHealth += runeStatsGlobal.FlatHPPoolMod;
+				bonusHealth += runeStatsGlobal.rFlatHPModPerLevel * document.getElementById("levelSelector").options[document.getElementById("levelSelector").selectedIndex].value;
+				
+				var health = baseHealth + bonusHealth;
+				
+				health *= (runeStatsGlobal.PercentHPPoolMod + 1);
+				
+				bonusAttackDamage += runeStatsGlobal.FlatPhysicalDamageMod;
+				bonusAttackDamage += runeStatsGlobal.rFlatPhysicalDamageModPerLevel * document.getElementById("levelSelector").options[document.getElementById("levelSelector").selectedIndex].value;
+				
+				var attackDamage = baseAttackDamage + bonusAttackDamage;
+				
+				healthDisplay.innerHTML = Math.round(health * 10) / 10.0;
+				attackDamageDisplay.innerHTML = Math.round(attackDamage * 10) / 10.0;
+				*/
+			
+				//console.log(stats);
+				
+				$.each(document.getElementById('itemInventoriesHolder').childNodes, function(key, val) {
+				
+					var champ = document.getElementById("champSelector").value;
+				
+					var level = val.getElementsByClassName('levelInventory')[0].options[val.getElementsByClassName('levelInventory')[0].selectedIndex].value;
+				
+					//Get base health.
+					var baseHealth = getStat(stats.hp, stats.hpperlevel, level);
+					var baseAttackDamage = getStat(stats.attackdamage, stats.attackdamageperlevel, level);
+					var baseArmor = getStat(stats.armor, stats.armorperlevel, level);
+					var baseMagicResist = getStat(stats.spellblock, stats.spellblockperlevel, level);
+					
+					var bonusHealth = 0;
+					var bonusAttackDamage = 0;
+					var bonusArmor = 0;
+					var bonusMagicResist = 0;
+					
+					var pctHealthIncrease = 0;
+					var pctHealthBonusIncrease = 0;
+					var pctArmorBonusIncrease = 0;
+					var pctMagicResistBonusIncrease = 0;
+					
+					var pctCrit = 0;
+					var pctCritDamage = 1.0;
+					
+					var healthDisplay = val.getElementsByClassName('healthDisplay')[0];
+					var attackDamageDisplay = val.getElementsByClassName("attackDamageDisplay")[0];
+					var armorDisplay = val.getElementsByClassName('armorDisplay')[0];
+					var magicResistDisplay = val.getElementsByClassName('magicResistDisplay')[0];
+					
+					var effectiveHealthArmorDisplay = val.getElementsByClassName('effectiveHealthArmorDisplay')[0];
+					var effectiveHealthMagicResistDisplay = val.getElementsByClassName('effectiveHealthMagicResistDisplay')[0];
+					
+					var comboDamageDisplay = val.getElementsByClassName('comboDamageDisplay')[0];
+					
+					var items = {};
+					
+					var uniquePassive = {};
+					
+					//Loop through inventory to add item stats to base stats.
+					for (var i = 1; i <= 6; i++) {
+						var slot = val.getElementsByClassName("slotWorking" + i)[0];
+						
+						var img = slot.childNodes[0];
+						
+						//Continue loop if there is no item in the slot.
+						if (img.name == "" || img.name == null || img.name == undefined) {
+							continue;
+						}
+						
+						//console.log(itemsGlobalJSON.data[img.name]);
+						
+						items[itemsGlobalJSON.data[img.name].name] = itemsGlobalJSON.data[img.name];
+						
+						//Stats to calculate.
+						//Health
+						bonusHealth += itemsGlobalJSON.data[img.name].stats.FlatHPPoolMod > 0 ? itemsGlobalJSON.data[img.name].stats.FlatHPPoolMod : 0;
+						//Attack Damage
+						bonusAttackDamage += itemsGlobalJSON.data[img.name].stats.FlatPhysicalDamageMod > 0 ? itemsGlobalJSON.data[img.name].stats.FlatPhysicalDamageMod : 0;	
+						//Armor
+						bonusArmor += itemsGlobalJSON.data[img.name].stats.FlatArmorMod > 0 ? itemsGlobalJSON.data[img.name].stats.FlatArmorMod : 0;						
+						//Magic Resist
+						bonusMagicResist += itemsGlobalJSON.data[img.name].stats.FlatSpellBlockMod > 0 ? itemsGlobalJSON.data[img.name].stats.FlatSpellBlockMod : 0;	
+						//Crit Chance
+						pctCrit += itemsGlobalJSON.data[img.name].stats.FlatCritChanceMod > 0 ? itemsGlobalJSON.data[img.name].stats.FlatCritChanceMod : 0;
+						
+						//Special
+						if (itemsGlobalJSON.data[img.name].name == "Sterak's Gage") {
+							baseAttackDamage *= 1.25;
+						}
+						if (itemsGlobalJSON.data[img.name].name == "Enchantment: Cinderhulk" && uniquePassive["Enchantment: Cinderhulk"] == undefined) {
+							pctHealthBonusIncrease += .15;
+							uniquePassive["Enchantment: Cinderhulk"] = true;
+						}
+						if (itemsGlobalJSON.data[img.name].name == "Infinity Edge" && uniquePassive["Infinity Edge"] == undefined) {
+							pctCritDamage += .5;
+							uniquePassive["Infinity Edge"] = true;
+						}
+												
+					}
+					
+					//Check for stat bonuses from masteries.
+					if (masteriesAssigned["points"]["6263"] == 1)
+						pctHealthIncrease += .05;
+						
+					if (masteriesAssigned["points"]["6212"] > 0) {
+						pctArmorBonusIncrease += .01 * masteriesAssigned["points"]["6212"];
+						pctMagicResistBonusIncrease += .01 * masteriesAssigned["points"]["6212"];
+					}
+					
+					if (masteriesAssigned["points"]["6232"] > 0) {
+						bonusHealth += 10 * masteriesAssigned["points"]["6232"];
+					}
+					
+					if (masteriesAssigned["points"]["6134"] > 0) {
+						bonusAttackDamage += (.4 + .088888888 * level) * masteriesAssigned["points"]["6134"];
+					}
+					
+					//Get Champ Bonus Stats, Pass 1 (Flat stats)
+					var champSpecificStats = getChampBonusStats1(champ, level);
+
+					console.log(champSpecificStats);
+					
+					var newStats = {};
+					
+					console.log(champSpecificStats.DisplayString);
+					
+					//Add flat bonuses from runes and masteries.
+					bonusHealth += runeStatsGlobal.FlatHPPoolMod;
+					bonusHealth += runeStatsGlobal.rFlatHPModPerLevel * val.getElementsByClassName('levelInventory')[0].options[val.getElementsByClassName('levelInventory')[0].selectedIndex].value;
+					pctHealthIncrease += runeStatsGlobal.PercentHPPoolMod;
+					
+					bonusAttackDamage += runeStatsGlobal.FlatPhysicalDamageMod;
+					bonusAttackDamage += runeStatsGlobal.rFlatPhysicalDamageModPerLevel * val.getElementsByClassName('levelInventory')[0].options[val.getElementsByClassName('levelInventory')[0].selectedIndex].value;
+					
+					console.log(runeStatsGlobal);
+					
+					pctCrit += runeStatsGlobal.FlatCritChanceMod;
+					pctCritDamage += runeStatsGlobal.FlatCritDamageMod;
+					
+					
+					
+					bonusArmor += runeStatsGlobal.FlatArmorMod;
+					bonusArmor += runeStatsGlobal.rFlatArmorModPerLevel * val.getElementsByClassName('levelInventory')[0].options[val.getElementsByClassName('levelInventory')[0].selectedIndex].value;
+					
+					bonusArmor += champSpecificStats.FlatArmorMod;
+					
+					bonusArmor *= (1.0 + pctArmorBonusIncrease);
+					
+					bonusMagicResist += runeStatsGlobal.FlatSpellBlockMod;
+					bonusMagicResist += runeStatsGlobal.rFlatSpellBlockModPerLevel * val.getElementsByClassName('levelInventory')[0].options[val.getElementsByClassName('levelInventory')[0].selectedIndex].value;
+					
+					bonusMagicResist += champSpecificStats.FlatSpellBlockMod;
+					
+					bonusMagicResist *= (1.0 + pctMagicResistBonusIncrease);
+					
+					bonusHealth *= (1.0 + pctHealthBonusIncrease);
+					
+					var health = baseHealth + bonusHealth;
+					health *= (1.0 + pctHealthIncrease);					
+					var attackDamage = baseAttackDamage + bonusAttackDamage;
+					var armor = baseArmor + bonusArmor;
+					
+					var magicResist = baseMagicResist + bonusMagicResist;
+					
+					var effectiveHealthArmor = health * (100.0 + armor) / 100.0;
+					var effectiveHealthMagicResist = health * (100.0 + magicResist) / 100.0;
+					
+					newStats.armor = armor;
+					newStats.bonusArmor = bonusArmor;
+					newStats.attackDamage = attackDamage;
+					newStats.baseAttackDamage = baseAttackDamage;
+					newStats.bonusAttackDamage = bonusAttackDamage;
+					newStats.health = health;
+					newStats.bonusHealth = bonusHealth;
+					newStats.magicResist = magicResist;
+					newStats.bonusMagicResist = bonusMagicResist;
+					newStats.pctCrit = pctCrit;
+					newStats.pctCritDamage = pctCritDamage;
+					
+					
+					
+					var skillOrder = ["q", "e", "w", "q", "q", "r", "q", "w", "q", "w", "r", "w", "w", "e", "e", "r", "e", "e"];
+					
+					var comboDamage = getChampCombo(champ, newStats, items, level, skillOrder);
+					
+					healthDisplay.innerHTML = Math.round(health * 10) / 10.0;
+					attackDamageDisplay.innerHTML = Math.round(attackDamage * 10) / 10.0;				
+					armorDisplay.innerHTML = Math.round(armor * 10) / 10.0;
+					magicResistDisplay.innerHTML = Math.round(magicResist * 10) / 10.0;
+					effectiveHealthArmorDisplay.innerHTML = Math.round(effectiveHealthArmor);
+					effectiveHealthMagicResistDisplay.innerHTML = Math.round(effectiveHealthMagicResist);
+					comboDamageDisplay.innerHTML = comboDamage["physDmg"] + "/" + comboDamage["magicDmg"] + "(" + comboDamage["totalCombo"] + ")";
+				});
+				
+				encodeURL();
+		
+			}
+			
+			function getChampCombo(champ, stats, items, level, skillOrder) {
+				
+				var q = 0;
+				var w = 0;
+				var e = 0;
+				var r = 0;
+				
+				var skills = {"q" : 0, "w" : 0, "e" : 0, "r" : 0};
+				
+				//Rank up primary at 1,3,5,7,9
+				//Rank up secondary at 2,8,10,12,13
+				//Rank up tertiary at 4,14,15,17,18
+				//Rank up ult at 6,11,16
+				for (var i = 0; i < level; i++) {
+					skills[skillOrder[i]]++;
+				}
+				
+				console.log(skills);
+
+				var physDmg = 0;
+				var magicDmg = 0;
+				var trueDmg = 0;
+				
+				var onHit = {};
+				var autoAttack = {};
+				
+				var special = {};
+
+				
+				special["physDmg"] = {};
+				special["magicDmg"] = {};
+				special["trueDmg"] = {};
+				
+				onHit["physDmg"] = 0;
+				onHit["magicDmg"] = 0;
+				onHit["trueDmg"] = 0;
+				
+				autoAttack["physDmg"] = 0;
+				autoAttack["magicDmg"] = 0;
+				autoAttack["trueDmg"] = 0;
+				
+			
+				
+				console.log("On-hit: ");					
+				console.log(onHit);					
+				
+				//autoAttack = onHit + stats.attackDamage * (1 + (stats.pctCrit * stats.pctCritDamage));
+				
+				//Calculate Expected Value for an autoattack crit.
+				autoAttack["physDmg"] = onHit["physDmg"] + stats.attackDamage * (1 + (stats.pctCrit * stats.pctCritDamage));
+				autoAttack["magicDmg"] = onHit["magicDmg"];
+				autoAttack["trueDmg"] = onHit["trueDmg"];
+				
+				var autoAttackTotal = onHit["physDmg"] + stats.attackDamage * (1 + (stats.pctCrit * stats.pctCritDamage)) + onHit["magicDmg"] + onHit["trueDmg"];
+				
+				console.log("Auto: ");
+				console.log(autoAttack);		
+
+				if (items["Titanic Hydra"] != null) {
+					console.log("Got Titanic Hydra!");
+					
+					//Add one autoattack, plus on-hits, plus 40+ 10% HP for Titanic active.
+					special["physDmg"]["Titanic Hydra"] = 40 + stats.health * .1 + autoAttack["physDmg"];
+					special["magicDmg"]["Titanic Hydra"] = onHit["magicDmg"];
+					special["trueDmg"]["Titanic Hydra"] = onHit["trueDmg"];
+					
+					//Add an on-hit component to further physical damage attacks.
+					onHit["physDmg"] += stats.health * .01 + 5;
+				}
+				if (items["Tiamat"] != null) {
+					special["physDmg"]["Tiamat"] = stats.attackDamage;
+				}
+				if (items["Ravenous Hydra"] != null) {
+					special["physDmg"]["Ravenous Hydra"] = stats.attackDamage;
+				}					
+				if (items["Sheen"] != null) {
+					special["physDmg"]["Sheen"] = stats.baseAttackDamage;
+				}
+				if (items["Trinity Force"] != null) {
+					special["physDmg"]["Trinity Force"] = 2 * stats.baseAttackDamage;
+				}
+				if (items["Bami's Cinder"] != null) {
+					special["magicDmg"]["Bami's Cinder"] = 3 * (5 + parseInt(level));
+				}
+				if (items["Enchantment: Cinderhulk"] != null) {
+					special["magicDmg"]["Enchantment: Cinderhulk"] = 3 * (7 + 2 * parseInt(level));
+				}					
+				if (items["Sunfire Cape"] != null) {
+					special["magicDmg"]["Sunfire Cape"] = 3 * (11 + parseInt(level));
+				}
+				
+
+				
+				if (champ == "Garen") {
+					console.log(stats);
+					console.log(champsGlobalJSON.data.Garen.spells);
+					
+					var spells = champsGlobalJSON.data.Garen.spells;
+					
+					
+										
+					var qDamage = {};
+					
+					qDamage["physDmg"] = 0;
+					qDamage["magicDmg"] = 0;
+					qDamage["trueDmg"] = 0;
+					
+
+					
+					qDamage["physDmg"] = skills["q"] > 0 ? autoAttack["physDmg"] + .4 * stats.attackDamage + spells[0].effect[1][skills["q"] - 1] : 0;
+					qDamage["magicDmg"] = autoAttack["magicDmg"];
+					qDamage["trueDmg"] = autoAttack["trueDmg"];
+					
+					var qDamageTotal = skills["q"] > 0 ? autoAttackTotal + .4 * stats.attackDamage + spells[0].effect[1][skills["q"] - 1] : 0;
+					
+					console.log("Q damage: ");
+
+					console.log(qDamage);
+					
+					var eDamageTick = skills["e"] > 0 ? spells[2].effect[1][skills["e"] - 1] + stats.attackDamage * spells[2].effect[3][skills["e"] - 1] * .01 * ((1 + (stats.pctCrit * (stats.pctCritDamage - .5)))): 0;
+					
+					var ticks = skills["e"] > 0 ? Math.floor((level - 1) / 3.0) + 5 : 0;
+					
+					var eTotal = eDamageTick * ticks;
+					
+					console.log("E damage/tick: " + eDamageTick);
+					console.log("Ticks: " + ticks);
+					console.log("E damage: " + eTotal);
+					
+					var specialTotal = 0;
+					
+					$.each(special["physDmg"], function(key, val) {
+						specialTotal += val;
+						physDmg += val;
+					});
+
+					$.each(special["magicDmg"], function(key, val) {
+						specialTotal += val;
+						magicDmg += val;
+					});
+					
+					$.each(special["trueDmg"], function(key, val) {
+						specialTotal += val;
+						trueDmg += val;
+					});
+					
+					physDmg += autoAttack["physDmg"];
+					physDmg += qDamage["physDmg"];
+					physDmg += eTotal;
+					
+					magicDmg += autoAttack["magicDmg"];
+					magicDmg += qDamage["magicDmg"];
+					
+					trueDmg += autoAttack["trueDmg"];
+					trueDmg += qDamage["trueDmg"];
+					
+					console.log("Special: " + specialTotal);
+
+					console.log(special);
+					
+					var totalCombo = autoAttackTotal + qDamageTotal + eTotal + specialTotal;
+					
+					console.log("Total Combo: " + totalCombo);
+
+					physDmg = physDmg != null ? Math.round(physDmg * 10) / 10.0 : 0;
+					magicDmg = magicDmg != null ? Math.round(magicDmg * 10) / 10.0 : 0;
+					trueDmg = trueDmg != null ? Math.round(trueDmg * 10) / 10.0 : 0;
+					
+					totalCombo = totalCombo != null ? Math.round(totalCombo * 10) / 10.0 : 0;
+
+					
+					return {"physDmg" : physDmg, "magicDmg" : magicDmg, "trueDmg" : trueDmg, "totalCombo" : totalCombo};
+					
+
+				}
+			}
+			
+			
+			function getChampBonusStats1(champ, level) {
+				var stats = {};
+				
+				$.each(runesGlobalJSON.basic.stats, function(key, val) {
+					stats[key] = val;
+				});
+				
+				if (champ == "Garen") {
+					//W learned
+					if (level > 3) {
+						var wBonus = Math.min(30,30*level*level/121); //Assume 120 CS at Level 11
+						
+						stats.FlatArmorMod = wBonus;
+						stats.FlatSpellBlockMod = wBonus;
+						
+						stats.DisplayString = "Courage: +" + Math.round(wBonus * 10) / 10.0 + " Bonus Armor/MR.";
+					}
+				}
+				
+				//console.log(stats);
+				
+				return stats;
+			}
+			
+			function hideMasteries() {
+				document.getElementById('masteriesHolder').style.visibility = 'hidden';
+			}
+			
+			function showMasteries() {
+				document.getElementById('masteriesHolder').style.visibility = 'visible';
+			}
+						
+            if (getCookie('darkScheme') == 'true') {
+                document.getElementById('dark-styles').disabled = false;
+                document.getElementById('light-styles').disabled = true;
+            } else {
+                document.getElementById('dark-styles').disabled = true;
+                document.getElementById('light-styles').disabled = false;
+            }
+	
+				
+				
+			function clearData() {
+				var url = document.location.toString().substring(0, document.location.toString().indexOf("port-a-build.html")) + "port-a-build.html";
+			
+				console.log(url);
+				
+				window.history.pushState({"html":'response.html',"pageTitle":'response.pageTitle'},"", url);
+				
+				document.cookie = "url=; expires=Thu, 01 Jan 1970 00:00:01 GMT;";
+				
+				window.location.href = url;
+			}
+			
+			
+			
+		</script>		
+		
+    </body>
+</html>

@@ -1,0 +1,480 @@
+<!doctype html>
+<!--
+  Material Design Lite
+  Copyright 2015 Google Inc. All rights reserved.
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+      https://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License
+-->
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="A front-end template that helps you build fast, modern mobile web apps.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <title>Carry-Factor.com - LoL Stats Command Center.  Stats, Counterpicks, and Cooldowns</title>
+
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+	<link rel="shortcut icon" href="http://www.carry-factor.com/website/diamond_i_favicon.png">
+    <!--<link rel="icon" sizes="192x192" href="images/touch/chrome-touch-icon-192x192.png">-->
+
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Material Design Lite">
+    <link rel="apple-touch-icon-precomposed" href="apple-touch-icon-precomposed.png">
+
+    <!-- Tile icon for Win8 (144x144 + tile color) -->
+    <meta name="msapplication-TileImage" content="images/touch/ms-touch-icon-144x144-precomposed.png">
+    <meta name="msapplication-TileColor" content="#3372DF">
+
+    <!-- SEO: If your mobile URL is different from the desktop URL, add a canonical link to the desktop page https://developers.google.com/webmasters/smartphone-sites/feature-phones -->
+    <!--
+    <link rel="canonical" href="http://www.example.com/">
+    -->
+
+    <link href='//fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en' rel='stylesheet' type='text/css'>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+	<!--
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.grey-orange.min.css">
+	-->
+	<link rel="stylesheet" href="https://storage.googleapis.com/code.getmdl.io/1.0.6/material.indigo-pink.min.css">
+    <link rel="stylesheet" href="http://www.carry-factor.com/carry-factor.css">
+	<link rel="stylesheet" type="text/css" href="http://www.carry-factor.com/carry-factor_Dark.css" id='dark-styles'>        
+	<link rel="stylesheet" type="text/css" href="http://www.carry-factor.com/carry-factor_Light.css" id='light-styles'>   
+
+	
+	<!--<link rel="stylesheet" href="bronzodia_Light.css">-->
+	
+	
+    <style>
+    #view-source {
+      position: fixed;
+      display: block;
+      right: 0;
+      bottom: 0;
+      margin-right: 40px;
+      margin-bottom: 40px;
+      z-index: 900;
+    }
+	
+	
+	.responsiveBanner { width: 320px; height: 100px; }
+	@media(min-width: 500px) { .responsiveBanner { width: 468px; height: 60px; } }
+	@media(min-width: 800px) { .responsiveBanner { width: 728px; height: 90px; } }	
+	@media(min-width: 1000px) { .responsiveBanner { width: 970px; height: 90px; } }		
+	@media(min-width: 1250px) { .responsiveBanner { width: 1200px; height: 90px; } }		
+    </style>
+	
+	
+	<script src="http://www.carry-factor.com/src/standardFunctions.js">
+		//Contents: 
+		//getUrlParameter(sParam) //Extracts a parameter from a URL and returns it.
+		//getCookie(cookieLoad) //Gets a cookie.
+		//String.prototype.replaceAll(search, replace) //Replaces all instances of a search string.
+		//String.prototype.removeMarkups() //Remove HTML markups (e.g. <, >)
+	</script>	
+	
+
+	
+	
+  </head>
+  <body>
+
+				  
+		<div class="demo-blog demo-blog--blogpost mdl-layout mdl-js-layout has-drawer is-upgraded">
+			<table style='width: 100%; text-align: center;'>
+				<tr>
+				
+			
+					<td>
+						<main class="mdl-layout__content">
+							<div class="demo-back">
+								<a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" href="http://www.carry-factor.com/index.html" title="go back" role="button">
+									<i class="material-icons" role="presentation">arrow_back</i>
+								</a>
+							</div>
+							
+
+							
+							<div class="demo-blog__posts mdl-grid">
+								<div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
+									<div class="mdl-card__media mdl-color-text--grey-50">
+										<a href="http://www.carry-factor.com/index.html"><img src="http://www.carry-factor.com/website/banner-carry-factor.png" style="width: 100%;"></a>
+									</div>
+
+
+
+									<div class="mdl-color-text--grey-700 mdl-card__supporting-text meta">
+										<div class="minilogo"></div>
+									  
+										<div>
+											<strong>Carry-factor.com</strong>
+											<span>4/23/2017</span>
+										</div>
+									  
+										<div class="section-spacer"></div>
+									  
+
+									<div class="snippet-demo-container demo-checkbox demo-checkbox__check-on">
+										<label class="mdl-checkbox mdl-js-checkbox" for="useDark">
+											<input type="checkbox" id="useDark" class="mdl-checkbox__input" checked onclick='changeColors()'>
+											<span class="mdl-checkbox__label">Dark Color Scheme</span>
+										</label>
+									</div>
+
+									  <!-- Sharing, Like, and Favorite buttons.  I'll need to add these back in later at some point. -->
+									  <!--
+									  <div class="meta__favorites">
+										425 <i class="material-icons" role="presentation">favorite</i>
+										<span class="visuallyhidden">favorites</span>
+									  </div>
+									  <div>
+										<i class="material-icons" role="presentation">bookmark</i>
+										<span class="visuallyhidden">bookmark</span>
+									  </div>
+									  <div>
+										<i class="material-icons" role="presentation">share</i>
+										<span class="visuallyhidden">share</span>
+									  </div>
+									  -->
+								  
+								</div>
+
+								
+								<div class="mdl-color-text--grey-700 mdl-card__supporting-text" style="text-align: left;">
+								
+								
+									<script src="http://www.carry-factor.com/src/MathJax-2.7.0/MathJax.js?config=TeX-AMS_CHTML"></script>
+
+									<img src="https://upload.wikimedia.org/wikipedia/commons/7/70/PIA19656-SaturnMoon-Enceladus-Ocean-ArtConcept-20150915.jpg" style="width:100%">
+									<div>Image: Enceladus's Subsurface Ocean (Source: Wikipedia)</div>
+									
+									<br>
+									<br>
+
+									<h3>Napkin Math!</h3>
+									
+									<!-- Sample MathJax equations-->
+									<!--
+									<p>$\alpha$ $$\omega$$ \Omega</p>
+									<p>Stuff \(sum_{i=0}^n i^2 = \frac{(n^2+n)(2n+1)}{6}\) Stuff</p>
+									<p>$$\sum_{i=0}^n i^2 = \frac{(n^2+n)(2n+1)}{6}$$</p>
+									-->
+
+									<h4>What's the pressure in the ocean on Enceladus?</h4>
+									
+									<p>So if you've been following space news, you've probably heard a lot about the oceans under Enceladus and other moons in the Solar System.  
+									I thought to myself, "How could life actually live down there?  Wouldn't the pressure be too high under 50 kilometers of ice?"
+									Wouldn't water only exist in some sort of supercooled state, where it's chemistry might be different?
+									Then I thought, the gravity there is quite a bit weaker than it is on Earth, so maybe it's not really all that inhospitable?
+									So I decided to do some calculations.</p>
+
+									<p>So, first we have to make some assumptions, then we can decide which formulas we want to use, and gather the constant variables we need.</p>
+
+									<p>First off, we don't really need precise numbers, so let's allow ourselves to fudge them.  Second, we are concerned with pressure being to high, so let's make all of our assumptions err on the side of caution by rounding our estimates up.</p>
+
+									<p>Let's look up Enceladus on Wikipedia(2) to get some ideas about what it's like there.  The first thing I notice is that it's pretty small, with a diameter of about 500km.</p>
+
+									<p>The first assumpion I made is that the ice sheet is really, really thick.  Let's say the ice sheet is 50km thick, or about 1/5 of the radius.</p>
+
+									<p>The second assumption I made gravity is constant with respect to depth.  We are looking at an ice sheet 50km thick, so in reality, the gravity will be different at different layers of ice, but it won't be that much different and I don't want to do a calculus-based model so let's just use the surface gravity for all of the ice, which is .113 m/s^2, or a little over 1% of Earth's gravity.</p>
+
+									<p>The third assumption I made is the ice has a uniform density of \(1000 kg/m^3\), the approximate density of uncompressed liquid water at melting point.  This seems reasonable, since according to Wikipedia the mean density of Enceladus is 1609 kg/m^3.  Water's about 1000 kg/m^3 and rock is about 3000 kg/m^3 (basic engineering approximation), so Enceladus is ice and water above rock with maybe some metal.  We're assuming the ice is slightly compressed, but for the most part homogenous.</p>
+
+									<p>So let's set up our formula!</p>
+
+									<p>We'll calculate weight using \(W = mg\) for simplicity (instead of the more precise but more complicated method of integrating the Gravitational Forumula \(F=Gmm/r^2\)).  We aren't trying to design a submarine, we are just trying to get an estimate!</p>
+
+									<p>Let's try to get the pressure in Pascals (N/m^2) since we're already using Meters to avoid converting numbers.</p>
+
+									<p>Before we can get pressure, we need to estimate the mass of the ice per square meter over the ocean.</p>
+
+									<p>Starting with volume of a rectanguloid, the Volume is equal to a surface area times it's height:</p>
+
+									<p>$$V = A * h$$</p>
+
+									<p>$$V = (1 m^2) * (50,000m) = 50,000 m^3$$</p>
+
+									<p>We can get mass by multiplying volume V by density \(\rho\) (rho):</p>
+
+									<p>$$m = V * \rho$$</p>
+
+									<p>$$m = 50,000 m^3 * 1000 km/m^3 = 50,000,000 kg$$</p>
+
+									<p>50 million kilos is a lot of ice!  But how much does it actually weigh?  Enceladus has a lot less gravity than Earth, remember!</p>
+
+									<p>Given the mass of ice, let's estimate the weight:</p>
+									
+									<p>$$W = m * g$$</p>
+
+									<p>$$W = 50,000,000 kg * 0.113 m/s^2 = 5,650,000 kg-m/s^2 = 5,650,000 N$$</p>
+
+									<p>Since we're interested in pressure, which is force per area, let's divide both sides by a square meter:</p>
+
+									<p>$$W/A = P = 5,650,000 N/m^2 = 5,650,000 Pa = 5,650 kPa$$</p>
+
+									<p>Okay, what's that in atmospheres?  Let's ask Google!</p>
+
+									<p>$$5,650 kPa * (1 atm / 101.3 kPa) = 55.8 atm$$</p>
+
+									<p>All our numbers are fudged, but it seems reasonable that the pressure in Enceladus's ocean is somehwere between 40 and 80 greater than the pressure we feel on Earth's surface.</p>
+
+									<p>55.8 atm is actually pretty reasonable for life to exist at!  It's about the same pressure as the ocean on Earth at a depth of 800m.</p>
+
+									<p>Whales can easily dive to that depth!  Considering life exists at the bottom of the Mariana Trench on Earth at a pressure of 1000 atm, 56 atm seems pretty comfortable!</p>
+
+									<p>So, it seems there is liquid water at about the right temperature and pressure for life to exist, and it's got plenty of hydrogen to use for energy.</p>
+
+									<p>But could the water be to briny?  Let's read a little about brine (salty water) on Wikipedia (3).</p>
+
+									<p>The lowest possible freezing point of brine is about -21.1 °C (-6.0 °F).  That's not too terribly cold.  And brine reaches it's saturation point at 26% dissolved salt by weight.</p>
+
+									<p>26% is a lot of salt though!  Wouldn't it pickle any life that could exist down there?</p>
+
+									<p>Well, on Earth, brine shrimp (Sea monkeys)(4) are able to live in waters with very high salinity, up to 25%!</p>
+
+									<p>This means that complex life can easily exist in brine almost all the way up to the saturation point of salt!</p>
+
+									<p>Enceladus could thus potentially host life, the only questions that remain are if the ocean chemistry is significantly different from Earth, and whether life ever made it's way down there.</p>
+
+									<img src="https://upload.wikimedia.org/wikipedia/commons/3/3f/Artemia_salina_4.jpg" style="width:50%">
+									<div>Image: Brine Shrimp (Source: Wikipedia)</div>
+
+									
+									
+									<p>Sources:</p>
+									<p>
+										<a href="https://spaceflightnow.com/2017/04/13/new-discoveries-raise-prospects-for-life-on-moons-of-jupiter-and-saturn/">(1)</a> https://spaceflightnow.com/2017/04/13/new-discoveries-raise-prospects-for-life-on-moons-of-jupiter-and-saturn/
+									</p>
+
+									<p>
+										<a href="https://en.wikipedia.org/wiki/Enceladus">(2)</a> https://en.wikipedia.org/wiki/Enceladus
+									</p>
+
+									<p>
+										<a href="https://en.wikipedia.org/wiki/Brine">(3)</a> https://en.wikipedia.org/wiki/Brine
+									</p>
+
+									<p>
+										<a href="https://en.wikipedia.org/wiki/Brine_shrimp">(4)</a> https://en.wikipedia.org/wiki/Brine_shrimp
+									</p>
+
+								</div>
+
+
+											
+								
+								<div class="mdl-color-text--primary-contrast mdl-card__supporting-text comments">
+			
+									
+									<div id="disqus_thread"></div>
+									<script>
+
+									/**
+									*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+									*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+									/*
+									var disqus_config = function () {
+									this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+									this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+									};
+									*/
+									(function() { // DON'T EDIT BELOW THIS LINE
+									var d = document, s = d.createElement('script');
+									s.src = 'https://carry-factor.disqus.com/embed.js';
+									s.setAttribute('data-timestamp', +new Date());
+									(d.head || d.body).appendChild(s);
+									})();
+									</script>
+									<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+																				
+								
+								  
+								  <!-- Comment form.  I'll need to add this back in later. -->
+								  <!--
+								  <form>
+									<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+									  <textarea rows=1 class="mdl-textfield__input" id="comment"></textarea>
+									  <label for="comment" class="mdl-textfield__label">Join the discussion</label>
+									</div>
+									<button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+									  <i class="material-icons" role="presentation">check</i><span class="visuallyhidden">add comment</span>
+									</button>
+								  </form>
+								  <div class="comment mdl-color-text--grey-700">
+									<header class="comment__header">
+									  <img src="images/co1.jpg" class="comment__avatar">
+									  <div class="comment__author">
+										<strong>James Splayd</strong>
+										<span>2 days ago</span>
+									  </div>
+									</header>
+									<div class="comment__text">
+									  In in culpa nulla elit esse. Ex cillum enim aliquip sit sit ullamco ex eiusmod fugiat. Cupidatat ad minim officia mollit laborum magna dolor tempor cupidatat mollit. Est velit sit ad aliqua ullamco laborum excepteur dolore proident incididunt in labore elit.
+									</div>
+									<nav class="comment__actions">
+									  <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+										<i class="material-icons" role="presentation">thumb_up</i><span class="visuallyhidden">like comment</span>
+									  </button>
+									  <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+										<i class="material-icons" role="presentation">thumb_down</i><span class="visuallyhidden">dislike comment</span>
+									  </button>
+									  <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+										<i class="material-icons" role="presentation">share</i><span class="visuallyhidden">share comment</span>
+									  </button>
+									</nav>
+									<div class="comment__answers">
+									  <div class="comment">
+										<header class="comment__header">
+										  <img src="images/co2.jpg" class="comment__avatar">
+										  <div class="comment__author">
+											<strong>John Dufry</strong>
+											<span>2 days ago</span>
+										  </div>
+										</header>
+										<div class="comment__text">
+										  Yep, agree!
+										</div>
+										<nav class="comment__actions">
+										  <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+											<i class="material-icons" role="presentation">thumb_up</i><span class="visuallyhidden">like comment</span>
+										  </button>
+										  <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+											<i class="material-icons" role="presentation">thumb_down</i><span class="visuallyhidden">dislike comment</span>
+										  </button>
+										  <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+											<i class="material-icons" role="presentation">share</i><span class="visuallyhidden">share comment</span>
+										  </button>
+										</nav>
+									  </div>
+									</div>
+								  </div>
+								  -->
+								  
+								</div>
+							  
+
+							  <!-- Nav Buttons, I can add back in later. -->
+							  <!--
+							  <nav class="demo-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
+								<a href="index.html" class="demo-nav__button">
+								  <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+									<i class="material-icons">arrow_back</i>
+								  </button>
+								  Newer
+								</a>
+								<div class="section-spacer"></div>
+								<a href="index.html" class="demo-nav__button">
+								  Older
+								  <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+									<i class="material-icons">arrow_forward</i>
+								  </button>
+								</a>
+							  </nav>
+							  -->
+							</div>
+
+
+
+							
+							
+							
+						</main>
+						<div class="mdl-layout__obfuscator"></div>
+					</td>
+
+				</tr>
+			</table>
+			
+
+							<footer class="mdl-mini-footer" style="width: 100%; height: 500px;">
+								
+							  <div class="mdl-mini-footer--left-section">
+								<button class="mdl-mini-footer--social-btn social-btn social-btn__twitter">
+								  <span class="visuallyhidden">Twitter</span>
+								</button>
+								<button class="mdl-mini-footer--social-btn social-btn social-btn__blogger">
+								  <span class="visuallyhidden">Facebook</span>
+								</button>
+								<button class="mdl-mini-footer--social-btn social-btn social-btn__gplus">
+								  <span class="visuallyhidden">Google Plus</span>
+								</button>
+							  </div>
+							  <div class="mdl-mini-footer--right-section">
+								<button class="mdl-mini-footer--social-btn social-btn__share">
+								  <i class="material-icons" role="presentation">share</i>
+								  <span class="visuallyhidden">share</span>
+								</button>
+							  </div>
+							  							
+							</footer>
+<div id='underFooter' style='background-color: #222222;'></div>
+			
+				
+		</div>
+
+
+
+
+		<div  id="ResponsiveHolder" style='background-color: #222222; z-index: 1000000; position: fixed; bottom: 0px; width: 100%; text-align: center;'>
+		
+			<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+			<!-- Carry-Factor Responsive 1 -->
+			<ins class="adsbygoogle responsiveBanner"
+				 style="display:block; margin: 0 auto;"
+				 data-ad-client="ca-pub-6399216573107712"
+				 data-ad-slot="7615806783"
+				 data-ad-format="auto"></ins>
+			<script>
+			(adsbygoogle = window.adsbygoogle || []).push({});
+			</script>		
+		</div>
+			
+	<!-- MDL Source Code on a ripple button.  I probably don't need to re-add later, but I can re-use the button. -->
+	<!--
+    <a href="https://github.com/google/material-design-lite/blob/mdl-1.x/templates/blog/" target="_blank" id="view-source" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-color--accent mdl-color-text--white">View Source</a>
+	-->
+	
+    <script src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+	
+	<script>            
+		function changeColors() {
+			document.cookie = "darkScheme=" + document.getElementById('useDark').checked + "; expires=Thu, 18 Dec 2020 12:00:00 UTC;";
+			
+			if (document.getElementById('useDark').checked) {
+				document.getElementById('dark-styles').disabled = false;
+				document.getElementById('light-styles').disabled = true;
+			} else {
+				document.getElementById('dark-styles').disabled = true;
+				document.getElementById('light-styles').disabled = false;
+			}
+		}
+		
+		if (getCookie('darkScheme') == 'true') {
+			document.getElementById('useDark').checked = true;
+			document.getElementById('dark-styles').disabled = false;
+			document.getElementById('light-styles').disabled = true;
+		} else {
+			document.getElementById('useDark').checked = false;
+			document.getElementById('dark-styles').disabled = true;
+			document.getElementById('light-styles').disabled = false;
+		}
+		
+		
+	</script>	
+	
+	
+  </body>
+</html>

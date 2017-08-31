@@ -1,0 +1,1 @@
+var canRunAdsGaren2 = true;

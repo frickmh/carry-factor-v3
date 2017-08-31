@@ -1,0 +1,1168 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Carry-Factor.com - LoL Stats Command Center.  Stats, Counterpicks, and Cooldowns</title>
+        <link rel="shortcut icon" href="../website/diamond_i_favicon.png">
+        <meta content="LoL Stats Command Center.  Scout your opponents and punish their weakest link.  Dynamic Counterpick tool." name='description'>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="Pre-game Lobby Stats for League of Legends">
+        <meta name="keywords" content="pre-game lobby stats, League of Legends, Champion Select, Statistics, Summoner info, Bronzodia, Bronzodia.com, stats, lol, bronzodia, carry-factor, carry factor, counterpick, counterpicks, counter power, , educational, learning, tutorial, coaching, jungling, carrying, pressure, cs at 10, cs@10, farm at 10, farm calculator, gold per minute, exp per minute, experience calculator, gold calculator, gold stats, average gold stats, average level stats, average gold per minute ">
+        
+
+        <link rel="stylesheet" type="text/css" href="../bronzodia.css">
+        <link rel="stylesheet" type="text/css" href="../bronzodia_Dark.css" id='dark-styles'>        
+        <link rel="stylesheet" type="text/css" href="../bronzodia_Light.css" id='light-styles'>        
+	
+		
+		
+		<script language="javascript" type="text/javascript" src="../src/flot/jquery.js"></script>
+		<script language="javascript" type="text/javascript" src="../src/flot/jquery.flot.js"></script>
+		<script language="javascript" type="text/javascript" src="../src/flot/jquery.flot.fillbetween.js"></script>
+		<script language="javascript" type="text/javascript" src="../src/flot/jquery.flot.crosshair.js"></script>
+		
+		<script src="../src/standardFunctions.js">
+			//Contents: 
+			//getUrlParameter(sParam) //Extracts a parameter from a URL and returns it.
+			//getCookie(cookieLoad) //Gets a cookie.
+			//String.prototype.replaceAll(search, replace) //Replaces all instances of a search string.
+			//String.prototype.removeMarkups() //Remove HTML markups (e.g. <, >)
+		</script>
+        
+                <!-- Google Analytics Tracking Script -->
+        <script>
+            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+            })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+            ga('create', 'UA-60328206-5', 'auto');
+            ga('send', 'pageview');
+
+        </script>
+        <style>
+            div.sidebar {
+                background-color: #555555;
+                width:60%;
+                margin: 0 auto;
+                border-style: solid;
+                border-width: thin;
+                border-radius: 5px; 
+                box-shadow: 10px 10px 5px grey;
+                text-align:center;
+                height: 630px;
+                background: #333333;
+                color: #FFFFFF;
+            }
+        </style>
+		
+		<script>
+		
+			var array         = [2, 3, 4, 6, 2, 5, 7, 2, 4, 5, 99];
+			var within_std_of = 3;
+
+			outputResult = function(str) {
+			  var content = $('#results').html();
+			  $('#results').html(content + str);
+			}
+
+			average = function(a) {
+			  var r = {mean: 0, variance: 0, deviation: 0, count:0}, t = a.length;
+			  r.count = a.length;
+			  for(var m, s = 0, l = t; l--; s += a[l]);
+			  for(m = r.mean = s / t, l = t, s = 0; l--; s += Math.pow(a[l] - m, 2));
+			  return r.deviation = Math.sqrt(r.variance = s / t), r;
+			}
+				
+			withinStd = function(mean, val, stdev) {
+			   var low = mean-(stdev*x.deviation);
+			   var hi = mean+(stdev*x.deviation);
+			   return (val > low) && (val < hi);
+			}
+			  
+			outputResult("Set = [" + array.concat(',') + "]<br/><br/>");
+
+			var x = average(array);
+			outputResult(
+				"mean      = " + x.mean + "<br />" +
+				"deviation = " + x.deviation + "<br />" +
+				"variance  = " + x.variance + "<br /><br />"
+			);
+				
+			for(i=0; i<array.length; i++) {
+			  outputResult (array[i] + " inside " + within_std_of + "std? <strong>" + withinStd(x.mean, array[i],within_std_of) + "</strong><br/>");
+			}	
+
+			console.log(array);
+			console.log(average(array));		
+		
+			var cs10 = new Array();
+			
+			var stats10 = {};
+			
+			var gold = {};
+			var levelFractional = {};
+			var cs = {};
+
+			$(document).ajaxStop(function(){
+				console.log("On Ajax Stop:");
+				console.log(gold);
+				console.log(levelFractional);
+				console.log(cs);
+				
+				console.log(cs10);
+				
+				document.getElementById("cs10Mean").innerHTML = average(cs10).mean.toFixed(2);
+				
+				document.getElementById("cs10StdDev").innerHTML = average(cs10).deviation.toFixed(2);
+				
+				
+				var sampleSize = cs10.length;
+				
+				if (sampleSize > 2) {
+				
+					//DF 1, 2, 3...				
+					var tValues2Tail95 = ["12.7062","4.3027","3.1824","2.7765","2.5706","2.4469","2.3646","2.306","2.2622","2.2281","2.201","2.1788","2.1604","2.1448","2.1315","2.1199","2.1098","2.1009","2.093","2.086","2.0796","2.0739","2.0687","2.0639","2.0595","2.0555","2.0518","2.0484","2.0452","2.0423","2.0395","2.0369","2.0345","2.0322","2.0301","2.0281","2.0262","2.0244","2.0227","2.0211","2.0195","2.0181","2.0167","2.0154","2.0141","2.0129","2.0117","2.0106","2.0096","2.0086","2.0076","2.0066","2.0057","2.0049","2.004","2.0032","2.0025","2.0017","2.001","2.0003"];
+					
+					var DoF = sampleSize - 1;
+					
+					var tValue = parseFloat(tValues2Tail95[DoF - 1]);
+					
+					var confidenceInterval = tValue * average(cs10).deviation / Math.sqrt(sampleSize);
+					
+					document.getElementById("cs10CI").innerHTML = average(cs10).mean.toFixed(0) + " ± " + confidenceInterval.toFixed(0) + " @ 95% CI";
+				} else {
+					document.getElementById("cs10CI").innerHTML = "Not enough data.";
+				}
+				console.log(average(cs10));
+				
+				var goldPlot = { "2%" : [] , "14%" : [] , "50%" : [] , "mean" : [] , "86%" : [] , "98%" : []};
+				var csPlot = { "2%" : [] , "14%" : [] , "50%" : [] , "mean" : [] , "86%" : [] , "98%" : []};
+				var lvlPlot = { "2%" : [] , "14%" : [] , "50%" : [] , "mean" : [] , "86%" : [] , "98%" : []};
+				
+				$.each(gold, function(key, val){
+					
+					var avgGold = average(gold[key]);
+					
+					var x = key;
+					
+					var sigma = avgGold.deviation;
+					
+					var mean = avgGold.mean;
+					
+					console.log(avgGold);
+					
+					goldPlot["2%"].push([x, mean - 2 * sigma]);
+					goldPlot["14%"].push([x, mean - sigma]);
+					goldPlot["50%"].push([x, mean]);
+					goldPlot["mean"].push([x, mean]);
+					goldPlot["86%"].push([x, mean + sigma]);
+					goldPlot["98%"].push([x, mean + 2 * sigma]);
+				
+				});
+				
+				$.each(levelFractional, function(key, val){
+					
+					var avgLevelFractional = average(levelFractional[key]);
+					
+					var x = key;
+					
+					var sigma = avgLevelFractional.deviation;
+					
+					var mean = avgLevelFractional.mean;
+					
+					lvlPlot["2%"].push([x, mean - 2 * sigma]);
+					lvlPlot["14%"].push([x, mean - sigma]);
+					lvlPlot["50%"].push([x, mean]);
+					lvlPlot["mean"].push([x, mean]);
+					lvlPlot["86%"].push([x, mean + sigma]);
+					lvlPlot["98%"].push([x, mean + 2 * sigma]);
+				
+				});
+
+				$.each(cs, function(key, val){
+					
+					var avgCs = average(cs[key]);
+					
+					var x = key;
+					
+					var sigma = avgCs.deviation;
+					
+					var mean = avgCs.mean;
+					
+					csPlot["2%"].push([x, mean - 2 * sigma]);
+					csPlot["14%"].push([x, mean - sigma]);
+					csPlot["50%"].push([x, mean]);
+					csPlot["mean"].push([x, mean]);
+					csPlot["86%"].push([x, mean + sigma]);
+					csPlot["98%"].push([x, mean + 2 * sigma]);
+				
+				});
+				
+				console.log(goldPlot);
+				console.log(lvlPlot);
+				console.log(csPlot);
+							
+				var datasetGold = [
+					{ label: "Gold mean", data: goldPlot["mean"], lines: { show: true }, color: "rgb(255,50,50)" },
+					
+					{ id: "g2%", data: goldPlot["2%"], lines: { show: true, lineWidth: 0, fill: false }, color: "rgb(255,50,50)" },
+					{ id: "g14%", data: goldPlot["14%"], lines: { show: true, lineWidth: 0, fill: 0.2 }, color: "rgb(255,50,50)", fillBetween: "g2%" },
+					{ id: "g50%", data: goldPlot["50%"], lines: { show: true, lineWidth: 0.5, fill: 0.4, shadowSize: 0 }, color: "rgb(255,50,50)", fillBetween: "g14%" },
+					{ id: "g86%", data: goldPlot["86%"], lines: { show: true, lineWidth: 0, fill: 0.4 }, color: "rgb(255,50,50)", fillBetween: "g50%" },
+					{ id: "g98%", data: goldPlot["98%"], lines: { show: true, lineWidth: 0, fill: 0.2 }, color: "rgb(255,50,50)", fillBetween: "g86%" }
+				];
+
+				var datasetLevel = [
+					{ label: "Level mean", data: lvlPlot["mean"], lines: { show: true }, color: "rgb(50,255,50)" },
+					
+					{ id: "g2%", data: lvlPlot["2%"], lines: { show: true, lineWidth: 0, fill: false }, color: "rgb(50,255,50)" },
+					{ id: "g14%", data: lvlPlot["14%"], lines: { show: true, lineWidth: 0, fill: 0.2 }, color: "rgb(50,255,50)", fillBetween: "g2%" },
+					{ id: "g50%", data: lvlPlot["50%"], lines: { show: true, lineWidth: 0.5, fill: 0.4, shadowSize: 0 }, color: "rgb(50,255,50)", fillBetween: "g14%" },
+					{ id: "g86%", data: lvlPlot["86%"], lines: { show: true, lineWidth: 0, fill: 0.4 }, color: "rgb(50,255,50)", fillBetween: "g50%" },
+					{ id: "g98%", data: lvlPlot["98%"], lines: { show: true, lineWidth: 0, fill: 0.2 }, color: "rgb(50,255,50)", fillBetween: "g86%" }
+				];
+
+				var datasetCs = [
+					{ label: "CS mean", data: csPlot["mean"], lines: { show: true }, color: "rgb(50,50,255)" },
+					
+					{ id: "g2%", data: csPlot["2%"], lines: { show: true, lineWidth: 0, fill: false }, color: "rgb(50,50,255)" },
+					{ id: "g14%", data: csPlot["14%"], lines: { show: true, lineWidth: 0, fill: 0.2 }, color: "rgb(50,50,255)", fillBetween: "g2%" },
+					{ id: "g50%", data: csPlot["50%"], lines: { show: true, lineWidth: 0.5, fill: 0.4, shadowSize: 0 }, color: "rgb(50,50,255)", fillBetween: "g14%" },
+					{ id: "g86%", data: csPlot["86%"], lines: { show: true, lineWidth: 0, fill: 0.4 }, color: "rgb(50,50,255)", fillBetween: "g50%" },
+					{ id: "g98%", data: csPlot["98%"], lines: { show: true, lineWidth: 0, fill: 0.2 }, color: "rgb(50,50,255)", fillBetween: "g86%" }
+				];
+				
+				plotGold = $.plot($("#plotGoldHolder"), datasetGold, {
+					xaxis: {
+						tickDecimals: 0
+					},
+					yaxis: {
+						tickFormatter: function (v) {
+							return v + " gold";
+						}
+					},
+					crosshair: {
+						mode: "x"
+					},
+					grid: {
+						//hoverable: true,  //Removed for mobile version
+						clickable: true,
+						autoHighlight: false, 
+						backgroundColor: "white"
+					},					
+					legend: {
+						position: "se", 
+						backgroundOpacity: "0"
+					}
+				});	
+
+								
+				plotLevel = $.plot($("#plotLvlHolder"), datasetLevel, {
+					xaxis: {
+						tickDecimals: 0
+					},
+					yaxis: {
+						tickDecimals: 0,
+						tickFormatter: function (v) {
+							return "Level " + v;
+						}
+					},
+					crosshair: {
+						mode: "x"
+					},
+					grid: {
+						//hoverable: true,  //Removed for movile version
+						clickable: true,
+						autoHighlight: false, 
+						backgroundColor: "white"
+					},					
+					legend: {
+						position: "se", 
+						backgroundOpacity: "0"
+					}
+				});	
+				
+				
+				plotCs = $.plot($("#plotCsHolder"), datasetCs, {
+					xaxis: {
+						tickDecimals: 0
+					},
+					yaxis: {
+						tickFormatter: function (v) {
+							return v + " CS";
+						}
+					},
+					crosshair: {
+						mode: "x"
+					},
+					grid: {
+						//hoverable: true,  //Removed for mobile version
+						clickable: true,
+						autoHighlight: false, 
+						backgroundColor: "white"
+					},					
+					legend: {
+						position: "se", 
+						backgroundOpacity: "0"
+					}
+				});
+				
+				//Hover doesn't work on mobile, so 'plotclick' will move the cursor
+				/*				
+				//Bind toggle events to clicks on the plot
+				$("#plotGoldHolder").bind("plotclick", function (event, pos, item) {
+					plotGold.toggleCrosshairLocked();					
+				});
+				
+				$("#plotLvlHolder").bind("plotclick", function (event, pos, item) {
+					plotLevel.toggleCrosshairLocked();					
+				});
+
+				$("#plotCsHolder").bind("plotclick", function (event, pos, item) {
+					plotCs.toggleCrosshairLocked();					
+				});
+				*/
+
+				
+				//Add Legend to Gold Plot
+				var legendsGold = $("#plotGoldHolder .legendLabel");
+
+				legendsGold.each(function () {
+					// fix the widths so they don't jump around
+					$(this).css('width', $(this).width());
+				});
+
+				var updateLegendTimeoutGold = null;
+				var latestPositionGold = null;
+
+				function updateLegendGold() {
+
+					updateLegendTimeoutGold = null;
+
+					var pos = latestPositionGold;
+
+					var axes = plotGold.getAxes();
+					if (pos.x < axes.xaxis.min || pos.x > axes.xaxis.max ||
+						pos.y < axes.yaxis.min || pos.y > axes.yaxis.max) {
+						return;
+					}
+
+					var i, j, dataset = plotGold.getData();
+					for (i = 0; i < dataset.length; ++i) {
+
+						var series = dataset[i];
+
+						// Find the nearest points, x-wise
+
+						for (j = 0; j < series.data.length; ++j) {
+							if (series.data[j][0] > pos.x) {
+								break;
+							}
+						}
+
+						// Now Interpolate
+
+						var y,
+							p1 = series.data[j - 1],
+							p2 = series.data[j];
+
+						if (p1 == null) {
+							y = p2[1];
+						} else if (p2 == null) {
+							y = p1[1];
+						} else {
+							y = p1[1] + (p2[1] - p1[1]) * (pos.x - p1[0]) / (p2[0] - p1[0]);
+						}
+
+						var minutes = Math.floor(pos.x);
+						var seconds = Math.round((pos.x - minutes) * 60) < 10 ? "0" + Math.round((pos.x % 1) * 60) : Math.round((pos.x % 1) * 60);
+						
+						if (seconds == 60) {
+							seconds = 0;
+							minutes++;
+						}
+						
+						//legendsGold.eq(i).text(series.label.replace(/=.*/, "= " + y.toFixed(2)));			
+						if (!plotGold.isLocked())
+							legendsGold.eq(i).text("Time: " + minutes + ":" + seconds + " Avg_Gold: " + Math.round(y.toFixed(2)));
+					}
+				}
+
+				$("#plotGoldHolder").bind("plotclick",  function (event, pos, item) {
+					latestPositionGold = pos;
+					if (!updateLegendTimeoutGold) {
+						updateLegendTimeoutGold = setTimeout(updateLegendGold, 50);
+					}
+				});		
+				
+				
+
+				//Add Legend to Level Plot
+				var legendsLevel = $("#plotLvlHolder .legendLabel");
+
+				legendsLevel.each(function () {
+					// fix the widths so they don't jump around
+					$(this).css('width', $(this).width());
+				});
+
+				var updateLegendTimeoutLevel = null;
+				var latestPositionLevel = null;
+
+				function updateLegendLevel() {
+
+					updateLegendTimeoutLevel = null;
+
+					var pos = latestPositionLevel;
+
+					var axes = plotLevel.getAxes();
+					if (pos.x < axes.xaxis.min || pos.x > axes.xaxis.max ||
+						pos.y < axes.yaxis.min || pos.y > axes.yaxis.max) {
+						return;
+					}
+
+					var i, j, dataset = plotLevel.getData();
+					for (i = 0; i < dataset.length; ++i) {
+
+						var series = dataset[i];
+
+						// Find the nearest points, x-wise
+
+						for (j = 0; j < series.data.length; ++j) {
+							if (series.data[j][0] > pos.x) {
+								break;
+							}
+						}
+
+						// Now Interpolate
+
+						var y,
+							p1 = series.data[j - 1],
+							p2 = series.data[j];
+
+						if (p1 == null) {
+							y = p2[1];
+						} else if (p2 == null) {
+							y = p1[1];
+						} else {
+							y = p1[1] + (p2[1] - p1[1]) * (pos.x - p1[0]) / (p2[0] - p1[0]);
+						}
+
+						var minutes = Math.floor(pos.x);
+						var seconds = Math.round((pos.x - minutes) * 60) < 10 ? "0" + Math.round((pos.x % 1) * 60) : Math.round((pos.x % 1) * 60);
+						//legendsLevel.eq(i).text(series.label.replace(/=.*/, "= " + y.toFixed(2)));					
+						if (seconds == 60) {
+							seconds = 0;
+							minutes++;
+						}
+						
+						if (!plotLevel.isLocked())
+							legendsLevel.eq(i).text("Time: " + minutes + ":" + seconds + " Avg_Lvl: " + y.toFixed(1));
+					}
+				}
+				
+				$("#plotLvlHolder").bind("plotclick",  function (event, pos, item) {
+					latestPositionLevel = pos;
+					if (!updateLegendTimeoutLevel) {
+						updateLegendTimeoutLevel = setTimeout(updateLegendLevel, 50);
+					}
+				});						
+				
+
+				
+				
+				//Add Legend to CS Plot
+				var legendsCs = $("#plotCsHolder .legendLabel");
+
+				legendsCs.each(function () {
+					// fix the widths so they don't jump around
+					$(this).css('width', $(this).width());
+				});
+
+				var updateLegendTimeoutCs = null;
+				var latestPositionCs = null;
+
+				function updateLegendCs() {
+
+					updateLegendTimeoutCs = null;
+
+					var pos = latestPositionCs;
+
+					var axes = plotCs.getAxes();
+					if (pos.x < axes.xaxis.min || pos.x > axes.xaxis.max ||
+						pos.y < axes.yaxis.min || pos.y > axes.yaxis.max) {
+						return;
+					}
+
+					var i, j, dataset = plotCs.getData();
+					for (i = 0; i < dataset.length; ++i) {
+
+						var series = dataset[i];
+
+						// Find the nearest points, x-wise
+
+						for (j = 0; j < series.data.length; ++j) {
+							if (series.data[j][0] > pos.x) {
+								break;
+							}
+						}
+
+						// Now Interpolate
+
+						var y,
+							p1 = series.data[j - 1],
+							p2 = series.data[j];
+
+						if (p1 == null) {
+							y = p2[1];
+						} else if (p2 == null) {
+							y = p1[1];
+						} else {
+							y = p1[1] + (p2[1] - p1[1]) * (pos.x - p1[0]) / (p2[0] - p1[0]);
+						}
+
+						var minutes = Math.floor(pos.x);
+						var seconds = Math.round((pos.x - minutes) * 60) < 10 ? "0" + Math.round((pos.x % 1) * 60) : Math.round((pos.x % 1) * 60);
+						//legendsLevel.eq(i).text(series.label.replace(/=.*/, "= " + y.toFixed(2)));						
+						if (seconds == 60) {
+							seconds = 0;
+							minutes++;
+						}
+						
+						if (!plotCs.isLocked())
+							legendsCs.eq(i).text("Time: " + minutes + ":" + seconds + " Avg_CS: " + Math.round(y.toFixed(2)));
+					}
+				}
+				
+				$("#plotCsHolder").bind("plotclick",  function (event, pos, item) {
+					latestPositionCs = pos;
+					if (!updateLegendTimeoutCs) {
+						updateLegendTimeoutCs = setTimeout(updateLegendCs, 50);
+					}
+				});		
+				
+				document.getElementById("loadingBox").style.visibility = "hidden";
+				
+			});
+			
+			var patchGlobal;
+			
+			var champsGlobalJSON;
+			
+			$(document).ready(function(){
+				$("#patch").load("../datadragon/getPatch.php", function(){
+					var patch = document.getElementById("patch").innerHTML;
+					
+					patchGlobal = patch;		
+					$.getJSON( "../datadragon/" + patch + "/data/en_US/champion.json", function( dataChamps ) {
+						champsGlobalJSON = dataChamps;					
+						getChampsList();
+						
+						
+						if (getUrlParameter("summonerName") != undefined && getUrlParameter("champName") != undefined && getUrlParameter("region") != undefined) {
+							document.getElementById("summonerSelector").value = getUrlParameter("summonerName").replaceAll("+","");
+							
+							document.getElementById("champSelector").value = getUrlParameter("champName");
+							
+							document.getElementById("regionSelector").value = getUrlParameter("region");		
+
+							var name = decodeURIComponent(document.getElementById("summonerSelector").value);
+							
+							var region = document.getElementById("regionSelector").value;
+							
+							var champ =  document.getElementById("champSelector").value;
+							
+							//url: 'https://na.api.riotgames.com/api/lol/NA/v1.4/summoner/by-name/' + name + '?api_key=55b49f8b-52e1-4cbc-b7cf-d30a054b7833',
+							
+							$.ajax({
+								type: 'GET',
+								
+
+								url: "http://carry-factor.com/src/get_ids_from_names.php?names=" + name + "&region=" + region,
+
+								beforeSend: function( xhr ) {
+									xhr.overrideMimeType( "text/plain; charset=x-user-defined" );
+								}            
+							}).done(function (data){
+								var found = false;
+								
+								var summonerId;
+								
+								console.log(data);
+								
+								//var dataJSON = JSON.parse(data);
+								
+								console.log("Hello");
+								//console.log(dataJSON);
+								//Arìane
+								
+								/*
+								$.each(dataJSON, function(key, val){
+								
+									console.log(val.name);
+									console.log(name);		
+
+									summonerId = val.id;									
+									
+									if (decodeURIComponent(val.name.toLowerCase().replaceAll(" ", "")) == decodeURIComponent(name.toLowerCase().replaceAll(" ", ""))) {
+										found = true;
+										
+										summonerId = dataJSON;
+									}
+								});*/
+								
+								console.log(data.length > 0);
+								
+								if (data.length > 0) {
+									document.getElementById("message").innerHTML = "Summoner Found!";
+									summonerId = data;
+									
+									$.getJSON("../data/champsListByName.json", function(data){
+										var champId = data.data[champ].id;
+										
+										plotData(summonerId, region, champId);
+									});									
+									
+									
+									
+								
+								} else {
+									document.getElementById("message").innerHTML = "Summoner not found.";
+								}
+								
+
+								
+							
+							});
+							
+							
+							
+						
+						} else {
+							document.getElementById("summonerSelector").value = getCookie("summonerName");							
+							document.getElementById("champSelector").value = getCookie("champName");							
+							document.getElementById("regionSelector").value = getCookie("region");	
+						}
+						
+						console.log(getCookie("summonerName"));
+						console.log(getCookie("region"));
+						console.log(getCookie("champName"));
+						
+					});
+					
+				});			
+
+			});
+			
+			function plotData(summonerId, region, champ) {
+				
+				console.log("Plot Data:");
+				console.log(summonerId);
+				console.log(region);
+				console.log(champ);
+				
+				document.getElementById("loadingBox").style.visibility = "visible";
+				
+				$.ajax({
+                            type: 'GET',
+                            
+							//Season 2016
+							//url: 'https://na.api.riotgames.com/api/lol/NA/v2.2/matchlist/by-summoner/50019204?rankedQueues=TEAM_BUILDER_RANKED_SOLO&endTime=1483228801000&beginTime=1451606401000&api_key=78f7f6d7-b181-4ea9-a792-487ec4417dee', 
+							//Season 2017
+							url: 'https://' + region + '.api.riotgames.com/api/lol/' + region.toUpperCase() + '/v2.2/matchlist/by-summoner/' + summonerId + '?endIndex=30&beginIndex=0&championIds=' + champ + '&api_key=55b49f8b-52e1-4cbc-b7cf-d30a054b7833', //Last 20 games on Garen ONLY
+							//url: 'https://na.api.riotgames.com/api/lol/NA/v2.2/matchlist/by-summoner/50019204?rankedQueues=TEAM_BUILDER_RANKED_SOLO&beginTime=1483228801000&api_key=78f7f6d7-b181-4ea9-a792-487ec4417dee', //All games in 2017
+							//data: { champ : champ.replace(" ", "").replace("'","") },
+
+                            //dataType: Text,
+                            beforeSend: function( xhr ) {
+                                xhr.overrideMimeType( "text/plain; charset=x-user-defined" );
+                            }            
+                        }).done(function(data) {
+							var dataJSON = JSON.parse(data);
+
+							console.log(dataJSON);
+							
+							if (dataJSON.totalGames < 30) {
+								document.getElementById("message").innerHTML = "Summoner found, Not enough games on champion! (" + dataJSON.totalGames + " games, 30 needed)";
+							} else {
+						
+							
+								$.each(dataJSON.matches, function(key, val) {
+									
+									var d = new Date(val.timestamp);
+
+									$.ajax({
+											type: 'GET',
+											//url: 'https://na.api.riotgames.com/api/lol/NA/v2.2/matchlist/by-summoner/50019204?api_key=78f7f6d7-b181-4ea9-a792-487ec4417dee',
+											//url: 'https://na.api.riotgames.com/api/lol/NA/v2.2/match/' + val.matchId + '?api_key=55b49f8b-52e1-4cbc-b7cf-d30a054b7833', //Matches with no timeline.
+											url: 'https://' + region + '.api.riotgames.com/api/lol/' + region.toUpperCase() + '/v2.2/match/' + val.matchId + '?includeTimeline=true&api_key=55b49f8b-52e1-4cbc-b7cf-d30a054b7833', //Matches, with timeline.
+											//data: { champ : champ.replace(" ", "").replace("'","") },
+											
+											//dataType: Text,
+											beforeSend: function( xhr ) {
+												xhr.overrideMimeType( "text/plain; charset=x-user-defined" );
+											}            
+										}).done(function(data) {
+											var dataJSON = JSON.parse(data);
+											
+											console.log(dataJSON);											
+											
+											$.each(dataJSON.participantIdentities, function(key, val) {
+												//console.log(val);
+												
+												//69981918 LiquidHandsoap
+												//50019204 NovaDisk
+												//val.player.summonerName == NovaDisk
+												if (val.player.summonerId == summonerId) {
+													//console.log("Found me!");
+													
+													var myParticipantId = val.participantId;
+													
+													//console.log(myParticipantId);
+													
+													console.log("Winner: " + dataJSON.participants[myParticipantId-1].stats.winner);
+													
+													if (dataJSON.participants[myParticipantId-1].stats.winner) {
+														//document.getElementById('tableWins').childNodes[d.getHours()].innerHTML = parseInt(document.getElementById('tableWins').childNodes[d.getHours()].innerHTML) + 1;
+													} else {
+														//document.getElementById('tableLosses').childNodes[d.getHours()].innerHTML = parseInt(document.getElementById('tableLosses').childNodes[d.getHours()].innerHTML) + 1;
+													}
+													
+													
+													if (dataJSON.timeline != undefined) {
+														//Get CS@10, etc.
+														if (dataJSON.timeline.frames[10] != undefined) {
+															
+															cs10.push(dataJSON.timeline.frames[10].participantFrames[myParticipantId].minionsKilled + dataJSON.timeline.frames[10].participantFrames[myParticipantId].jungleMinionsKilled);
+															
+														}
+														
+														$.each(dataJSON.timeline.frames, function(key, val) {
+															
+															var keyInt = parseInt(key);
+														
+															if (gold[keyInt] == undefined) {
+																gold[keyInt] = new Array();
+															}																											
+															gold[keyInt].push(val.participantFrames[myParticipantId].totalGold);
+															
+															if (cs[keyInt] == undefined) {
+																cs[keyInt] = new Array();
+															}
+															
+															cs[keyInt].push(val.participantFrames[myParticipantId].minionsKilled + val.participantFrames[myParticipantId].jungleMinionsKilled);
+															
+															if (levelFractional[keyInt] == undefined) {
+																levelFractional[keyInt] = new Array();
+															}
+															
+															var exp = val.participantFrames[myParticipantId].xp;
+															
+															var levelFractionalTemp = getFractionalLevel(exp);
+															
+															/*
+															console.log("Total EXP:");
+															console.log(exp);
+															console.log("Level Fractional:");
+															console.log(levelFractionalTemp);
+															console.log("");
+															*/
+															levelFractional[keyInt].push(levelFractionalTemp);													
+
+														
+														});													
+													}
+
+												}
+											});
+											
+										});
+								});
+							
+							}
+							
+							
+						});			
+			
+			}
+			
+			
+			function getFractionalLevel(champExp) {
+								
+				var expRemaining;
+
+				expRemaining = champExp != undefined ? parseInt(champExp) : 0;
+				
+				var expLevelBreakpoints = [0, 0, 280, 380, 480, 580, 680, 780, 880, 980, 1080, 1180, 1280, 1380, 1480, 1580, 1680, 1780, 1880];
+				
+				var expCumulativeBreakpoints = new Array();
+				
+				var partialLevel = 0;
+				
+				var currentLevel = 0;
+				
+				//console.log("Starting Loop:");
+				
+				for (var i = 1; i <= 18; i++) {
+					//console.log(expRemaining);
+					if (expRemaining - expLevelBreakpoints[i] >= 0) {
+						expRemaining -= expLevelBreakpoints[i];
+						currentLevel++;
+						//console.log(expRemaining);
+						
+					}
+				}
+				
+				if (currentLevel < 18) {
+					partialLevel = expRemaining / expLevelBreakpoints[currentLevel + 1];
+				}
+				/*
+				console.log("Current Level:");
+				console.log(currentLevel);
+				console.log("EXP Remaining:");
+				console.log(expRemaining);
+				*/
+				return currentLevel + partialLevel;
+
+			
+			}
+			
+
+			function getChampsList() {
+
+				var patch = patchGlobal;
+				
+				var select = document.getElementById("champSelector");
+				
+				$.each(champsGlobalJSON.data, function(key, val) {
+					var option = document.createElement("option");
+					
+					option.innerHTML = val.name;
+					option.value = val.id;
+					//option.setAttribute("name", val.id);
+					
+					select.appendChild(option);
+				
+				});						
+				
+				
+			}	
+
+
+			
+			function setName() {
+				var summonerName = document.getElementById('summonerSelector').value;
+				document.cookie = "summonerName=" + summonerName + "; expires=Thu, 19 Dec 2025 12:00:00 UTC;";
+				//alert (document.cookie);
+				
+			}					
+
+			function setRegion() {
+				var region = document.getElementById('regionSelector').value;
+				document.cookie = "region=" + region + "; expires=Thu, 19 Dec 2025 12:00:00 UTC;";
+				//alert (document.cookie);
+				
+			}					
+			
+			function setChamp() {
+				var champ = document.getElementById('champSelector').value;
+				document.cookie = "champName=" + champ + "; expires=Thu, 19 Dec 2025 12:00:00 UTC;";
+				//alert (document.cookie);
+				
+			}					
+
+			
+			
+		</script>			
+		
+		
+        
+    </head>
+    <body>
+        <div id="main_content_div" align="center">
+        <div></div>
+        <div style='width: 100%;' class='brown'><a href="../index.html"><img class='banner' style='width: 320px;' src='../website/banner-carry-factor.png' alt='Carry-factor: LoL Stats Command Center.  Stats, Counterpicks, and Cooldowns'></a></div>
+
+		
+        <div>
+            <table style='width:100%'><tbody><tr>
+						<td>
+							
+							<h2>Last 30 Games Average Gold, Level, and CS</h2>
+							<form><h3><span>Summoner Name:&nbsp;</span></h3><input type="text" name="summonerName" id="summonerSelector" onchange="setName();"><select id="regionSelector" name="region" onchange="setRegion();">
+												<option value="na" selected="selected">NA</option>
+												<option value="euw">EUW</option>
+												<option value="eune">EUNE</option>
+												<option value="br">BR</option>
+												<option value="kr">KR</option>
+												<option value="lan">LAN</option>
+												<option value="las">LAS</option>
+												<option value="oce">OCE</option>
+												<option value="ru">RU</option>
+												<option value="tr">TR</option>
+												<option value="jp">JP</option></select>
+											<select id="champSelector" name="champName" onChange="setChamp();"></select><br><br><button class='freljord' >Load Data</button></form>
+							<h2 id="message"></h2>
+							
+							<div id="LeaderboardTop" style='margin: 0 auto; box-shadow: 10px 10px 5px rgba(50, 50, 50, .3);position: fixed; bottom: 0px;'>
+
+								
+							</div>							
+							
+							
+							<h2>CS @ 10</h2>
+							<div>Avg:</div>
+							<div id="cs10Mean"></div>
+							<div>Std. Dev:</div>
+							<div id="cs10StdDev"></div>
+							<div>Confidence Interval:</div>
+							<div id="cs10CI"></div>
+
+							<h1>Gold</h1>
+							<!--<div style="text-align: right">*Dark region: 1 std. dev. Light region: 2 std. dev.</div>-->
+							<div id="plotGoldHolder" class="demo-plotGoldHolder" style="height: 400px; width=60vw;"></div>
+							<h1>Level</h1>
+							<div id="plotLvlHolder" class="demo-plotLvlHolder" style="height: 400px; width=60vw;"></div>
+							<h1>CS</h1>
+							<div id="plotCsHolder" class="demo-plotCsHolder" style="height: 400px; width=60vw;"></div>
+
+							<div id="patch">No patch found.</div>
+
+
+							<div id="results">						
+
+						</td>
+
+						<span style='float:right;' >Dark Color Scheme<input type='checkbox' onclick='changeColors()' id='useDark'></span>
+                    </tr>
+                </tbody>
+            </table>
+			
+        </div>
+                
+
+        </div>
+
+        <div id="loadingBox" style="color:#EEEEEE; background-color: #111111; position: fixed; top: 200px; margin: 0 auto; width: 90%; text-align: center; border: 1px solid #EEEEEE; visibility: hidden; "><br><h3>Loading Data!</h3><p>Please wait...</p><br></div>	
+		
+		<!--
+		<table style='text-align: center' align='center'><tr><td><a href='../aboutus.html'>About us</a></td><td><a href="../contact.html">Contact</a></td><td><a href="../privacy_policy.html">Privacy Policy</a></td><td><a href="../terms_of_use.html">Terms of Use</a></td><td><a href="../credits.html">Credits</a></td><td><a target='_blank' href="https://www.reddit.com/user/NovaDisk1/">Reddit</a></td></tr></table>
+        -->
+		<div><br><br><br></div>
+		<!--<div id="LeaderboardBottom" style='margin: 0 auto; text-align: center; width: 100%; position: fixed; bottom: 0px; box-shadow: 10px 10px 5px rgba(50, 50, 50, .3);'>-->
+		<div style='position: fixed; bottom: 0px; width: 100%;'>
+			<div id="LeaderboardBottom" style='margin: 0 auto; box-shadow: 10px 10px 5px rgba(50, 50, 50, .3); text-align: center;'>
+				<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+				<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+				<!-- Carry-Factor Standard Mobile -->
+				<ins class="adsbygoogle"
+					 style="display:inline-block;width:320px;height:50px"
+					 data-ad-client="ca-pub-6399216573107712"
+					 data-ad-slot="2901025987"></ins>
+				<script>
+				(adsbygoogle = window.adsbygoogle || []).push({});
+				</script>								
+				
+			</div>		
+		</div>
+		<script>
+            //alert(document.cookie);
+            var region = document.getElementById('regionSelector').value;
+            
+            if (region == null) {
+                document.getElementById('regionSelector').value = na;
+            }
+            
+            
+            //Load the cookies if document.cookie exists.
+            if (document.cookie !== null)
+            {
+                //alert (document.cookie);
+                
+                var afterRegion = document.cookie.substr(document.cookie.indexOf("region=") + 7);
+                var regionString;
+                        
+                //alert (afterRegion);
+                if (afterRegion.indexOf(";") > -1) {
+                    regionString = afterRegion.substr(0,afterRegion.indexOf(';'));
+                    //alert ('afterRegion: ' + afterRegion + '\nif regionString: ' + regionString);
+                } else {
+                    regionString = afterRegion;
+                    //alert ('afterRegion: ' + afterRegion + '\nelse regionString: ' + regionString);
+                }
+                
+                var regionSelector = document.getElementById('regionSelector')
+                
+                var validated = false;
+                
+
+                for (var i = 0; i < regionSelector.length; i++) {
+                    if (regionSelector[i].value == regionString) {
+                        validated = true;
+                        
+                    }    	 
+                    //alert(regionSelector[i].value + ' == ' + regionString + ' ? ' + validated);
+                }
+                
+                //alert(regionString);
+                
+                //if (regionString == null || regionString.length > 4 || regionString.length < 2) {                 
+                if (validated == false) {
+                    regionString = 'na';
+                }
+        
+                document.getElementById('regionSelector').value = regionString;
+               //alert(regionString);
+               
+            }
+            
+
+            
+            function setRegion() {
+                var region = document.getElementById('regionSelector').value;
+                document.cookie = "region=" + region + "; expires=Thu, 18 Dec 2020 12:00:00 UTC;";
+                //alert (document.cookie);
+                
+            }
+            
+            String.prototype.endsWith = function(suffix) {
+                return this.indexOf(suffix, this.length - suffix.length) !== -1;
+            };
+
+            
+            function getCookie(cookieLoad) {
+                //alert(cookieLoad);
+                
+                var cookieLength = cookieLoad.length + 1;
+                
+                var cookieString;
+                
+                if (document.cookie !== null && document.cookie.indexOf(cookieLoad) > -1)
+                {
+                    var afterCookie = document.cookie.substr(document.cookie.indexOf(cookieLoad + "=") + cookieLength);                    
+
+                    //alert (afterCookie);
+                    if (afterCookie.indexOf(";") > -1) {
+                        cookieString = afterCookie.substr(0,afterCookie.indexOf(';'));
+                        //alert ('afterCookie: ' + afterCookie + '\nif cookieString: ' + cookieString);
+                    } else {
+                        cookieString = afterCookie;
+                        //alert ('afterRegion: ' + afterRegion + '\nelse cookieString: ' + cookieString);
+                    }
+                }
+                
+                return cookieString;
+                
+            }
+            
+            
+        </script>
+        
+        <script>            
+            function changeColors() {
+                document.cookie = "darkScheme=" + document.getElementById('useDark').checked + "; expires=Thu, 18 Dec 2020 12:00:00 UTC;";
+                
+                if (document.getElementById('useDark').checked) {
+                    document.getElementById('dark-styles').disabled = false;
+                    document.getElementById('light-styles').disabled = true;
+                } else {
+                    document.getElementById('dark-styles').disabled = true;
+                    document.getElementById('light-styles').disabled = false;
+                }
+            }
+            
+            if (getCookie('darkScheme') == 'true') {
+                document.getElementById('useDark').checked = true;
+                document.getElementById('dark-styles').disabled = false;
+                document.getElementById('light-styles').disabled = true;
+            } else {
+                document.getElementById('useDark').checked = false;
+                document.getElementById('dark-styles').disabled = true;
+                document.getElementById('light-styles').disabled = false;
+            }
+            
+            
+        </script>
+        
+        
+        <!--<script src="sharedFunctions.js"></script>-->
+        <script src="../ads.js"></script>
+        <script>
+            if( window.canRunAds === undefined ){
+			
+				
+				for (var i = 0; i < 3; i++)
+				{
+					//I should probably make an image so it's not filtered out.
+					var div = document.createElement("div");
+					//div.setAttribute("class", "democlass"); 
+					//div.setAttribute("class", "democlass"); 
+					
+					var opacity = Math.random() * .06 + .92;
+					
+					//Random digits.
+					var int1 = Math.floor((Math.random() * 10)); 
+					var int2 = Math.floor((Math.random() * 10)); 
+					var int3 = Math.floor((Math.random() * 10)); 
+					
+					var bgColor = "#0" + int1 + "0" + int2 + "0" + int3;
+					var textColor = "#F" + int1 + "0" + int2 + "0" + int3;
+					
+					var widthShield = "80.0" + int1 + "vw";
+					var heightShield = "50.0" + int2 + "vw";
+					var leftShield = "10.0" + int2 + "vw";
+					var topShield = "12.0" + int2 + "vw";
+					
+					//var styleShield = "background-color: " + bgColor + "; opacity: " + opacity + "; color: red; width: " + widthShield + "; height: " + heightShield + "; position: absolute; left: " + leftShield + "; top: " + topShield + "; text-align: center;";
+					
+					//alert (styleShield);
+					
+					div.setAttribute("style", "background-color: " + bgColor + "; opacity: " + opacity + "; color: red; width: " + widthShield + "; height: " + heightShield + "; position: absolute; left: " + leftShield + "; top: " + topShield + "; text-align: center;"); 
+
+					
+					var para = document.createElement("h2");
+					div.appendChild(para);
+					var t = document.createTextNode("\"Awwwww\"");
+					para.appendChild(t);			
+					
+					var para = document.createElement("h3");
+					div.appendChild(para);
+					var t = document.createTextNode("AdBlock is ON!");
+					para.appendChild(t);
+					
+					var para = document.createElement("p");
+					div.appendChild(para);
+					var t = document.createTextNode("We can't help you Carry with Knowledge without paying for the cost of the server!  Please disable AdBlock, then Refresh the page.");
+					/*
+					var t = document.createTextNode("We can't help you Carry with Knowledge without paying for the cost of the server!  Please disable AdBlock, then Refresh the page."
+						+ "<br><br>NOTE:  We understand your concerns of computer security with regards to ads.  This is why we only use ads from the Google Adsense network."
+						+ "<br> Many of our competitors will circumvent adblock by serving ads from less reputable sources (Taboola etc)."
+						+ "<br> If you find one of our ads dangerous, offensive, or overly annoying, please send us the URL, and we will block it and report it to Google."
+						+ "<br> Addionally, you can use AdChoices (Triangle in upper-right corner of ad pane) to configure your ad preferences.");*/
+					para.appendChild(t);
+					
+					
+					
+					
+					var img = document.createElement("img");
+					img.setAttribute("src", "../website/Amumu_circle.jpg"); 
+					img.setAttribute("height", "600"); 
+					div.appendChild(img);
+					//var t = document.createTextNode("Please help me continue to dispense Justice by paying for the cost of the server!  Please disable AdBlock, then Refresh the page.");
+					para.appendChild(t);
+
+					document.body.appendChild(div);
+				}
+			
+
+            
+            }
+        </script>
+        
+    </body>
+</html>

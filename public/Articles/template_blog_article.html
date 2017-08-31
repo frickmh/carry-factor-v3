@@ -1,0 +1,378 @@
+<!doctype html>
+<!--
+  Material Design Lite
+  Copyright 2015 Google Inc. All rights reserved.
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+      https://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License
+-->
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="A front-end template that helps you build fast, modern mobile web apps.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <title>Carry-Factor.com - LoL Stats Command Center.  Stats, Counterpicks, and Cooldowns</title>
+
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+	<link rel="shortcut icon" href="http://www.carry-factor.com/website/diamond_i_favicon.png">
+    <!--<link rel="icon" sizes="192x192" href="images/touch/chrome-touch-icon-192x192.png">-->
+
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Material Design Lite">
+    <link rel="apple-touch-icon-precomposed" href="apple-touch-icon-precomposed.png">
+
+    <!-- Tile icon for Win8 (144x144 + tile color) -->
+    <meta name="msapplication-TileImage" content="images/touch/ms-touch-icon-144x144-precomposed.png">
+    <meta name="msapplication-TileColor" content="#3372DF">
+
+    <!-- SEO: If your mobile URL is different from the desktop URL, add a canonical link to the desktop page https://developers.google.com/webmasters/smartphone-sites/feature-phones -->
+    <!--
+    <link rel="canonical" href="http://www.example.com/">
+    -->
+
+    <link href='//fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en' rel='stylesheet' type='text/css'>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+	<!--
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.grey-orange.min.css">
+	-->
+	<link rel="stylesheet" href="https://storage.googleapis.com/code.getmdl.io/1.0.6/material.indigo-pink.min.css">
+    <link rel="stylesheet" href="http://www.carry-factor.com/carry-factor.css">
+	<link rel="stylesheet" type="text/css" href="http://www.carry-factor.com/carry-factor_Dark.css" id='dark-styles'>        
+	<link rel="stylesheet" type="text/css" href="http://www.carry-factor.com/carry-factor_Light.css" id='light-styles'>   
+
+	
+	<!--<link rel="stylesheet" href="bronzodia_Light.css">-->
+	
+	
+    <style>
+    #view-source {
+      position: fixed;
+      display: block;
+      right: 0;
+      bottom: 0;
+      margin-right: 40px;
+      margin-bottom: 40px;
+      z-index: 900;
+    }
+	
+	
+	.responsiveBanner { width: 320px; height: 100px; }
+	@media(min-width: 500px) { .responsiveBanner { width: 468px; height: 60px; } }
+	@media(min-width: 800px) { .responsiveBanner { width: 728px; height: 90px; } }	
+	@media(min-width: 1000px) { .responsiveBanner { width: 970px; height: 90px; } }		
+	@media(min-width: 1250px) { .responsiveBanner { width: 1200px; height: 90px; } }		
+    </style>
+	
+	
+	<script src="http://www.carry-factor.com/src/standardFunctions.js">
+		//Contents: 
+		//getUrlParameter(sParam) //Extracts a parameter from a URL and returns it.
+		//getCookie(cookieLoad) //Gets a cookie.
+		//String.prototype.replaceAll(search, replace) //Replaces all instances of a search string.
+		//String.prototype.removeMarkups() //Remove HTML markups (e.g. <, >)
+	</script>	
+	
+
+	
+	
+  </head>
+  <body>
+
+				  
+		<div class="demo-blog demo-blog--blogpost mdl-layout mdl-js-layout has-drawer is-upgraded">
+			<table style='width: 100%; text-align: center;'>
+				<tr>
+				
+			
+					<td>
+						<main class="mdl-layout__content">
+							<div class="demo-back">
+								<a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" href="http://www.carry-factor.com/index.html" title="go back" role="button">
+									<i class="material-icons" role="presentation">arrow_back</i>
+								</a>
+							</div>
+							
+
+							
+							<div class="demo-blog__posts mdl-grid">
+								<div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
+									<div class="mdl-card__media mdl-color-text--grey-50">
+										<a href="http://www.carry-factor.com/index.html"><img src="http://www.carry-factor.com/website/banner-carry-factor.png" style="width: 100%;"></a>
+									</div>
+
+
+
+									<div class="mdl-color-text--grey-700 mdl-card__supporting-text meta">
+										<div class="minilogo"></div>
+									  
+										<div>
+											<strong>Carry-factor.com</strong>
+											<span>4/15/2017</span>
+										</div>
+									  
+										<div class="section-spacer"></div>
+									  
+
+									<div class="snippet-demo-container demo-checkbox demo-checkbox__check-on">
+										<label class="mdl-checkbox mdl-js-checkbox" for="useDark">
+											<input type="checkbox" id="useDark" class="mdl-checkbox__input" checked onclick='changeColors()'>
+											<span class="mdl-checkbox__label">Dark Color Scheme</span>
+										</label>
+									</div>
+
+									  <!-- Sharing, Like, and Favorite buttons.  I'll need to add these back in later at some point. -->
+									  <!--
+									  <div class="meta__favorites">
+										425 <i class="material-icons" role="presentation">favorite</i>
+										<span class="visuallyhidden">favorites</span>
+									  </div>
+									  <div>
+										<i class="material-icons" role="presentation">bookmark</i>
+										<span class="visuallyhidden">bookmark</span>
+									  </div>
+									  <div>
+										<i class="material-icons" role="presentation">share</i>
+										<span class="visuallyhidden">share</span>
+									  </div>
+									  -->
+								  
+								</div>
+
+								
+								<div class="mdl-color-text--grey-700 mdl-card__supporting-text" style="text-align: left;">
+								
+								
+									<script src="http://www.carry-factor.com/src/MathJax-2.7.0/MathJax.js?config=TeX-AMS_CHTML"></script>
+
+									<p>This is a template which will be used to rapidly prototype blog articles.</p>
+									
+									<p>The purpose of this template is to allow creation of web pages that are readable on both mobile and desktop browsers.</p>
+
+									<p>This will reduce the amount of work I have to do to create articles.</p>
+									
+									<p>Hopefully this will allow me to publish at a faster rate.</p>
+									
+									<p>Just delete these paragraphs and replace them with the contents of my blog article.</p>
+									
+									
+								</div>
+
+
+											
+								
+								<div class="mdl-color-text--primary-contrast mdl-card__supporting-text comments">
+			
+									
+									<div id="disqus_thread"></div>
+									<script>
+
+									/**
+									*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+									*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+									/*
+									var disqus_config = function () {
+									this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+									this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+									};
+									*/
+									(function() { // DON'T EDIT BELOW THIS LINE
+									var d = document, s = d.createElement('script');
+									s.src = 'https://carry-factor.disqus.com/embed.js';
+									s.setAttribute('data-timestamp', +new Date());
+									(d.head || d.body).appendChild(s);
+									})();
+									</script>
+									<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+																				
+								
+								  
+								  <!-- Comment form.  I'll need to add this back in later. -->
+								  <!--
+								  <form>
+									<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+									  <textarea rows=1 class="mdl-textfield__input" id="comment"></textarea>
+									  <label for="comment" class="mdl-textfield__label">Join the discussion</label>
+									</div>
+									<button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+									  <i class="material-icons" role="presentation">check</i><span class="visuallyhidden">add comment</span>
+									</button>
+								  </form>
+								  <div class="comment mdl-color-text--grey-700">
+									<header class="comment__header">
+									  <img src="images/co1.jpg" class="comment__avatar">
+									  <div class="comment__author">
+										<strong>James Splayd</strong>
+										<span>2 days ago</span>
+									  </div>
+									</header>
+									<div class="comment__text">
+									  In in culpa nulla elit esse. Ex cillum enim aliquip sit sit ullamco ex eiusmod fugiat. Cupidatat ad minim officia mollit laborum magna dolor tempor cupidatat mollit. Est velit sit ad aliqua ullamco laborum excepteur dolore proident incididunt in labore elit.
+									</div>
+									<nav class="comment__actions">
+									  <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+										<i class="material-icons" role="presentation">thumb_up</i><span class="visuallyhidden">like comment</span>
+									  </button>
+									  <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+										<i class="material-icons" role="presentation">thumb_down</i><span class="visuallyhidden">dislike comment</span>
+									  </button>
+									  <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+										<i class="material-icons" role="presentation">share</i><span class="visuallyhidden">share comment</span>
+									  </button>
+									</nav>
+									<div class="comment__answers">
+									  <div class="comment">
+										<header class="comment__header">
+										  <img src="images/co2.jpg" class="comment__avatar">
+										  <div class="comment__author">
+											<strong>John Dufry</strong>
+											<span>2 days ago</span>
+										  </div>
+										</header>
+										<div class="comment__text">
+										  Yep, agree!
+										</div>
+										<nav class="comment__actions">
+										  <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+											<i class="material-icons" role="presentation">thumb_up</i><span class="visuallyhidden">like comment</span>
+										  </button>
+										  <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+											<i class="material-icons" role="presentation">thumb_down</i><span class="visuallyhidden">dislike comment</span>
+										  </button>
+										  <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+											<i class="material-icons" role="presentation">share</i><span class="visuallyhidden">share comment</span>
+										  </button>
+										</nav>
+									  </div>
+									</div>
+								  </div>
+								  -->
+								  
+								</div>
+							  
+
+							  <!-- Nav Buttons, I can add back in later. -->
+							  <!--
+							  <nav class="demo-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
+								<a href="index.html" class="demo-nav__button">
+								  <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+									<i class="material-icons">arrow_back</i>
+								  </button>
+								  Newer
+								</a>
+								<div class="section-spacer"></div>
+								<a href="index.html" class="demo-nav__button">
+								  Older
+								  <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+									<i class="material-icons">arrow_forward</i>
+								  </button>
+								</a>
+							  </nav>
+							  -->
+							</div>
+
+
+
+							
+							
+							
+						</main>
+						<div class="mdl-layout__obfuscator"></div>
+					</td>
+
+				</tr>
+			</table>
+			
+
+							<footer class="mdl-mini-footer" style="width: 100%; height: 500px;">
+								
+							  <div class="mdl-mini-footer--left-section">
+								<button class="mdl-mini-footer--social-btn social-btn social-btn__twitter">
+								  <span class="visuallyhidden">Twitter</span>
+								</button>
+								<button class="mdl-mini-footer--social-btn social-btn social-btn__blogger">
+								  <span class="visuallyhidden">Facebook</span>
+								</button>
+								<button class="mdl-mini-footer--social-btn social-btn social-btn__gplus">
+								  <span class="visuallyhidden">Google Plus</span>
+								</button>
+							  </div>
+							  <div class="mdl-mini-footer--right-section">
+								<button class="mdl-mini-footer--social-btn social-btn__share">
+								  <i class="material-icons" role="presentation">share</i>
+								  <span class="visuallyhidden">share</span>
+								</button>
+							  </div>
+							  							
+							</footer>
+<div id='underFooter' style='background-color: #222222;'></div>
+			
+				
+		</div>
+
+
+
+
+		<div  id="ResponsiveHolder" style='background-color: #222222; z-index: 1000000; position: fixed; bottom: 0px; width: 100%; text-align: center;'>
+		
+			<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+			<!-- Carry-Factor Responsive 1 -->
+			<ins class="adsbygoogle responsiveBanner"
+				 style="display:block; margin: 0 auto;"
+				 data-ad-client="ca-pub-6399216573107712"
+				 data-ad-slot="7615806783"
+				 data-ad-format="auto"></ins>
+			<script>
+			(adsbygoogle = window.adsbygoogle || []).push({});
+			</script>		
+		</div>
+			
+	<!-- MDL Source Code on a ripple button.  I probably don't need to re-add later, but I can re-use the button. -->
+	<!--
+    <a href="https://github.com/google/material-design-lite/blob/mdl-1.x/templates/blog/" target="_blank" id="view-source" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-color--accent mdl-color-text--white">View Source</a>
+	-->
+	
+    <script src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+	
+	<script>            
+		function changeColors() {
+			document.cookie = "darkScheme=" + document.getElementById('useDark').checked + "; expires=Thu, 18 Dec 2020 12:00:00 UTC;";
+			
+			if (document.getElementById('useDark').checked) {
+				document.getElementById('dark-styles').disabled = false;
+				document.getElementById('light-styles').disabled = true;
+			} else {
+				document.getElementById('dark-styles').disabled = true;
+				document.getElementById('light-styles').disabled = false;
+			}
+		}
+		
+		if (getCookie('darkScheme') == 'true') {
+			document.getElementById('useDark').checked = true;
+			document.getElementById('dark-styles').disabled = false;
+			document.getElementById('light-styles').disabled = true;
+		} else {
+			document.getElementById('useDark').checked = false;
+			document.getElementById('dark-styles').disabled = true;
+			document.getElementById('light-styles').disabled = false;
+		}
+		
+		
+	</script>	
+	
+	
+  </body>
+</html>

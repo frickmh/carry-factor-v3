@@ -1,0 +1,25 @@
+Monday November 9th 2015 03:04:19 AM
+NovaDisk
+na
+Firefox 42.0
+http://bronzodia.com/results.php?region=na&playerNames=NovaDisk%2CDoublelift%2CEugeneJPark%2CWingsofDeathX%2CTheOddOne
+Sample Bug Description
+Paste Lobby Chat in Box
+Press Submit
+
+
+Tuesday November 10th 2015 02:44:41 AM
+WhiteHotJustice
+oce
+Google Chrome Version 46.0.2490.80 m
+http://www.bronzodia.com/results.php?region=oce&playerNames=WhiteHotJustice%2CTomHanks%2CScorpion733%2CAscalon%2Cwhosalty
+No results are given, everything is blank
+Use OCE region
+
+-----Tuesday November 10th 2015 05:33:17 AM
+-----NovaDisk
+-----RESOLVED
+-----Hey WhiteHotJustice,	Thanks for submitting the bug!  I found the source of the problem and believe I have corrected it.  Give it another try, and pelase let me know if it doesn't work!
+
+
+

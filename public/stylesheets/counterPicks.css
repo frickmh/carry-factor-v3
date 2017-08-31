@@ -1,0 +1,42 @@
+/*CSS file for styling the Counterpicks frame in Results.html.
+This file goes with counterPicks.js and was originally part of a common file 'matchupsTest.php'.*/
+
+        select.monospace {
+            font-family:"Courier New", Courier, monospace;
+            margin: 1px;
+            border: 1px solid #111;
+            background: transparent;
+            width: 34px;
+            padding: 5px 35px 5px 5px;
+            font-size: 24px;
+            border: 1px solid #ccc;
+            border-radius: 50px;
+            height: 42px;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            background: 5% / 15% no-repeat #eee;
+            cursor: pointer;
+
+        }
+
+        select.role {
+            font-family:"Courier New", Courier, monospace;
+            margin: 1px;
+            border: 1px solid #111;
+            background: transparent;
+            width: 25px;
+            padding: 5px 15px 5px 5px;
+            font-size: 24px;
+            border: 1px solid #ccc;
+            border-radius: 50px;
+            height: 25px;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            background: 5% / 15% no-repeat #eee;
+            cursor: pointer;
+            background: url(/roleicons/Fill.png) 0% / 100% no-repeat;
+            vertical-align: middle;
+
+        }

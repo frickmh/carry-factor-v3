@@ -1,0 +1,3 @@
+5 4,16 * * * /usr/bin/python /home/frickmh55449/public_html/data/updateChampStats.py
+15 4,16 * * * /usr/bin/php /home/frickmh55449/public_html/data/buildRoles.php
+5 5 * * * /usr/bin/php /home/frickmh55449/public_html/datadragon/updateDataDragon.php

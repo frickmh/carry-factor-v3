@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Carry-Factor.com - LoL Stats Command Center.  Stats, Counterpicks, and Cooldowns</title>
+        <link rel="shortcut icon" href="website/diamond_i_favicon.png">
+        <meta content="LoL Stats Command Center.  Scout your opponents and punish their weakest link.  Dynamic Counterpick tool." name='description'>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="Pre-game Lobby Stats for League of Legends">
+        <meta name="keywords" content="pre-game lobby stats, League of Legends, Champion Select, Statistics, Summoner info, Bronzodia, Bronzodia.com, stats, lol, bronzodia, carry-factor, carry factor, counterpick, counterpicks, counter power, , educational, learning, tutorial, coaching, jungling, carrying, pressure ">
+        
+
+        <link rel="stylesheet" type="text/css" href="stylesheets/bronzodia.css">
+        <link rel="stylesheet" type="text/css" href="stylesheets/bronzodia_Dark.css" id='dark-styles'>        
+        <link rel="stylesheet" type="text/css" href="stylesheets/bronzodia_Light.css" id='light-styles'>        
+        
+        
+                <!-- Google Analytics Tracking Script -->
+        <script>
+            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+            })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+            ga('create', 'UA-60328206-5', 'auto');
+            ga('send', 'pageview');
+
+        </script>
+        <style>
+            div.sidebar {
+                background-color: #555555;
+                width:60%;
+                margin: 0 auto;
+                border-style: solid;
+                border-width: thin;
+                border-radius: 5px; 
+                box-shadow: 10px 10px 5px grey;
+                text-align:center;
+                height: 500px;
+                background: #333333;
+                color: #FFFFFF;
+            }
+        </style>
+        
+    </head>
+    <body>
+        <div id="main_content_div" align="center">
+        <div></div>
+        <div style='width: 100%;' class='brown'><a href="index.html"><img class='banner' style='width:57.65%' src='website/banner-carry-factor.png' alt='Carry-factor: LoL Stats Command Center.  Stats, Counterpicks, and Cooldowns'></a></div>
+
+		
+        <div>
+            <table style='width:100%'><tbody><tr>
+                        <td style='width:21%'>
+							<div class='sidebar'>
+                            <!--<p>Articles (WiP)</p>
+                            <table>
+                                <tr><td>Stuff</td></tr>
+                                <tr><td>Stuff</td></tr>
+                            </table>
+							-->
+								
+								<h3>Web Apps</h3>
+								<div style="text-align: left; margin-left: 1vw;">
+									<a href="/index.html" style="color: #EEEEEE;"><b>Carry-Factor.com</b></a>
+									<div style="color: #EEEEEE;">- LoL Stats Command Center</div>
+									<br>
+									<a href="/goldGraph.html" style="color: #EEEEEE;"><b>Gold Graph</b></a>
+									<div style="color: #EEEEEE;">- Check your Average Gold, EXP, CS vs Time, CS@10</div>
+								</div>							
+							
+                            </div>
+                            
+                            
+                        </td>
+                        <td style='width:58%'>
+                            <div id='inner_content_div' class='trynd' style='border-style: solid;border-width: thin;background-size:120%; border-radius: 5px; box-shadow: 10px 10px 5px grey;text-align:center'>
+                                <div>
+                                    <div style='text-align: left'><form action="demo.php" target="_blank"><input type="submit" class='bigButton' value='Demo Video'></form></div><span style='float:right;' >Dark Color Scheme<input type='checkbox' onclick='changeColors()' id='useDark'></span>
+                                    <div style='text-align: left'><form action="bugs.html" target="_blank"><input type="submit" class='bigButton' value='Report Bug'></form></div>
+
+                                    <h2>Paste lobby chat here, then submit.</h2>
+
+                                    <!-- News Banner -->
+                                    <!--<h3 style='color:#FF0000'></h3>-->
+
+                                    <!-- News Update Message -->
+                                    <p style='color:#FF0000' id="newsUpdate">Welcome to Carry-Factor.com!</p>
+
+
+
+                                    <table style='width:50%;margin: 0 auto'><tr>
+                                            <td style='text-alight:left'><button onclick='saveTextArea()'>Save Names</button><button onclick="resetTextArea()">Reset</button></td>
+                                        </tr>
+                                        <tr><td><textarea style="height: 135px; width: 100%" class="lobbyChat" id="lobbychatvisible" spellcheck="false" title='Paste chat here.  Type missing player names in a seperate line.  Non-case sensitive, ignores spaces.'>NovaDisk joined the lobby.
+hashinshin joined the lobby.
+Hanjaro joined the lobby.
+MarineRevenge joined the lobby.
+GundayMonday joined the lobby.
+                                                </textarea></td>
+                                        </tr></table>                                                                      
+                                </div>
+                                <p></p>
+                                <div>                
+                                    <select id="regionvisible" onchange="setRegion()">
+                                        <option value="na1" selected="selected">NA</option>
+                                        <option value="euw1">EUW</option>
+                                        <option value="eun1">EUNE</option>
+                                        <option value="br1">BR</option>
+                                        <option value="kr">KR</option>
+                                        <option value="la1">LAN</option>
+                                        <option value="la2">LAS</option>
+                                        <option value="oc1">OCE</option>
+                                        <option value="ru">RU</option>
+                                        <option value="tr1">TR</option>
+										<option value="jp">JP</option>
+                                    </select>
+                                </div>
+
+                                <!--
+                                <div>
+                                    <input id="userName">                      
+                                </div>-->
+                                <p></p>
+                                <button  id='buttonvisible' style="height: 50px; width: 150px" onclick="openResultsWindow()" class='freljord' title="Look up summoner info.  If a player hasn't said anything in the lobby, just enter their name on a separate line followed by a ':' (Similar to TheOddone in the example text)">Submit</button>
+                                <br><br>
+                                <div  title="Check this box to look up stats on a player, whether or not they are in a match.  Type their name into a seperate line in the chat box, followed by a ':'."><input type="checkbox" id='scoutVisible'>Force Scout Mode</div>
+                                <div></div>
+
+                                <p></p>
+                                <p>Loads Pre-game stats in lobby, or Current Game stats during/after splash screen</p>
+                                <br>
+
+
+
+                            </div> <!-- End inner_content_div-->
+                            </td>
+                            <td style='width:21%;'>
+								<div class='sidebar'><p><!--Featured Streams (WiP)--></p>
+                                <!--
+								<table>
+                                    <tr><td>Stuff</td></tr>
+                                    <tr><td>Stuff</td></tr>
+                                </table>
+								-->
+							
+									<h3>Non-League Stuff</h3>
+									<div style="text-align: left; margin-left: 1vw;">
+										<a href="/articles/non-league/enceladus.html" style="color: #EEEEEE;"><b>Can Life Survive on Enceladus?</b></a>
+										<div style="color: #EEEEEE;">- Calculating Pressure on Enceladus's Subsurface Ocean</div>
+										<br>
+										<!--
+										<a href="/goldGraph.html" style="color: #EEEEEE;"><b>Gold Graph</b></a>
+										<div style="color: #EEEEEE;">- Check your Average Gold, EXP, CS vs Time, CS@10</div>
+										-->
+									</div>										
+								
+								</div>
+							</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+                
+                <form style="visibility: hidden; height:1px" id='formhidden' action='results.html' method="get" target="_self"><input name='region' id='region' value="Region"><input type='checkbox' name='scout' id='scoutHidden'><input name='playerNames' id='playerNames' value="Players"><!--<textarea name='lobbychat' id='lobbychat'>Hello!</textarea>--><input id="inputhidden" type="submit" value="Submit"></form>
+                
+                <!--<table><tr><td><p>Advertisement.</p></td></tr><tr><td><table border='1'><tr><td><script type="text/javascript" src="//eclkspbn.com/adServe/banners?tid=42108_62839_3"></script></td></tr></table></td></tr></table>-->
+
+        </div>
+        <div style='width: 100%;' class="brown"><table><tr><td><img src="website/diamond_i.png" alt='diamond_i.png'></td><td style='width: 100%; font-size: 36px; text-align: center; color: #FFFFFF'>
+		
+
+					<!--<button style='float: left;' onclick="alert(this.parentNode.removeChild(this.parentNode.childNodes[2]));">X</button>-->
+				<div id="LeaderboardBottom" style='box-shadow: 10px 10px 5px #3C3C3C;width:728px;height:90px;text-align: center; margin: 0 auto' align='center'>
+					<button style='float: left;' onclick="this.parentNode.remove();">X</button>
+					<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+					<!-- Bottom Leaderboard Bronzodia -->
+					<ins class="adsbygoogle"
+						 style="display:inline-block;width:728px;height:90px"
+						 data-ad-client="ca-pub-6399216573107712"
+						 data-ad-slot="7253070786"></ins>
+					<script>
+					(adsbygoogle = window.adsbygoogle || []).push({});
+					</script>
+				</div>
+                
+                    </td><td><img src="website/diamond_i.png" alt='diamond_i.png' style="filter: fliph"></td></tr></table></div>
+        <table style='text-align: center' align='center'><tr><td><a href='aboutus.html'>About us</a></td><td><a href="contact.html">Contact</a></td><td><a href="privacy_policy.html">Privacy Policy</a></td><td><a href="terms_of_use.html">Terms of Use</a></td><td><a href="credits.html">Credits</a></td><td><a target='_blank' href="https://www.reddit.com/user/NovaDisk1/">Reddit</a></td></tr></table>
+        
+		
+		<script>
+            //alert(document.cookie);
+            var region = document.getElementById('regionvisible').value;
+            
+            if (region == null) {
+                document.getElementById('regionvisible').value = na;
+            }
+            
+            
+            //Load the cookies if document.cookie exists.
+            if (document.cookie !== null)
+            {
+                //alert (document.cookie);
+                
+                var afterRegion = document.cookie.substr(document.cookie.indexOf("region=") + 7);
+                var regionString;
+                        
+                //alert (afterRegion);
+                if (afterRegion.indexOf(";") > -1) {
+                    regionString = afterRegion.substr(0,afterRegion.indexOf(';'));
+                    //alert ('afterRegion: ' + afterRegion + '\nif regionString: ' + regionString);
+                } else {
+                    regionString = afterRegion;
+                    //alert ('afterRegion: ' + afterRegion + '\nelse regionString: ' + regionString);
+                }
+                
+                var regionSelector = document.getElementById('regionvisible')
+                
+                var validated = false;
+                
+
+                for (var i = 0; i < regionSelector.length; i++) {
+                    if (regionSelector[i].value == regionString) {
+                        validated = true;
+                        
+                    }    	 
+                    //alert(regionSelector[i].value + ' == ' + regionString + ' ? ' + validated);
+                }
+                
+                //alert(regionString);
+                
+                //if (regionString == null || regionString.length > 4 || regionString.length < 2) {                 
+                if (validated == false) {
+                    regionString = 'na';
+                }
+        
+                document.getElementById('regionvisible').value = regionString;
+               //alert(regionString);
+
+        
+        
+               if (getCookie('textArea') !== undefined && getCookie('textArea') !== null  && getCookie('textArea') != "NaN") {
+                   
+                   //alert(document.cookie);
+                   //alert(getCookie('textArea'));
+                   
+                   document.getElementById('lobbychatvisible').value = getCookie('textArea').replace(/<br>/g,"\n");
+               }
+               
+               
+            }
+            
+            function saveTextArea() {
+                var region = document.getElementById('regionvisible').value;
+                var textArea = document.getElementById('lobbychatvisible').value;
+                
+                alert("Summoner Names List Saved as: \n\n" + textArea);
+                
+                textArea = textArea.replace(/\n/g,"<br>");
+                
+                document.cookie =  "textArea=" + textArea + "; expires=Thu, 18 Dec 2020 12:00:00 UTC;";
+                
+                //document.cookie = "region=" + region + "; expires=Thu, 18 Dec 2020 12:00:00 UTC;";
+                
+                
+            }
+            
+            function resetTextArea() {
+                document.cookie =  "textArea=" +  + ";expires=Thu, 01 Jan 1970 00:00:01 GMT;";                
+                
+                alert("Summoner Names List Reset to Default.  (Will revert on refresh)");
+            }
+            
+            function setRegion() {
+                var region = document.getElementById('regionvisible').value;
+                document.cookie = "region=" + region + "; expires=Thu, 18 Dec 2020 12:00:00 UTC;";
+                //alert (document.cookie);
+                
+            }
+            
+            String.prototype.endsWith = function(suffix) {
+                return this.indexOf(suffix, this.length - suffix.length) !== -1;
+            };
+
+            
+            function getCookie(cookieLoad) {
+                //alert(cookieLoad);
+                
+                var cookieLength = cookieLoad.length + 1;
+                
+                var cookieString;
+                
+                if (document.cookie !== null && document.cookie.indexOf(cookieLoad) > -1)
+                {
+                    var afterCookie = document.cookie.substr(document.cookie.indexOf(cookieLoad + "=") + cookieLength);                    
+
+                    //alert (afterCookie);
+                    if (afterCookie.indexOf(";") > -1) {
+                        cookieString = afterCookie.substr(0,afterCookie.indexOf(';'));
+                        //alert ('afterCookie: ' + afterCookie + '\nif cookieString: ' + cookieString);
+                    } else {
+                        cookieString = afterCookie;
+                        //alert ('afterRegion: ' + afterRegion + '\nelse cookieString: ' + cookieString);
+                    }
+                }
+                
+                return cookieString;
+                
+            }
+            
+            function openResultsWindow() {              
+              //setCookies(); 
+              
+              //alert("Submit clicked.");
+              
+              var region = document.getElementById('regionvisible').value;
+              
+              //alert("region assigned.");
+
+              
+              var formHidden = document.getElementById('formhidden');
+              var regionHidden = document.getElementById('region');
+              var scoutHidden = document.getElementById('scoutHidden');
+              //var lobbyChatHidden = document.getElementById('lobbychat');
+              var playerNamesHidden = document.getElementById('playerNames')
+              
+              var lobbyChat = document.getElementById('lobbychatvisible').value;
+              
+              //alert("Values assigned.");
+              
+              regionHidden.value = document.getElementById('regionvisible').value;
+              scoutHidden.checked = document.getElementById('scoutVisible').checked;
+        
+
+
+              
+              playerNamesHidden.value = findPlayerNames(lobbyChat);
+
+              
+              //alert("Action, method, and target assigned.");
+              
+              formHidden.submit();
+              
+              document.getElementById('buttonvisible').innerHTML = "Loading...";
+             
+
+              
+              //alert("Submit attempted.");
+            };
+            
+
+            
+
+            
+            // Arguments :
+            //  verb : 'GET'|'POST'
+            //  target : an optional opening target (a name, or "_blank"), defaults to "_self"
+            openNewWindow = function () { //function(verb, url, data, target) {
+                
+              alert("openNewWindow called.");
+              
+              var formHidden = document.getElementById('formhidden');
+              var regionHidden = document.getElementById('region');
+              var lobbyChatHidden = document.getElementById('lobbychat');
+              
+              alert("Values assigned.");
+              
+              regionHidden.value = document.getElementById('regionvisible').value;
+        
+              alert(regionHidden.value);
+
+              lobbyChatHidden.value = document.getElementById('lobbychatvisible').value;
+
+              alert(lobbyChatHidden.value);
+              
+
+
+              
+              formHidden.submit();
+              
+              alert("Submit attempted.");
+              
+
+            };
+            
+            function findPlayerNames(chat) {
+                var lobbyChatLines = chat.split(/\r?\n/);
+
+                var playersList = [];
+
+                for (i = 0; i < lobbyChatLines.length; i++) {
+                      //alert(lobbyChatLines[i]);
+
+
+                      if (lobbyChatLines[i].indexOf('You are now in a chat room with your full champion select team.') > -1) {
+
+
+                      } else if (lobbyChatLines[i].indexOf("A player did not lock in their pick or ban. Your group was returned to matchmaking.") > -1) {
+
+
+                      } else if (lobbyChatLines[i].indexOf("A player didn't accept the AFK check. Your group was returned to matchmaking.") > -1) {
+
+
+                      } else if (lobbyChatLines[i].indexOf("did not accept the AFK check. Your group was removed from matchmaking.") > -1) {
+
+
+                      } else if (lobbyChatLines[i].indexOf("cancelled matchmaking.") > -1) {
+
+
+                      } else if (lobbyChatLines[i].indexOf('A player left champ select. Your group was returned to matchmaking.') > -1) {
+
+
+                      } else if (lobbyChatLines[i].indexOf('You are now back in a chat room with just your premade.') > -1) {
+
+
+                      } else if (lobbyChatLines[i].indexOf(':') > 0) {
+                          var name = lobbyChatLines[i].split(':')[0].replace(/\s/g, '');
+
+                          var upperCaseNames = playersList.map(function(value) {
+                          return value.toUpperCase();
+                          });
+
+                          if (upperCaseNames.indexOf(name.toUpperCase()) < 0) {
+                              playersList.push(name);
+
+                          }
+
+                      } else if (lobbyChatLines[i].indexOf(' joined the room.') > 0) {
+
+                          var name = lobbyChatLines[i].split(' joined the room.')[0].replace(/\s/g, '');
+
+                          var upperCaseNames = playersList.map(function(value) {
+                          return value.toUpperCase();
+                          });
+
+                          if (upperCaseNames.indexOf(name.toUpperCase()) < 0) {
+                              playersList.push(name);
+
+                          }
+
+                      } else if (lobbyChatLines[i].indexOf(' joined the lobby') > 0) {
+
+                          var name = lobbyChatLines[i].split(' joined the lobby')[0].replace(/\s/g, '');
+
+                          var upperCaseNames = playersList.map(function(value) {
+                          return value.toUpperCase();
+                          });
+
+                          if (upperCaseNames.indexOf(name.toUpperCase()) < 0) {
+                              playersList.push(name);
+
+                          }
+
+                      } else if (lobbyChatLines[i].indexOf(' a rejoint le salon') > 0) {
+							//French
+                          var name = lobbyChatLines[i].split(' a rejoint le salon')[0].replace(/\s/g, '');
+
+                          var upperCaseNames = playersList.map(function(value) {
+                          return value.toUpperCase();
+                          });
+
+                          if (upperCaseNames.indexOf(name.toUpperCase()) < 0) {
+                              playersList.push(name);
+
+                          }
+
+                      } else if (lobbyChatLines[i].indexOf(' se unió a la sala') > 0) {
+							//Spanish
+                          var name = lobbyChatLines[i].split(' se unió a la sala')[0].replace(/\s/g, '');
+
+                          var upperCaseNames = playersList.map(function(value) {
+                          return value.toUpperCase();
+                          });
+
+                          if (upperCaseNames.indexOf(name.toUpperCase()) < 0) {
+                              playersList.push(name);
+
+                          }
+
+                      } else if (lobbyChatLines[i].indexOf(' entrou no saguão') > 0) {
+							//Spanish
+                          var name = lobbyChatLines[i].split(' entrou no saguão')[0].replace(/\s/g, '');
+
+                          var upperCaseNames = playersList.map(function(value) {
+                          return value.toUpperCase();
+                          });
+
+                          if (upperCaseNames.indexOf(name.toUpperCase()) < 0) {
+                              playersList.push(name);
+
+                          }
+
+                      } else if (lobbyChatLines[i].indexOf(' присоединился к лобби') > 0) {
+							//Spanish
+                          var name = lobbyChatLines[i].split(' присоединился к лобби')[0].replace(/\s/g, '');
+
+                          var upperCaseNames = playersList.map(function(value) {
+                          return value.toUpperCase();
+                          });
+
+                          if (upperCaseNames.indexOf(name.toUpperCase()) < 0) {
+                              playersList.push(name);
+
+                          }
+
+                      } else if (lobbyChatLines[i].indexOf(' everek lobiye katıldı') > 0) {
+							//Spanish
+                          var name = lobbyChatLines[i].split(' everek lobiye katıldı')[0].replace(/\s/g, '');
+
+                          var upperCaseNames = playersList.map(function(value) {
+                          return value.toUpperCase();
+                          });
+
+                          if (upperCaseNames.indexOf(name.toUpperCase()) < 0) {
+                              playersList.push(name);
+
+                          }
+
+                      } else if (lobbyChatLines[i].indexOf(' がロビーに参加しました') > 0) {
+							//Spanish
+                          var name = lobbyChatLines[i].split(' がロビーに参加しました')[0].replace(/\s/g, '');
+
+                          var upperCaseNames = playersList.map(function(value) {
+                          return value.toUpperCase();
+                          });
+
+                          if (upperCaseNames.indexOf(name.toUpperCase()) < 0) {
+                              playersList.push(name);
+
+                          }
+
+                      } else if (lobbyChatLines[i].replace(/\s/g, '').length > 1){
+                          var name = lobbyChatLines[i].replace(/\s/g, '');
+                          //alert(name);
+                          /*if (name.toUpperCase() === "LIQUIDHANDSOAP")
+                          {
+                              alert(name);
+                          }*/
+
+                          var upperCaseNames = playersList.map(function(value) {
+                          return value.toUpperCase();
+                          });                       
+
+                          if (upperCaseNames.indexOf(name.toUpperCase()) < 0) {
+                              playersList.push(name);
+
+                          }                        
+                          //playersList.push(name);
+                      }
+
+              }
+
+              var params = '';
+
+              for (i = 0; i < playersList.length; i++) {
+
+                    params += playersList[i];
+
+
+                    if (i < playersList.length - 1) {
+                        params +=',';
+                    } else {
+
+                    }
+
+              }
+
+              return params;               
+
+            };
+            
+        </script>
+        
+        <script>            
+            function changeColors() {
+                document.cookie = "darkScheme=" + document.getElementById('useDark').checked + "; expires=Thu, 18 Dec 2020 12:00:00 UTC;";
+                
+                if (document.getElementById('useDark').checked) {
+                    document.getElementById('dark-styles').disabled = false;
+                    document.getElementById('light-styles').disabled = true;
+                } else {
+                    document.getElementById('dark-styles').disabled = true;
+                    document.getElementById('light-styles').disabled = false;
+                }
+            }
+            
+            if (getCookie('darkScheme') == 'true') {
+                document.getElementById('useDark').checked = true;
+                document.getElementById('dark-styles').disabled = false;
+                document.getElementById('light-styles').disabled = true;
+            } else {
+                document.getElementById('useDark').checked = false;
+                document.getElementById('dark-styles').disabled = true;
+                document.getElementById('light-styles').disabled = false;
+            }
+            
+            
+        </script>
+        
+        
+        <!--<script src="sharedFunctions.js"></script>-->
+        <script src="ads.js"></script>
+		<script src="src/standardFunctions.js"></script>		
+        <script>
+			addWall();
+            
+        </script>
+        
+    </body>
+</html>

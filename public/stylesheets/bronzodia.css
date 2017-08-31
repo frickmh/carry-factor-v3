@@ -1,0 +1,259 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Oct 18, 2015, 1:10:56 AM
+    Author     : fric0_000
+*/
+
+
+
+
+
+input.navButton {
+    border-radius: 5px;
+    font-family: Helvetica, Arial, sans-serif;
+    font-weight: bold;
+    font-size: large;
+}
+
+button.navButton {
+    border-radius: 5px;
+    font-family: Helvetica, Arial, sans-serif;
+    font-weight: bold;
+    font-size: large;
+}
+
+#continueButton.navButton:hover {
+    background-color: #BBDDFF; 
+    transition: all .35s;
+    -webkit-box-shadow: 0 0 20px rgba(81, 203, 238, 1);
+    -moz-box-shadow: 0 0 20px rgba(81, 203, 238, 1);    
+    box-shadow: 0 0 20px rgba(81, 203, 238, .5);
+}
+
+#continueButton.navButton {
+    background-image: url(/website/winters_claw_cropped.png); /* 16px x 16px */
+    background-size: 15%;
+    background-repeat: no-repeat;  /* make the background image appear only once */
+    background-position: 2px 2px;  /* equivalent to 'top left' */
+}
+
+input.navButton:hover {
+    background-color: #BBDDFF; 
+    transition: all .35s;
+    -webkit-box-shadow: 0 0 20px rgba(81, 203, 238, 1);
+    -moz-box-shadow: 0 0 20px rgba(81, 203, 238, 1);    
+    box-shadow: 0 0 20px rgba(81, 203, 238, .5);
+}
+
+img.banner:hover {
+    background-color: #FFFFFF; 
+    transition: all .35s;
+    -webkit-box-shadow: 0 0 20px rgba(81, 203, 238, 1);
+    -moz-box-shadow: 0 0 20px rgba(81, 203, 238, 1);    
+    box-shadow: 0 0 20px rgba(81, 203, 238, 1);
+    opacity: .9;
+}
+
+button.arrow:hover {
+    background-color: #CCEEFF; 
+}
+
+img.champ:hover {
+    background-color: #FFFFFF; 
+    opacity: .9;
+}
+
+
+input.button_submit {
+    border-radius: 5px;
+    background-image: url(/website/winters_claw_cropped.png); /* 16px x 16px */
+    background-size: 15%;
+    background-repeat: no-repeat;  /* make the background image appear only once */
+    background-position: 5px 4px;  /* equivalent to 'top left' */
+    //cursor: pointer;        /* make the cursor like hovering over an <a> element */
+    //height: 128px;           /* make this the size of your image */
+    //width: 32px;
+    
+    //padding-right: 16px;
+    //padding-top: 16px;
+    //padding-bottom: 16px;
+    //padding-left: 64px;     /* make text start to the right of the image */
+    //vertical-align: middle; /* align the text vertically centered */
+    
+}
+
+input.freljord {
+    background-image: url(/website/winters_claw_cropped.png); /* 16px x 16px */
+    background-size: 30%;
+    background-repeat: no-repeat;  /* make the background image appear only once */
+    background-position: 2px 2px;  /* equivalent to 'top left' */
+    padding-top:10px;padding-bottom:10px;padding-right:10px;padding-left:45px;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: large;
+}
+
+button.freljord {
+    background-image: url(/website/winters_claw_cropped.png); /* 16px x 16px */
+    background-size: 30%;
+    background-repeat: no-repeat;  /* make the background image appear only once */
+    background-position: 2px 2px;  /* equivalent to 'top left' */
+    padding-top:10px;padding-bottom:10px;padding-right:10px;padding-left:45px;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: large;
+}
+
+.freljord:hover {
+    background-color: #BBDDFF;     
+    transition: all .35s;
+    -webkit-box-shadow: 0 0 20px rgba(81, 203, 238, 1);
+    -moz-box-shadow: 0 0 20px rgba(81, 203, 238, 1);    
+    box-shadow: 0 0 20px rgba(81, 203, 238, .5);
+}
+
+#regionvisible:hover {
+    //background-color: #BBDDFF;     
+    transition: all .35s;
+    -webkit-box-shadow: 0 0 20px rgba(81, 203, 238, 1);
+    -moz-box-shadow: 0 0 20px rgba(81, 203, 238, 1);    
+    box-shadow: 0 0 20px rgba(81, 203, 238, .5);    
+}
+
+#scoutVisible:hover {
+    //background-color: #BBDDFF;     
+    transition: all .35s;
+    -webkit-box-shadow: 0 0 20px rgba(81, 203, 238, 1);
+    -moz-box-shadow: 0 0 20px rgba(81, 203, 238, 1);    
+    box-shadow: 0 0 20px rgba(81, 203, 238, .5);    
+}
+
+.shadow_round {
+    box-shadow: 10px 10px 5px rgba(50, 50, 50, .3);
+    border-radius: 10px;   
+}
+
+.shadow {
+    box-shadow: 10px 10px 5px rgba(50, 50, 50, .3);
+}
+
+.shadow_low {
+    box-shadow: 5px 5px 3px rgba(50, 50, 50, .3);
+}
+
+.xbutton {
+    position: absolute;
+    right: 25.2%;
+    top: 55.2%;
+    z-index: 2;
+    visibility: hidden;
+    border-radius: 3px;
+}
+
+.xbutton:hover {
+    background-color: #BBDDFF;         
+}
+
+div.brown {
+    //background-image: url("website/brown.png");
+    background: #333333;
+}
+
+span.tooltip {
+    cursor: default;
+    display: inline-block;
+    vertical-align: text-top;
+    font-size: 12px;
+    width: 16px;
+    height: 16px;
+    background-color: #89A4CC;
+    line-height: 16px;
+    color: #FFF;
+    font-weight: bold;
+    border-radius: 8px;
+    text-align: center;
+    //position: relative;
+}
+
+span.tooltip-small {
+    cursor: default;
+    display: inline-block;
+    vertical-align: text-top;
+    font-size: 10px;
+    width: 12px;
+    height: 12px;
+    background-color: #89A4CC;
+    line-height: 12px;
+    color: #FFF;
+    font-weight: bold;
+    border-radius: 6px;
+    text-align: center;
+    position: relative;
+}
+
+.scorePoor {
+    color: #DD0000;
+    font-weight: bold;
+}
+
+.scoreAboveAvg {
+    color: #000088;
+}
+
+.scoreGood {
+    color: #0000FF;
+}
+
+.scoreVeryGood {
+    color: #00CCCC;
+}
+
+.scoreExcellent {
+    color: #00B200;
+}
+
+
+
+
+//Bronzodia Approved Products:
+div.bronzodiaApproved {
+    height:33px;
+    position:absolute;
+    left:0px; 
+    background-color: #663300;
+    color:#DDDDFF;
+    font-size: small;
+    width:100px;
+    border-radius: 0 8px 8px 0;
+}
+
+img.bronzodiaApproved {
+    height:40px;
+    position:absolute;
+    left:60px;
+    margin-top:-2px;
+}
+
+img.bronzodiaApproved, div.bronzodiaApproved:hover {
+    cursor: help;
+}
+
+iframe.bronzodiaApproved:hover {
+    transition: all .35s;
+    -webkit-box-shadow: 0 0 20px rgba(81, 203, 238, 1);
+    -moz-box-shadow: 0 0 20px rgba(81, 203, 238, 1);    
+    box-shadow: 0 0 20px rgba(81, 203, 238, .5);    
+}
+
+img.product:hover {
+    cursor: pointer;
+    background-color: #BBDDFF;     
+    transition: all .35s;
+    -webkit-box-shadow: 0 0 20px rgba(81, 203, 238, 1);
+    -moz-box-shadow: 0 0 20px rgba(81, 203, 238, 1);    
+    box-shadow: 0 0 20px rgba(81, 203, 238, .5);
+}

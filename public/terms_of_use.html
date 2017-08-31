@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Carry-Factor.com - LoL Stats Command Center.  Stats, Counterpicks, and Cooldowns</title>
+        <link rel="shortcut icon" href="website/diamond_i_favicon.png">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="Pre-game Lobby Stats for League of Legends">
+        <meta name="keywords" content="pre-game lobby stats, League of Legends, Champion Select, Statistics, Summoner info">
+
+		<link rel="stylesheet" type="text/css" href="bronzodia.css">
+        <link rel="stylesheet" type="text/css" href="bronzodia_Dark.css" id='dark-styles'>        
+        <link rel="stylesheet" type="text/css" href="bronzodia_Light.css" id='light-styles'>     
+		
+        <!-- Google Analytics Tracking Script -->
+        <script>
+            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+            })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+            ga('create', 'UA-60328206-5', 'auto');
+            ga('send', 'pageview');
+
+        </script>
+    </head>
+    <body>
+        <div id="main_content_div" align="center">
+            <div style='width: 100%;' class='brown'><a href="index.html"><img class='banner' style='width:57.65%' src='website/banner-carry-factor.png' alt='Carry-factor: LoL Stats Command Center.  Stats, Counterpicks, and Cooldowns'></a></div>
+
+            <div style="width: 50%; font-size: larger" align='left'>
+                <h4>Carry-Factor.com Terms of Use ("Agreement")</h4>
+
+                <p><i>This Agreement was last modified on June 29, 2015.</i></p>
+
+                <p>Please read these Terms of Service completely using www.carry-factor.com which is owned and operated by the developer, Mark H Frick. This Agreement documents the legally binding terms and conditions attached to the use of the Site at www.carry-factor.com.</p>
+
+                <p>By using or accessing the Site in any way, viewing or browsing the Site, or adding your own content to the Site, you are agreeing to be bound by these Terms of Service. </p>
+
+                <p><b>Intellectual Property</b></p>
+
+                <p>The Site and all of its original content are the sole property of the developer, and are, as such, fully protected by the appropriate international copyright and other intellectual property rights laws.</p>
+
+                <p><b>Termination</b></p>
+
+                <p>The developer reserves the right to terminate your access to the Site, without any advance notice. </p>
+
+                <p><b>Links to Other Websites </b></p>
+
+                <p>Our Site does contain a number of links to other websites and online resources that are not owned or controlled by the developer.</p>
+
+                <p>The developer has no control over, and therefore cannot assume responsibility for, the content or general practices of any of these third party sites and/or services. Therefore, we strongly advise you to read the entire terms and conditions and privacy policy of any site that you visit as a result of following a link that is posted on our site. </p>
+
+                <p><b>Governing Law</b></p>
+
+                <p>This Agreement is governed in accordance with the laws of the State of Minnesota, United States. </p>
+
+                <p><b>Changes to This Agreement </b></p>
+
+                <p>The developer reserves the right to modify these Terms of Service at any time. We do so by posting and drawing attention to the updated terms on the Site. Your decision to continue to visit and make use of the Site after such changes have been made constitutes your formal acceptance of the new Terms of Service.</p>
+
+                <p>Therefore, we ask that you check and review this Agreement for such changes on an occasional basis. Should you not agree to any provision of this Agreement or any changes we make to this Agreement, we ask and advise that you do not use or continue to access www.carry-factor.com immediately. </p>
+
+                <p><b>Contact Us</b></p>
+
+                <p>If you have any questions about this Agreement, please feel free to contact me at mark.h.frick@gmail.com. </p>
+
+
+            </div>
+			<div style='width: 100%;' class="brown"><table><tr><td><img src="website/diamond_i.png" alt='diamond_i.png'></td><td style='width: 100%; font-size: 36px; text-align: center; color: #FFFFFF'></td><td><img src="website/diamond_i.png" alt='diamond_i.png' style="filter: fliph"></td></tr></table></div>
+            <table style='text-align: center' align='center'><tr><td><a href='aboutus.html'>About us</a></td><td><a href="contact.html">Contact</a></td><td><a href="privacy_policy.html">Privacy Policy</a></td><td><a href="terms_of_use.html">Terms of Use</a></td></tr></table>
+
+        </div>
+		
+		<script>
+            function getCookie(cookieLoad) {
+                //alert(cookieLoad);
+                
+                var cookieLength = cookieLoad.length + 1;
+                
+                var cookieString;
+                
+                if (document.cookie !== null && document.cookie.indexOf(cookieLoad) > -1)
+                {
+                    var afterCookie = document.cookie.substr(document.cookie.indexOf(cookieLoad + "=") + cookieLength);                    
+
+                    //alert (afterCookie);
+                    if (afterCookie.indexOf(";") > -1) {
+                        cookieString = afterCookie.substr(0,afterCookie.indexOf(';'));
+                        //alert ('afterCookie: ' + afterCookie + '\nif cookieString: ' + cookieString);
+                    } else {
+                        cookieString = afterCookie;
+                        //alert ('afterRegion: ' + afterRegion + '\nelse cookieString: ' + cookieString);
+                    }
+                }
+                
+                return cookieString;
+                
+            }
+		
+            if (getCookie('darkScheme') == 'true') {
+                document.getElementById('dark-styles').disabled = false;
+                document.getElementById('light-styles').disabled = true;
+            } else {
+                document.getElementById('dark-styles').disabled = true;
+                document.getElementById('light-styles').disabled = false;
+            }
+		</script>	
+		
+    </body>
+</html>

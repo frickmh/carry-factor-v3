@@ -1,0 +1,1820 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Carry-Factor.com - LoL Stats Command Center.  Stats, Counterpicks, and Cooldowns</title>
+        <link rel="shortcut icon" href="website/diamond_i_favicon.png">
+        <meta charset="UTF-8">
+        <!--<meta charset="ISO-8859-1">-->
+        <!--<meta charset="ANSI">-->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="Pre-game Lobby Stats for League of Legends">
+        <meta content="LoL Stats Command Center.  Scout your opponents and punish their weakest link.  Dynamic Counterpick tool." name='description'>
+        <meta name="keywords" content="pre-game lobby stats, League of Legends, Champion Select, Statistics, Summoner info, Bronzodia, Bronzodia.com, stats, lol, bronzodia, carry-factor, carry factor, counterpick, counterpicks, counter power, , educational, learning, tutorial, coaching, jungling, carrying, pressure ">
+        
+        
+        <link href="http://fonts.googleapis.com/css?family=Corben:bold" rel="stylesheet" type="text/css">
+        <link href="http://fonts.googleapis.com/css?family=Nobile" rel="stylesheet" type="text/css">
+        
+        <link rel="stylesheet" type="text/css" href="stylesheets/bronzodia.css">
+        <link rel="stylesheet" type="text/css" href="stylesheets/bronzodia_Dark.css" id='dark-styles'>        
+        <link rel="stylesheet" type="text/css" href="stylesheets/bronzodia_Light.css" id='light-styles'>      
+
+        <link rel="stylesheet" type="text/css" href="stylesheets/counterPicks.css">      
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <script src="https://code.jquery.com/color/jquery.color-2.1.2.min.js"></script>
+        <script src="/public/src/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
+        <script src="/public/src/jquery-ui-1.12.1.custom/external/jquery/jquery.js"></script>
+		
+	<script src="src/standardFunctions.js"></script>
+	<script src="src/counterPicks.js"></script>
+
+        <script src="/reload/reload.js"></script> 
+ 
+      
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+        
+        <!-- Google Analytics Tracking Script -->
+        <script>
+            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+            })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+            ga('create', 'UA-60328206-5', 'auto');
+            ga('send', 'pageview');
+
+        </script>
+        <style>
+            
+
+            td {
+                font-size:.74vw;
+            }
+            
+            
+            input[type=text].hidden {
+                width:0px;
+                height:0px;
+            }
+            textArea.hidden {
+                width:0px;
+            }
+
+            .tinytext {
+                font-size: xx-small;
+                font-style: normal;
+            }
+            input[type=submit] {padding:5px 15px; 
+                cursor:pointer;
+                
+                //font-weight:bold;
+
+            }
+            table.tableOuter {
+                background-image: url("website/zwartevilt.png");
+                box-shadow: 10px 10px 5px rgba(50, 50, 50, .3);
+                border-radius: 10px;
+
+            }
+            b.tableOuter {
+                color: #EEEEEE;
+            }
+            
+            table.tableInner {
+                height: 100%;
+                //background-image: url("website/light_grey.png");
+            }
+            
+            
+            table.notStats {
+                border-collapse: collapse;
+                border: none;
+            }
+
+            .notStats table, .notStats tbody, .notStats td, .notStats tr {
+                border: none;
+                border-collapse: collapse;
+            }
+            
+            .recentScoresTable tr, .recentScoresTable div {
+                font-family: Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif;
+                font-size:.8vw;
+            }
+            
+            iframe.addPlayers {
+                position:absolute;
+                right: 33%;
+                top: 60%;
+                height: 20vw;
+                width: 33vw;
+                //visibility: hidden;
+            }
+
+
+            
+        </style>
+    </head>
+    <body>
+        <div id="main_content_div" align="center">
+                <div style='width: 100%;' class='brown'><a href="index.html"><img class='banner' style='width:57.65%' src='website/banner-carry-factor.png' alt='Carry-Factor.com: LoL Stats Command Center'></a></div>
+                <br>
+                
+                
+                
+                <div id="LeaderboardTop" style='box-shadow: 10px 10px 5px rgba(50, 50, 50, .3);width:728px;height:90px;'>
+					
+                    <!-- Leaderboard Bronzodia - Google AdSense-->
+                    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                    
+                    <ins class="adsbygoogle"
+                         style="display:inline-block;width:728px;height:90px"
+                         data-ad-client="ca-pub-6399216573107712"
+                         data-ad-slot="2427748385"></ins>
+                    <script>
+                    (adsbygoogle = window.adsbygoogle || []).push({});
+                    </script>
+                    <!-- Large Leaderboard Top Bronzodia -->
+                    <!--
+                    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>                
+                    <ins class="adsbygoogle"
+                         style="display:inline-block;width:970px;height:90px"
+                         data-ad-client="ca-pub-6399216573107712"
+                         data-ad-slot="2985489185"></ins>
+                    <script>
+                    (adsbygoogle = window.adsbygoogle || []).push({});
+                    </script>-->
+                    <button style='float: left;' onclick="this.parentNode.remove();">X</button>
+                </div>
+
+				<div>
+				<form style="visibility: hidden; height:1px" id='formhidden' action='results.html' method="get" target="_self"><input name='region' id='region' value="Region"><input type='checkbox' name='scout' id='scoutHidden'><input name='playerNames' id='playerNames' value="Players"><!--<textarea name='lobbychat' id='lobbychat'>Hello!</textarea>--><input id="inputhidden" type="submit" value="Submit"></form>
+
+                                <br>
+				<h3>Enter Names, then Submit.</h3>
+					<textarea style="height: 135px; width: 25%" class="lobbyChat" id="lobbychatvisible" spellcheck="false" title='Paste chat here.  Type missing player names in a seperate line.  Non-case sensitive, ignores spaces.'>NovaDisk joined the lobby.
+hashinshin joined the lobby.
+Super Metroid joined the lobby.
+MarineRevenge joined the lobby.
+GundayMonday joined the lobby.
+					</textarea>
+
+					<div>                
+						<select id="regionvisible" onchange="setRegion()">
+							<option value="na1" selected="selected">NA</option>
+							<option value="euw1">EUW</option>
+							<option value="eun1">EUNE</option>
+							<option value="br1">BR</option>
+							<option value="kr">KR</option>
+							<option value="la1">LAN</option>
+							<option value="la2">LAS</option>
+							<option value="oc1">OCE</option>
+							<option value="ru">RU</option>
+							<option value="tr1">TR</option>
+							<option value="jp1">JP</option>
+						</select>
+					</div>
+					<br>
+
+					
+					<button  id='buttonvisible' style="height: 50px; width: 150px" onclick="openResultsWindow()" class='freljord' title="Re-submit request for player stats. Detailed stats on player champion pools can be found here.">Submit</button>
+                                												
+				</div>
+
+				<script>
+					function setRegion() {
+						var region = document.getElementById('regionvisible').value;
+						document.cookie = "region=" + region + "; expires=Fri, 30 Dec 2022 12:00:00 UTC;";
+						//alert (document.cookie);
+						
+					}					
+					
+					if (getCookie("region") != null) {
+						var val = getCookie("region");
+						var sel = document.getElementById('regionvisible');
+						var opts = sel.options;
+						for(var opt, j = 0; opt = opts[j]; j++) {
+							if(opt.value == val) {
+								sel.selectedIndex = j;
+								break;
+							}
+						}
+					}
+				</script>
+				
+  <script>
+    var myUrl = 'getPreGameJSON?region=' + getUrlParameter('region') + '&names=' + getUrlParameter('playerNames');
+
+    var matchesGlobal;
+
+    $( document ).ready(function() {
+      console.log("Document ready!");
+
+      var champsListByNameAjax = $.getJSON("./data/champsListByName.json");
+      var champsListByIdAjax = $.getJSON("./data/champsList.json");
+
+      addWall();
+
+      $.when(champsListByNameAjax, champsListByIdAjax).done(function(champsListByNameJSON, champsListByIdJSON) {
+
+        //Main control function which uses JSON data for all players to generate a graphical diaplay table.
+        $.ajax({
+            url: myUrl,
+            type: 'GET',
+            success: function(data){
+                //console.log(data.redirect);
+
+                //Patch Display
+                $("#patchDisplay").html(data.patch);
+                console.log(data);
+             
+                console.log(data.players);
+
+                $("#lobbychatvisible").html(getUrlParameter('playerNames'));   
+
+                var playerCount = Object.keys(data.players).length;
+
+                matchesGlobal = data.matches;
+
+                //Copy the Table Slots for each player
+                if (playerCount > 1) {
+                  for (var i = 0; i < playerCount - 1; i++) {
+                    var slot = $(".tableSlot:eq(0)").clone()
+                    slot.appendTo("#allPlayersContainer");
+                  }
+                }
+
+                //Build the graphic table using the JSON data
+                for (var i = 0; i < playerCount; i++) {
+                  var player = data.players[i];
+
+                  //Show mane, with link to op.gg profile.
+                  $(".nameLink:eq(" + i + ")").html(player.name); 
+                  $(".nameLink:eq(" + i + ")").attr('href', "https://" + opggRegion(data.region) + ".op.gg/summoner/userName="  + player.name);
+
+                  //Build rank icon and rank string.
+                  if (player.leagues.tier != undefined && player.leagues.tier != 'unranked') {
+                    var rankIconImg = $(".rankIcon:eq(" + i + ")");
+                    //console.log(rankIconImg); 
+                    rankIconImg.attr('src', ("/rankicons/" + player.leagues.tier + '_' + player.leagues.rank + '.png').toLowerCase());
+                  }
+                  $(".playerRank:eq(" + i + ")").html(buildRank(player));              
+                  $(".winLoss:eq(" + i + ")").html(player.leagues.wins + " / " + player.leagues.losses + " W/L");
+
+
+                  //console.log(champsListByIdJSON);
+
+                  //Build the 'Recent Roles' table. (Build positions first!)
+                  buildPositions(player, champsListByIdJSON[0]);
+                  buildRoles(i, player, playerCount, data.region);
+
+                  buildScores(i, player, data.region, data.matches, champsListByIdJSON[0].data);
+
+                  buildCounters(i, champsListByNameJSON[0]);
+
+                  //Need these for the swap arrows on top of the slots.
+                  document.getElementsByClassName('arrowHolder')[i].setAttribute('data-slot',i);
+                  document.getElementsByClassName('arrowHolder')[i].setAttribute('data-players',playerCount);
+   
+                  buildChampStats(i, player, data.region, champsListByNameJSON[0]);
+
+                  //console.log(champsListByIdJSON[0]);
+
+                  buildRecentChampsCount(i, player, champsListByIdJSON[0], data.region);
+
+                  console.log(player);
+
+
+                }
+
+                //Sort the roles table by position and champion frequency
+                sortRoles();
+
+                //Fill blank spaces to make the Recent Roles table look consistent and clean
+                fillMaxRoles(data);
+
+                counterPicks__init__();
+
+            },
+            error: function(errData) {
+                //alert('woops!'); //or whatever
+                console.log(errData);
+                if (errData.status == 429) {
+                  alert("You've made too many page requests, please try again in a few minutes.");
+
+                }
+            }
+        });
+      });
+
+    });
+
+    function buildRecentChampsCount(i, player, champsListByIdJSON, region) {
+
+      var matches = matchesGlobal;
+      
+      var playerMatches = [];
+
+      var champsListById = champsListByIdJSON.data;
+
+      //Iterate through the matches, adding any matches where the player fits to playerMatches.
+      for (var j = 0; j < matches.length; j++) {
+        for (var k = 0; k < 10; k++) {
+          if (matches[j]["summonerId" + k] == player.id) {
+            var match = { "champ" : champsListById[matches[j]["champId" + k]], "kills" : matches[j]["kills" + k], "deaths" : matches[j]["deaths" + k], "assists" : matches[j]["assists" + k], "win" : matches[j]["win" + k].data[0], "gameCreation" : matches[j].gameCreation};
+
+            //console.log(match);
+            playerMatches.push(match);
+
+          }
+        }
+      }
+
+      var playerChamps = {};
+
+      //console.log(playerMatches);
+
+      for (var j = 0; j < playerMatches.length; j++) {
+        //If stats do not exist for a champ, create a new champ and initialize it's stats.
+        if (playerChamps[playerMatches[j].champ["key"]] == undefined) {
+          playerChamps[playerMatches[j].champ["key"]] = { "champ" : playerMatches[j].champ, "wins" : playerMatches[j].win, "games" : 1, "kills" : playerMatches[j].kills, "deaths" : playerMatches[j].deaths, "assists" : playerMatches[j].assists};
+        } else {
+          playerChamps[playerMatches[j].champ["key"]].wins += playerMatches[j].win;
+          playerChamps[playerMatches[j].champ["key"]].games += 1;
+          playerChamps[playerMatches[j].champ["key"]].kills += playerMatches[j].kills;
+          playerChamps[playerMatches[j].champ["key"]].deaths += playerMatches[j].deaths;
+          playerChamps[playerMatches[j].champ["key"]].assists += playerMatches[j].assists;
+
+
+        }
+      }
+ 
+
+      var playerChampsArray = [];
+
+      for (playerChamp in playerChamps) {
+        playerChampsArray.push(playerChamps[playerChamp]);
+      }
+
+      function compare(a,b) {
+	  if (a.games > b.games)
+		return -1;
+	    if (a.games < b.games)
+		  return 1;
+	      return 0;
+      }
+
+      playerChampsArray.sort(compare);
+ 
+      //console.log(playerChampsArray);
+        
+      playerChampsArray = playerChampsArray.slice(0,8);
+/*      
+      player.recentChampsCount = {};
+
+      if (player.matchList == undefined || player.matchList.matches == undefined) {
+        return;
+      }
+
+      for (var j = 0; j < Object.keys(player.matchList.matches).length; j++) {
+        var match = player.matchList.matches[j];
+
+        if (player.recentChampsCount[match.champion] == undefined) {
+
+          player.recentChampsCount[match.champion] = { "champId" : match.champion };
+
+          player.recentChampsCount[match.champion].games = 1;
+        } else {
+          player.recentChampsCount[match.champion].games += 1;
+        }
+      }
+
+      var champsArray = [];
+
+      for (champ in player.recentChampsCount) {
+        champsArray.push(player.recentChampsCount[champ]);
+      }
+
+      champsArray = champsArray.sort(function(a, b) {
+        return (b.games > a.games) ? 1 : ((b.games < a.games) ? -1 : 0);
+      });
+
+      console.log(champsArray);
+*/
+      var champsArray = playerChampsArray;
+
+      var statsTable = $(".statsTable:eq(" + i + ")");
+
+      statsTable.addClass("slot" + i);
+
+      for (var j = 0; j < champsArray.length; j++) {
+
+        if (j > 7) {continue;}
+
+        statsPortrait = $("img:eq(" + j + ")", statsTable);
+
+        //console.log(champsListByIdJSON);
+
+
+        statsPortrait.attr("src", "/datadragon/" + $("#patchDisplay").html() + "/img/champion/" + champsListByIdJSON.data[champsArray[j].champ.id].key + ".png");
+
+        statsPortrait.css("opacity", 1);
+
+        statsPortrait.attr("title", champsListByIdJSON.data[champsArray[j].champ.id].name + " (" + champsArray[j].games + " recent games)");
+
+        //statsPortrait.attr("onclick", " selectStats(" + player.id + ", " + champsArray[j].champId + ", '" + region + "', " + i +", '" + champsListByIdJSON.data[champsArray[j].champId].key + "');");
+/*
+        statsPortrait.click({ "stuff" : 5}, function(event) { 
+            alert("I'm clicked! " + event.data.stuff);
+            });
+*/
+
+        statsPortrait.click({ "playerId" : player.id, "champId" : champsArray[j].champ.id, "region" : region, "i" : i, "key" : champsListByIdJSON.data[champsArray[j].champ.id].key}, function(event) {
+            selectStats(event.data.playerId, event.data.champId, event.data.region , event.data.i , event.data.key);
+            });
+
+
+        var kdaTooltipString = "Avg Score: " + round1(1.0 * champsArray[j].kills / champsArray[j].games) + "/" + round1(1.0 * champsArray[j].deaths / champsArray[j].games) + "/" + round1(1.0 * champsArray[j].assists / champsArray[j].games);
+        var kda = round2(1.0 * (champsArray[j].kills + champsArray[j].assists) / champsArray[j].deaths);
+
+        var kdaTooltip = $("<span/>").addClass("tooltip");
+        kdaTooltip.html("+");
+        kdaTooltip.attr("title", kdaTooltipString);
+
+        var champNameHolder = $(".statsTable.slot" + i + " .champNameClass:eq(" + j + ")").html(champsListByIdJSON.data[champsArray[j].champ.id].name);
+        var gamesPlayedHolder = $(".statsTable.slot" + i + " .gamesPlayedClass:eq(" + ( j + 1 ) + ")").html(champsArray[j].games);
+        var winPctHolder = $(".statsTable.slot" + i + " .winPctClass:eq(" + ( j + 1 ) + ")").html(round1(100.0 * champsArray[j].wins / champsArray[j].games) + "%");
+        var kdaHolder = $(".statsTable.slot" + i + " .kdaClass:eq(" + ( j + 1 ) + ")").html(kda);
+
+        kdaTooltip.prependTo(kdaHolder);
+
+        champNameHolder[0].parentNode.parentNode.parentNode.parentNode.parentNode.setAttribute("class", champsListByIdJSON.data[champsArray[j].champ.id].key);
+
+        //console.log(champNameHolder[0].parentNode.parentNode.parentNode.parentNode.parentNode);
+
+        //getChampStats(player.id, champsArray[j].champId, region, i, champNameHolder[0].parentNode.parentNode.parentNode.parentNode.parentNode);
+        
+
+      }
+
+      return player;
+    }
+
+
+    //Build matchlist, and store some simple data (Role count)
+    //0 is the most recent match.
+    function buildPositions(player, champNamesByIdJSON) {
+      //console.log(data);
+
+      if (player == undefined || player.matchList == undefined || player.matchList.status != undefined && (player.matchList.status.status_code >= 400))
+        return;
+
+      player.positions = {};
+      player.matchCount = 0;
+
+
+      for (var j = 0; j < 20; j++) {
+        var match = player.matchList.matches[j];
+        //console.log("Match: " + match);
+
+        if (match == undefined)
+          continue;
+
+        player.matchCount++;
+
+        var role = "";
+        if (match.lane == 'BOTTOM') {
+          role = match.role == 'DUO_CARRY' ? 'ADC' : 'Support';
+        } else {
+          role = match.lane;
+          role = role.charAt(0) + role.slice(1).toLowerCase();
+        }
+
+        if (player.positions[role] == undefined) {
+          player.positions[role] = {};
+          player.positions[role].champs = {};
+          player.positions[role].count = 1;
+        } else {
+          player.positions[role].count++;
+        }
+
+        var championId = match.champion;
+
+        //console.log("Champion ID: " + championId);
+
+        if (player.positions[role].champs[championId] == undefined ||
+            player.positions[role].champs[championId] == 0) {
+          player.positions[role].champs[championId] = {};
+          player.positions[role].champs[championId].count = 1;
+
+          //console.log(champNamesByIdJSON);
+
+          player.positions[role].champs[championId].key = champNamesByIdJSON.data[championId].key;
+          player.positions[role].champs[championId].name = champNamesByIdJSON.data[championId].name;
+        } else {
+          player.positions[role].champs[championId].count++;
+        }
+
+        //Sort champs here.  Just kidding, we are going to sort them in jQuery where the sort function already exists.
+
+      }
+      //console.log(output.players[i].positions);
+      //console.log(output.players[i].matches);
+
+      return player;
+    }
+   
+
+
+    function buildChampStats(i, player, region, responseChampsJSON) {
+
+      var patchDisplay = $("#patchDisplay").html();
+
+      var statsChampImg = $(".statsChampImg:eq(" + i + ")").addClass("slot" + i);
+
+      var champNameSelect = $(".champNameSelect:eq(" + i + ")");
+          
+      champNameSelect.attr('data-slot', i);
+      champNameSelect.attr('data-region', region);
+      champNameSelect.addClass('slot' + i);
+
+
+      champNameSelect.change({ "i" : i, "region" : region  }, function(event){
+
+
+          console.log(event.data);
+
+          var summonerId = this.options[this.selectedIndex].getAttribute('data-summonerId');
+          var champId = this.options[this.selectedIndex].getAttribute('data-champId');
+          var champKey = this.options[this.selectedIndex].value;
+
+          getChampStats(summonerId, champId, event.data.region, event.data.i, this.parentNode.parentNode); 
+
+          //$(".statsChampImg.slot" + i).attr("src", "/datadragon/" + patchDisplay + "/img/champion/" + champKey + ".png");
+
+        });
+
+ 
+      //console.log(responseChampsJSON);
+
+      $.each(responseChampsJSON.data, function(key, data) {
+          var option = $('<option/>');
+          
+          option.html(data.name);
+
+          option.attr('value', data.key);
+
+          option.attr('data-champId', data.id);
+          option.attr('data-summonerId', player.id);
+          option.attr('data-slot', i);
+
+          option.appendTo(champNameSelect);
+
+      });
+
+      var my_options = $('select.champNameSelect:eq( ' + i + ' )  option');
+      var selected = $('select.champNameSelect:eq( ' + i + ' )').val();
+
+      my_options.sort(function(a,b) {
+              if (a.innerHTML > b.innerHTML) return 1;
+              if (a.innerHTML < b.innerHTML) return -1;
+              return 0;
+            });
+
+      $('select.champNameSelect:eq( ' + i + ' )').empty().append( my_options );
+      $('select.champNameSelect:eq( ' + i + ' )').val($('select.champNameSelect:eq( ' + i + ' )  option:first').val());
+
+    }
+
+
+    //A weird global variable that I apparently used as a default value for resetting the counterpicks.
+    //Bad programming practice, but whatever, it works.
+    var tableChampsInner = "";
+
+    function buildCounters(i, responseJSONChamps) {
+
+      var patch =  document.getElementById('patchDisplay').innerHTML;
+
+
+      //console.log(responseJSONChamps);
+
+
+      var counters = document.createElement("DIV");
+
+      
+      var tableChamps = "" +
+        "<div style='font-size:115%; margin-top:-.35vw;text-align:center'>Counterpicks<span class='tooltip' title='Winrates for Plat+.\n  - Counter power is the % difference between the average of the two champion win percents, and the matchup win %.\n  - Positive (Blue) values indicate the Left Champion (Your teammate) is stronger.\n  - Negative (Red) values indicate the Right Champion (Your opponent) is stronger.'>?</span></div>" +
+        "<table><tr><td><select onChange='getRoles(" + i + ", true);' class='monospace counterSelectChamp1 slot" + i + "'><br>";
+
+
+      tableChampsInner = "";
+
+      tableChampsInner += "<option id='None' value='None'></option>";
+
+      tableChampsInner += "<option id='Reset' value='Reset'>(Reset)</option>";
+
+      for (var champ in responseJSONChamps['data'])
+      {
+
+          //console.log(champ);
+
+          //champID = data['key'];
+
+          tableChampsInner += "<option name='" + champ + "' value='" + champ + "'>" + champ + "</option>";
+      }
+
+      //Some sort of weird global variable, used for resetting the counters, I think
+      //echo "<script>var tableChampsInner = \"$tableChampsInner\"</sc/ript>";
+
+
+      tableChamps += tableChampsInner;
+
+
+      tableChamps += "</select>" +
+                      //. "<table><tr><td><button>Reset</button></td></tr><tr><td><select id='matchupRole$k' onChange='getMatchups($k)' class='role'></select>vs.</td></tr></table>" //New
+                       "</td><td><table style='margin:-8px'><tr><td><button onclick='resetCounters(" + i + ")'><div style='margin:-3px -9px'>Reset<div></button></td></tr><tr><td><select onChange='getMatchups(" + i + ")' class='role matchupRole slot" + i + "'></select>vs.</td></tr></table></td><td>" + //New, wrapped Line 3 in Table
+                      //. "<select id='matchupRole$k' onChange='getMatchups(" + i + ")' class='role'></select>vs." //Original
+                       "<select class='monospace counterSelectChamp2 slot" + i + "' onChange='getRoles(" + i + ", false);'>" + tableChampsInner + "</select></td><td id='matchupPct$k' class='matchupPct slot" + i + "'>Win %</td><td>(<span class='champDelta slot" + i + "'>Counter Power</span>)</td></tr>" + //Original (Both)
+          //. "<tr><td><span id='champ1_$k'>Win %</span><span id='champ2_$k' style='float:right'>Win %</span></td></tr></table>"; //Original
+                       "<tr><td><span class='champ1 slot" + i + "'>Win %</span></td><td></td><td><span class='champ2 slot" + i + "' style='float:right'>Win %</span></td></tr></table>"; //New
+
+      //console.log(tableChamps);
+      counters.innerHTML = tableChamps;
+
+     //Append to tablePaneUpper[i]!
+      var tablePaneUpper = document.getElementsByClassName('tablePaneUpper')[i];
+
+      tablePaneUpper.appendChild(counters);
+
+      var options = $('select.counterSelectChamp1:eq( ' + i + ' )  option');
+      var arr = options.map(function(_, o) {
+        return {
+          t: $(o).text(),
+          v: o.value
+        };
+      }).get();
+      arr.sort(function(o1, o2) {
+        return o1.t > o2.t ? 1 : o1.t < o2.t ? -1 : 0;
+      });
+      options.each(function(i, o) {
+        //console.log(i);
+        o.value = arr[i].v;
+        $(o).text(arr[i].t);
+      });
+
+      var options = $('select.counterSelectChamp2:eq( ' + i + ' )  option');
+      var arr = options.map(function(_, o) {
+        return {
+          t: $(o).text(),
+          v: o.value
+        };
+      }).get();
+      arr.sort(function(o1, o2) {
+        return o1.t > o2.t ? 1 : o1.t < o2.t ? -1 : 0;
+      });
+      
+      options.each(function(i, o) {
+        //console.log(i);
+        o.value = arr[i].v;
+        $(o).text(arr[i].t);
+      });
+
+      //Assign an alphabetically ordered options list to the global variable 'tableChampsInner'       
+      tableChampsInner = $(".counterSelectChamp1:eq(" + i + ")").html();
+
+
+
+      var urlCheck = 'checkGame?region=' + getUrlParameter('region') + '&names=' + getUrlParameter('playerNames');
+
+
+      //console.log(urlCheck);
+
+      $.ajax({
+          url: urlCheck, 
+          success: function(result) {
+            //console.log(result);
+            if (result.status == "Live") {
+              //$("#continueButton").css('background-color','green');
+              setInterval(function(){
+                  $("#continueButton").animate({'background-color': '#FFFFFF; -webkit-box-shadow: 0 0 20px rgba(81, 203, 238, 1); -moz-box-shadow: 0 0 20px rgba(81, 203, 238, 1); box-shadow: 0 0 20px rgba(81, 203, 238, 1); opacity: .9;'}, 1000);
+                  //$("#continueButton").animate({'background-color': '#CCEEFF; -webkit-box-shadow: 0 0 0px rgba(81, 203, 238, 1); -moz-box-shadow: 0 0 0px rgba(81, 203, 238, 1); box-shadow: 0 0 0px rgba(81, 203, 238, 1); opacity: 1.0;'}, 1000);
+                  $("#continueButton").animate({'background-color': '#CCEEFF'}, 1000);
+                  $("#continueButton").animate({'background-color': '#EEEEEE'}, 1000);
+                  
+                }, 3000);
+            }
+          }
+      });
+
+    }
+
+
+    function buildScores(i, player, region, matches, champsListById) {
+
+      //console.log(champsListById);
+
+
+      var playerMatches = [];
+
+      //Iterate through the matches, adding any matches where the player fits to playerMatches.
+      for (var j = 0; j < matches.length; j++) {
+        for (var k = 0; k < 10; k++) {
+          if (matches[j]["summonerId" + k] == player.id) {
+            var match = { "champ" : champsListById[matches[j]["champId" + k]], "kills" : matches[j]["kills" + k], "deaths" : matches[j]["deaths" + k], "assists" : matches[j]["assists" + k], "win" : matches[j]["win" + k].data[0], "gameCreation" : matches[j].gameCreation, "gameId" : matches[j].gameId};
+
+            //console.log(match);
+            playerMatches.push(match);
+
+          }
+        }
+      }
+
+      function compare(a,b) {
+          if (a.gameCreation > b.gameCreation)
+                return -1;
+            if (a.gameCreation < b.gameCreation)
+                  return 1;
+              return 0;
+      }
+
+      playerMatches.sort(compare);
+
+      playerMatches = playerMatches.slice(0,10);
+
+
+      console.log(playerMatches);
+
+      console.log(player);
+
+      var matchList = (player.matchList != undefined && player.matchList.status == undefined ) ? player.matchList.matches : {};
+
+      //Now we need to combine player.matchList with playerMatches, so we can update them later.
+      for (var j = 0; j < matchList.length; j++) {
+        var matchFound = false;
+        for (var k = 0; k < playerMatches.length; k++) {
+          if (playerMatches[k].gameId == matchList[j].gameId) {
+            matchFound = true;
+            console.log("Found!");
+            
+          }
+        }
+        if (!matchFound) {
+          var match = { "champ" : champsListById[matchList[j].champion], "gameCreation" : matchList[j].timestamp / 1000, "gameId" : matchList[j].gameId, "toUpdate" : true};
+
+          console.log("Not found, adding!");
+
+          playerMatches.push(match);
+        }
+
+      }
+
+
+      playerMatches.sort(compare);
+
+      playerMatches = playerMatches.slice(0,10);
+
+      if (playerMatches == undefined) 
+        return;      
+
+
+      var matchScoresHolder = $(".matchScoresHolder:eq(" + i + ")").addClass("slot" + i);
+
+
+      function drawMatch(slot, match, region, playerId, index) {
+
+        var outcome = match.win != undefined ? (match.win == 1 ? 'win' : 'loss') : "unknown";
+        
+        var champKey = match.champ.key;
+  
+        var date = new Date(match.gameCreation * 1000);
+
+        var offset = date.getTimezoneOffset();
+
+        //console.log(date);
+
+        dateString = (date.getHours() % 12 != 0 ? date.getHours() % 12 : 12) + ":" + (date.getMinutes() < 10 ? "0" : "") + date.getMinutes() + (date.getHours() < 12 ? "am" : "pm") + " on " + (date.getMonth() + 1) + "/" + date.getDate() + "/" + date.getFullYear();
+
+        //console.log(outcome);
+
+        //console.log(champKey);
+
+        var matchScoresHolder = $(".matchScoresHolder.slot" + slot);
+
+        var mKills = match.kills != undefined ? match.kills : "&nbsp;";
+        var mDeaths = match.deaths != undefined ? match.deaths : "&nbsp;";
+        var mAssists = match.assists != undefined ? match.assists : "&nbsp;";
+
+        var divImgHolder = $("<div/>");
+
+        var imgChamp = $("<img/>").addClass('champ');
+
+        imgChamp.attr("src", "/datadragon/" + document.getElementById('patchDisplay').innerHTML + "/img/champion/" + champKey + ".png");
+        imgChamp.attr("alt", champKey + ".png");
+        imgChamp.attr("title", champKey + " " + outcome + " at " + dateString);
+        imgChamp.attr("style", "width:1.4vw;cursor:pointer;display:block;box-shadow: 1.5px 1.5px .75px grey; border-radius:3px;");
+        imgChamp.attr("onclick", "selectStats(" + playerId  + "," + match.champ.id  + "," + "'" + region + "'" + ", " + slot + "," + "'" + champKey + "'" + ");");
+
+        imgChamp.appendTo(divImgHolder);
+
+
+        var divStatsHolder = $("<div/>");
+        divStatsHolder.attr("style", "font-weight: normal;line-height: 88%;");
+        divStatsHolder.html(mKills + "<br>" + mDeaths + "<br>" + mAssists);
+
+
+        var matchScore = $("<td/>").addClass(outcome);
+        
+        divImgHolder.appendTo(matchScore);
+        divStatsHolder.appendTo(matchScore);
+
+        matchScore.appendTo(matchScoresHolder);
+ 
+        console.log(match);
+
+        if (match != undefined && match.toUpdate != undefined) {
+
+          console.log(match);
+
+          urlUpdate = "enterGameAndRetrieve?region=" + region + "&match=" + match.gameId + "&champ=" + match.champ.id;
+
+          $.ajax({
+            url: urlUpdate,
+            type: 'GET',
+            slot: slot,
+            index: index,
+            success: function(data) {
+              console.log(data);
+              var tdMatch = $(".matchScoresHolder.slot" + slot + " td:eq(" + (index + 1) + ")");
+
+              console.log(data.match.win);
+ 
+
+              tdMatch.removeClass("unknown");
+              tdMatch.addClass(data.match.win == 1 ? "win" : "loss");
+
+              tdMatch.find("div:eq(1)").html(data.match.kills + "<br>" + data.match.deaths + "<br>" + data.match.assists);
+
+              tdMatch.find("img:eq(0)").attr("title", tdMatch.find("img:eq(0)").attr("title").replace("unknown", data.match.win == 1 ? "win" : "loss"));
+
+              console.log(tdMatch);
+
+            }
+            
+          });
+
+
+        }
+      
+
+      } 
+
+      for (var j = 0; j < 10; j++) {
+
+        //console.log(player.matches[j]);
+
+        if (playerMatches[j] == undefined)
+          return;
+
+        var match = playerMatches[j];
+
+        drawMatch(i, match, region, player.id, j);
+
+
+
+
+      }
+    }
+
+    //Sort 'Recent Roles' Table such that the most frequent roles are on top, and the most frequent champs are to the left.
+    function sortRoles() {
+
+      //Sort rows by frequency.
+      for (var i = 0; i < $('.tableSlot').length; i++) {
+        var $rolesTable = $('.rolesTable:eq(' + i + ')');
+
+        $rolesTable.find('.roleRow').sort(function(a, b) {
+            return +b.dataset.positioncount - +a.dataset.positioncount;
+        })
+        .appendTo($rolesTable);
+
+        //Sort champs by frequency in each role.
+        for (var j = 0; j < document.getElementsByClassName('tableSlot')[i].getElementsByClassName('roleRow').length; j++) {
+          
+          var $roleTD = $('.rolesTable:eq(' + i + ')  .roleTD:eq(' + j + ')');
+ 
+           
+          $roleTD.find('.roleChamp').sort(function(a, b) {
+              return +b.dataset.champcount - +a.dataset.champcount;
+          })
+          .appendTo($roleTD);
+         
+        }
+
+      }
+    }
+
+    //Function to make the Recent Roles table look pretty by ensuring each table is the same length.  Blank square images are inserted.
+    function fillMaxRoles(data) {
+      var maxRoles = 0;
+ 
+      for (var player in data.players) {
+        var roleCount = 0;
+
+        if (data.players[player].positions != undefined) {
+          for (var position in data.players[player].positions) {
+            roleCount++;
+          }
+        }
+        maxRoles = roleCount > maxRoles ? roleCount : maxRoles;
+      } 
+
+      //For each player slot, create empty rows until the number of filled rows is equal to the maximum number of rows for all players.
+      for (var i = 0; i < Object.keys(data.players).length; i++) {
+
+        var rolesFilled = document.getElementsByClassName('tableSlot')[i].getElementsByClassName('roleRow').length;
+
+        for (var j = 0; j < (maxRoles - rolesFilled); j++) {
+
+          var roleRow = document.createElement("TR");
+          roleRow.setAttribute('class', 'roleRow');
+
+          roleRow.innerHTML = "";
+
+            roleRow.innerHTML += "<td class='roleChamp'><img src='/images/blank_square.png' alt='blank' class='champ' title='' style='width:1.5vw;display:block;box-shadow: 1.5px 1.5px .75px grey; border-radius:3px; opacity:.1;'></td>";
+
+
+          roleRow.innerHTML += "<td><div style='font-weight: normal;'></div></td>";
+
+          document.getElementsByClassName('rolesTable')[i].appendChild(roleRow);
+
+        }
+      }
+    }
+
+    //Function for generating 'Recent Roles' table from the player JSON.
+    function buildRoles(i, player, pCounti, region) {
+
+        for (var position in player.positions) {
+
+          var positionRecentMatchesCount = player.positions[position].count;
+
+          var recentRolePercentage = Math.round(positionRecentMatchesCount * 100.0 / player.matchCount);
+
+          var roleRow = document.createElement("TR");
+          roleRow.setAttribute('class', 'roleRow');
+          roleRow.setAttribute('data-positioncount', positionRecentMatchesCount);
+
+          //Table Display Champs!  Need to iterate!
+          var testHtml = "<td class='roleTD'>";
+
+
+          for (var champId in player.positions[position].champs) {
+            var champName = player.positions[position].champs[champId].name;
+            var champKey = player.positions[position].champs[champId].key;
+            var champCount = player.positions[position].champs[champId].count;
+            var title = champName + ": " + champCount + (champCount != 1 ? " games" : " game");
+            //testHtml += "<img src='/datadragon/" + document.getElementById('patchDisplay').innerHTML + "/img/champion/" + champKey + ".png' alt='" + champKey + "' class='champ roleChamp' data-champCount='" + champCount + "' title='" + title + "' style='width:1.5vw;cursor:pointer;display:block;float:left;box-shadow: 1.5px 1.5px .75px grey; border-radius:3px;' onClick='selectStats($name,$slot,$region,$idsArray[$o])'>";
+            testHtml += "<img src='/datadragon/" + document.getElementById('patchDisplay').innerHTML + "/img/champion/" + champKey + ".png' alt='" + champKey + "' class='champ roleChamp' data-champCount='" + champCount + "' title='" + title + "' style='width:1.5vw;cursor:pointer;display:block;float:left;box-shadow: 1.5px 1.5px .75px grey; border-radius:3px;' onClick='selectStats(\"" + player.id + "\"," + champId + ",\"" + region + "\"," + i + ", \"" + champKey + "\")'>";
+
+          }
+
+          testHtml += "</td>";
+
+          testHtml += "<td><div style='font-weight: normal;' class='rolePercentage'>" + position + ":&nbsp" + recentRolePercentage + "%</div></td>";
+
+          //console.log(testHtml);
+
+          roleRow.innerHTML = testHtml;
+
+          document.getElementsByClassName('rolesTable')[i].appendChild(roleRow);
+        }
+       
+      
+    }
+
+    //This function will generate a valid op.gg region based on the Riot API region.
+    function opggRegion(region) {
+      var outputRegion;
+ 
+      outputRegion = region == 'la1' ? 'lan' : region;
+      outputRegion = region == 'la2' ? 'las' : region;
+      
+      outputRegion = outputRegion.replace(/[0-9]/g, '');
+
+      return outputRegion;
+    }
+
+    //Generates a string containing the player's rank (example format: Diamond V (55 LP))
+    function buildRank(player) {
+      if (player.leagues == undefined || player.leagues.tier == undefined || player.leagues.tier.toLowerCase() == "unranked")
+        return "Unranked (0LP)";
+
+      var lp;
+
+      //Add Miniseries if present, else display LP/
+      if (player.leagues.miniSeries != undefined) {
+        lp = player.leagues.miniSeries.progress;
+        lp = lp.replaceAll("W", "<font style='color:green'>&#x2714;</font>&nbsp");
+        lp = lp.replaceAll("L", "<font style='color:red'>&#x2716;</font>&nbsp");
+        lp = lp.replaceAll("N", "<font style='color:grey'>&#x2796;</font>&nbsp");
+      } else {
+        lp = player.leagues.leaguePoints;
+      }
+
+      return player.leagues.tier[0] + player.leagues.tier.slice(1).toLowerCase() + " " + player.leagues.rank.toUpperCase() + " (" + lp + " LP)";                        
+    }
+
+  </script>
+    
+  <div>Patch: <span id='patchDisplay'>Loading...</span></div>
+
+
+  <br><h1 style='color:black;'>Website Maintenance in Progress!!!</h1>
+
+
+
+
+
+
+<table border='3' cellpadding='8' class='tableOuter'><tbody>
+  <tr style='text-align:center;'><th colspan='5'><h2 style='color:#DDDDDD;margin: 0 auto;margin-top:-.35vw;margin-bottom:-.3vw;'>Pre-game Lobby Statistics</th></tr></h2>      
+  <tr style='text-align:center;'>
+    <th colspan='5'>
+      <div>
+        <table style='margin: 0 auto; border-collapse: collapse; margin-bottom:-.6vw; margin-top:-0.5vw;display:inline-block'>
+          <tr style='text-align:center;'>
+            <td>
+            </td>
+            <td>
+              <form action='results.php' id='postDataContinueForm' method='get'>
+                <textarea id='postDataContinueTextArea' style='visibility: hidden; height: 0px;' class='hidden'></textarea>
+                  <input type='text' id='postDataContinueRegion' name='region' value='Hello!' style='visibility: hidden' class='hidden'>
+                  <input type='text' id='playerNames' name='playerNames' value='$chatString' style='visibility: hidden; float:left;' class='hidden'>
+                </form>
+                <input class='navButton' style='padding:10px; margin-right: 10px; float:left;' type='submit' value='Go Back' title='Return to previous page.' onClick='goBack();'>
+                <input class='navButton' id='continueButton' style='padding-top:10px;padding-bottom:10px;padding-right:10px;padding-left:45px; float:left;' type='submit' value='Continue to Live Stats' title='Once the splash screen loads, Continue to In-game Stats will bring you to a page that displays information for both teams.  If the game has not started yet, you will see an empty stats sheet.  Please reload once the game starts.' onClick='openCurrentGame();'>
+            </td>
+          </tr>
+        </table>
+        <span style='float:right;display:inline-block'><input type='checkbox' id='autofillCounter' onclick='setAutofill();'><span style='color:#EEEEEE;font-size:.72vw;font-weight:normal;vertical-align:top'>Auto Counterpick</span></span>
+      </div>
+    </th>
+  </tr>
+  <tr id='allPlayersContainer'>
+     <!--Put player info in HERE!  Duplicate using jQuery!-->
+
+    <td 'text-align:center' class='tableSlot'>
+
+
+      <div class='divPlayer'>
+        <table name='tablePlayer' border='1' style='border:solid #000; border-width: 0 1px;' cellpadding='1' class='tableInner'><tbody>
+						
+          <tr><div align='center' style='margin-top:-0.5vw;'><b class='tableOuter'>Move Slot</b></div></tr>
+          <tr><div align='center' class='arrowHolder' data-slot='0' data-players='0'>
+            <button class='arrow' onClick='swapFarLeft(this.parentNode.getAttribute("data-slot"), this.parentNode.getAttribute("data-players"))' title='Swap to Far Left'><<</button>
+            <button class='arrow' onClick='swapLeft(this.parentNode.getAttribute("data-slot"), this.parentNode.getAttribute("data-players"))' title='Swap to Left'><</button>
+            <button class='arrow' onClick='swapRight(this.parentNode.getAttribute("data-slot"), this.parentNode.getAttribute("data-players"))' title='Swap to Right'>></button>
+            <button class='arrow' onClick='swapFarRight(this.parentNode.getAttribute("data-slot"), this.parentNode.getAttribute("data-players"))' title='Swap to Far Right'>>></button>
+          </div></tr>
+						
+						
+          <tr><th colspan='5' text-align:'center' class='tablePaneUpper'>
+            <div style='text-align:center'><b style='font-size: 150%; text-shadow: 4px 4px 3px rgba(100, 100, 100, 0.2);'>
+              <a class='nameLink' href='https://op.gg/summoner/' target='_blank'>No player yet.</a>
+            </b></div>
+					
+            <div style='font-size: 0;'><img class='rankIcon' src='./rankicons/unranked.png' alt='Unranked' title='Unranked' style='width:3.9vw; text-align:center; margin-top:-.25vw;'></div>
+            <div class='playerRank' style='text-align:center; font-size=125%'>Unranked (0LP)</div>
+            <div style='text-align:center; font-size:75%;margin-bottom:-.05vw;'></div><div class='winLoss' style='text-align:center; font-size:80%;margin-bottom:-.05vw;'>0 / 0 W/L</div>
+
+            <div style='margin-top:-.4vw;'>
+              <!--$matchHistoryTable-->
+
+
+
+              <hr>
+              <div style='font-size:115%; margin-top:-.35vw;'>Recent Roles<span class='tooltip' title="Matchmade games, Summoner's Rift, Ranked and Normal.  Roles are about 95% accurate.">?</span></div>
+              <table style='border-collapse: collapse; margin-top:-.15vw;'>
+                <tbody class='rolesTable'> 
+                <!-- 'roleRow' (row containing champion images, correspinding to each role) will be inserted here! -->
+                </tbody>
+              </table>
+
+              <table class='recentScoresTable' style='border-collapse: collapse;'>
+                <hr style='margin-top:-.10vw;'>
+                <tr>
+                  <div style='font-size:115%; margin-top:-.35vw;'>Recent Scores
+                  </div>
+                </tr>
+                <tr style='text-align:left;'>
+                  <div>&nbspNewest&nbsp&#8592;&#8594;&nbspOldest</div>
+                </tr>
+                <tr class='matchScoresHolder'>
+                  <td style='padding-top:1.3vw; padding-right:.1vw;line-height: 88%;'>K<br>D<br>A<br></td>
+
+                </tr>
+              </table>
+
+
+
+            </div>
+	
+						
+            <hr>
+						
+            <div style='font-size:115%; margin-top:-.5vw;'><hr style='margin-bottom:-.05vw;'>Most Played Champs</div></th></tr>
+
+              <tr><td>
+                <table class='statsTable'><tbody>
+                       
+                  <tr class='tableTopChampsHeader'><td>&nbspRecent Champs&nbsp</td><td style='width:3vw;'>&nbspGames&nbsp</td><!--<td>&nbspAvg Score&nbsp</td>-->
+                    <td style='width:3.5vw;'>&nbspWin Pct&nbsp</td><td style='width:3.5vw;'>&nbspKDA&nbsp<span class='tooltip' title='Stats from the past 30 days.'>?</span></td>
+                  </tr>
+
+                  <tr class='topChamps' name='selectContainer'>
+                    <td style='height:1.45vw'>
+                      <select name='champNameSelect' class='champNameSelect'><br>
+                    </td>
+                    <td class='gamesPlayedClass'>
+                    </td>
+                    <td class='winPctClass'>
+                    </td>
+                    <td class='kdaClass'>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td style='font-size:0;'>
+                      <table class='notStats' style='float:left;font-size:0;margin-top:-.06vw;margin-bottom:-.06vw;'>
+                        <tr>
+                          <td style='display:block; font-size:0;'><img src='/images/blank_square.png' class='champ statsChampImg'  onerror='this.src=\"/images/blank_square.png\"' alt='champ' title='champ' style='width:1.5vw; cursor:pointer;float:left;box-shadow: 1.5px 1.5px .75px grey; border-radius:3px; opacity: .1;' style='font-size:0;'></td>
+                          <td class='champNameClass'></td>
+                        </tr>
+                      </table>
+                    </td>
+                    <td class='gamesPlayedClass'></td>
+                    <td class='winPctClass'></td>
+                    <td class='kdaClass'><span class='tooltip' title='Avg Score: kills/deaths/assists'>+</span></td>
+                  </tr>
+ 
+                  <tr>
+                    <td style='font-size:0;'>
+                      <table class='notStats' style='float:left;font-size:0;margin-top:-.06vw;margin-bottom:-.06vw;'>
+                        <tr>
+                          <td style='display:block; font-size:0;'><img src='/images/blank_square.png' class='champ statsChampImg'  onerror='this.src=\"/images/blank_square.png\"' alt='champ' title='champ' style='width:1.5vw; cursor:pointer;float:left;box-shadow: 1.5px 1.5px .75px grey; border-radius:3px; opacity: .1;' style='font-size:0;'></td>
+                          <td class='champNameClass'></td>
+                        </tr>
+                      </table>
+                    </td>
+                    <td class='gamesPlayedClass'></td>
+                    <td class='winPctClass'></td>
+                    <td class='kdaClass'><span class='tooltip' title='Avg Score: kills/deaths/assists'>+</span></td>
+                  </tr>
+ 
+                  <tr>
+                    <td style='font-size:0;'>
+                      <table class='notStats' style='float:left;font-size:0;margin-top:-.06vw;margin-bottom:-.06vw;'>
+                        <tr>
+                          <td style='display:block; font-size:0;'><img src='/images/blank_square.png' class='champ statsChampImg'  onerror='this.src=\"/images/blank_square.png\"' alt='champ' title='champ' style='width:1.5vw; cursor:pointer;float:left;box-shadow: 1.5px 1.5px .75px grey; border-radius:3px; opacity: .1;' style='font-size:0;'></td>
+                          <td class='champNameClass'></td>
+                        </tr>
+                      </table>
+                    </td>
+                    <td class='gamesPlayedClass'></td>
+                    <td class='winPctClass'></td>
+                    <td class='kdaClass'><span class='tooltip' title='Avg Score: kills/deaths/assists'>+</span></td>
+                  </tr>
+
+                  <tr>
+                    <td style='font-size:0;'>
+                      <table class='notStats' style='float:left;font-size:0;margin-top:-.06vw;margin-bottom:-.06vw;'>
+                        <tr>
+                          <td style='display:block; font-size:0;'><img src='/images/blank_square.png' class='champ statsChampImg'  onerror='this.src=\"/images/blank_square.png\"' alt='champ' title='champ' style='width:1.5vw; cursor:pointer;float:left;box-shadow: 1.5px 1.5px .75px grey; border-radius:3px; opacity: .1;' style='font-size:0;'></td>
+                          <td class='champNameClass'></td>
+                        </tr>
+                      </table>
+                    </td>
+                    <td class='gamesPlayedClass'></td>
+                    <td class='winPctClass'></td>
+                    <td class='kdaClass'><span class='tooltip' title='Avg Score: kills/deaths/assists'>+</span></td>
+                  </tr>
+                  
+                  <tr>
+                    <td style='font-size:0;'>
+                      <table class='notStats' style='float:left;font-size:0;margin-top:-.06vw;margin-bottom:-.06vw;'>
+                        <tr>
+                          <td style='display:block; font-size:0;'><img src='/images/blank_square.png' class='champ statsChampImg'  onerror='this.src=\"/images/blank_square.png\"' alt='champ' title='champ' style='width:1.5vw; cursor:pointer;float:left;box-shadow: 1.5px 1.5px .75px grey; border-radius:3px; opacity: .1;' style='font-size:0;'></td>
+                          <td class='champNameClass'></td>
+                        </tr>
+                      </table>
+                    </td>
+                    <td class='gamesPlayedClass'></td>
+                    <td class='winPctClass'></td>
+                    <td class='kdaClass'><span class='tooltip' title='Avg Score: kills/deaths/assists'>+</span></td>
+                  </tr>
+                  
+                  <tr>
+                    <td style='font-size:0;'>
+                      <table class='notStats' style='float:left;font-size:0;margin-top:-.06vw;margin-bottom:-.06vw;'>
+                        <tr>
+                          <td style='display:block; font-size:0;'><img src='/images/blank_square.png' class='champ statsChampImg'  onerror='this.src=\"/images/blank_square.png\"' alt='champ' title='champ' style='width:1.5vw; cursor:pointer;float:left;box-shadow: 1.5px 1.5px .75px grey; border-radius:3px; opacity: .1;' style='font-size:0;'></td>
+                          <td class='champNameClass'></td>
+                        </tr>
+                      </table>
+                    </td>
+                    <td class='gamesPlayedClass'></td>
+                    <td class='winPctClass'></td>
+                    <td class='kdaClass'><span class='tooltip' title='Avg Score: kills/deaths/assists'>+</span></td>
+                  </tr>
+                  
+                  <tr>
+                    <td style='font-size:0;'>
+                      <table class='notStats' style='float:left;font-size:0;margin-top:-.06vw;margin-bottom:-.06vw;'>
+                        <tr>
+                          <td style='display:block; font-size:0;'><img src='/images/blank_square.png' class='champ statsChampImg'  onerror='this.src=\"/images/blank_square.png\"' alt='champ' title='champ' style='width:1.5vw; cursor:pointer;float:left;box-shadow: 1.5px 1.5px .75px grey; border-radius:3px; opacity: .1;' style='font-size:0;'></td>
+                          <td class='champNameClass'></td>
+                        </tr>
+                      </table>
+                    </td>
+                    <td class='gamesPlayedClass'></td>
+                    <td class='winPctClass'></td>
+                    <td class='kdaClass'><span class='tooltip' title='Avg Score: kills/deaths/assists'>+</span></td>
+                  </tr>
+                  
+                  <tr>
+                    <td style='font-size:0;'>
+                      <table class='notStats' style='float:left;font-size:0;margin-top:-.06vw;margin-bottom:-.06vw;'>
+                        <tr>
+                          <td style='display:block; font-size:0;'><img src='/images/blank_square.png' class='champ statsChampImg'  onerror='this.src=\"/images/blank_square.png\"' alt='champ' title='champ' style='width:1.5vw; cursor:pointer;float:left;box-shadow: 1.5px 1.5px .75px grey; border-radius:3px; opacity: .1;' style='font-size:0;'></td>
+                          <td class='champNameClass'></td>
+                        </tr>
+                      </table>
+                    </td>
+                    <td class='gamesPlayedClass'></td>
+                    <td class='winPctClass'></td>
+                    <td class='kdaClass'><span class='tooltip' title='Avg Score: kills/deaths/assists'>+</span></td>
+                  </tr>
+
+                </tbody>
+              </table>
+            </div>
+          </tr>
+        </tbody>
+        </table>
+      </div>
+    </td>
+  </tr>
+</tbody>
+</table>
+
+<!-- Some PHP code used for color coding the table.  I can convert this to Javascript if I want to add colors to the scores based on their value (Good/poor KDA, Winrate etc.)-->
+
+<!--
+xxxxxxxx  Function for creating Stats Table  xxxxxxxxxxx
+
+    foreach ($responseJSONChamps['data'] as $key => $data)
+    {
+    $champID = $data['id'];
+
+    $tableChamps .= "<option id='$champID' value='$key'>$key</option>";
+    }
+                       
+    </select></td><td id='games$k'>-</td><td id='winPct$k'>-</td><td id='kda$k'>-</td></tr>";
+                        
+    for ($i = 0; $i < 10; $i++)
+    {
+                           
+      $kdaClass = 'scoreAvg';
+      $winPctClass = 'scoreAvg';
+                            
+      if ($played > 9 && $winPct <= 30 ) {$winPctClass = 'scorePoor';}
+      if ($played > 3 && $winPct <= 25 ) {$winPctClass = 'scorePoor';}
+                            
+      if ($played > 20) {
+        if ($kda > 3) { $kdaClass = 'scoreAboveAvg'; }
+        if ($kda > 3.5) { $kdaClass = 'scoreGood'; }
+        if ($kda > 4) { $kdaClass = 'scoreVeryGood'; }
+        if ($kda > 5) { $kdaClass = 'scoreExcellent'; }
+        if ($kda < 1.5) { $kdaClass = 'scorePoor'; }
+        if ($winPct < 40) { $winPctClass = 'scorePoor'; }
+
+      if ($played > 30)
+      {
+        if ($winPct > 55) { $winPctClass = 'scoreAboveAvg'; }
+        if ($winPct > 60) { $winPctClass = 'scoreGood'; }
+        if ($winPct > 65) { $winPctClass = 'scoreVeryGood'; }
+        if ($winPct > 70) { $winPctClass = 'scoreExcellent'; }
+        if ($winPct < 40) { $winPctClass = 'scorePoor'; }
+      }
+    }
+
+
+
+
+//Spornts Summoner ID:	39709811-->
+
+                
+                
+
+		<span style='float:right;display:inline-block'><input type='checkbox' id='useDark' onclick='changeColors();'><span style='font-size:.72vw;font-weight:normal;vertical-align:top'>Dark Color Scheme</span></span>
+        </div>
+        
+        <div style='text-align: center; margin: 0 auto'>Please Copy and Paste the URL (with Summoner Names) in the Lobby Chat!<span title='This supports our Website, and help your team WIN!' class='tooltip'>?</span></div>
+        <br>
+
+        <div style='width: 100%;' class='brown'><table><tr><td><img src="website/diamond_i.png" alt='diamond_i.png'></td><td style='width: 100%; font-size: 36px; text-align: center; color: #FFFFFF'>
+                <div id="LeaderboardBottom"  style='box-shadow: 10px 10px 5px rgba(50, 50, 50, .6);width:728px;height:90px;text-align: center; margin: 0 auto' align='center'>
+					<button style='float: left;' onclick="this.parentNode.remove();">X</button>
+					<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                    <!-- Bottom Leaderboard Bronzodia -->
+                    <ins class="adsbygoogle"
+                         style="display:inline-block;width:728px;height:90px"
+                         data-ad-client="ca-pub-6399216573107712"
+                         data-ad-slot="7253070786"></ins>
+                    <script>
+                    (adsbygoogle = window.adsbygoogle || []).push({});
+                    </script>
+                </div>                
+            </td><td><img src="website/diamond_i.png" alt='diamond_i.png' style="filter: fliph"></td></tr></table></div>
+        <table style='text-align: center' align='center'><tr><td><a href='aboutus.html'>About us</a></td><td><a href="contact.html">Contact</a></td><td><a href="privacy_policy.html">Privacy Policy</a></td><td><a href="terms_of_use.html">Terms of Use</a></td><td><a href="credits.html">Credits</a></td><td><a href="https://www.reddit.com/user/NovaDisk1/">Reddit</a></td></tr></table>
+
+		
+		
+        <script>
+            enableContinueToGameStats();
+            
+            function enableContinueToGameStats() {
+                var postDataLobbyChat = document.getElementById('postDataLobbyChat').value;
+                var postDataRegion = document.getElementById('postDataRegion').value;
+                
+                //var postDataContinueForm = document.getElementById('postDataContinueForm');
+                var postDataContinueTextArea = document.getElementById('postDataContinueTextArea');
+                var postDataContinueRegion = document.getElementById('postDataContinueRegion');
+                
+                postDataContinueTextArea.value = postDataLobbyChat;
+                postDataContinueRegion.value = postDataRegion;
+                
+                //postDataContinueForm.innerHTML = 'Loading...';
+                //postDataContinueForm.disabled = true;
+            }
+        </script>
+        
+        <script src="/ads.js"></script>
+        <script src="/adsbygoogle.js"></script>
+        <script>
+            
+  function getChampStats(summonerId, champId, region, i, displayObject) {
+ 
+    var myUrl = "/getChampStats?summoner=" + summonerId + "&champ=" + champId + "&region=" + region;
+
+    //console.log(myUrl);
+
+
+    $.ajax({
+        url: myUrl,
+        type: 'GET',
+        success: function(data) {
+ 
+            //console.log(this.url);
+            //console.log(champId);
+            //console.log(data);
+            //console.log(data.length);
+
+
+            var kills = 0;
+            var deaths = 0;
+            var assists = 0;
+            var wins = 0;
+            var games = 0;
+
+            for (match in data) {
+              for (var i = 0; i < 10; i++) {
+                if (data[match]['summonerId' + i] == summonerId) {
+                  //console.log("Matched!");
+                  kills += data[match]['kills' + i];
+                  deaths += data[match]['deaths' + i];
+                  assists += data[match]['assists' + i];
+                  wins += data[match]['win' + i].data[0];
+                  games++;
+
+
+                }
+              }
+
+            }
+
+            //console.log(kills);
+            //console.log(deaths);
+            //console.log(assists);
+            //console.log(wins);
+            //console.log(games);
+
+            displayObject.getElementsByClassName('gamesPlayedClass')[0].innerHTML = games;
+            displayObject.getElementsByClassName('winPctClass')[0].innerHTML = games != 0 ? round1(100.0 * wins / games) + "%": 0 + "%"; 
+            displayObject.getElementsByClassName('kdaClass')[0].innerHTML = (games > 0 ? "<span class='tooltip' title='Avg Score: " + round1(1.0 * kills / games) + "/" + round1(1.0 * deaths / games) + "/" + round1(1.0 * assists / games) + "'>+</span>" : "<span class='tooltip' title='No games in the past month.'>+</span>" ) + (deaths != 0 ? round2((1.0 * kills + assists) / deaths) : 0);
+            
+
+            
+
+
+        }
+    });
+
+  }
+            function selectStats(summonerId, champId, region, i, champKey) {
+                //alert(champ);
+                
+                //alert(j);
+ 
+                var champNameSelect = $(".champNameSelect.slot" + i);
+
+                champNameSelect.val(champKey);
+
+                //Fill the Counterpicks if autofill Counter is checked.
+                if (document.getElementById('autofillCounter').checked) {
+                  var select1 = $(".counterSelectChamp1.slot" + i).val(champKey);
+                  getRoles(i, true);
+                }
+                
+                getChampStats(summonerId, champId, region, i, champNameSelect[0].parentNode.parentNode);
+
+
+            }
+       
+        </script>
+        
+        <script>
+            $(document).ready(function(){
+
+               
+               $('#continueButton').click(function(){
+                   //$(this).prop("value", 'Loading...');
+                   //$(this).prop("disabled", true);
+                   
+               });
+               
+               
+               
+               if (getUrlParameter('scout') == 'true') {
+                    
+                   
+                    var playerList = getUrlParameter('playerNames').split(',');
+                    var champNamesList = getUrlParameter('champNames').split(',');
+                    
+                    for (var i = 0; i < playerList.length; i++) {
+                        //alert("Scouting..." + playerList[i] + " playing " + champNamesList[i]);
+                        if (champNamesList[i] != null) {
+                            document.getElementById('champName' + i).value = champNamesList[i];
+                            
+                            document.getElementById('champName' + i).onchange();
+                        }
+            
+                        
+                    
+                    }
+                }
+            });
+			
+           
+            $.fn.gotof = function(i, j) {
+                //alert("I am calling form jquery. Var: " + i);
+                
+                console.log("gotof: " + i + "," +j);
+                
+                if (j >= 0) {
+                    $('.divPlayer:eq(' + i + ')').animate({opacity: '0'}, 10);
+                    $('.divPlayer:eq(' + i + ')').animate({opacity: '1'}, "fast");
+
+                    $('.divPlayer:eq(' + j + ')').animate({opacity: '0'}, 10);
+                    $('.divPlayer:eq(' + j + ')').animate({opacity: '1'}, "fast");
+                } else
+                {
+                    //alert(j);
+                    //var block = $(e.target);
+
+                    var block = $('#selectContainer:eq(' + i + ')');
+
+                    //var color = $.Color(block.css('backgroundColor'));
+                    var color = $.Color('#DDDDDD');
+                    
+                        block.animate({backgroundColor: '#3366CC'}, 50, function() {
+                        block.animate({backgroundColor: color}, 300);
+                    });
+                    
+                    //$('#games' + i).animate({opacity: '0'}, 10);
+                   // $('#games' + i).animate({opacity: '1'}, "fast");
+                    
+                    $('#avgScore:eq(' + i + ')').animate({opacity: '0'}, 10);
+                    $('#avgScore:eq(' + i + ')').animate({opacity: '1'}, "fast");
+
+                    $('#kda:eq(' + i + ')').animate({opacity: '0'}, 10);
+                    $('#kda:eq(' + i + ')').animate({opacity: '1'}, "fast");
+                    
+                    $('#winPct:eq(' + i + ')').animate({opacity: '0'}, 10);
+                    $('#winPct:eq(' + i + ')').animate({opacity: '1'}, "fast");
+
+                }
+            };
+            
+            function swapFarLeft(i, j) {
+                var playerOldSlot = document.getElementsByClassName('tableInner')[i];
+                var playerFarLeft = document.getElementsByClassName('tableInner')[0];
+                
+                var tempPlayerData = playerFarLeft.innerHTML;
+                
+                playerFarLeft.innerHTML = playerOldSlot.innerHTML;
+                playerOldSlot.innerHTML = tempPlayerData;
+                
+                swapNamesUrl(i, 0);
+                
+                $.fn.gotof(i, 0);
+
+
+            }
+            
+            function swapFarRight(i, j) {
+                //console.log("i: ", + i + " ,j: " + j);
+                var playerOldSlot = document.getElementsByClassName('tableInner')[parseInt(i)];
+                var playerFarRight = document.getElementsByClassName('tableInner')[parseInt(j - 1)];
+
+                var tempPlayerData = playerFarRight.innerHTML;
+
+                playerFarRight.innerHTML = playerOldSlot.innerHTML;
+                playerOldSlot.innerHTML = tempPlayerData;   
+                
+                swapNamesUrl(i, j);
+                
+                $.fn.gotof(i, j);
+            }
+            
+            function swapLeft(i, j) {
+                
+                var k = parseInt(i) - 1;
+                
+                if (i === 0) { return; }
+
+                var playerOldSlot = document.getElementsByClassName('tableInner')[i];
+                var playerLeft = document.getElementsByClassName('tableInner')[k];
+
+                var tempPlayerData = playerLeft.innerHTML;
+
+                playerLeft.innerHTML = playerOldSlot.innerHTML;
+                playerOldSlot.innerHTML = tempPlayerData;
+
+                swapNamesUrl(i, k);
+                
+                $.fn.gotof(i, k);
+            }
+            
+            function swapRight(i, j) {
+                
+                //alert("Swapping Right");
+                
+                var k = parseInt(i) + 1;
+                
+                if (i === j) { return; }
+
+                //console.log("i: ", + i + " ,j: " + j + " ,k: " + k);
+
+                var playerOldSlot = document.getElementsByClassName('tableInner')[i];
+                var playerRight = document.getElementsByClassName('tableInner')[k];
+
+                var tempPlayerData = playerRight.innerHTML;
+
+                playerRight.innerHTML = playerOldSlot.innerHTML;
+                playerOldSlot.innerHTML = tempPlayerData;
+
+                swapNamesUrl(i, k);
+                
+                $.fn.gotof(i, k);
+            }
+            
+            function swapNamesUrl(i, j) {
+                //var playerNames = (document.location.toString().substring(document.location.toString().indexOf("playerNames=")).split('=')[1]).split('%2C');
+                
+                //alert(getUrlParameter('playerNames').split(',').length);
+                
+                var playerNames = getUrlParameter('playerNames').split(',');
+                
+                //alert(playerNames);
+                
+                var playerTemp = playerNames[i];
+                playerNames[i] = playerNames[j];
+                playerNames[j] = playerTemp;
+
+                var url = document.location.toString().substring(0, document.location.toString().indexOf("playerNames=")) + ('playerNames=');
+                
+                for (var k = 0; k < playerNames.length; k++) {
+                    url += playerNames[k];
+                    
+                    if (k < playerNames.length - 1) {
+                        url += '%2C';
+                    }
+                }
+
+                window.history.pushState({"html":'response.html',"pageTitle":'response.pageTitle'},"", url);
+                
+            }
+            
+        
+        </script>
+        <script>
+            function scoutOpponents(region) {
+                //var playerNames = (document.location.toString().substring(document.location.toString().indexOf("playerNames=")).split('=')[1]).split('%2C');
+                
+                //alert("Hello");
+                
+                var playerNames = getUrlParameter('playerNames').split(',');
+                
+                //alert(playerNames);
+                
+                var team = 0;
+                
+                for (var i = 0; i < 10; i++)
+                {
+                    var player = document.getElementById('nameContainer' + i).innerHTML;
+                                        
+                    for (var j = 0; j < playerNames.length; j++) {
+                        
+                        //alert('playerNames[j]: ' + playerNames[j].toLowerCase() + '\nplayer: ' + player.toLowerCase() + '\nEqual: ' + String(playerNames[j].toLowerCase() == player.toLowerCase()).valueOf() );
+                        
+                        if (playerNames[j].toLowerCase() == player.toLowerCase()) {
+                            //team = player + "," + playerNames[j];
+                            team = i;
+                            
+                        }
+                    }
+                }
+                
+                team = Math.floor(team / 5);
+                
+                //alert('Team: ' + team);
+                
+
+                
+                if (team == 0) {
+                    team = 1;
+                } else {
+                    team = 0;
+                }
+
+                //alert('Team: ' + team);
+
+                
+                var playerNamesNew = "playerNames=";
+                
+                var champNamesNew = "champNames=";
+                
+                for (var i = team * 5; i < 5 + team * 5; i++)
+                {
+                    var player = document.getElementById('nameContainer' + i).childNodes[0].innerHTML;
+                    player = player.replace(/\s+/g, '');
+                    
+                    var champ = document.getElementById('champNameContainer' + i).innerHTML;
+
+                    playerNamesNew += player;
+                    champNamesNew += champ;
+
+                    if (i < 4 + team * 5) {                    
+                        playerNamesNew += "%2C";
+                        champNamesNew += "%2C";
+                    }
+                }
+                
+                //Need to add Region.
+                
+                var url = "/results.html?" + "region=" + region + "&scout=true" + "&" + playerNamesNew + "&" + champNamesNew;
+
+
+                //alert("Coming soon!\nTeam: " + playerNamesNew + "\nChamps: " + champNamesNew);
+                //alert("Url: " + url);
+                
+                var win = window.open(url, '_blank');
+                win.focus();
+            } 
+        
+        </script>
+       
+        <script>
+        var setUrlParameter = function setUrlParameter(sParam, newParam) {
+                var sPageURL = decodeURIComponent(window.location.search.substring(1)),
+                    sURLVariables = sPageURL.split('&'),
+                    sParameterName,
+                    i,
+                    newUrl = "";
+
+                for (i = 0; i < sURLVariables.length; i++) {
+                    sParameterName = sURLVariables[i].split('=');
+
+                    if (sParameterName[0] === sParam) {                        
+                        newUrl += sParameterName[0] + '=' + newParam;
+                    } else {
+                        newUrl += sURLVariables[i];
+                    }
+                    
+                    if (i + 1 < sURLVariables.length) {
+                        newUrl += "&";
+                    }
+                }
+                
+                return newUrl;
+                
+            };
+        </script>
+        
+        <script>
+            function rePasteLobbyChat() {
+                var iframeDoc = iframeAddPlayers.contentDocument || iframeAddPlayers.contentWindow.document;
+                var newLobbyChatIframe = iframeDoc.getElementById('newLobbyChat');
+                var newPlayerList2 = findPlayerNames(newLobbyChatIframe.value);
+                
+//                iframeDoc.getElementById('buttonRePasteLobbyChat').innerHTML = "Loading...";
+
+                window.location.href = "results.html?" + setUrlParameter('playerNames', newPlayerList2);
+            }
+        </script>
+        
+        <script>
+            function openCurrentGame() {
+                //alert('Attempting reload...');
+                //window.location.href = window.location.href;
+                //window.location.reload();
+
+              var win = window.open('process_current_match.html?region=' + getUrlParameter('region') + '&playerNames=' + getUrlParameter('playerNames'), '_blank');
+                if (win) {
+                    //Browser has allowed it to be opened
+                    win.focus();
+              } else {
+                    //Browser has blocked it
+                    alert('Current match blocked by popup blocker.');
+              }
+
+            }
+
+
+          function goBack() {
+            window.location.href = '/';
+          }
+
+                
+            
+        
+        </script>
+        
+        <!--<script src="sharedFunctions.js"></script>-->
+        
+        <script>
+
+			
+			function openResultsWindow() {
+
+				var formHidden = document.getElementById('formhidden');
+				var regionHidden = document.getElementById('region');
+				var scoutHidden = document.getElementById('scoutHidden');
+				//var lobbyChatHidden = document.getElementById('lobbychat');
+				var playerNamesHidden = document.getElementById('playerNames')
+
+				var lobbyChat = document.getElementById('lobbychatvisible').value;
+
+				//alert("Values assigned.");
+
+				regionHidden.value = document.getElementById('regionvisible').value;
+				//scoutHidden.checked = document.getElementById('scoutVisible').checked;
+
+
+
+
+				playerNamesHidden.value = findPlayerNames(lobbyChat);
+
+
+				//alert("Action, method, and target assigned.");
+
+				formHidden.submit();
+
+//				document.getElementById('buttonvisible').innerHTML = "Loading...";				
+				
+				
+				//alert(innerDoc.getElementById('buttonRePasteLobbyChat'));
+				
+			}
+        
+        </script>
+        
+        <script>
+            function setAutofill() {
+                var autoFill = document.getElementById('autofillCounter');
+                
+                document.cookie =  "autofillCounter=" + autoFill.checked + "; expires=Fri, 30 Dec 2022 12:00:00 UTC;";
+
+            }
+
+            document.getElementById('autofillCounter').checked = getCookie('autofillCounter') !== undefined ? JSON.parse(getCookie('autofillCounter')) : true;
+
+                        
+        </script>
+	<script src="src/carry-factor_Functions.js"></script>
+        
+    </body>
+</html>

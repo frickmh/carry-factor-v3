@@ -1,0 +1,24 @@
+NovaDisk's Map Pressure Strat
+
+Battering Ram Garen - "Lose Lane, Win Game".
+
+Overall strategy:  Get beat up in lane, while getting as tanky as possible.  In the mid-game, ignore your opponent's damage, shove lanes, spam deep vision, and rotate to siege down towers.  Abuse your tankiness to negate enemy towers and nullify picks.  Bait CC/burst combos with your W.  Walk up to the tower, zone for your carries, and wear the tower down.  Tank tower shots and dive if necessary.
+Disclaimer:  You'll lose almost every lane with this build/strat, so the outcome of a lot of your games will be out of your hands.  This strat relies on macro decision making, rather than killing your opponent and getting ahead in traditional fashion.
+Runes:  Scaling AD Reds, Scaling HP Yellows, Scaling MR Blues, Movespeed Quints.  This rune set is INCREDIBLY weak early game, so try to trade or skirmish if possible.  This means giving up a lot of CS.
+Masteries:  12/0/18 (No exceptions).  Keystone is Grasp or Stoneborn.  Stoneborn is great for surviving burst, but laning is quite weak.  Grasp hits like a truck since you're stacking HP.
+Summoner Spells:  TP/Flash (No exceptions).  TP is necessary for recovering lane.
+Starting Items:  Ruby + 2 Pot, Doran's shield vs on-hits, Cloth + Refillable vs Lethality/Ignite
+Build:  Get Bami's and Boots, then stack health.  Health is the key here, since you're roaming early you need to be strong vs all damage types.  If they're heavy AD Randuin's is pretty good too.  Health is the most efficient stat for tanking turrets since turrets have built-in armor pen.  You're also going to need to be strong vs Ignite and possibly Red Smite.  Getting early Warmog's (Turns on around Level 12-13) exerts a massive amount of pressure on the map, since you can continuously get chewed up, then regenerate.  Sterak's is another core.  Pick up a Randuin's, then get a Cleaver.  Bami's is crucial since it provides the minimum required waveclear.
+Max Order:  Q > W > E.  Q for early mobility and nuke.  W 2nd is key here.  Getting 6 seconds of Damage Reduction at Level 13 will let you absorb their entire combo.  E max last because ranking it doesn't really add that much damage, you need levels to get more spins.
+
+
+NovaDisk's "Facecheck Special"
+
+TL;DR:  Titanic Hydra is OP
+This build is all about tanky burst, and revolves around Tiamat and Titanic Hydra.  
+The triple auto attack given by your Auto-Q-Titanic combo deals absolutely insane damage, and you can get the whole combo off if your opponent facechecks.
+At one item, no other item in the game does as much damage as Titanic Hydra.  Period.  Infinity Edge comes close, but Titanic gives you 450 health and regeneration too, which makes you reasonably tanky.   And early on, Tiamat does more damage than BF Sword.  Yet Tiamat and Titanic give you excellent trade power, waveclear.
+If the game's even, build Tiamat and Randuin's side-by-side.  Think of this as a greedy Sunfire, which gives you burst and utility.  Usually 2nd completed item is Sterak's.  Then you can finish Titanic and build Cleaver, your choice on the order.  Last item is situational tank item.
+If you're insanely fed you can rush Titanic straight up.  Go straight into Cleaver and Sterak's, your choice on the order.  Late game you'll need at least one tank item, probably Randuin's.  You can get a Triforce to finish if you're really that fed.  Mallet is a more conservative option.
+If you're behind you can build Randuin's first, then Tiamat later, or switch for a Bami's and full tank build.  This family of builds is great because you can bail at any time and go for a high durability build.  It's important to recognize early if you're getting behind, though, because if you try to finish Tiamat after you're behind you might be too squishy to do anything.  At this point it would be better just to switch to Bami's and try to hold on as best as you can.
+This family of builds works best against AD Bruisers and AD heavy teams, since Randuin's is such a core part of the build.  Burst isn't effective against tanks so I wouldn't recommend it versus durable lane opponents such as Nautilus, especially if they are AP.  It can work situationally versus AP Bruisers like Rumble, replacing early Randuin's with Cowl and some health, but generally this build is riskier overall vs. AP.

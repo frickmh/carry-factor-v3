@@ -1,0 +1,96 @@
+
+<p>Sources:</p>
+<p>
+(1) https://spaceflightnow.com/2017/04/13/new-discoveries-raise-prospects-for-life-on-moons-of-jupiter-and-saturn/
+</p>
+
+<p>
+(2) https://en.wikipedia.org/wiki/Enceladus
+</p>
+
+<p>
+(3) https://en.wikipedia.org/wiki/Brine
+</p>
+
+<p>
+(4) https://en.wikipedia.org/wiki/Brine_shrimp
+</p>
+
+<h3>Napkin Math!</h3>
+
+<h4>What's the pressure in the ocean on Enceladus?</h4>
+
+<p>So if you've been following space news, you've probably heard a lot about the oceans under Enceladus and other moons in the Solar System.  
+I thought to myself, "How could life actually live down there?  Wouldn't the pressure be too high under 50 kilometers of ice?"
+Wouldn't water only exist in some sort of supercooled state, where it's chemistry might be different?
+Then I thought, the gravity there is quite a bit weaker than it is on Earth, so maybe it's not really all that inhospitable?
+So I decided to do some calculations.</p>
+
+<p>So, first we have to make some assumptions, then we can decide which formulas we want to use, and gather the constant variables we need.</p>
+
+<p>First off, we don't really need precise numbers, so let's allow ourselves to fudge them.  Second, we are concerned with pressure being to high, so let's make all of our assumptions err on the side of caution by rounding our estimates up.</p>
+
+<p>Let's look up Enceladus on Wikipedia(2) to get some ideas about what it's like there.  The first thing I notice is that it's pretty small, with a diameter of about 500km.</p>
+
+<p>The first assumpion I made is that the ice sheet is really, really thick.  Let's say the ice sheet is 50km thick, or about 1/5 of the radius.</p>
+
+<p>The second assumption I made gravity is constant with respect to depth.  We are looking at an ice sheet 50km thick, so in reality, the gravity will be different at different layers of ice, but it won't be that much different and I don't want to do a calculus-based model so let's just use the surface gravity for all of the ice, which is .113 m/s^2, or a little over 1% of Earth's gravity.</p>
+
+<p>The third assumption I made is the ice has a uniform density of 1000 kg/m^3, the approximate density of uncompressed liquid water at melting point.  This seems reasonable, since according to Wikipedia the mean density of Enceladus is 1609 kg/m^3.  Water's about 1000 kg/m^3 and rock is about 3000 kg/m^3 (basic engineering approximation), so Enceladus is ice and water above rock with maybe some metal.  We're assuming the ice is slightly compressed, but for the most part homogenous.</p>
+
+<p>So let's set up our formula!</p>
+
+<p>We'll use W = mg for simplicity (instead of the more precise but more complicated F=Gmm/r^2)</p>
+
+<p>Let's try to get the pressure in Pascals (N/m^2) since we're already using Meters to avoid converting numbers.</p>
+
+<p>Before we can get pressure, we need to estimate the mass of the ice column over the ocean.</p>
+
+<p>Starting with volume of a rectanguloid, the Volume is equal to a surface area times it's height:</p>
+
+<p>V = A * h</p>
+
+<p>V = (1 m^2) * (50,000m) = 50,000 m^3</p>
+
+<p>We can get mass by multiplying volume V by density ρ (rho):</p>
+
+<p>m = V * ρ</p>
+
+<p>m = 50,000 m^3 * 1000 km/m^3 = 50,000,000 kg</p>
+
+<p>50 million kilos is a lot of ice!  But how much does it actually weigh?  Enceladus has a lot less gravity than Earth, remember!</p>
+
+<p>W = m * g</p>
+
+<p>W = 50,000,000 kg * 0.113 m/s^2 = 5,650,000 kg-m/s^2 = 5,650,000 N</p>
+
+<p>Since we're interested in pressure, which is force per area, let's divide both sides by a square meter:</p>
+
+<p>W/A = P = 5,650,000 N/m^2 = 5,650,000 Pa = 5,650 kPa</p>
+
+<p>Okay, what's that in atmospheres?  Let's ask Google!</p>
+
+<p>5,650 kPa * (1 atm / 101.3 kPa) = 55.8 atm</p>
+
+<p>All our numbers are fudged, but it seems reasonable that the pressure in Enceladus's ocean is somehwere between 40 and 80 atm.</p>
+
+<p>55.8 atm is actually pretty reasonable for life to exist at!  It's about the same pressure as the ocean on Earth at a depth of 800m.</p>
+
+<p>Whales can easily dive to that depth!  Considering life exists at the bottom of the Mariana Trench on Earth at a pressure of 1000 atm, 56 atm seems pretty comfortable!</p>
+
+<p>So, it seems there is liquid water at about the right temperature and pressure for life to exist, and it's got plenty of hydrogen to use for energy.</p>
+
+<p>But could the water be to briny?  Let's read a little about brine (salty water) on Wikipedia (3).</p>
+
+<p>The lowest possible freezing point of brine is about -21.1 °C (-6.0 °F).  That's not too terribly cold.  And brine reaches it's saturation point at 26% dissolved salt by weight.</p>
+
+<p>26% is a lot of salt though!  Wouldn't it pickle any life that could exist down there?</p>
+
+<p>Well, on Earth, brine shrimp (Sea monkeys)(4) are able to live in waters with very high salinity, up to 25%!</p>
+
+<p>This means that complex life can easily exist in brine almost all the way up to the saturation point of salt!</p>
+
+<p>Enceladus could thus potentially host life, the only questions that remain are if the ocean chemistry is significantly different from Earth, and whether life ever made it's way down there.</p>
+
+
+

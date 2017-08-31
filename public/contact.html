@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Carry-Factor.com - LoL Stats Command Center.  Stats, Counterpicks, and Cooldowns</title>
+        <link rel="shortcut icon" href="website/diamond_i_favicon.png">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="Pre-game Lobby Stats for League of Legends">
+        <meta name="keywords" content="pre-game lobby stats, League of Legends, Champion Select, Statistics, Summoner info">
+
+		<link rel="stylesheet" type="text/css" href="bronzodia.css">
+        <link rel="stylesheet" type="text/css" href="bronzodia_Dark.css" id='dark-styles'>        
+        <link rel="stylesheet" type="text/css" href="bronzodia_Light.css" id='light-styles'>     
+		
+        <!-- Google Analytics Tracking Script -->
+        <script>
+            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+            })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+            ga('create', 'UA-60328206-5', 'auto');
+            ga('send', 'pageview');
+
+        </script>
+    </head>
+    <body>
+        <div id="main_content_div" align="center">
+            <div style='width: 100%;' class='brown'><a href="index.html"><img class='banner' style='width:57.65%' src='website/banner-carry-factor.png' alt='Carry-factor: LoL Stats Command Center.  Stats, Counterpicks, and Cooldowns'></a></div>
+            <br>
+            <div>Mark Frick</div>
+            <div><a href='mailto:mark.h.frick@gmail.com?Subject=Bronzodia'>mark.h.frick@gmail.com</a></div>
+            <div>US: 763-227-5255</div><br><br>
+        <div style='width: 100%;' class="brown"><table><tr><td><img src="website/diamond_i.png" alt='diamond_i.png'></td><td style='width: 100%; font-size: 36px; text-align: center; color: #FFFFFF'></td><td><img src="website/diamond_i.png" alt='diamond_i.png' style="filter: fliph"></td></tr></table></div>
+        <table style='text-align: center' align='center'><tr><td><a href='aboutus.html'>About us</a></td><td><a href="contact.html">Contact</a></td><td><a href="privacy_policy.html">Privacy Policy</a></td><td><a href="terms_of_use.html">Terms of Use</a></td></tr></table>
+
+        </div>
+
+		<script>
+            function getCookie(cookieLoad) {
+                //alert(cookieLoad);
+                
+                var cookieLength = cookieLoad.length + 1;
+                
+                var cookieString;
+                
+                if (document.cookie !== null && document.cookie.indexOf(cookieLoad) > -1)
+                {
+                    var afterCookie = document.cookie.substr(document.cookie.indexOf(cookieLoad + "=") + cookieLength);                    
+
+                    //alert (afterCookie);
+                    if (afterCookie.indexOf(";") > -1) {
+                        cookieString = afterCookie.substr(0,afterCookie.indexOf(';'));
+                        //alert ('afterCookie: ' + afterCookie + '\nif cookieString: ' + cookieString);
+                    } else {
+                        cookieString = afterCookie;
+                        //alert ('afterRegion: ' + afterRegion + '\nelse cookieString: ' + cookieString);
+                    }
+                }
+                
+                return cookieString;
+                
+            }
+		
+            if (getCookie('darkScheme') == 'true') {
+                document.getElementById('dark-styles').disabled = false;
+                document.getElementById('light-styles').disabled = true;
+            } else {
+                document.getElementById('dark-styles').disabled = true;
+                document.getElementById('light-styles').disabled = false;
+            }
+		</script>		
+		
+    </body>
+</html>

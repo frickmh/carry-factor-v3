@@ -1,0 +1,2930 @@
+<!DOCTYPE html>
+    <head>
+        <title>Carry-Factor.com - LoL Stats Command Center.  Stats, Counterpicks, and Cooldowns</title>
+        <link rel="shortcut icon" href="website/diamond_i_favicon.png">
+        <meta content="LoL Stats Command Center.  Scout your opponents and punish their weakest link.  Dynamic Counterpick tool." name='description'>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="Pre-game Lobby Stats for League of Legends">
+        <meta name="keywords" content="pre-game lobby stats, League of Legends, Champion Select, Statistics, Summoner info, Bronzodia, Bronzodia.com, stats, lol, bronzodia, carry-factor, carry factor, counterpick, counterpicks, counter power, educational, learning, tutorial, coaching, jungling, carrying, pressure ">
+
+                <!-- Google Analytics Tracking Script -->
+        <script>
+            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+            })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+            ga('create', 'UA-60328206-5', 'auto');
+            ga('send', 'pageview');
+
+        </script>
+
+        <link href="http://fonts.googleapis.com/css?family=Corben:bold" rel="stylesheet" type="text/css">
+        <link href="http://fonts.googleapis.com/css?family=Nobile" rel="stylesheet" type="text/css">
+
+        <link rel="stylesheet" type="text/css" href="stylesheets/bronzodia.css">
+        <link rel="stylesheet" type="text/css" href="stylesheets/bronzodia_Dark.css" id='dark-styles'>
+        <link rel="stylesheet" type="text/css" href="stylesheets/bronzodia_Light.css" id='light-styles'>
+
+        <link rel="stylesheet" type="text/css" href="stylesheets/counterPicks.css">
+
+        <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <script src="https://code.jquery.com/color/jquery.color-2.1.2.min.js"></script>-->
+
+        <script src="src/standardFunctions.js"></script>
+        <script src="src/carry-factor_Functions.js"></script>
+        <script src="src/counterPicks.js"></script>
+
+        <script src="/reload/reload.js"></script>
+
+
+
+
+
+        <style>
+
+          img.center {
+                  display: block;
+                  margin-left: auto;
+                  margin-right: auto;
+          }
+
+          .center {
+              margin-left: auto;
+              margin-right: auto;
+              width: 115em;
+          }
+
+          .centerMasteries {
+              margin: 0 auto;
+          }
+          
+          .current_match table, .current_match td, .current_match tr {
+              //border: 1px solid #BBBBBB;
+              font-family: Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif;
+              //font-size:.8vw;
+          }
+          
+          tr.currentMatchPlayer:hover {
+              opacity: .9;
+          }
+          
+          tr.currentMatchPlayer:active {
+              opacity: .9;
+          }
+          
+          .placeholder {
+
+              width: 1290px;
+              height: 74px;
+                
+          }		
+
+          .matchupWinRate {
+             font-weight: bold;
+          }
+
+        
+          .counterPower {
+            font-weight: bold;
+            color: blue;
+          }
+            
+          .counterPower[data*="-"] { color: red; }
+                       
+                      
+          table.masteriesHolder {
+          
+            background-color: #888888;
+            
+            position: fixed;
+
+            top: 5vw;
+            
+            left: 20vw;
+            
+            opacity: .9;
+            
+          }
+
+
+
+        td.masteriesHolder {
+
+        width: 20vw;
+
+               //height: 30vw;
+               
+        }
+
+
+
+        .ferocity {
+
+          background-color: #660000;
+          
+          
+          text-align: centerMasteries;
+          
+        display: inline-block;
+
+        }
+
+
+
+        .cunning {
+
+          background-color: #660066;
+          
+          
+          text-align: centerMasteries;
+          
+        display: inline-block;
+
+        }
+
+
+
+        .resolve {
+
+          background-color: #006600;
+          
+          text-align: centerMasteries;
+          
+        display: inline-block;
+
+        }
+
+
+            
+      </style>
+    </head>
+    <body>
+
+		<!--<script src = "src/jquery/jquery-2.2.4.min.js"></script>-->
+		<!--<script src = "src/jquery/jquery-sortable.js"></script-->
+		<!--<script src = "src/jquery/jquery-ui.min.js"></script>-->
+	        <script src="/src/jquery-ui-1.12.1.custom/external/jquery/jquery.js"></script>
+        	<script src="/src/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
+                
+		<!--<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>-->
+	
+	<div id='headerDiv' align='center'>		
+
+                <div style='width: 100%;' class='brown'><a href="index.html"><img class='banner' style='width:57.65%' src='website/banner-carry-factor.png' alt='Carry-Factor.com: LoL Stats Command Center'></a></div>
+                <br>
+
+
+
+                <div id="LeaderboardTop" style='box-shadow: 10px 10px 5px rgba(50, 50, 50, .3);width:728px;height:90px;'>
+
+                    <!-- Leaderboard Bronzodia - Google AdSense-->
+                    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+                    <ins class="adsbygoogle"
+                         style="display:inline-block;width:728px;height:90px"
+                         data-ad-client="ca-pub-6399216573107712"
+                         data-ad-slot="2427748385"></ins>
+                    <script>
+                    (adsbygoogle = window.adsbygoogle || []).push({});
+                    </script>
+                    <!-- Large Leaderboard Top Bronzodia -->
+                    <!--
+                    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                    <ins class="adsbygoogle"
+                         style="display:inline-block;width:970px;height:90px"
+                         data-ad-client="ca-pub-6399216573107712"
+                         data-ad-slot="2985489185"></ins>
+                    <script>
+                    (adsbygoogle = window.adsbygoogle || []).push({});
+                    </script>-->
+                    <button style='float: left;' onclick="this.parentNode.remove();">X</button>
+                </div>
+
+
+
+                                <div>
+                                <form style="visibility: hidden; height:1px" id='formhidden' action='results.html' method="get" target="_self"><input name='region' id='region' value="Region"><input type='checkbox' name='scout' id='scoutHidden'><input name='playerNames' id='playerNames' value="Players"><!--<textarea name='lobbychat' id='lobbychat'>Hello!</textarea>--><input id="inputhidden" type="submit" value="Submit"></form>
+
+                                <h3>Enter Names, then Submit.</h3>
+                                        <textarea style="height: 135px; width: 25%" class="lobbyChat" id="lobbychatvisible" spellcheck="false" title='Paste chat here.  Type missing player names in a seperate line.  Non-case sensitive, ignores spaces.'>NovaDisk joined the lobby.
+hashinshin joined the lobby.
+Super Metroid joined the lobby.
+MarineRevenge joined the lobby.
+GundayMonday joined the lobby.
+                                        </textarea>
+
+                                        <div>
+                                                <select id="regionvisible" onchange="setRegion()">
+                                                        <option value="na1" selected="selected">NA</option>
+                                                        <option value="euw1">EUW</option>
+                                                        <option value="eun1">EUNE</option>
+                                                        <option value="br1">BR</option>
+                                                        <option value="kr">KR</option>
+                                                        <option value="la1">LAN</option>
+                                                        <option value="la2">LAS</option>
+                                                        <option value="oc1">OCE</option>
+                                                        <option value="ru">RU</option>
+                                                        <option value="tr1">TR</option>
+                                                        <option value="jp1">JP</option>
+                                                </select>
+                                        </div>
+                                        <br>
+
+
+                                        <button  id='buttonvisible' style="height: 50px; width: 150px" onclick="openResultsWindow()" class='freljord' title="Look up summoner info.  If a player hasn't said anything in the lobby, just enter their name on a separate line followed by a ':' (Similar to TheOddone in the example text)">Submit</button>
+
+                                </div>
+  <div>Patch: <span id='patchDisplay'>Loading...</span></div>	
+
+                                <script>
+                                        function getCookie(cookieLoad) {
+                                                //alert(cookieLoad);
+
+                                                var cookieLength = cookieLoad.length + 1;
+
+                                                var cookieString;
+
+                                                if (document.cookie !== null && document.cookie.indexOf(cookieLoad) > -1)
+                                                {
+                                                        var afterCookie = document.cookie.substr(document.cookie.indexOf(cookieLoad + "=") + cookieLength);
+                                                        //alert (afterCookie);
+                                                        if (afterCookie.indexOf(";") > -1) {
+                                                                cookieString = afterCookie.substr(0,afterCookie.indexOf(';'));
+                                                                //alert ('afterCookie: ' + afterCookie + '\nif cookieString: ' + cookieString);
+                                                        } else {
+                                                                cookieString = afterCookie;
+                                                                //alert ('afterRegion: ' + afterRegion + '\nelse cookieString: ' + cookieString);
+                                                        }
+                                                }
+
+                                                return cookieString;
+
+                                        }
+
+                                        function setRegion() {
+                                                var region = document.getElementById('regionvisible').value;
+                                                document.cookie = "region=" + region + "; expires=Thu, 18 Dec 2020 12:00:00 UTC;";
+                                                //alert (document.cookie);
+
+                                        }
+
+                                        if (getCookie("region") != null) {
+                                                var val = getCookie("region");
+                                                var sel = document.getElementById('regionvisible');
+                                                var opts = sel.options;
+                                                for(var opt, j = 0; opt = opts[j]; j++) {
+                                                        if(opt.value == val) {
+                                                                sel.selectedIndex = j;
+                                                                break;
+                                                        }
+                                                }
+                                        }
+                                </script>
+	</div> <!--End Header Div-->
+
+
+
+  <div id="main_content_div" align="center">
+    <div></div>
+        <table>
+          <tr>
+            <td>
+              <div id='skyscraperContainer' style='height:600px; width: 160px;margin-right: 50px; background-color: #CFDFFF'>			
+			<button style='float: left;' onclick="this.parentNode.remove();">X</button>
+			<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+			<ins class="adsbygoogle"
+				 style="display:inline-block;width:160px;height:600px; margin-right: 50px;"
+				 data-ad-client="ca-pub-6399216573107712"
+				 data-ad-slot="1622310788"></ins>
+			<script>
+			(adsbygoogle = window.adsbygoogle || []).push({});
+			</script>			
+              </div>
+        
+                    
+            </td>
+            <td class='contentHolder'>
+        
+        
+
+		
+        <h2 style="text-align: center;" align="center">Current Match Statistics</h2>
+        
+
+                <iframe name="iframe_showMasteries" class='shadow_round' id='iframe_showMasteries' src="black_screen.html" width="841" height='480' style='background-color: #222222; position: absolute; right: 24%; top: 55%; visibility: hidden;'></iframe>
+                <button style='font-size: 150%'  id='iframe_closeButton' onclick="hideMasteries()" style='background-color: #888888; visibility: hidden;' class='xbutton'>X</button>
+                
+                
+                
+                <script>
+                    function showMasteries(player)
+                    {
+                        
+                        var formMasteries = document.getElementById('formMasteries');                
+
+                        var playerNumber = document.getElementById('playerNumber');
+
+                        playerNumber.value = player;
+
+                        formMasteries.submit();
+                        
+                        var iframeMasteries = document.getElementById('iframe_showMasteries');
+                        iframeMasteries.style.visibility = 'visible';
+                        
+                        var iframe_closeButton = document.getElementById('iframe_closeButton');
+                        iframe_closeButton.style.visibility = 'visible';
+
+                    }
+                    
+                    function hideMasteries()
+                    {
+                        var iframeMasteries = document.getElementById('iframe_showMasteries');
+                        iframeMasteries.style.visibility = 'hidden';
+                        
+                        var iframe_closeButton = document.getElementById('iframe_closeButton');
+                        iframe_closeButton.style.visibility = 'hidden';
+                    }
+                    
+                    function openResultsWindow() {              
+                      
+
+                      var region = document.getElementById('regionvisible').value;
+
+
+                      var formHidden = document.getElementById('formhidden');
+                      var regionHidden = document.getElementById('region');
+                      var playerNamesHidden = document.getElementById('playerNames')
+
+                      var lobbyChat = document.getElementById('lobbychatvisible').value;
+
+                      regionHidden.value = document.getElementById('regionvisible').value;
+
+                      var lobbyChatLines = lobbyChat.split(/\r?\n/);
+
+                      var playersList = [];
+
+                      for (i = 0; i < lobbyChatLines.length; i++) {
+                            if (lobbyChatLines[i].indexOf(':') > 0) {
+                                var name = lobbyChatLines[i].split(':')[0].replace(/\s/g, '');
+
+                                var upperCaseNames = playersList.map(function(value) {
+                                return value.toUpperCase();
+                                });
+
+                                if (upperCaseNames.indexOf(name.toUpperCase()) < 0) {
+                                    playersList.push(name);
+
+                                }
+
+                            } else if (lobbyChatLines[i].indexOf(' joined the room.') > 0) {
+
+                                var name = lobbyChatLines[i].split(' joined the room.')[0].replace(/\s/g, '');
+
+                                var upperCaseNames = playersList.map(function(value) {
+                                return value.toUpperCase();
+                                });
+
+                                if (upperCaseNames.indexOf(name.toUpperCase()) < 0) {
+                                    playersList.push(name);
+
+                                }
+
+                            }
+
+                      }
+
+                      var params = '';
+
+                      for (i = 0; i < playersList.length; i++) {
+
+                            params += playersList[i];
+
+
+                            if (i < playersList.length - 1) {
+                                params +=',';
+                            } else {
+
+                            }
+
+                      }
+
+
+                      playerNamesHidden.value = params;
+
+                      formHidden.submit();
+
+                      document.getElementById('buttonvisible').innerHTML = "Loading...";
+                      document.getElementById('buttonvisible').disabled = true;
+
+                    };
+
+
+                    function setCookies() {
+                        alert("Starting to set cookies.");
+
+                        var d = new Date();
+                        d.setTime(d.getTime() + (90*24*60*60*1000));
+                        var expires = "expires=" + d.toGMTString();
+
+                        var e = document.getElementById("regionvisible");
+
+                        alert("Got e.");
+
+                        document.cookie = "username=" + document.getElementById("userName").value;
+
+                        alert("Username added to cookie.");
+
+                        document.cookie = "region=" + e.options[e.selectedIndex].value;
+
+                        alert("Region added to cookie.");
+
+                        document.cookie = expires;
+
+                        alert("Cookies assigned.");
+
+                        //alert(document.cookie);
+                    }
+
+                    // Arguments :
+                    //  verb : 'GET'|'POST'
+                    //  target : an optional opening target (a name, or "_blank"), defaults to "_self"
+                    openNewWindow = function () { //function(verb, url, data, target) {
+
+                      alert("openNewWindow called.");
+
+                      var formHidden = document.getElementById('formhidden');
+                      var regionHidden = document.getElementById('region');
+                      var lobbyChatHidden = document.getElementById('lobbychat');
+
+                      alert("Values assigned.");
+
+                      regionHidden.value = document.getElementById('regionvisible').value;
+
+                      alert(regionHidden.value);
+
+                      lobbyChatHidden.value = document.getElementById('lobbychatvisible').value;
+
+                      alert(lobbyChatHidden.value);
+
+
+                      formHidden.submit();
+
+                      alert("Submit attempted.");
+
+
+                    };
+
+					
+                    //alert(document.getElementById('postDataContinuePlayer').value);
+                    
+
+                </script>
+                <script>
+                    function getChampSpells(i, champ, region, cooldown_flat, cooldown_scaling, spell1, spell2, cooldown_SS1, cooldown_SS2) {
+                        var url = '/champSpells.php';
+						
+                
+                        var xmlhttpChampSpells = new XMLHttpRequest();
+                        
+                        
+                        xmlhttpChampSpells.onreadystatechange = function() {
+                            
+                            
+                            var spellsRaw = xmlhttpChampSpells.responseText;
+                            
+                           
+                            var spellSlot = document.getElementById('spellSlot');
+                            
+                            spellSlot.innerHTML = spellsRaw;
+                            
+                            
+                            
+                        };
+
+                        xmlhttpChampSpells.open("POST", url, false);
+                        
+                        xmlhttpChampSpells.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                
+                        xmlhttpChampSpells.send('region=' + region + '&champ=' + champ + '&cooldown_flat=' + cooldown_flat + '&cooldown_scaling=' + cooldown_scaling 
+                                + '&spell1=' + spell1 + '&spell2=' + spell2 + '&cooldown_SS1=' + cooldown_SS1 + '&cooldown_SS2=' + cooldown_SS2);
+                        
+                        
+                    }
+                </script>
+ 
+
+  <script>
+    //var myUrl = 'getCurrentGameJSON?region=' + getUrlParameter('region') + '&names=' + getUrlParameter('playerNames');
+    var myUrl = '/sampleCurrentGameJSON2.json';
+
+    console.log(myUrl);
+
+    $( document ).ready(function() {
+      console.log("Document ready!");
+
+      //Main control function which uses JSON data for all players to generate a graphical diaplay table.
+      $.ajax({
+          url: myUrl,
+          type: 'GET',
+          success: function(data){
+              //Patch Display
+              $("#patchDisplay").html(data.patch);
+              console.log(data);
+
+              console.log(data.players);
+              
+              //Gather all JSON at the beginning of the Ajax call.
+              var sspellAjax = $.getJSON("/datadragon/" + data.patch + "/data/en_US/summoner.json");
+              var runeAjax = $.getJSON("/datadragon/" + data.patch + "/data/en_US/rune.json");
+              var masteryAjax = $.getJSON("/datadragon/" + data.patch + "/data/en_US/mastery.json");
+              var champSpellAjax = $.getJSON("/data/champSpells.json");
+              var championsSummaryAjax = $.getJSON("/data/championsSummary.json");
+              
+              $.when(sspellAjax, runeAjax, masteryAjax, champSpellAjax, championsSummaryAjax).done(function(sspellJSON, runeJSON, masteryJSON, champSpellJSON, championsSummaryJSON){
+                console.log(sspellJSON);                  
+              
+                var tableTeam = $(".tableTeam:eq(0)").clone();
+
+                tableTeam.appendTo("#tableHolder");
+              
+                var teams = {};
+
+                //Initialize Players object.
+                for (var player in data.players)
+                {
+                  var teamId = data.players[player].teamId;
+
+                  if (teams[teamId] == undefined)
+                  {
+                    teams[teamId] = {};
+                    teams[teamId].players = {};
+                  }
+                  
+                  teams[teamId].players[player] = player;
+
+                }
+                console.log(teams);
+
+                var i = 0;
+
+                
+                for (var team in teams) {
+                  var j = 0;
+
+                  console.log(team);
+
+                  $(".tableTeam:eq(" + i + ")").attr("class", "tableTeam " + team);
+                  i++;
+
+                }
+
+                //Clone empty table rows (Will fill below)
+                $.each(teams, function(index, value) {
+                    console.log(index);
+                    console.log(value);
+                    console.log(teams);
+
+                    for (var i = 0; i < Object.keys(value.players).length - 1; i++) {
+
+                      var rowPlayer = $("." + index + " .currentMatchPlayer:eq(0)").clone();
+                      console.log(rowPlayer);
+                      rowPlayer.appendTo("." + index);
+                    }
+                });
+
+                var playerCount = Object.keys(data.players).length;
+
+                //Main loop where we fill each divider in each table row with output.
+                for (var i = 0; i < playerCount; i++) {
+                  var playerRow = $(".currentMatchPlayer:eq(" + i + ")");
+                  playerRow.attr('name', i);
+                  
+                  console.log(data.players[i]);
+
+                  var player = data.players[i];
+
+
+                  //Build Champ Portrait and Summoner Spells.
+                  $(".champPortraitMain:eq(" + i + ")").attr("src", "/datadragon/" + data.patch + "/img/champion/" + player.champion.key + ".png");
+                  $(".champPortraitMain:eq(" + i + ")").attr("title", player.champion.name);
+                  $(".champPortraitMain:eq(" + i + ")").attr("alt", player.champion.key + ".png");
+                  $(".champPortraitMain:eq(" + i + ")").parent().attr("href", "http://leagueoflegends.wikia.com/wiki/" + player.champion.key);
+
+                  $.each(sspellJSON[0].data, function(index, sspell) {
+                    if (sspell.key == player.spells[0]) {
+                      $(".sspell1:eq(" + i + ")").attr("src", "/datadragon/" + data.patch + "/img/spell//" + sspell.id + ".png");
+                      $(".sspell1:eq(" + i + ")").attr("title", sspell.name + " (" + sspell.cooldownBurn + "s)");
+                    }
+                    if (sspell.key == player.spells[1]) {
+                      $(".sspell2:eq(" + i + ")").attr("src", "/datadragon/" + data.patch + "/img/spell//" + sspell.id + ".png");
+                      $(".sspell2:eq(" + i + ")").attr("title", sspell.name + " (" + sspell.cooldownBurn + "s)");
+                    }
+                  });
+
+                      
+                      
+                  //Build Champ Name.
+                  $(".champNameContainer:eq(" + i + ")").html(player.champion.name);
+
+                  $(".nameContainer:eq(" + i + ")").html(player.name);
+                  $(".nameContainer:eq(" + i + ")").attr('href', "https://" + opggRegion(data.region) + ".op.gg/summoner/userName="  + player.name);
+                  
+
+                  //Build Recent Roles played in the last 20 games.
+                  $(".recentRoles:eq(" + i + ")").html('');
+
+                  var tableRecentRoles = $('<table></table>').addClass('tableRecentRoles');
+                  $.each(player.positions, function(j, position) {
+                        var row = $('<tr></tr>').addClass('rolesRow').text(j + ': ' + Math.round(position.count * 100.0 / player.matchCount) + "%");
+                        row.attr('data-positioncount', position.count);
+                        tableRecentRoles.append(row);
+                  });
+
+                  $(".recentRoles:eq(" + i + ")").append(tableRecentRoles);
+
+
+                  //Build League info including rank, with icon.
+                  $(".leagueIcon:eq(" + i + ")").attr("src", "/rankicons/" + player.leagues.tier + "_" + player.leagues.rank + ".png");
+                  $(".leagueIcon:eq(" + i + ")").attr("title", player.leagues.tier.charAt(0)+ player.leagues.tier.slice(1).toLowerCase() + " " + player.leagues.rank);
+                  $(".leagueIcon:eq(" + i + ")").attr("alt", player.leagues.tier.charAt(0) + player.leagues.tier.slice(1).toLowerCase() + " " + player.leagues.rank);
+                  
+                  $(".playerRank:eq(" + i + ")").html(buildRank(player));
+                  
+                  $(".seasonWinLoss:eq(" + i + ")").html(player.leagues.wins + "/" + player.leagues.losses);
+
+
+
+                  //Build table containing scores, champ played, and outcome for each of the last 10 games.
+                  var trRecentWins = $('<tr></tr>').addClass('tableRecentWins');
+
+                  $.each(player.matches, function(j, match) {
+
+                      var outcome = match.win ? "win" : "loss";
+
+                      var td = $('<td></td>').addClass(outcome);
+
+                      var date = new Date(match.dateTime);
+                      var offset = date.getTimezoneOffset();
+
+                      dateString = (date.getHours() % 12 != 0 ? date.getHours() % 12 : 12) + ":" + (date.getMinutes() < 10 ? "0" : "") + date.getMinutes() + (date.getHours() < 12 ? "am" : "pm") + " on " + (date.getMonth() + 1) + "/" + date.getDate() + "/" + date.getFullYear();
+
+                      td.attr('style', 'width:.6vw;height:.6vw;font-size:100%;border: 1px solid #BBBBBB;text-align:center;cursor:default;');
+                      td.attr('title', match.kills + "/" + match.deaths + "/" + match.assists + " " + match.championName + " " + outcome + " at " + dateString);
+
+                      var img = $('<img>').addClass('champPortrait');
+                      img.attr('src', "/datadragon/" + data.patch + "/img/champion/" + match.championKey + ".png");
+                      img.attr('style', 'width:.9vw; display:block;');
+
+                      td.append(img);
+
+                      trRecentWins.append(td);
+
+                  });
+
+                  $(".recentWins:eq(" + i + ") > tbody").append(trRecentWins);
+
+
+                  //Build Runes display.
+                  var tableRunesDisplay = $('<table></table>').addClass('tableRunesDisplay');
+
+                  console.log(runeJSON);
+
+                  $.each(player.runes, function(j, rune) {
+                      var tr = $('<tr></tr>');
+
+
+                      var span = $('<span></span>').html(rune.count + "x " + runeJSON[0].data[rune.runeId].description);
+
+
+
+                      var img = $('<img>').attr('src', "/datadragon/" + data.patch + "/img/rune/" + runeJSON[0].data[rune.runeId].image.full);
+                      img.attr('style', 'width: 1.0vw;');
+                      img.attr('title', runeJSON[0].data[rune.runeId].name);
+
+                      tr.append(img);
+                      tr.append(span);
+
+                      tableRunesDisplay.append(tr);
+
+                  });
+
+                  $(".runesDisplay:eq(" + i + ")").append(tableRunesDisplay);
+
+
+                  //Build Masteries display.
+                  var masteriesDisplay = $(".masteriesDisplay:eq(" + i + ")");
+
+                  console.log(masteriesDisplay);
+
+
+                  var ferocityCount = 0;
+                  var cunningCount = 0;
+                  var resolveCount = 0;
+
+                  $.each(player.masteries, function(j, mastery) {
+                      if (String(mastery.masteryId).charAt(1) == '1') {
+                          ferocityCount += mastery.rank;
+                      }
+                      if (String(mastery.masteryId).charAt(1) == '2') {
+                          resolveCount += mastery.rank;
+                      }
+                      if (String(mastery.masteryId).charAt(1) == '3') {
+                          cunningCount += mastery.rank;
+                      }
+                      if (String(mastery.masteryId).charAt(2) == '6') {
+                        console.log(masteryJSON[0]);
+                        var keystoneDisplay = $(".keystoneDisplay:eq(" + i + ")");
+                        keystoneDisplay.attr('src', "datadragon/" + data.patch + "/img/mastery/" + masteryJSON[0].data[mastery.masteryId].image.full);
+                        keystoneDisplay.attr('title', masteryJSON[0].data[mastery.masteryId].name + ": " + masteryJSON[0].data[mastery.masteryId].description);
+                      }
+
+                      console.log(player.name + " " + mastery.masteryId + " == 6241? " + (mastery.masteryId == 6241));
+                      if (mastery.masteryId == 6241) {
+                        $(".insightDisplay:eq(" + i + ")").html('\u2714');
+                      } 
+                      
+
+                    });
+
+                  masteriesDisplay.attr('name', i);
+                  masteriesDisplay.click( 
+                      function(){ 
+                        loadMasteries(masteryJSON[0], data, this); 
+                        showMasteries(); 
+                        console.log(param1);
+                        });
+
+                  masteriesDisplay.attr('value', ferocityCount + "/" + cunningCount + "/" + resolveCount);
+                  masteriesDisplay.html(ferocityCount + "/" + cunningCount + "/" + resolveCount);
+
+                   
+
+                  //Build Spell Cooldowns display.
+                  var cooldownDisplay = $(".cooldownDisplay:eq(" + i + ")");
+
+                  cooldownDisplay.html('');
+
+                  console.log(cooldownDisplay);
+                  console.log(champSpellJSON[0]);
+
+                  console.log(champSpellJSON[0].data[player.champion.key]);
+                  $.each(champSpellJSON[0].data[player.champion.key].spells, function(j, spell) {
+                      //console.log(spell.key);
+
+                      var spellHolder = $('<div></div>');
+
+                      var letter = "o";
+                      if (j == 0) { letter = "Q"; }
+                      if (j == 1) { letter = "W"; }
+                      if (j == 2) { letter = "E"; }
+                      if (j == 3) { letter = "R"; }
+
+                      var cdDiv = $('<div></div>').html(letter + ": " + spell.cooldownBurn);
+                      cdDiv.attr('style', 'display:inline-block');
+
+                      var cdSpan = $('<span></span>').addClass('tooltip');
+                      cdSpan.html('+');
+                      cdSpan.attr('title', spell.description);
+
+                      spellHolder.append(cdSpan);
+                      spellHolder.append(cdDiv);
+
+                      cooldownDisplay.append(spellHolder);
+
+
+                  });
+
+
+                  //Add names to the table, so they can be referenced later by 'getCounterData()'
+                  var counterPowerDisplay = $(".counterPowerDisplay:eq(" + i + ")");
+                      
+                  counterPowerDisplay.attr('name', player.champion.key);
+
+                  console.log(counterPowerDisplay.attr('name'));
+
+                  $(".currentMatchPlayer:eq(" + i + ")").attr("data-champName", player.champion.key);
+
+
+                }
+
+                sortRoles();
+
+                //Order the rows by most played frequency according to champion.gg.
+                //Once per team.
+                for (var j = 0; j < 2; j++){
+
+                  //Array containing the 5 roles.  Roles will be spliced from this array as we iterate through.
+                  var rolesRemaining = [ "Top", "Jungle", "Middle", "ADC", "Support" ];
+
+                  //For each role remaining, we search all players below index i to find the 
+                  //greatest play percent by role out of the remaining champions.
+                  //This champion is then swapped with the topmost searched index (at index i),
+                  //the role is removed from rolesRemaining, 
+                  //and as i increases, it will be omitted from further searches.
+                  $.each(rolesRemaining, function(i, role){
+
+                      var greatestPctPlayed = 0;
+                      var playerToSwapUp;
+
+                      $.each($(".current_match_tbody:eq(" + j + ") > tr") , function(team, trPlayer) {
+       
+                          var checkRole = championsSummaryJSON[0][trPlayer.getAttribute('data-champName')].role;
+
+                          if (checkRole[rolesRemaining[0]] != undefined) {
+
+                            if (checkRole[rolesRemaining[0]].percentPlayed > greatestPctPlayed) {
+                              greatestPctPlayed = checkRole[rolesRemaining[0]].percentPlayed;
+                              playerToSwapUp = trPlayer;
+                            }
+
+                          }
+
+                      });
+
+                      var playerToSwapDown = $(".current_match_tbody:eq(" + j + ") > tr")[i];
+
+                      if (playerToSwapUp != undefined && playerToSwapDown != undefined) {
+                        swapNodes(playerToSwapUp, playerToSwapDown);
+                      }
+
+                      //Remove the role being tested from the remaining roles list.
+                      rolesRemaining.splice(0, 1);
+                  });
+                }
+
+                getCounterData();
+
+                init_sortable();
+/*
+                //Build the graphic table using the JSON data
+                for (var i = 0; i < playerCount; i++) {
+                  var player = data.players[i];
+
+                  //Show mane, with link to op.gg profile.
+                  $(".nameLink:eq(" + i + ")").html(player.name);
+                  $(".nameLink:eq(" + i + ")").attr('href', "https://" + opggRegion(data.region) + ".op.gg/summoner/userName="  + player.name);
+
+                  //Build rank icon and rank string.
+                  if (player.leagues.tier != undefined && player.leagues.tier != 'unranked') {
+                    var rankIconImg = $(".rankIcon:eq(" + i + ")");
+                    //console.log(rankIconImg);
+                    rankIconImg.attr('src', ("/rankicons/" + player.leagues.tier + '_' + player.leagues.rank + '.png').toLowerCase());
+                  }
+                  $(".playerRank:eq(" + i + ")").html(buildRank(player));
+                  $(".winLoss:eq(" + i + ")").html(player.leagues.wins + " / " + player.leagues.losses + " W/L");
+                  //Build the 'Recent Roles' table.
+                  buildRoles(i, player, playerCount);
+
+                  buildScores(i, player);
+
+                  buildCounters(i);
+
+                  //Need these for the swap arrows on top of the slots.
+                  document.getElementsByClassName('arrowHolder')[i].setAttribute('data-slot',i);
+                  document.getElementsByClassName('arrowHolder')[i].setAttribute('data-players',playerCount);
+                }
+
+                //Sort the roles table by position and champion frequency
+                sortRoles();
+
+                //Fill blank spaces to make the Recent Roles table look consistent and clean
+                fillMaxRoles(data);
+
+                counterPicks__init__();
+*/
+
+              });  //end when
+          },  //end success
+          error: function(data) {
+              alert('woops!'); //or whatever
+          }
+      }); //end ajax
+
+    }); //end readya
+
+
+   function swapNodes(a, b) {
+     var aparent = a.parentNode;
+     var asibling = a.nextSibling === b ? a : a.nextSibling;
+     b.parentNode.insertBefore(a, b);
+     aparent.insertBefore(b, asibling);
+   }
+
+  //Generates a string containing the player's rank (example format: Diamond V (55 LP))
+  function buildRank(player) {
+    if (player.leagues == undefined || player.leagues.tier == undefined || player.leagues.tier.toLowerCase() == "unranked")
+      return "Unranked (0LP)";
+
+      var lp;
+
+      //Add Miniseries if present, else display LP/
+      if (player.leagues.miniSeries != undefined) {
+        lp = player.leagues.miniSeries.progress;
+        lp = lp.replaceAll("W", "<font style='color:green'>&#x2714;</font>&nbsp");
+        lp = lp.replaceAll("L", "<font style='color:red'>&#x2716;</font>&nbsp");
+
+        lp = lp.replaceAll("N", "<font style='color:grey'>&#x2796;</font>&nbsp");
+          } else {
+            lp = player.leagues.leaguePoints;           
+          }
+      return player.leagues.tier[0] + player.leagues.tier.slice(1).toLowerCase() + " " + player.leagues.rank.toUpperCase() + " (" + lp + " LP)";
+     
+  }
+
+  function sortRoles() {
+
+    //Sort rows by frequency.
+    for (var i = 0; i < $('.recentRoles').length; i++) {
+      var $rolesTable = $('.tableRecentRoles:eq(' + i + ')');
+
+      $rolesTable.find('.rolesRow').sort(function(a, b) {
+        return +b.dataset.positioncount - +a.dataset.positioncount;
+      })
+      .appendTo($rolesTable);
+
+    }
+  }
+
+  function loadMasteries(masteriesGlobalJSON, data, myObj) {
+//Print Masteries List.  Debugging only.
+
+//     console.log("Loading Masteries!");
+//     console.log(masteriesGlobalJSON);
+//     $( "<pre/>", {
+//       "class": "my-new-list",
+//       html: JSON.stringify(masteriesGlobalJSON, null, '\t')
+//     }).appendTo( "body" );
+
+   
+
+  //   $( "<img/>", {
+ //      "class": "my-new-list",
+ //      html: JSON.stringify(masteriesGlobalJSON, null, '\t')
+ //    }).appendTo( "#ferocityHolder" );
+
+    console.log(masteriesGlobalJSON);
+    console.log(data.players[myObj.name]);
+
+    var player = data.players[myObj.name];
+
+    $("<table/>", {      
+      html: "<tbody><tr><td></td><td></td><td></td></tr>"
+      + "<tr><td></td><td></td><td></td></tr>"
+      + "<tr><td></td><td></td><td></td></tr>"
+      + "<tr><td></td><td></td><td></td></tr>"
+      + "<tr><td></td><td></td><td></td></tr>"
+      + "<tr><td></td><td></td><td></td></tr></tbody>",
+      "class": "centerMasteries"
+      }).appendTo('#ferocityHolder');
+
+    $("<table/>", {
+      html: "<tbody><tr><td></td><td></td><td></td></tr>"
+      + "<tr><td></td><td></td><td></td></tr>"
+      + "<tr><td></td><td></td><td></td></tr>"
+      + "<tr><td></td><td></td><td></td></tr>"
+      + "<tr><td></td><td></td><td></td></tr>"
+      + "<tr><td></td><td></td><td></td></tr></tbody>",
+      "class": "centerMasteries"
+      }).appendTo('#cunningHolder');
+
+    $("<table/>", {
+      html: "<tbody><tr><td></td><td></td><td></td></tr>"
+      + "<tr><td></td><td></td><td></td></tr>"
+      + "<tr><td></td><td></td><td></td></tr>"
+      + "<tr><td></td><td></td><td></td></tr>"
+      + "<tr><td></td><td></td><td></td></tr>"
+      + "<tr><td></td><td></td><td></td></tr></tbody>",
+      "class": "centerMasteries"
+      }).appendTo('#resolveHolder');
+
+    //Initialize the mastery structure.
+    
+    var masteriesAssigned = {};
+
+    masteriesAssigned['points'] = {};
+    masteriesAssigned['trees'] = {};
+    masteriesAssigned['rows'] = {};
+    
+    $.each(masteriesGlobalJSON.data, function(key, val) {
+        //style="padding-top: 8vw; text-align: left; padding-left: 5vw; top: 5vs; left: 5vw;"
+        //Set Total Assigned Points to zero.
+        masteriesAssigned['total'] = 0;
+        
+        //Fill the assigned masteries with 0's.
+        masteriesAssigned['points'][key] = 0;
+
+        //Fill the assigned trees with 0's.
+        masteriesAssigned['trees'][key[1]] = 0;
+
+        //Fill the assigned rows with 0's.
+        masteriesAssigned['rows'][key[1] + [key[2]]] = 0;
+      });
+        
+    $.each(player.masteries, function(i, mastery) {
+        masteriesAssigned['points'][mastery.masteryId] = mastery.rank;
+        masteriesAssigned['total'] ++;
+    });
+
+    $.each(masteriesGlobalJSON.data, function(key, val) {
+        drawMastery(key, masteriesAssigned, masteriesGlobalJSON);
+      });
+ 
+  }
+
+  function drawMastery(key, masteriesAssigned, masteriesGlobalJSON) {
+    //console.log(masteriesAssigned);
+    //console.log(key);
+    //console.log(masteriesAssigned.points[key]);
+
+    var patch = document.getElementById("patchDisplay").innerHTML;
+    var cleanedAssigned = masteriesAssigned['points'][key] == undefined ? 0 : masteriesAssigned['points'][key];
+                          
+    if (masteriesAssigned['points'][key] == masteriesGlobalJSON.data[key].ranks) {
+
+    //Gold Icons
+    
+      var imgSrcMastery = "datadragon/" + patch + "/img/mastery/" + masteriesGlobalJSON.data[key].image.full;
+      var imgStyleMastery = "width: 4vw; margin: .2vw; border: solid gold 1px;";
+      var textStyleMastery = "border: solid gold 1px; color: gold; background-color: #222222; width: 3vw; margin-left: 1.5vw; margin-top: -1.0vw; position: relative; font-size: .8vw;";
+      
+    } else if (masteriesAssigned['points'][key] > 0) {
+    
+      //Gold Icons
+      
+      var imgSrcMastery = "datadragon/" + patch + "/img/mastery/" + masteriesGlobalJSON.data[key].image.full;
+      var imgStyleMastery = "width: 4vw; margin: .2vw; border: solid lime 1px;";
+      var textStyleMastery = "border: solid lime 1px; color: lime; background-color: #222222; width: 3vw; margin-left: 1.5vw; margin-top: -1.0vw; position: relative; font-size: .8vw;";
+      
+    } else {
+    
+      //Gray icons (No points assigned)
+      var imgSrcMastery = "datadragon/" + patch + "/img/mastery/gray_" + masteriesGlobalJSON.data[key].image.full;
+      var imgStyleMastery = "width: 4vw; margin: .2vw; border: solid gray 1px;";
+      var textStyleMastery = "border: solid gray 1px; color: gray; background-color: #222222; width: 3vw; margin-left: 1.5vw; margin-top: -1.0vw; position: relative; font-size: .8vw;";
+      
+    }
+
+
+    
+    //I'll need to check if this should be gray or not here.
+    
+    var imageMastery = $("<img/>", {
+       src: imgSrcMastery,
+       style: imgStyleMastery,
+       title: masteriesGlobalJSON.data[key].name + ": " + masteriesGlobalJSON.data[key].description[masteriesGlobalJSON.data[key].description.length - 1],
+
+       
+       onclick: "addMasteryPoint(" + key + ")"
+       
+       //html: JSON.stringify(masteriesGlobalJSON, null, '\t')
+       
+       });
+
+
+    
+    var pointsMastery = $("<div/>", {
+     
+        html: "<span id='ranks_" + key + "'>" + cleanedAssigned + "</span>&nbsp;&nbsp;/&nbsp;&nbsp;<span id='maxRanks_" + key + "'>" + masteriesGlobalJSON.data[key].ranks + "</span>",
+
+        style: textStyleMastery
+        
+        });
+
+    key = key.toString();
+
+    
+    //Map rows.
+    
+    var row = parseInt(key[2]) - 1;
+    //Normalize Columns: Some Ferocity masteries appear in Column 4.
+    var col = parseInt(key[3]) - 1 == 3 ? 2 : parseInt(key[3]) - 1;
+    //Normalize Rows and Columns: All Cunning and Resolve masteries in even rows have their row's 2nd mastery in Column 2 instead of 3.
+    col = parseInt(key[0]) > 0 && row % 2 == 0 && col == 1 ? 2 : col;
+
+    
+    if (key[1] == "1") {
+      $('#ferocityHolder')[0].childNodes[0].rows[row].cells[col].innerHTML = "";
+      imageMastery.appendTo($('#ferocityHolder')[0].childNodes[0].rows[row].cells[col]);
+      pointsMastery.appendTo($('#ferocityHolder')[0].childNodes[0].rows[row].cells[col]);
+      
+    } else if (key[1] == "3") {
+      $('#cunningHolder')[0].childNodes[0].rows[row].cells[col].innerHTML = "";
+      imageMastery.appendTo($('#cunningHolder')[0].childNodes[0].rows[row].cells[col]);
+      pointsMastery.appendTo($('#cunningHolder')[0].childNodes[0].rows[row].cells[col]);
+      
+    } else if (key[1] == "2") {
+      $('#resolveHolder')[0].childNodes[0].rows[row].cells[col].innerHTML = "";
+      imageMastery.appendTo($('#resolveHolder')[0].childNodes[0].rows[row].cells[col]);
+      pointsMastery.appendTo($('#resolveHolder')[0].childNodes[0].rows[row].cells[col]);
+      
+    }
+    //console.log($('#ferocityHolder')[0].childNodes[0]);
+  }
+
+  function hideMasteries() {
+    document.getElementById('masteriesHolder').style.visibility = 'hidden';
+  }
+  
+  function showMasteries() {
+    document.getElementById('masteriesHolder').style.visibility = 'visible';
+  }
+
+
+
+  </script>
+
+               
+<div id='tableHolder'>          
+  <table class='tableTeam' style='border: 1px solid #BBBBBB;' class='shadow_round current_match'>
+    <thead>
+      <tr class='fields'>
+        <th><div style='width:7.8vw'>Summoner</div></th>
+        <th><div style='width:4.75vw'>Recent Roles</div></th>
+        <th><div style='width:9.1vw'>Champion (Games)</div></th>
+        <th><div style='width:4.2vw' style='text-align:center;'>Rank</div></th>
+        <th><div style='width:4.2vw' style='text-align:center;'>Carry<br>Factor</div></th>
+        <th><div style='text-align:center;width:4.2vw;'>Ranked</div><br>W/L</th>
+        <th style='text-align:center'><div style='width:5.7vw'>KDA</div></th>
+        <th style='text-align:center;'>Win %<br>(Games)</th>
+        <th><div style='width: 10.4vw'>Runes</div></th><th>Masteries</th>
+        <th>Cooldowns<br>(Testing)</th><th>Insight</th>
+        <th>Counter<br> Power<span class='tooltip' title="Winrates for Plat+.\n  - The Black Value is the overall win % for this champion in this matchup.\n  - The number in '( )' is the Counter Power.\n  - Counter power is the % difference between the average of the two champion win percents, and the matchup win %.\n  - Positive (Blue) values indicate this champion is statistically favored against their lane matchup.\n  - Negative (Red) values indicate their lane opponent is statistically favored in this matchup.\n  - Matchups must have 100+ games in Plat+ to be shown.\">?</span></th>
+      </tr>
+    </thead>					
+    <tbody class='current_match_tbody' id='current_match_team_$j'>                    
+    
+      <tr class='currentMatchPlayer' id='$champName' name='0'>
+        <td class='tablePaneUpper'>                                                
+          <div><a class='nameContainer' href='https://$region.op.gg/summoner/userName=$opggPlayerName' target='_blank'>" . $postDataJSON['participants'][$k]['summonerName'] . "</a></div>
+          <div style='font-size:50%; '>Recent<br>&nbspNewest&nbsp&#8592;&#8594;&nbspOldest<br>
+            <table class='recentWins' style='border-collapse: collapse;'>
+              <tbody>
+                <tr>
+                  <!-- Recent Matches go here! (Generated by jQuery in ajax done function)-->
+
+
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </td>
+        <td style='font-size: 85%' class='tablePaneUpper recentRoles'>$everyoneRolesString[$k]</td>
+        <td class='tablePaneUpper'>
+          <table style='border-collapse: collapse;'>
+            <tr>
+              <td><a target='_blank'><img src='$portrait' alt='$champName' style='width:2.8vw;' class='champPortraitMain'></a></td>
+              <td>
+                <div>
+                  <a target='_blank'><img src='ssicons/$spell1.png' alt='$spell1' style='width:1.25vw;' class='sspell1'></a>
+                </div>
+                <div>
+                  <a target='_blank'><img src='ssicons/$spell2.png' alt='$spell2' style='width:1.25vw;' class='sspell2'></a>
+                </div>
+              </td>
+              <td>
+                <div class='champNameContainer'>$champName</div>
+                <div>($everyoneGamesPlayed[$k])</div>
+              </td>
+            </tr>
+          </table>
+        </td>
+
+        <td class='tablePaneUpper'><div style='text-align:center'><img src='$leagueIcon' class='center leagueIcon' alt='$leaguesArray[$k]' style='width:2vw'></div><div class='playerRank' style='text-align:center; font-size:85%'>$leaguesArray[$k]<br>$lpArray[$k]</div></td>
+        <td class='padleft' style='text-align:center;'><span>$carry<span class='tooltip' title='$carryString'>+</span></span></td>
+        <td class='padleft' style='text-align:center;'><div class='seasonWinLoss'>$everyoneSeasonWins[$k]/$everyoneSeasonLosses[$k]</div></td>
+        <td class='tablePaneUpper' style='text-align:center'>$everyoneKDA[$k]<span class='tooltip' title='$everyoneKillsPerGame[$k]/$everyoneDeathsPerGame[$k]/$everyoneAssistsPerGame[$k]'>+</span></td>
+        <td class='padleft' style='text-align:center;'>$everyoneWinPercent[$k]%<br>($everyoneGamesPlayed[$k])</td>
+        <td class='tablePaneUpper'><div style='font-size: 75%' class='runesDisplay'><!--Runes generated by ajax here.--></div></td>
+        <td class='tablePaneUpper' style='text-align: center'><button id='$k' onclick='console.log("jquery onclick loadMasteries")' style='font-size:1vh' class='masteriesDisplay'>$masteries</button><div style='text-align: center; margin-top: .2vw;'><img class='keystoneDisplay' src='$masteryImageDirectory/$keystone.png' alt='$keystone' title='Keystone: $keystoneLabel' style='width:1.5vw;'></div></td>
+        <td class='tablePaneUpper'><div class='cooldownDisplay' style='width:8vw; font-size:small;'>$spellCooldownString</div></td>
+        <td class='tablePaneUpper' style='text-align: center;'><h3 class='insightDisplay'></h3></td>					
+        <td class='tablePaneUpper counterPowerDisplay'>Counter Power
+          <div class='overallWinRate'>-</div>
+          <div class='matchupWinRate'>-</div>
+          <div>(<span class='counterPower'>-</span>)</div></td>
+        
+        </td>					
+      </tr>
+    </tbody>
+  </table>
+
+  <br>
+  <div class='avgRankHolder'>Average Rank:</div>
+  <br>
+
+</div>
+
+  
+
+<div>
+  <table id="masteriesHolder" class="masteriesHolder" style="visibility: hidden;">
+    <tbody>
+      <tr><td style="text-align: center;"><h5 style="display: inline-block;">Masteries</h5><button style="float:right; display: inline-block;" onclick="hideMasteries();" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect"><i class="material-icons">close</i></button></td></tr>
+      <tr>
+        <td class="masteriesHolder ferocity">
+          <div>Ferocity</div>
+          <div id="ferocityHolder" style="text-align: center;"></div>
+          <!--<div style="padding-top: 8vw; text-align: left; padding-left: 5vw; top: 5vs; left: 5vw;">More Content</div>-->
+        </td>
+        <td class="masteriesHolder cunning">
+          <div>Cunning</div>
+          <div id="cunningHolder"></div>
+        </td>
+        <td class="masteriesHolder resolve">
+          <div>Resolve</div>
+          <div id="resolveHolder"></div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+                
+                <?php
+	    
+                $region = $postDataJSON['region'];
+                
+				$patchFull = $postDataJSON['patchFull'];
+				$patchShort = $postDataJSON['patchShort'];
+		
+
+
+		
+        		
+                $leaguesArray = array();
+                $lpArray = array();
+                
+                $rankCount = 0;
+                $rankAvg = 0;
+
+                //Get the wins and league of each player.
+                for($i = 0; $i < count($idsArray); $i++)
+                {
+                    $rank = ucfirst(strtolower($leaguesJSON[$idsArray[$i]][0]['tier'])) . ' ' . strtoupper($leaguesJSON[$idsArray[$i]][0]['entries'][0]['division']);
+                    
+                    $rankTemp = 0;
+                    
+                    switch ($leaguesJSON[$idsArray[$i]][0]['tier']) {
+                        case "BRONZE":
+                            $rankCount++;
+                            break;
+                        case "SILVER":
+                            $rankAvg += 500;
+                            $rankCount++;
+                            break;
+                        case "GOLD":
+                            $rankAvg += 1000;
+                            $rankCount++;
+                            break;
+                        case "PLATINUM":
+                            $rankAvg += 1500;
+                            $rankCount++;
+                            break;
+                        case "DIAMOND":
+                            $rankAvg += 2000;
+                            $rankCount++;
+                            break;
+                        case "MASTER":
+                            $rankAvg += 2500;
+                            $rankCount++;
+                            break;
+                        case "CHALLENGER":
+                            $rankAvg += 2500;
+                            $rankCount++;
+                            break;
+                        default:
+                            break;
+                    }
+                    
+                    $tier = $leaguesJSON[$idsArray[$i]][0]['tier'];
+                    
+                    if ($tier == "BRONZE" || $tier == "SILVER" || $tier == "GOLD" || $tier == "PLATINUM" || $tier == "DIAMOND") {
+                        switch ($leaguesJSON[$idsArray[$i]][0]['entries'][0]['division']) {
+                        case "IV":
+                            $rankAvg += 100;
+                            break;
+                        case "III":
+                            $rankAvg += 200;
+                            break;
+                        case "II":
+                            $rankAvg += 300;
+                            break;
+                        case "I":
+                            $rankAvg += 400;
+                            break;
+                        default:
+                            break;
+                        }
+                    }
+                    
+                    if ($leaguesJSON[$idsArray[$i]][0]['entries'][0]['leaguePoints'] !== NULL) {
+                        $rankAvg += $leaguesJSON[$idsArray[$i]][0]['entries'][0]['leaguePoints'];
+                        $rankTemp += $leaguesJSON[$idsArray[$i]][0]['entries'][0]['leaguePoints'];
+                    }
+                    
+                    //echo "$rankTemp, ";
+
+                    $lp = "";
+					
+					if ($leaguesJSON[$idsArray[$i]][0]['entries'][0]['miniSeries'] !== NULL) {
+
+                        $lp = $leaguesJSON[$idsArray[$i]][0]['entries'][0]['miniSeries']['progress'];
+
+                        $lp = str_replace("W", "<font style='color:green'>&#x2714;</font>&nbsp", $lp);
+                        $lp = str_replace("L", "<font style='color:red'>&#x2716;</font>&nbsp", $lp);
+                        $lp = str_replace("N", "<font style='color:grey'>&#x2796;</font>&nbsp", $lp);
+
+                    } else {
+                        $lp = $leaguesJSON[$idsArray[$i]][0]['entries'][0]['leaguePoints'] . " LP";
+                    }
+
+
+                
+                //xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx Build Table xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                
+                
+                $tableList = array();
+                
+                for ($j = 0; $j < 2; $j++)
+                {
+                    $table = "<table style='border: 1px solid #BBBBBB;' class='shadow_round current_match'>";
+                    
+					$table .= "<thead><tr class='fields'><th style='width:7.8vw'>Summoner</th><th style='width:4.75vw'>Recent Roles</th><th style='width:9.1vw'>Champion (Games)</th><th style='width:4.2vw' style='text-align:center;'>Rank</th><th style='width:4.2vw' style='text-align:center;'>Carry<br>Factor</th><th style='text-align:center;width:4.2vw;'>Ranked<br>W/L</th><th style='width:5.7vw' style='text-align:center'>KDA</th><th style='text-align:center;'>Win %<br>(Games)</th><th style='width:10.4vw'>Runes</th><th>Masteries</th><th>Cooldowns<br>(Testing)</th><th>Insight</th><th>Counter<br> Power<span class='tooltip' title=\"Winrates for Plat+.\n  - The Black Value is the overall win % for this champion in this matchup.\n  - The number in '( )' is the Counter Power.\n  - Counter power is the % difference between the average of the two champion win percents, and the matchup win %.\n  - Positive (Blue) values indicate this champion is statistically favored against their lane matchup.\n  - Negative (Red) values indicate their lane opponent is statistically favored in this matchup.\n  - Matchups must have 100+ games in Plat+ to be shown.\">?</span></th></tr></thead>";
+					
+                    $table .= "<tbody class='current_match_tbody' id='current_match_team_$j'>";
+                    
+					
+					$tableRowsPlayers = array();
+					$champNamesList = array();
+					
+                    for ($i = 0; $i < 5; $i++)
+                    {
+                        $k = $i + 5 * $j;
+
+                        //Get data for recent roles here.
+
+                        $recentWins = "<table style='border-collapse: collapse;'><tr>";
+                        
+                        $carry = 0;
+                        
+                        $carryString = "";
+                        
+                        $delta = 0;
+                        $streak = 0;
+                        
+						$tableRow = "";
+						
+						//Calculate recent games and display results
+                        $winRate = $everyoneSeasonWins[$k]/ ($everyoneSeasonLosses[$k] + $everyoneSeasonWins[$k]);
+                        
+                        $count = count($everyoneGamesData[$k]);
+                                                
+                        for ($l = 0; $l < count($everyoneGamesData[$k]); $l++) {
+                            //echo "<pre><div style='text-align: left'><br>Post Data:<br>"; print_r($everyoneGamesData[$k][$i]['win']); echo "</div></pre>";
+                            
+                            
+                            
+                            $kills = $everyoneGamesData[$k][$l]['kills'] != NULL ? $everyoneGamesData[$k][$l]['kills'] : 0;
+                            $deaths = $everyoneGamesData[$k][$l]['deaths'] != NULL ? $everyoneGamesData[$k][$l]['deaths'] : 0 ;
+                            $assists = $everyoneGamesData[$k][$l]['assists'] != NULL ? $everyoneGamesData[$k][$l]['assists'] : 0;
+                            $champ = $everyoneGamesData[$k][$l]['champ'];
+                            
+                            $gameDate = $everyoneGamesData[$k][$l]['gameDate'];
+                            
+                            $portrait = getChampPortrait($champ);
+                            
+                            if ($everyoneGamesData[$k][$l]['win'] == NULL) {
+                                //echo "<br>$k,$l: LOSS<br>";
+                                $recentWins .= "<td class='loss' title='$champ LOSS\n$kills/$deaths/$assists\n$gameDate' style='width:.6vw;height:.6vw;font-size:100%;border: 1px solid #BBBBBB;text-align:center;cursor:default;'><img src='$portrait' style='width:.9vw; display:block;'></td>";
+                            } else {
+                                //echo "<br>$k,$l: WIN<br>";
+                                $recentWins .= "<td class='win' title='$champ WIN\n$kills/$deaths/$assists\n$gameDate' style='width:.5vw;height:.8vw;font-size:100%; border: 1px solid #BBBBBB;;text-align:center;cursor:default;'><img src='$portrait' style='width:.9vw; display:block;'></td>";
+                            }
+                        }
+                        
+                        //Count oldest to newest to get streak.
+                        for ($l = count($everyoneGamesData[$k]) - 1; $l >= 0; $l--) {
+                            if ($everyoneGamesData[$k][$l]['win'] == NULL) {
+                                //echo "<br>$k,$l: LOSS<br>";
+                                $delta -= 1;
+                                $streak = $streak > 0 ? -1 : $streak - 1; 
+                            } else {
+                                //echo "<br>$k,$l: WIN<br>";
+                                $delta += 1;
+                                $streak = $streak < 0 ? 1 : $streak + 1; 
+                            }
+
+                        }
+                        
+                        $carryString .= "Carry Factors:";
+                        
+                        //Modify Carry rating by Win/Loss streak.
+                        if ($streak >= 6) {
+                            $carry += 2;
+                            $carryString .= "\nMajor Win Streak";
+                        } else if ($streak >= 4) {
+                            $carry++;
+                            $carryString .= "\nWin Streak";
+                        } else if ($streak <= -6) {
+                            $carry -= 2;
+                            $carryString .= "\nMajor Loss Streak";
+                        } else if ($streak <= -4) {
+                            $carryString .= "\nLoss Streak";
+                            $carry--;
+                        }
+                        
+                        
+                        
+                        //Modify Carry rating by recent Win/Loss ratio
+                        if ($delta / $count >= .6) {
+                            $carry +=2;
+                            $carryString .= "\nExcellent Recent Winrate";
+                        } else if ($delta / $count >= .4) {
+                            $carry++;
+                            $carryString .= "\nGood Recent Winrate";
+                        } else if ($delta / $count <= -.6) {
+                            $carry -=2;
+                            $carryString .= "\nVery Poor Recent Winrate";
+                        } else if ($delta / $count <= -.4) {
+                            $carry--;
+                            $carryString .= "\nPoor Recent Winrate";
+                        }
+                        
+                        if ($winRate > .6) {
+                            $carry++;
+                            $carryString .= "\nSmurf";
+                        }
+                        
+                        //Modify Carry rating for Champion Win % and Champion KDA
+                        if ($everyoneGamesPlayed[$k] >= 20) {
+                            if ($everyoneWinPercent[$k] >= 60) {
+                                $carry += 2;
+                                $carryString .= "\n60% Champ Win %";                                
+                            } else if ($everyoneWinPercent[$k] >= 55) {
+                                $carry ++;
+                                $carryString .= "\n55% Champ Win %";                                
+                            } else if ($everyoneWinPercent[$k] <= 40) {
+                                $carry -= 2;
+                                $carryString .= "\n40% Champ Win %";                                
+                            } else if ($everyoneWinPercent[$k] <= 45) {
+                                $carry --;
+                                $carryString .= "\n45% Champ Win %";                                
+                            }
+                            
+                            if ($everyoneKDA[$k] >= 3.5) {
+                                $carry += 2;
+                                $carryString .= "\n> 3.5 KDA";
+                            } else if ($everyoneKDA[$k] >= 3) {
+                                $carry ++;
+                                $carryString .= "\n> 3.0 KDA";
+                            } else if ($everyoneKDA[$k] <= 1.5) {
+                                $carry -= 2;
+                                $carryString .= "\n< 1.5 KDA";
+                            } else if ($everyoneKDA[$k] <= 2) {
+                                $carry --;
+                                $carryString .= "\n< 2.0 KDA";
+                            }
+                            
+                            
+                            
+                        }
+                        
+                        if ($everyoneGamesPlayed[$k] < 5) {
+                            $carry--;
+                            $carryString .= "\n<5 Ranked Games on Champ";
+                        }
+                        
+                        //echo "<div title='$carryString'>Carry Factor: $carry</div>";
+                        
+                        
+                        
+                        //echo "<br>Streak: $streak, Delta: $delta, Games: $count, Carry: $carry";
+                        
+                        $recentWins .= "</tr></table>";
+                        
+                        //Put Leagues data here.
+                        
+
+
+                        //Put Stats data here.
+
+                        $champName = getChampName($postDataJSON['participants'][$k]['championId']);
+
+                        $tableRow .= "<tr class='currentMatchPlayer' id='$champName'><td class='tablePaneUpper'>";
+
+                        $win = $everyoneGamesData[$k][0]['win'];
+						
+						$opggPlayerName = $postDataJSON['participants'][$k]['summonerName'];
+                                                
+                        $tableRow .= "<div id='nameContainer$k'><a href='https://$region.op.gg/summoner/userName=$opggPlayerName' target='_blank'>" . $postDataJSON['participants'][$k]['summonerName'] . "</a></div><div style='font-size:50%; '>Recent<br>&nbspNewest&nbsp&#8592;&#8594;&nbspOldest<br>$recentWins</div></td>";
+                        
+                        $portrait = getChampPortrait($champName);
+                        $spell1 = getSpell($postDataJSON['participants'][$k]['spell1Id']);
+                        $spell2 = getSpell($postDataJSON['participants'][$k]['spell2Id']);
+                        
+                        array_push($everyone_spell1, $spell1);
+                        array_push($everyone_spell2, $spell2);
+                        
+						
+						
+                        foreach ($summonerSpellsJSON['data'] as $key => $data) {
+                            if ($postDataJSON['participants'][$k]['spell1Id'] == $data['key']) {
+                                array_push($everyoneSS1_CD_raw, $data['cooldown'][0]);
+                            }
+                            if ($postDataJSON['participants'][$k]['spell2Id'] == $data['key']) {
+                                array_push($everyoneSS2_CD_raw, $data['cooldown'][0]);
+                            }
+                        }
+						
+						
+                        
+                        $leagueIcon = getLeagueIcon($leaguesArray[$k]);
+
+                        $runes = $postDataJSON['participants'][$k]['runes'];
+
+                        $cdr_flat = 0;
+                        $cdr_scaling = 0;
+                        
+                        $runesDisplay = getRunesReadable($runes, $region, $cdr_flat, $cdr_scaling);
+                        
+                        array_push($everyoneCDR_Flat, $cdr_flat);
+                        array_push($everyoneCDR_Scaling, $cdr_scaling);
+
+                        $masteries = $playerMasteriesCount[$k];
+                        $keystone = $playerKeystoneMasteries[$k];
+                        $keystoneLabel = $playerKeystoneMasteriesDescription[$k];
+                        
+                        $spellNum = 0;
+                        
+                        $spellCooldownString = "";
+                        
+                        foreach($champSpellsJSON['data'][$champName]['spells'] as $key => $data) {
+                            $spellLetter = "";        
+                            switch ($spellNum) {
+                                case 0: $spellLetter = "Q";
+                                    break;
+                                case 1: $spellLetter = "W";
+                                    break;
+                                case 2: $spellLetter = "E";
+                                    break;
+                                case 3: $spellLetter = "R";
+                                    break;
+                                default:
+                                    break;
+                            }
+                            
+                            $spellNum++;
+                            
+                            $spellDescription = $data['sanitizedDescription'];
+                            
+                            $spellCooldownString .= "<span class='tooltip' title=\"$spellDescription\">$spellLetter</span>" . ": " . $data['cooldownBurn'] . " <br>";
+                            
+                        }
+                        
+                        //$f = $w * $G - $w * $L * $G - $w * $G * $r ** ($w - 1) + $w * L * G * $r ** ($w * $L - 1);
+                        
+                        
+                        $tableRow .= "
+
+
+                
+                //xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx Build Table xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                
+      	//Table used to go here, moved to top for modernization
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+			
+					$tableRowsPlayers = array();
+					$champNamesList = array();
+					
+                        $carry = 0;
+                        
+                        $carryString = "";
+                        
+                        $delta = 0;
+                        $streak = 0;
+                        
+						$tableRow = "";
+						
+						//Calculate recent games and display results
+                        $winRate = $everyoneSeasonWins[$k]/ ($everyoneSeasonLosses[$k] + $everyoneSeasonWins[$k]);
+                        
+                        $count = count($everyoneGamesData[$k]);
+                                                
+                        for ($l = 0; $l < count($everyoneGamesData[$k]); $l++) {
+                            //echo "<pre><div style='text-align: left'><br>Post Data:<br>"; print_r($everyoneGamesData[$k][$i]['win']); echo "</div></pre>";
+                            
+                           }
+                        }
+                        
+                        //Count oldest to newest to get streak.
+                        for ($l = count($everyoneGamesData[$k]) - 1; $l >= 0; $l--) {
+                            if ($everyoneGamesData[$k][$l]['win'] == NULL) {
+                                //echo "<br>$k,$l: LOSS<br>";
+                                $delta -= 1;
+                                $streak = $streak > 0 ? -1 : $streak - 1; 
+                            } else {
+                                //echo "<br>$k,$l: WIN<br>";
+                                $delta += 1;
+                                $streak = $streak < 0 ? 1 : $streak + 1; 
+                            }
+
+                        }
+                        
+                        $carryString .= "Carry Factors:";
+                        
+                        //Modify Carry rating by Win/Loss streak.
+                        if ($streak >= 6) {
+                            $carry += 2;
+                            $carryString .= "\nMajor Win Streak";
+                        } else if ($streak >= 4) {
+                            $carry++;
+                            $carryString .= "\nWin Streak";
+                        } else if ($streak <= -6) {
+                            $carry -= 2;
+                            $carryString .= "\nMajor Loss Streak";
+                        } else if ($streak <= -4) {
+                            $carryString .= "\nLoss Streak";
+                            $carry--;
+                        }
+                        
+                        
+                        
+                        //Modify Carry rating by recent Win/Loss ratio
+                        if ($delta / $count >= .6) {
+                            $carry +=2;
+                            $carryString .= "\nExcellent Recent Winrate";
+                        } else if ($delta / $count >= .4) {
+                            $carry++;
+                            $carryString .= "\nGood Recent Winrate";
+                        } else if ($delta / $count <= -.6) {
+                            $carry -=2;
+                            $carryString .= "\nVery Poor Recent Winrate";
+                        } else if ($delta / $count <= -.4) {
+                            $carry--;
+                            $carryString .= "\nPoor Recent Winrate";
+                        }
+                        
+                        if ($winRate > .6) {
+                            $carry++;
+                            $carryString .= "\nSmurf";
+                        }
+                        
+                        //Modify Carry rating for Champion Win % and Champion KDA
+                        if ($everyoneGamesPlayed[$k] >= 20) {
+                            if ($everyoneWinPercent[$k] >= 60) {
+                                $carry += 2;
+                                $carryString .= "\n60% Champ Win %";                                
+                            } else if ($everyoneWinPercent[$k] >= 55) {
+                                $carry ++;
+                                $carryString .= "\n55% Champ Win %";                                
+                            } else if ($everyoneWinPercent[$k] <= 40) {
+                                $carry -= 2;
+                                $carryString .= "\n40% Champ Win %";                                
+                            } else if ($everyoneWinPercent[$k] <= 45) {
+                                $carry --;
+                                $carryString .= "\n45% Champ Win %";                                
+                            }
+                            
+                            if ($everyoneKDA[$k] >= 3.5) {
+                                $carry += 2;
+                                $carryString .= "\n> 3.5 KDA";
+                            } else if ($everyoneKDA[$k] >= 3) {
+                                $carry ++;
+                                $carryString .= "\n> 3.0 KDA";
+                            } else if ($everyoneKDA[$k] <= 1.5) {
+                                $carry -= 2;
+                                $carryString .= "\n< 1.5 KDA";
+                            } else if ($everyoneKDA[$k] <= 2) {
+                                $carry --;
+                                $carryString .= "\n< 2.0 KDA";
+                            }
+                            
+                            
+                            
+                        }
+                        
+                        if ($everyoneGamesPlayed[$k] < 5) {
+                            $carry--;
+                            $carryString .= "\n<5 Ranked Games on Champ";
+                        }
+                        
+                        //echo "<div title='$carryString'>Carry Factor: $carry</div>";
+                        
+                        
+                        
+                        //echo "<br>Streak: $streak, Delta: $delta, Games: $count, Carry: $carry";
+                        
+                        
+                        //Put Leagues data here.
+                        
+
+
+                        //Put Stats data here.
+
+
+                       
+						
+                        foreach ($summonerSpellsJSON['data'] as $key => $data) {
+                            if ($postDataJSON['participants'][$k]['spell1Id'] == $data['key']) {
+                                array_push($everyoneSS1_CD_raw, $data['cooldown'][0]);
+                            }
+                            if ($postDataJSON['participants'][$k]['spell2Id'] == $data['key']) {
+                                array_push($everyoneSS2_CD_raw, $data['cooldown'][0]);
+                            }
+                        }
+						
+						
+                        
+                        $leagueIcon = getLeagueIcon($leaguesArray[$k]);
+
+                        $runes = $postDataJSON['participants'][$k]['runes'];
+
+                        $cdr_flat = 0;
+                        $cdr_scaling = 0;
+                        
+                        $runesDisplay = getRunesReadable($runes, $region, $cdr_flat, $cdr_scaling);
+                        
+                        array_push($everyoneCDR_Flat, $cdr_flat);
+                        array_push($everyoneCDR_Scaling, $cdr_scaling);
+
+                        $masteries = $playerMasteriesCount[$k];
+                        $keystone = $playerKeystoneMasteries[$k];
+                        $keystoneLabel = $playerKeystoneMasteriesDescription[$k];
+                        
+                        $spellNum = 0;
+                        
+                        $spellCooldownString = "";
+                        
+                        foreach($champSpellsJSON['data'][$champName]['spells'] as $key => $data) {
+                            $spellLetter = "";        
+                            switch ($spellNum) {
+                                case 0: $spellLetter = "Q";
+                                    break;
+                                case 1: $spellLetter = "W";
+                                    break;
+                                case 2: $spellLetter = "E";
+                                    break;
+                                case 3: $spellLetter = "R";
+                                    break;
+                                default:
+                                    break;
+                            }
+                            
+                            $spellNum++;
+                            
+                            $spellDescription = $data['sanitizedDescription'];
+                            
+                            $spellCooldownString .= "<span class='tooltip' title=\"$spellDescription\">$spellLetter</span>" . ": " . $data['cooldownBurn'] . " <br>";
+                            
+                        }
+                        
+                        //$f = $w * $G - $w * $L * $G - $w * $G * $r ** ($w - 1) + $w * L * G * $r ** ($w * $L - 1);
+                        
+                        $tableRow .= 
+					
+						$tableRowsPlayers[$champName] = $tableRow;
+						
+						$champNamesList["$champName"] = array();
+						
+						//echo $champName;
+
+                    }
+					
+					
+				
+					
+					$table .= $tableRowsPlayers[$rolesArray["Top"]];
+					$table .= $tableRowsPlayers[$rolesArray["Jungle"]];
+					$table .= $tableRowsPlayers[$rolesArray["Middle"]];
+					$table .= $tableRowsPlayers[$rolesArray["ADC"]];
+					$table .= $tableRowsPlayers[$rolesArray["Support"]];
+					
+				
+					
+                    
+                    array_push($tableList, $table);
+					
+					unset($tableRowPlayers);
+					unset($champNamesList);
+                }
+                
+                if ($rankCount > 0)
+                {
+                    $rankAvg = $rankAvg / $rankCount;
+                }
+                
+                $rankPrint = "Unranked";
+                $lpPrint = 0;
+                
+                if ($rankAvg > 3000)
+                {
+                    $rankPrint = "Challenger I";                    
+                    $lpPrint = $rankAvg - 2500;
+                } else if ($rankAvg > 2500) {
+                    $rankPrint = "Master I";                    
+                    $lpPrint = $rankAvg - 2500;
+                }
+
+
+                
+                if ($rankAvg > 0 && $rankAvg < 2500) {
+                    if ($rankAvg >= 2000) {
+                        $rankPrint = "Diamond";
+                    } else if ($rankAvg >= 1500) {
+                        $rankPrint = "Platinum";
+                    } else if ($rankAvg >= 1000) {
+                        $rankPrint = "Gold";
+                    } else if ($rankAvg >= 500) {
+                        $rankPrint = "Silver";
+                    } else if ($rankAvg > 0) {
+                        $rankPrint = "Bronze";
+                    }
+                    
+                    switch (floor(($rankAvg % 500) / 100)) {
+                        case 0: $rankPrint .= " V";
+                            break;
+                        case 1: $rankPrint .= " IV";
+                            break;
+                        case 2: $rankPrint .= " III";
+                            break;
+                        case 3: $rankPrint .= " II";
+                            break;
+                        case 4: $rankPrint .= " I";
+                            break;
+                        default:
+                            break;
+                    }
+
+                    $lpPrint = floor($rankAvg % 100);
+
+                    
+                }
+                
+                
+                if ($lpPrint !== NULL) {
+                    $lpPrint = floor($lpPrint);
+                }
+                
+                if ($rankAvg !== NULL) {
+                    $rankAvg = round1($rankAvg);
+                }
+                
+                
+                $rankIconPrint = getLeagueIcon($rankPrint);
+                
+                
+                print_r($tableList[0]);
+                
+                echo "<div style='text-align:center;margin: 0 auto;'><div style='height:.5vw;'></div><button onclick=\"scoutOpponents('$region')\" class='freljord shadow_low' style='background-size: 20%;'>Scout Opponents</button></div><div style='height:.5vw;'></div>";
+                
+                echo "<div style='text-align:center;margin: 0 auto'>Avg Rank: <img src='$rankIconPrint' alt='$rankIconPrint' title='$rankPrint' style='width:1vw'>$rankPrint $lpPrint LP ($rankAvg MMR)</div>";
+                
+                print_r($tableList[1]);
+                
+                $tableSpellsButtons = "<br><br><table><tr>";
+                
+                for ($i = 0; $i < count($postDataJSON['participants']); $i++) {
+                    
+                    //echo "Hello";
+                    
+                    $champName = getChampName($postDataJSON['participants'][$i]['championId']);
+                    
+                    //$cooldown_Masteries = getChampName($postDataJSON['participants'][$i]['masteries']);
+                    $cooldown_flat = $everyoneCDR_Flat[$i];
+                    $cooldown_scaling = $everyoneCDR_Scaling[$i];
+                    //$cooldown_Masteries = 0;
+                    
+                    $cooldown_SS = 0;
+                    
+                    foreach ($postDataJSON['participants'][$i]['masteries'] as $key => $data) {
+                        if ($data['masteryId'] == 6241) {
+                            $cooldown_SS = .15;
+                            //echo "<br>$cooldown_SS";
+                            
+                            $everyoneSS1_CD_raw[$i] = $everyoneSS1_CD_raw[$i] * (1 - $cooldown_SS);
+                            $everyoneSS2_CD_raw[$i] = $everyoneSS2_CD_raw[$i] * (1 - $cooldown_SS);                            
+                        }
+                        if ($data['masteryId'] == 6352) {
+                            $cooldown_flat -= .05;
+                            //$cooldown_Masteries = .05;
+                            //echo "<br>Cooldown Flat: $cooldown_flat";
+                        }
+                    }
+                    
+                    //CDR/lvl Blues:
+                    //5052: -0.05% cooldowns per level (-0.93% at champion level 18)
+                    //5174: -0.07% cooldowns per level (-1.3% at champion level 18)
+                    //5296: -0.09% cooldowns per level (-1.67% at champion level 18)
+                    //
+                    //CDR/lvl Quints:
+                    //5296: -0.09% cooldowns per level (-1.67% at champion level 18)
+                    //5234: -0.21% cooldowns per level (-3.9% at champion level 18)
+                    //5356: -0.28% cooldowns per level (-5% at champion level 18)
+                    //
+                    //Cooldown Quints:
+                    //5111: -1.4% cooldowns
+                    //5233: -1.95% cooldowns
+                    //5355: -2.5% cooldowns
+                    //
+                    //Cooldown Blues:
+                    //5051: -0.47% cooldowns
+                    //8003: -0.75% cooldowns
+                    //5295: -0.83% cooldowns
+                    
+                    
+                    //6241:  Insight (+15% SS CDR)
+                    //6352:  Intelligence (+5% CDR)
+                    
+                    
+                    //$cooldown_Masteries;
+                    
+                    //echo "<br>$everyone_spell1[$i]";
+                    //echo "<br>$everyone_spell2[$i]";
+                    
+                    $tableSpellsButtons .= "<td><button onclick='getChampSpells($i,\"$champName\",\"$region\",\"$cooldown_flat\",\"$cooldown_scaling\",\"$everyone_spell1[$i]\",\"$everyone_spell2[$i]\",\"$everyoneSS1_CD_raw[$i]\",\"$everyoneSS2_CD_raw[$i]\")'>$champName Spells</button></td>";
+                    
+                    //echo "<br>Cooldown_SS1: $everyoneSS1_CD_raw[$i]<br>";
+                    //echo "<br>Cooldown_SS2: $everyoneSS2_CD_raw[$i]<br>";
+                    //echo "<br>Cooldown_Masteries: $cooldown_Masteries<br>";
+                    //echo "<br>Cooldown_Flat: $cooldown_flat<br>";
+                    //echo "<br>Cooldown_Scaling: $cooldown_scaling<br>";
+                }
+
+                $tableSpellsButtons .= "</tr></table>";
+                
+                echo $tableSpellsButtons;
+				
+                
+                //echo "<table><tr><td><button>Hello</button></td></tr></table>";
+                
+                //echo "<br><div><pre id='spellSlot' style='text-align:left'>Spells</pre></div>";
+                echo "<br><div id='spellSlot' style='text-align:left; background-color:#8888FF22;'>Spells</div>";
+                
+                
+				$postDataJSON['patchFull'] = $patchFull;
+				$postDataJSON['patchShort'] = $patchShort;
+				
+                $outputPostData = json_encode($postDataJSON);
+
+                //DON'T COMMENT THIS OUT!
+                echo "<form id='formMasteries' action='mastery_iframe_1.php' method='post' target='iframe_showMasteries' style='visibility: hidden'> <input id='playerNumber' type='text' name='playerNumber'><textarea name='post' id='postData'>$outputPostData</textarea><input type='submit' value='Do Stuff!' /></form>";
+
+                //echo "</div></pre>";
+
+                /*
+                echo "<pre><div style='text-align: left'><br>Post Data:<br>"; print_r($postDataJSON); echo "</div></pre>";
+
+                echo "<pre><div style='text-align: left'><br>IDs String:<br>"; print_r($idsString); echo "</div></pre>";
+                
+                echo "<pre><div style='text-align: left'><br>IDs Array:<br>"; print_r($idsArray); echo "</div></pre>";
+                
+                echo "<pre><div style='text-align: left'><br>Leagues JSON:<br>"; print_r($leaguesJSON); echo "</div></pre>";
+
+                echo "<pre><div style='text-align: left'><br>Leagues Array:<br>"; print_r($leaguesArray); echo "</div></pre>";
+
+                echo "<pre><div style='text-align: left'><br>Stats Array:<br>"; print_r($statsJSON); echo "</div></pre>";
+                */
+                
+                //xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx FUNCTIONS xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+               
+                function getSpell($spell_ID) {
+                    
+                    $spell_name = "";
+                    
+                    if ($spell_ID == 	1	) {$spell_name = "cleanse";} 
+                        else if ($spell_ID == 	12	) {$spell_name = "teleport";} 
+                        else if ($spell_ID == 	30	) {$spell_name = "to the king!";} 
+                        else if ($spell_ID == 	14	) {$spell_name = "ignite";} 
+                        else if ($spell_ID == 	6	) {$spell_name = "ghost";} 
+                        else if ($spell_ID == 	32	) {$spell_name = "mark";} 
+                        else if ($spell_ID == 	7	) {$spell_name = "heal";} 
+                        else if ($spell_ID == 	11	) {$spell_name = "smite";} 
+                        else if ($spell_ID == 	3	) {$spell_name = "exhaust";} 
+                        else if ($spell_ID == 	31	) {$spell_name = "poro toss";} 
+                        else if ($spell_ID == 	13	) {$spell_name = "clarity";} 
+                        else if ($spell_ID == 	21	) {$spell_name = "barrier";} 
+                        else if ($spell_ID == 	2	) {$spell_name = "clairvoyance";} 
+                        else if ($spell_ID == 	4	) {$spell_name = "flash";} 
+                        else if ($spell_ID == 	17	) {$spell_name = "garrison";} 
+                        else {$spell_name = "Other";}				
+
+                        return "$spell_name";
+                }
+                
+                
+                function getRunesReadable($runes, $region, &$cdr_flat, &$cdr_scaling) {
+                    $runesOutput = "";
+                    
+                    global $runesJSON;
+
+                    $totalRunes = array();
+                    
+                    foreach ($runes as $rune)
+                    {
+                        $count = $rune['count'];
+                        $runeId = $rune['runeId'];
+                        $description = $runesJSON['data'][$runeId]['description'];
+                        
+						//5402":{"name":"Greater Mark of Precision",
+						//5253":{"name":"Greater Mark of Lethality"
+						//5418":{"name":"Greater Quintessence of Precision
+						//5343":{"name":"Greater Quintessence of Lethality","description":"+3.20 lethality",
+						
+						//5401":{"name":"Mark of Precision","description":"+0.7 Leth / +0.48 M.Pen
+						//5131":{"name":"Mark of Lethality","description":"+1.25 lethality
+						//5417":{"name":"Quintessence of Precision","description":"+1.74 Lethality / +1.09 Magic Penetration
+						//5221":{"name":"Quintessence of Lethality","description":"+2.49 lethality
+						
+						//Still need to do Hybrid Pen runes (Precision runes)
+						
+						if (strpos($description, 'Lethality') !== false || strpos($description, 'lethality') !== false ) {
+							
+							//echo "<pre><div style='text-align: left'><br>Rune:<br>"; print_r($rune); echo "</div></pre>";
+							
+							//preg_match_all('((?:\d+)(?:\.\d*)?)/', $description, $runeStats);
+							preg_match_all('/[0-9]+[\.][0-9]+/', $description, $runeStats);
+														
+							
+                            //Check if total runes contains the stat
+                            if (array_key_exists('Lethality', $totalRunes))
+                            {	
+								
+								//echo "$description";
+						
+								//echo "<pre><div style='text-align: left'><br>New Lethality:<br>"; print_r($runeStats); echo "</div></pre>";
+								
+								//echo $runeStats['0']['0'];
+						
+								
+								//echo "<br>RuneStats: $runeStats";
+						
+								$lethality = $runeStats['0']['0'];
+								
+								//echo "<br>New Lethality: $lethality";
+								
+								//echo "<pre><div style='text-align: left'><br>New Lethality:<br>"; print_r($lethality); echo "</div></pre>";
+								
+								
+								
+								
+                                //Add rune stats to total.
+                                $totalRunes['Lethality']['scalar'] += $count * $lethality;
+								
+                            }
+                            else
+                            {
+								
+								//echo "$description";
+								
+								//echo "<pre><div style='text-align: left'><br>Add Lethality:<br>"; print_r($runeStats); echo "</div></pre>";
+
+								//echo $runeStats['0']['0'];
+								
+								
+								//echo "<br>RuneStats: $runeStats";
+								
+								$lethality = $runeStats['0']['0'];
+								
+								//echo "Add Lethality: $lethality";
+								
+								//echo "<pre><div style='text-align: left'><br>Add Lethality:<br>"; print_r($lethality); echo "</div></pre>";
+								
+								
+								
+								
+                                //Create a new stat category.
+                                $totalRunes['Lethality']['scalar'] = $count * $lethality ;
+                                $totalRunes['Lethality']['description'] = "+2.01 Lethality";
+								
+                            }
+							
+							//rFlatMagicPenetrationMod
+						}
+						
+                        foreach ($runesJSON['data'][$runeId]['stats'] as $key => $runeStat)
+                        {
+							//echo "<br>" . $runesJSON['data'][$runeId]['stats'] . ", " . $key . ", " . $runeStat;
+							
+							//Check if it contains Precision.
+							if (strpos($runesJSON['data'][$runeId]['name'], 'precision') !== FALSE || strpos($runesJSON['data'][$runeId]['name'], 'Precision') !== FALSE) {
+								//Do Precision Stuff.
+								//echo "<br>Precision Stuff!";
+								
+								//Precision Runes only contain Magic Pen Stat, Lethality is no tincluded in 7.2.  Might have to fix later.
+								//Check if total runes contains the stat
+								if (array_key_exists($key, $totalRunes))
+								{
+									//Add rune stats to total.
+									$totalRunes['rFlatMagicPenetrationMod']['scalar'] += $count * $runeStat;
+								}
+								else
+								{
+									//Create a new stat category.
+									$totalRunes['rFlatMagicPenetrationMod']['scalar'] = $count * $runeStat;
+									$totalRunes['rFlatMagicPenetrationMod']['description'] = "+2.01 magic penetration";
+								}								
+								
+							} else							
+                            //Check if total runes contains the stat
+                            if (array_key_exists($key, $totalRunes))
+                            {
+                                //Add rune stats to total.
+                                $totalRunes[$key]['scalar'] += $count * $runeStat;
+                            }
+                            else
+                            {
+                                //Create a new stat category.
+                                $totalRunes[$key]['scalar'] = $count * $runeStat;
+                                $totalRunes[$key]['description'] = $description;
+                            }
+                            
+                        }
+                    }
+                    
+                    foreach ($totalRunes as $key => $sumRuneStat)
+                    {                    
+                        $keyReadable = "";
+                        //echo "<br>Key: $key";
+                        //Find Cooldowns
+                        if (strpos($key, 'Cooldown') !== FALSE) {
+                            if (strpos($key, 'PerLevel') !== FALSE) {
+                                $cdr_scaling += $sumRuneStat['scalar'];
+                                //echo "<br>Scaling"; echo $cdr_scaling;
+                            } else {
+                                $cdr_flat += $sumRuneStat['scalar'];
+                                //echo "<br>Flat"; echo $cdr_flat;
+                            }
+                        }
+                        
+                        //Add '+', if necessary.
+                        if ($sumRuneStat['scalar'] > 0)
+                        {
+                            $keyReadable .= "+";
+                        }
+                        
+                        //Add Percent, if necessary.
+                        if (strpos($key, 'Percent') !== FALSE) {
+                            //echo 'Found it';
+                            $statRounded = round(100 * $sumRuneStat['scalar'], 2);
+                            
+                            $keyReadable .= $statRounded . "%";
+                        }
+                        else { 
+                            //echo "nope!";
+                            $statRounded = round($sumRuneStat['scalar'], 2);
+                            $keyReadable .= $statRounded;
+                        }
+                        
+                        if (strpos($key, '5 sec.') !== FALSE) {
+                            //echo 'Found it';
+                            $statRounded = round(5 * $sumRuneStat['scalar'], 2);
+                        }
+                        
+                        
+                        //Add rest of description string, check for Scaling rune
+                        if (strpos($key, 'PerLevel') !== FALSE) {
+                            //echo 'Found it';
+                            $keyReadable .= substr($sumRuneStat['description'], strpos($sumRuneStat['description'], ' '), strpos($sumRuneStat['description'], '(') - strpos($sumRuneStat['description'], ' ')); 
+                            $keyReadable .= '(';
+                            
+                            if ($sumRuneStat['scalar'] > 0)
+                            {
+                                $keyReadable .= "+";
+                            }
+
+                            //Add Percent at Level 18, if necessary.
+                            if (strpos($key, 'Percent') !== FALSE) {
+                                //echo 'Found it';
+                                $statRounded = round((100 * 18 * $sumRuneStat['scalar']), 2);
+                                $keyReadable .=  $statRounded . "%";
+                            }
+                            else { 
+                                //echo "nope!";
+                                $statRounded = round(18 * $sumRuneStat['scalar'], 2);
+                                $keyReadable .= $statRounded;
+                            }
+                            
+                            $keyReadable .= " @ 18)";
+                            
+                            
+                            if (strpos($keyReadable, 'per level (') !== FALSE) {
+                                $keyReadable = str_replace('per level (', ' / lvl (', $keyReadable);
+                            }
+                            
+                        } else {
+                            //echo "nope!";                            
+                            $keyReadable .= substr($sumRuneStat['description'], strpos($sumRuneStat['description'], ' ')); 
+
+                        }
+                        
+                        
+                        //$runesOutput .= $sumRuneStat['scalar'] . ' ' . $key . '<br>';
+                        
+                        $runesOutput .= $keyReadable . '<br>';
+                    }
+                    
+                    return $runesOutput;                    
+                }
+                
+                function cleanRunesNames()
+                {
+                    
+                }
+                
+                function splitMasteries()
+                {
+                    $url = "./mastery/mastery.json";
+                    
+                    $masteriesJSON = json_decode(read_file($url)['body'], true);
+                    
+                    print_r($masteriesJSON);
+                    
+                    $masteryIdsList = array();
+                    
+                    foreach($masteriesJSON['data'] as $id => $mastery)
+                    {
+                        array_push($masteryIdsList, $id);
+                    }
+                    
+                    print_r($masteryIdsList);
+                    
+                    $width = 48;
+                    $height = 48;
+                    
+                    $source = imagecreatefrompng( "http://$server/mastery/gray_mastery0.png" );
+                    $source_width = imagesx( $source );
+                    $source_height = imagesy( $source );
+                    
+                    echo( "<br>Source width: $source_width\n" );
+                    echo( "<br>Source height: $source_height\n" );
+
+                    $i = 0;
+                    
+                    for( $row = 0; $row < $source_height / $height; $row++)
+                    {
+                        for( $col = 0; $col < $source_width / $width; $col++)
+                        {
+                            echo "Image: ";
+                            $fn = sprintf( "gray_$masteryIdsList[$i].jpg", $col, $row );
+                            echo( "$fn\n" );
+
+                            $im = imagecreatetruecolor( $width, $height );
+                            imagecopyresized( $im, $source, 0, 0,
+                                $col * $width, $row * $height, $width, $height,
+                                $width, $height );
+                            imagejpeg( $im, $fn );
+                            imagedestroy( $im );
+                            
+                            $i++;
+                        }
+                    } 
+                }
+                
+                function layerMasteriesStatic()
+                {
+                    $url = "./mastery/mastery.json";
+                    
+                    $masteriesJSON = json_decode(read_file($url)['body'], true);
+                    
+                    $masteryIdsList = array();
+                    
+                    foreach($masteriesJSON['data'] as $id => $mastery)
+                    {
+                        array_push($masteryIdsList, $id);
+                    }
+                    
+                    $source = imagecreatefromjpeg("http://$server/mastery/masteryback.jpg");
+                    $source_width = imagesx( $source );
+                    $source_height = imagesy( $source );
+                    
+                    echo( "<br>Source width: $source_width\n" );
+                    echo( "<br>Source height: $source_height\n" );
+                    
+                    echo "Image: ";
+                    $fn = sprintf( "TestBackground1.jpg");
+                    echo( "$fn\n" );
+                    
+                    //imagesavealpha($final_img, true);
+
+                    //$trans_colour = imagecolorallocatealpha($final_img, 0, 0, 0, 127);
+                    //imagefill($final_img, 0, 0, $trans_colour);
+
+                 
+                    $imageOut = $source;
+                    
+                        
+                    foreach ($masteryIdsList as $id => $key) {
+                        
+                        //echo( "<br>Id: $id\n" );
+                        //echo( "<br>Key: $key\n" );
+                        
+                        $pad_out_x = 24;
+                        $pad_in_x = 12;
+                        
+                        $pad_out_y = 20;
+                        $pad_in_y = 22;
+                        
+                        $page_width = 273;
+                        
+                        $image_layer = imagecreatefromjpeg("http://$server/mastery/gray_$key.jpg");
+                        
+                        $page = floor(floor(($key % 1000)) / 100) - 1;
+                        $row = floor(floor(($key % 100)) / 10) - 1;
+                        $col = ($key % 10) - 1;
+                        
+                        echo( "<br>Page: $page\n" );
+                        echo( "<br>Row: $row\n" );
+                        echo( "<br>Col: $col\n" );
+                        
+                        $layer_width = imagesx($image_layer);
+                        $layer_height = imagesy($image_layer);
+                        
+                        echo( "<br>Layer width: $layer_width\n" );
+                        echo( "<br>Layer height: $layer_height\n" );
+                        
+                        
+                        $dst_x = $page * $page_width + $pad_out_x + $col * ($layer_width + $pad_in_x);
+                        $dst_y = $pad_out_y + $row * ($layer_height + $pad_in_y);
+                        
+
+                        
+                        //echo( "<br>Key: $key\n" );
+                        
+                        $output_width = imagesx($imageOut);
+                        $output_height = imagesy($imageOut);
+                        
+                        //echo( "<br>Output width: $output_width\n" );
+                        //echo( "<br>Output height: $output_height\n" );
+
+                        //imagecopy($dst_im, $src_im, $page_width, $pad_in, $pad_out, $y, $x, $src_h)
+                                              
+                        $color = imagecolorallocate($image_layer, 50, 50, 50);
+                        drawBorder($image_layer, $color, 1);
+                        
+                        imagecopy($imageOut, $image_layer, $dst_x, $dst_y, 0, 0, $layer_width, $layer_height);
+                        
+                        $output_width = imagesx($imageOut);
+                        $output_height = imagesy($imageOut);
+                        
+                        //echo( "<br>Output width: $output_width\n" );
+                        //echo( "<br>Output height: $output_height\n" );
+                        
+
+                        
+                        //This works
+                        imagejpeg($imageOut, $fn);                        
+                        
+                        echo "\nGot Here.";
+                    }
+
+                    //imagealphablending($final_img, true);
+                    //imagesavealpha($final_img, true);
+                    //imagealphablending($final_img, true);
+
+
+                    //header('Content-Type: image/png');
+                    imagejpg($imageOut, $fn);
+                    
+                    echo "\nShould be copied.";
+                }
+                
+                
+                //The iFrame must be called in JavaScript.  We should count offense/defense here though.
+                function getMasteriesCount()
+                {
+                    global $postDataJSON;
+                    
+
+                    
+                    foreach ($postDataJSON['participants'] as $id => $player)
+                    {
+                        global $playerMasteriesCount;
+						global $playerMasteriesInsight;
+                        
+                        $offenseCount = 0;
+                        $defenseCount = 0;
+                        $utilityCount = 0;
+                        
+						$insight = false;
+												
+                        foreach ($player['masteries'] as $index => $mastery)
+                        {
+                            if ((((int)$mastery['masteryId']) % 1000) < 200)
+                            {
+                                $offenseCount += $mastery['rank'];
+                            }
+                            else if ((((int)$mastery['masteryId']) % 1000) < 300)
+                            {
+                                $defenseCount += $mastery['rank'];
+                            } 
+                            else 
+                            {
+                                $utilityCount += $mastery['rank'];
+                            } 
+							
+							if (((int)$mastery['masteryId']) == 6241) {
+								$insight = true;
+							}
+                        }
+                        
+                        array_push($playerMasteriesCount, "$offenseCount / $utilityCount / $defenseCount");
+						array_push($playerMasteriesInsight, $insight);
+						
+                    }
+                    
+
+
+
+                }
+                
+                function getKeystoneMastery() {
+                    global $postDataJSON;
+                    
+                    global $playerKeystoneMasteries;
+                    global $playerKeystoneMasteriesDescription;
+					
+					global $patchFull;
+                    
+                    $i = 0;
+                    
+                    $url = "./datadragon/$patchFull/data/en_US/mastery.json";
+
+					
+					
+                    $masteriesJSON_Global = json_decode(read_file($url)['body'], true);
+
+                    $masteryIdsList = $masteriesJSON_Global['data'];
+                    
+                    //$masteries = $postDataJSON['participants'][$i]['masteries'];                    
+                    //echo "<pre>" . print_r($masteries) . "</pre>";
+                    
+                    foreach ($postDataJSON['participants'] as $id => $player)
+                    {   
+                        $keystone = "X";
+                        $keystoneDescription = "No keystone mastery.";
+                        
+                        foreach ($postDataJSON['participants'][$i]['masteries'] as $key => $data)
+                        {
+                            
+                            
+                            if ($data['masteryId'] % 100 > 60) {
+                                $keystone = $data['masteryId'];
+                                $keystoneDescription = $masteryIdsList[$keystone]['name'] . ". \n" . $masteryIdsList[$keystone]['description'][0];
+                                //echo "<pre>" . print_r($masteryIdsList[$keystone]['description']) . "</pre>";
+                            }
+                        }
+                                
+                        $i++;
+
+                        array_push($playerKeystoneMasteries, $keystone);
+                        array_push($playerKeystoneMasteriesDescription, $keystoneDescription);
+                    }
+
+
+                }
+                
+                
+                function drawBorder(&$img, &$color, $thickness = 1) 
+                {
+                    $x1 = 0; 
+                    $y1 = 0; 
+                    $x2 = ImageSX($img) - 1; 
+                    $y2 = ImageSY($img) - 1; 
+
+                    for($i = 0; $i < $thickness; $i++) 
+                    { 
+                        ImageRectangle($img, $x1++, $y1++, $x2--, $y2--, $color); 
+                    } 
+                }
+                
+                function getLeagueIcon($leagueName)
+                {
+                    return "rankicons/" . str_replace(" ", "_", strtolower($leagueName)) . ".png";
+                }
+                
+                function round1($input) {
+                    return round($input, 1, PHP_ROUND_HALF_UP);
+                }
+                function round2($input) {
+                    return round($input, 2, PHP_ROUND_HALF_UP);
+                }
+                
+                function _bot_detected() {
+
+                    if (isset($_SERVER['HTTP_USER_AGENT']) && preg_match('/bot|crawl|slurp|spider/i', $_SERVER['HTTP_USER_AGENT'])) {
+                      return TRUE;
+                    }
+                    else {
+                      return FALSE;
+                    }
+
+                } 
+               				  
+				
+				
+				
+                ?>
+                
+                
+                
+        </td>
+        <td>
+            <div id='skyscraperContainer2' style='height:600px; width: 160px;margin-left: 50px; background-color: #CFDFFF' class='shadow'>			
+				<button style='float: left;' onclick="this.parentNode.remove();">X</button>
+				<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+				<ins class="adsbygoogle"
+					 style="display:inline-block;width:160px;height:600px; margin-right: 50px;"
+					 data-ad-client="ca-pub-6399216573107712"
+					 data-ad-slot="1622310788"></ins>
+				<script>
+				(adsbygoogle = window.adsbygoogle || []).push({});
+				</script>		
+			</div>
+            
+        </td></tr></table>
+
+
+
+
+
+                <span style='float:right;display:inline-block'><input type='checkbox' id='useDark' onclick='changeColors();'><span style='font-size:.72vw;font-weight:normal;vertical-align:top'>Dark Color Scheme</span></span>
+        </div>
+
+        <div style='text-align: center; margin: 0 auto'>Please Copy and Paste the URL (with Summoner Names) in the Lobby Chat!<span title='This supports our Website, and help your team WIN!' class='tooltip'>?</span></div>
+        <br>
+
+        <div style='width: 100%;' class='brown'><table><tr><td><img src="website/diamond_i.png" alt='diamond_i.png'></td><td style='width: 100%; font-size: 36px; text-align: center; color: #FFFFFF'>
+                <div id="LeaderboardBottom"  style='box-shadow: 10px 10px 5px rgba(50, 50, 50, .6);width:728px;height:90px;text-align: center; margin: 0 auto' align='center'>
+                                        <button style='float: left;' onclick="this.parentNode.remove();">X</button>
+                                        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                    <!-- Bottom Leaderboard Bronzodia -->
+                    <ins class="adsbygoogle"
+                         style="display:inline-block;width:728px;height:90px"
+                         data-ad-client="ca-pub-6399216573107712"
+                         data-ad-slot="7253070786"></ins>
+                    <script>
+                    (adsbygoogle = window.adsbygoogle || []).push({});
+                    </script>
+                </div>
+            </td><td><img src="website/diamond_i.png" alt='diamond_i.png' style="filter: fliph"></td></tr></table></div>
+        <table style='text-align: center' align='center'><tr><td><a href='aboutus.html'>About us</a></td><td><a href="contact.html">Contact</a></td><td><a href="privacy_policy.html">Privacy Policy</a></td><td><a href="terms_of_use.html">Terms of Use</a></td><td><a href="credits.html">Credits</a></td><td><a href="https://www.reddit.com/user/NovaDisk1/">Reddit</a></td></tr></table>
+
+
+
+
+
+
+
+
+
+
+
+        </div>  <!-- End main content div -->
+		
+		<script>
+			
+			var checkList = "" + 
+				"<div style='font-size: x-small;'>" + 
+				"<div>Mental Checklist:</div>" + 
+				"<br>" + 
+				"<div>Early Game:</div>" + 
+				"<div>Statistical outliers?</div>" + 
+				"<div>Runes/Masteries?</div>" + 
+				"<div>Trade Mechanics?</div>" + 
+				"<div>Jg Skirmishing power?</div>" + 
+				"<div>Jungle paths?</div>" + 
+				"<div>Posture okay?</div>" + 
+				"<div>Hand in stable position?</div>" + 
+				"<div>Level 1 invades?</div>" + 
+				"<div>Power spikes?</div>" + 
+				"<div>Which lanes have priority?</div>" + 
+				"<div>Snowball potential?</div>" + 
+				"<div>Who wants to roam?</div>" + 
+				"<div>Should I TP or push?</div>" + 
+				"<div>Am I safe to push?</div>" + 
+				"<div>Or should I freeze?</div>" + 
+				"<div>How long am I safe to push?</div>" + 
+				"<div>Where is everybody?</div>" + 
+				"<br>" + 
+				"<div>Mid Game:</div>" + 
+				"<div>Who is strong?</div>" + 
+				"<div>Should we siege or pick?</div>" + 
+				"<div>Should I group or split?</div>" + 
+				"<div>Which team has more tanks?</div>" + 
+				"<div>Who has initiation/pick?</div>" + 
+				"<div>What's my job in skirmishes?</div>" + 
+				"<div>What's my job on the map?</div>" + 
+				"<div>Rotate, get Drake, or shove?</div>" + 
+				"<br>" + 
+				"<div>Late Game:</div>" + 
+				"<div>How do teamfights work?</div>" + 
+				"<div>What's my job?</div>" + 
+				"<div>DPS? Zone? Protect? Initiate?</div>" + 
+				"<div>Will I get zoned?</div>" + 
+				"<div>Biggest threat to my carries?</div>" + 
+				"<div>Biggest threat to me?</div>" + 
+				"</div>";
+				
+				
+			//Swap Ad Frame from left to right, randomly.
+			if (new Date().getTime() % 2 == 0) {
+				document.getElementById("skyscraperContainer2").innerHTML = checkList;
+				
+			} else {
+				document.getElementById("skyscraperContainer").innerHTML = checkList;
+				
+			}
+		</script>
+
+<script>
+
+  function init_sortable() {
+    $( ".current_match_tbody" ).sortable({
+      update: function(event, ui) {}
+      });
+    $( ".current_match_tbody" ).on( "sortupdate", function( event, ui ) {
+        //Code to execute upon sorting.
+        getCounterData();
+        });
+
+  }
+			
+  function getCounterData() {
+    
+    $.getJSON("/data/championsSummary.json", function(championsSummary){
+        //"Vladimir":{"role":{"Top":{"percentPlayed":57.57,"winRate":"46.77"},"Middle":
+        var roles = ["Top", "Jungle", "Middle", "ADC", "Support"];
+	
+        $.each(roles, function(k, role){
+
+            var workingRow1 = $(".current_match_tbody:eq(0) > tr:eq(" + k + ")");
+
+            var champ1 = workingRow1.find(".counterPowerDisplay").attr('name');
+
+            console.log(champ1);
+            console.log(championsSummary);
+            var champ1wr = parseFloat(championsSummary[champ1].role[role] != undefined? championsSummary[champ1].role[role].winRate : undefined);
+
+            var workingRow2 = $(".current_match_tbody:eq(1) > tr:eq(" + k + ")");
+
+            var champ2 = workingRow2.find(".counterPowerDisplay").attr('name');
+            var champ2wr = parseFloat(championsSummary[champ2].role[role] != undefined? championsSummary[champ2].role[role].winRate : undefined);
+
+            console.log(champ1 + " vs " + champ2 + " " + roles[k] + ": " + champ1wr + ", " + champ2wr);
+
+
+            console.log(championsSummary[champ1].role[role]);
+
+            if (championsSummary[champ1].role[role] != undefined) {
+              workingRow1.find(".overallWinRate").html(champ1wr);
+            } else {
+              workingRow1.find(".overallWinRate").html('-');
+            }
+
+            if (championsSummary[champ2].role[role] != undefined) {
+              workingRow2.find(".overallWinRate").html(champ2wr);
+            } else {
+              workingRow2.find(".overallWinRate").html('-');
+            }
+
+            if (champ1wr != undefined && champ2wr != undefined) {
+              $.getJSON("/data/championgg/" + champ1 + '.json', function(counters) {
+                  console.log(counters);            
+                  var matchupFound = false;
+                  $.each(counters, function(i, champRole) {
+                      if (champRole.role == roles[k]) {
+                        console.log("Roles match.");
+                        $.each(champRole.matchups, function(j, matchup) {
+                            if (matchup.key == champ2) {
+                              console.log("Found matchup!");
+                              matchupFound = true;
+                              workingRow1.find(".matchupWinRate").html(matchup.winRate);
+                              workingRow2.find(".matchupWinRate").html(100 - matchup.winRate);
+
+                              console.log(champ1wr);
+                              console.log(champ2wr);
+                              var counterPower = matchup.winRate - (champ1wr + champ2wr) / 2.0;
+
+                              console.log(matchup.winRate + " - (" + champ1wr + " + " + champ2wr + ") / 2.0");
+
+                              console.log( (champ1wr + champ2wr) / 2.0);
+                              console.log(counterPower);
+
+                              workingRow1.find(".counterPower").html(Math.round(10.0 * counterPower) / 10.0);
+                              workingRow1.find(".counterPower").attr('data', counterPower);
+                              workingRow2.find(".counterPower").html(Math.round(-10.0 * counterPower) / 10.0);
+                              workingRow2.find(".counterPower").attr('data', -counterPower);
+
+                            }
+                        });
+                                        }
+                  });
+
+                 if (!matchupFound) {
+                     workingRow1.find(".matchupWinRate").html('-');
+                     workingRow2.find(".matchupWinRate").html('-');
+
+                     workingRow1.find(".counterPower").html('-');
+                     workingRow1.find(".counterPower").attr('data', '');
+                     workingRow2.find(".counterPower").html('-');
+                     workingRow2.find(".counterPower").attr('data', '');
+ 
+                 }
+
+
+              });
+            }
+        });// end each
+    }); //end getJSON
+    }
+
+/*	
+  function getCounterDataBackup() {
+    var current_match_team_0 = document.getElementsByClassName("current_match_tbody")[0];
+
+    //var team_0_rows = current_match_team_0.getElementsByTagName("tr");
+    var team_0_rows = current_match_team_0.childNodes;
+
+    //console.log(team_0_rows);
+    var current_match_team_1 = document.getElementsByClassName("current_match_tbody")[1];
+
+    //var team_1_rows = current_match_team_1.getElementsByTagName("tr");
+    var team_1_rows = current_match_team_1.childNodes;
+				
+    //var counterOutputTest = team_0_rows[0].getAttribute('id') + " vs " + team_1_rows[0].getAttribute('id') + " Top";
+
+    $.getJSON("/data/championsSummary.json", function(championsSummary){
+        //"Vladimir":{"role":{"Top":{"percentPlayed":57.57,"winRate":"46.77"},"Middle":
+        var roles = ["Top", "Jungle", "Middle", "ADC", "Support"];
+	
+        $.each(roles, function(k, role){
+
+
+            var workingRow1 = $(".current_match_tbody:eq(0) tr:eq(" + k + ")");
+
+            var champ1 = workingRow1.find(".counterPowerDisplay").attr('name');
+            var champ1wr = championsSummary[champ1].role[role] != undefined? championsSummary[champ1].role[role].winRate : undefined;
+
+            var workingRow2 = $(".current_match_tbody:eq(1) tr:eq(" + k + ")");
+
+            var champ2 = workingRow2.find(".counterPowerDisplay").attr('name');
+            var champ2wr = championsSummary[champ2].role[role] != undefined? championsSummary[champ2].role[role].winRate : undefined;
+
+            console.log(champ1 + " vs " + champ2 + " " + roles[k] + ": " + champ1wr + ", " + champ2wr);
+
+
+            console.log(championsSummary[champ1].role[role]);
+
+            if (championsSummary[champ1].role[role] != undefined) {
+              workingRow1.find(".overallWinRate").html(champ1wr);
+            }
+
+            if (championsSummary[champ2].role[role] != undefined) {
+              workingRow2.find(".overallWinRate").html(champ2wr);
+            }
+
+            if (champ1wr != undefined && champ2wr != undefined) {
+              $.getJSON("/data/championgg/" + role_team_0 + '.json', function(counters) {
+                  console.log(counters);                  
+
+              });
+            }
+	
+            var matchupWinRateObject_0 = team_0_rows[k].getElementsByClassName('matchupWinRate')[0];
+            var counterPowerObject_0 = team_0_rows[k].getElementsByClassName('counterPower')[0];
+	
+            var matchupWinRateObject_1 = team_1_rows[k].getElementsByClassName('matchupWinRate')[0];
+            var counterPowerObject_1 = team_1_rows[k].getElementsByClassName('counterPower')[0];
+	
+            if (championsSummary[role_team_0] == undefined || championsSummary[role_team_0]['role'] == undefined || championsSummary[role_team_0]['role'][role] == undefined || championsSummary[role_team_0]['role'][role]['winRate'] == undefined 
+	
+                || championsSummary[role_team_1] == undefined || championsSummary[role_team_1]['role'] == undefined || championsSummary[role_team_1]['role'][role] == undefined || championsSummary[role_team_1]['role'][role]['winRate'] == undefined) {
+		
+              //alert(role_team_0 + " vs " + role_team_1 + " has undefined!");
+	
+              matchupWinRateObject_0.innerHTML = '-';
+              counterPowerObject_0.innerHTML = '-';
+	
+              matchupWinRateObject_0.setAttribute("data", null);
+              counterPowerObject_0.setAttribute("data", null);								
+	
+              matchupWinRateObject_1.innerHTML = '-';
+              counterPowerObject_1.innerHTML = '-';
+	
+              matchupWinRateObject_1.setAttribute("data", null);
+              counterPowerObject_1.setAttribute("data", null);							
+	
+            } else {
+              //championsSummary[role_team_1] == undefined || championsSummary[role_team_1]['role'] == undefined || championsSummary[role_team_1]['role'][role] == undefined || championsSummary[role_team_1]['role'][role]['winRate'] == undefined) 
+									
+              var role_team_0_global_winrate = championsSummary[role_team_0]['role'][role]['winRate'];
+              var role_team_1_global_winrate = championsSummary[role_team_1]['role'][role]['winRate'];
+	
+              var avg = (parseFloat(role_team_0_global_winrate) + parseFloat(role_team_1_global_winrate)) / 2.0;					
+              $.getJSON("/data/championgg/" + role_team_0 + '.json', function(result){
+                  $.each(result, function(i, field){
+                      //$("div").append(field + " ");
+                      //alert(i);
+                      //alert(role);
+                      if (field['role'] == role) {
+                      //alert(field['role']);
+                      
+                      field['matchups'][role_team_1];
+		
+                      //alert(JSON.stringify(field['matchups']));
+											
+		
+                      $.each(field['matchups'], function(j, matchup) {
+                          if (matchup['key'] == role_team_1 && matchup['games'] >= 100) {
+                          var winRateMatchup = parseFloat(matchup['winRate']);
+                          var counterPower = (parseFloat(winRateMatchup) - parseFloat(avg)).toFixed(1);
+			
+                          //alert(role_team_0 + " vs " + role_team_1 + " " + role + ":" + winRateMatchup + " (" + counterPower + ")");
+													
+                          matchupWinRateObject_0.innerHTML = winRateMatchup;
+                          counterPowerObject_0.innerHTML = counterPower;													
+                          matchupWinRateObject_0.setAttribute("data", winRateMatchup);
+                          counterPowerObject_0.setAttribute("data", counterPower);
+								
+                          matchupWinRateObject_1.innerHTML = 100 - winRateMatchup;
+                          counterPowerObject_1.innerHTML = -counterPower;
+			
+                          matchupWinRateObject_1.setAttribute("data", 100 - winRateMatchup);
+                          counterPowerObject_1.setAttribute("data", -counterPower);
+													
+                          } else if (matchup['key'] == role_team_1 && matchup['games'] < 100) {
+                            //alert("Only " + matchup['games'] + " played in " + role_team_0 + " vs " + role_team_1);
+                            matchupWinRateObject_0.innerHTML = '-';
+                            counterPowerObject_0.innerHTML = '-';
+			
+                            matchupWinRateObject_0.setAttribute("data", null);
+                            counterPowerObject_0.setAttribute("data", null);
+													
+                            matchupWinRateObject_1.innerHTML = '-';
+                            counterPowerObject_1.innerHTML = '-';													
+                            matchupWinRateObject_1.setAttribute("data", null);
+                            counterPowerObject_1.setAttribute("data", null);
+                          }
+			
+                      });
+                      }
+                  });
+                  //alert(JSON.stringify(result));
+              });									
+            }
+        });
+    });
+    //alert(counterOutputTest);
+    }
+			
+*/
+
+    </script>        
+	<script>
+
+
+
+            function changeColors() {
+                document.cookie = "darkScheme=" + document.getElementById('useDark').checked + "; expires=Thu, 18 Dec 2020 12:00:00 UTC;";
+
+                //alert("Colors Changed!");
+
+                if (document.getElementById('useDark').checked) {
+                    document.getElementById('dark-styles').disabled = false;
+                    document.getElementById('light-styles').disabled = true;
+                } else {
+                    document.getElementById('dark-styles').disabled = true;
+                    document.getElementById('light-styles').disabled = false;
+                }
+            }
+
+            if (getCookie('darkScheme') == 'true') {
+                document.getElementById('useDark').checked = true;
+                document.getElementById('dark-styles').disabled = false;
+                document.getElementById('light-styles').disabled = true;
+            } else {
+                document.getElementById('useDark').checked = false;
+                document.getElementById('dark-styles').disabled = true;
+                document.getElementById('light-styles').disabled = false;
+            }
+
+        </script>
+    </body>
+

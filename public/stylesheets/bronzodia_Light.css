@@ -1,0 +1,208 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Feb 23, 2016, 1:13:00 AM
+    Author     : fric0_000
+*/
+
+body {
+    //background-color: #CCDDFF;
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#78aae4+15,88bdec+68,beddf4+100 */
+    background: #78aae4; /* Old browsers */
+    background: -moz-linear-gradient(top, #78aae4 15%, #88bdec 68%, #beddf4 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(15%,#78aae4), color-stop(68%,#88bdec), color-stop(100%,#beddf4)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top, #78aae4 15%,#88bdec 68%,#beddf4 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top, #78aae4 15%,#88bdec 68%,#beddf4 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top, #78aae4 15%,#88bdec 68%,#beddf4 100%); /* IE10+ */
+    background: linear-gradient(to bottom, #78aae4 15%,#88bdec 68%,#beddf4 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#78aae4', endColorstr='#beddf4',GradientType=0 ); /* IE6-9 */
+    
+}
+
+div.trynd {
+    background-image: url("../website/trynd_light.jpg");
+}
+
+h1, h2, h3, h4, h5, h6 {
+    //font-family: 'Corben', Georgia, Times, serif;
+    font-family: Helvetica, Arial, sans-serif;
+}
+p, div {
+    font-family: Helvetica, Arial, sans-serif;
+
+}
+
+input.bigButton {
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: large;    
+    background-color: #F0F0F0;
+}
+
+button.bigButton {
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: large;    
+    background-color: #F0F0F0;
+}
+
+.bigButton:hover {
+    background-color: #BBDDFF;
+    transition: all .35s;    
+    -webkit-box-shadow: 0 0 20px rgba(81, 203, 238, 1);
+    -moz-box-shadow: 0 0 20px rgba(81, 203, 238, 1);    
+    box-shadow: 0 0 20px rgba(81, 203, 238, .3);
+}
+
+textArea.lobbyChat {
+    font-family: Helvetica Neue,Helvetica,Arial,Verdana,sans-serif,Dotum;
+    font-size: 12px;
+    line-height: 135%;
+    transition: all .35s;
+    padding: 5px;
+    color:#555;
+    border:#35a5e5 1px solid;
+    border-radius: 8px;
+    outline:none;
+    box-shadow: 0 0 5px rgba(81, 203, 238, 0);
+    -webkit-box-shadow: 0 0 5px rgba(81, 203, 238, 0);
+    -moz-box-shadow: 0 0 5px rgba(81, 203, 238, 0);
+    overflow:hidden;
+} 
+
+textarea.lobbyChat:hover {
+    color:#333;
+    -webkit-box-shadow: 0 0 20px rgba(81, 203, 238, 1);
+    -moz-box-shadow: 0 0 20px rgba(81, 203, 238, 1);    
+    box-shadow: 0 0 20px rgba(81, 203, 238, .25);
+}
+
+
+textarea.lobbyChat:focus {
+    color:#000;
+    -webkit-box-shadow: 0 0 20px rgba(81, 203, 238, 1);
+    -moz-box-shadow: 0 0 20px rgba(81, 203, 238, 1);    
+    box-shadow: 0 0 20px rgba(81, 203, 238, 1);
+    /*
+    outline:none;
+    border:#35a5e5 1px solid;
+    
+    -webkit-box-shadow: 0 0 5px rgba(81, 203, 238, 1);
+    -moz-box-shadow: 0 0 5px rgba(81, 203, 238, 1); */
+}
+
+tr.tablePaneUpper {
+    background-image: url("../website/light_grey.png");
+}
+th.tablePaneUpper {
+    background-image: url("../website/light_grey.png");
+}
+td.tablePaneUpper {
+    background-image: url("../website/light_grey.png");
+}
+div.tablePaneUpper {
+    background-image: url("../website/light_grey.png");
+}
+
+tr.topChamps td {
+    font-size:.8vw;
+}
+
+tr.topChamps select {
+    font-size:.7vw;
+}
+
+tr.topChamps:hover {
+    background-color: #CCCCFF
+}
+
+@media screen and (min-width: 1900px) {
+    td {
+        font-size:.8vw;
+    }
+    tr.topChamps td {
+        font-size:1.0vw;
+    }
+}
+
+tr.tableTopChampsHeader {
+    background-color: #DDDDFF;
+}
+tr.tableTopChampsHeader td {
+    font-size:.74vw;
+}
+
+            
+
+table.statsTable {
+    border-collapse: collapse;
+    background-color: #DDDDDD;
+
+}
+
+.statsTable table, .statsTable td, .statsTable tr {
+    border: 1px solid #BBBBBB;
+    font-family: Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif;
+    font-size:.8vw;
+}
+
+div.counters {
+    background-color: #DDDDFF;
+}
+
+.win {
+    background: #88FFFF;
+}
+.loss {
+    background: #FF3333;
+}
+.unknown {
+    background: #DDDDDD;
+}
+
+td.padleft {
+    //padding-left: 8px;
+    background-image: url("../website/light_grey.png");
+}
+
+tr.fields {
+    background: #DDDDFF;
+    font-weight: bold;
+    text-align: center;
+    font-size: 110%;
+}
+
+button.arrow {
+    width:21%;
+    padding-top:1.25%;
+    padding-bottom:1.25%;
+    background: #EEEEFF;
+    border-radius: 5px;
+}
+
+/* unvisited link */
+a:link {
+	color: black;
+	text-decoration: none;
+}
+
+/* visited link */
+a:visited {
+	color: #250042;
+	text-decoration: none;
+}
+
+/* mouse over link */
+a:hover {
+	//color: hotpink;
+	text-decoration: none;
+}
+
+/* selected link */
+a:active {
+	color: black;
+	text-decoration: none;
+}

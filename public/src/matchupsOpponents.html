@@ -1,0 +1,25 @@
+
+<script src='./standardFunctions.js'></script>
+<script>
+
+  var champ = getUrlParameter('champ');
+  var role = getUrlParameter('role');
+
+var url = "./data/championgg/general/" + champ + ".json";
+
+//Still half PHP.  Just copy paste this, it'll be too hard and not worth it to use a separate file.
+$response = read_file($url);
+
+$statsJSON = json_decode($response['body'], true);
+
+
+foreach ($statsJSON as $key => $data) {
+    
+    
+    if ($data['role'] == $role) {
+        print_r(json_encode($data));
+    }
+}
+
+</script>
+

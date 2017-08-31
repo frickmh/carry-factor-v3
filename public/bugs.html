@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Carry-Factor.com Bug reporting</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="shortcut icon" href="website/diamond_i_favicon.png">
+        <link rel="stylesheet" type="text/css" href="bronzodia.css">
+        <script src='https://www.google.com/recaptcha/api.js'></script>
+    </head>
+    <body>
+        <div id="main_content_div" align="center">
+		<div style='width: 100%;' class="brown"><a href="index.html"><img src='website/banner-carry-factor.png' alt='Carry-Factor.com - LoL Stats Command Center.  Stats, Counterpicks, and Cooldowns'></a></div>
+
+        <div>
+            <h2>Bug Reporting</h2>
+            <br>
+            <h3>Thanks for taking the time to report a bug!  Please help us by providing the following information:</h3>
+            <form action='bugsDone.php' method="post">
+                <table><tr><td>
+                            Summoner Name:</td><td><input type="text" name='summonerName'>
+                    </td></tr><tr><td>
+                            Region:</td><td><select name='region'>
+                                <option value="na" selected="selected">NA</option>
+                                <option value="euw">EUW</option>
+                                <option value="eune">EUNE</option>
+                                <option value="br">BR</option>
+                                <option value="kr">KR</option>
+                                <option value="lan">LAN</option>
+                                <option value="las">LAS</option>
+                                <option value="oce">OCE</option>
+                                <option value="ru">RU</option>
+								<option value="tr">JP</option>
+                                <option value="tr">TR</option>
+                            </select>
+                    </td></tr><tr><td>
+                            Browser and Version:</td><td><input type="text" name='browser'>
+                    </td></tr><tr><td>
+                            Problem URL:</td><td><input type="text" name='url' style='width: 500px;'>        
+                    </td></tr><tr><td>
+                        Problem Description:</td><td><textarea name='description' style='width: 500px;'></textarea>
+                    </td></tr><tr><td>
+                        Steps taken to Reproduce Error:</td><td><textarea name='steps' style='width: 500px;'></textarea>
+                    </td></tr><tr><td>
+                        </td><td><div class="g-recaptcha" data-sitekey="6Ld54hYUAAAAAK7Yfm4kh97psopp8-PZ46GsPW2P"></div>
+                    </td></tr><tr><td>
+                        </td><td><input style='float:left; height: 50px; width: 120px;' type="submit" value="Submit" class='bigButton shadow'>
+                    </td></tr>                    
+                </table>
+                
+            </form>
+            <br>
+            <button class='bigButton shadow' onclick="viewBugsList();">View Existing Bugs</button>
+            <br><br>
+        
+        
+        </div>
+        
+        
+                <div style='width: 100%;' class='brown'><table><tr><td><img src="website/diamond_i.png" alt='diamond_i.png'></td><td style='width: 100%; font-size: 36px; text-align: center; color: #FFFFFF'>
+                <div id="LeaderboardBottom"  style='box-shadow: 10px 10px 5px rgba(50, 50, 50, .6);width:728px;height:90px;text-align: center; margin: 0 auto' align='center'>
+              
+                </div>
+            </td><td><img src="website/diamond_i.png" alt='diamond_i.png' style="filter: fliph"></td></tr></table></div>
+        </div>
+        
+        <script>
+            function viewBugsList() {
+                window.location.href = 'bugsList.php';
+    
+            }
+        </script>
+    </body>
+</html>
