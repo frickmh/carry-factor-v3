@@ -7,10 +7,15 @@
 
 #Will need NVM (Node Version Manager) to install node.
 
+#Global npm modules:
+# supervisor
+# pm2
+
 # Crontab tasks: (Change paths as needed)
 #5 4,16 * * * /usr/bin/python /home/frickmh55449/public_html/data/updateChampStats.py
 #15 4,16 * * * /usr/bin/php /home/frickmh55449/public_html/data/buildRoles.php
 #5 5 * * * /usr/bin/php /home/frickmh55449/public_html/datadragon/updateDataDragon.php
+#@reboot /bin/bash /home/frickmh/carry-factor-v3/src_srv/cfspider/cfspider/spiders/start_cfspider.sh
 
 #Other Tasks to execute:
 #./src_srv/upkeep/resetDatabase.py (Run ON SETUP.  This initializes the database, and sets up start points for the spiders.)

@@ -48,7 +48,7 @@ if (region == '' or not region in validRegions):
 db = MySQLdb.connect(host="localhost",    # your host, usually localhost
                  user="frickmh",         # your username
                  passwd="rbbsbfh11",  # your password
-                 db="carryfactor")        # name of the data base    
+                 db="carryfactor_" + region)        # name of the data base    
 
 cur = db.cursor()
 
