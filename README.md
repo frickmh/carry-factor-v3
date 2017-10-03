@@ -15,6 +15,7 @@
 #5 4,16 * * * /usr/bin/python /home/frickmh55449/public_html/data/updateChampStats.py
 #15 4,16 * * * /usr/bin/php /home/frickmh55449/public_html/data/buildRoles.php
 #5 5 * * * /usr/bin/php /home/frickmh55449/public_html/datadragon/updateDataDragon.php
+#6 5 * * * /usr/bin/python /home/frickmh/carry-factor-v3/src_srv/upkeep/cleanDatabase.py
 #@reboot /bin/bash /home/frickmh/carry-factor-v3/src_srv/cfspider/cfspider/spiders/start_cfspider.sh
 
 #Other Tasks to execute:

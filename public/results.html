@@ -276,7 +276,9 @@ GundayMonday joined the lobby.
                   buildPositions(player, champsListByIdJSON[0]);
                   buildRoles(i, player, playerCount, data.region);
 
-                  buildScores(i, player, data.region, data.matches, champsListByIdJSON[0].data);
+                  var missingMatches = { "region" : data.region, "matches" : [] };
+
+                  buildScores(i, player, data.region, data.matches, champsListByIdJSON[0].data, missingMatches);
 
                   buildCounters(i, champsListByNameJSON[0]);
 
@@ -717,7 +719,7 @@ GundayMonday joined the lobby.
     }
 
 
-    function buildScores(i, player, region, matches, champsListById) {
+    function buildScores(i, player, region, matches, champsListById, missingMatches) {
 
       //console.log(champsListById);
 
@@ -1542,6 +1544,9 @@ xxxxxxxx  Function for creating Stats Table  xxxxxxxxxxx
             
             function swapFarRight(i, j) {
                 //console.log("i: ", + i + " ,j: " + j);
+
+                j = j;
+
                 var playerOldSlot = document.getElementsByClassName('tableInner')[parseInt(i)];
                 var playerFarRight = document.getElementsByClassName('tableInner')[parseInt(j - 1)];
 
@@ -1550,9 +1555,9 @@ xxxxxxxx  Function for creating Stats Table  xxxxxxxxxxx
                 playerFarRight.innerHTML = playerOldSlot.innerHTML;
                 playerOldSlot.innerHTML = tempPlayerData;   
                 
-                swapNamesUrl(i, j);
+                swapNamesUrl(i, j - 1);
                 
-                $.fn.gotof(i, j);
+                $.fn.gotof(i, j - 1);
             }
             
             function swapLeft(i, j) {
