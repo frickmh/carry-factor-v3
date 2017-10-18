@@ -1,4 +1,5 @@
 module.exports = {
+  //Requires a valid region (e.g. 'na1') and a valid number of threads (20 threads is about 2400 matches/min, which is about what I want)
   start: function(region, threads) {
     var Spider = require('node-spider');
 
