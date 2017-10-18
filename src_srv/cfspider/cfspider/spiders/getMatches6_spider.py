@@ -289,7 +289,7 @@ class GetMatches6Spider(scrapy.Spider):
             signal.signal(signal.SIGTERM, self.exit_gracefully)
 
           def exit_gracefully(self,signum, frame):
-            print('You pressed Ctrl+C! getMatches5_spider Killing gracefully...')
+            print('You pressed Ctrl+C! getMatches6_spider Killing gracefully...')
             self.kill_now = True
 
         killer = GracefulKiller()

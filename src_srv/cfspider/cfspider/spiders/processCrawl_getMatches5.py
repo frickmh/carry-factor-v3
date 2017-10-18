@@ -61,21 +61,38 @@ def run_spider():
 
 i = 0
 
-running = True
 
-while running == True:
+class GracefulKiller:
+  kill_now = False
+  def __init__(self):
+    signal.signal(signal.SIGINT, self.exit_gracefully)
+    signal.signal(signal.SIGTERM, self.exit_gracefully)
+
+  def exit_gracefully(self,signum, frame):
+    print('You pressed Ctrl+C! processCrawl Killing gracefully...')
+    self.kill_now = True
+
+killer = GracefulKiller()
+
+
+#while running == True:
+while True:
+
+  if killer.kill_now:
+    break
+
 #def signal_handler(signal, frame):
-  def signal_handler(signal, frame):
-    print('You pressed Ctrl+C!')
-    global running
-    print(running)
-    running = False
-    print("RunningTest: " + str(running))
+#  def signal_handler(signal, frame):
+#    print('You pressed Ctrl+C!')
+#    global running
+#    print(running)
+#    running = False
+#    print("RunningTest: " + str(running))
+#
+#  signal.signal(signal.SIGINT, signal_handler)
 
-  signal.signal(signal.SIGINT, signal_handler)
 
-
-  print("Running: " + str(running))
+#  print("Running: " + str(running))
 
   print('')
   print('run ' + str(i) + ':')
