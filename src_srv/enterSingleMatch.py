@@ -81,14 +81,18 @@ print(region)
 print("INSTANTIATED at " + time.ctime() + "!")
 
 
+startTime = time.time();
  
-url = "https://" + region + ".api.riotgames.com/lol/match/v3/matches/" + str(match) + "?api_key=" + api_key
+#url = "https://" + region + ".api.riotgames.com/lol/match/v3/matches/" + str(match) + "?api_key=" + api_key
+url = "https://" + region + ".api.riotgames.com/lol/match/v3/matches/" + str(match)
 
 print(url)
 
 #time.sleep(5)
 
 req = urllib.request.Request(url);
+req.add_header('X-Riot-Token',api_key)
+print((time.time() - startTime) * 1000)
 
 response = ""
 
@@ -103,8 +107,8 @@ except urllib.error.HTTPError as e:
 #The spider will execute 'parse' every time it has a 200 request
 print("PARSING!")
 
+print((time.time() - startTime) * 1000)
 #Spider start time
-startTime = time.time();
 
 body = json.loads(response)
 queueId = body["queueId"] #Has to be 420
@@ -122,9 +126,10 @@ if int(queueId) == 420:
 
     print("Solo Queue!")
 
+    print((time.time() - startTime) * 1000)
     #Database ops here
 
-    startTime = time.time()
+#    startTime = time.time()
 
     gameCreation = int(body["gameCreation"] / 1000)
 
@@ -206,7 +211,12 @@ if int(queueId) == 420:
     print(sql)
 
     cur.execute(sql)
+
+    print((time.time() - startTime) * 1000)
+
     db.commit()
+
+    print((time.time() - startTime) * 1000)
 
     #SoloQ Match closing operations here.
     print(str(gameId) + " " + elo + ", " + str(200) + ",")
