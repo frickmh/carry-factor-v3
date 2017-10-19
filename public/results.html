@@ -23,13 +23,13 @@
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
         <script src="https://code.jquery.com/color/jquery.color-2.1.2.min.js"></script>
-        <script src="/public/src/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
-        <script src="/public/src/jquery-ui-1.12.1.custom/external/jquery/jquery.js"></script>
+        <script src="/src/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
+        <script src="/src/jquery-ui-1.12.1.custom/external/jquery/jquery.js"></script>
 		
 	<script src="src/standardFunctions.js"></script>
 	<script src="src/counterPicks.js"></script>
 
-        <script src="/reload/reload.js"></script> 
+        <!--<script src="/reload/reload.js"></script> -->
  
       
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -201,6 +201,10 @@ GundayMonday joined the lobby.
 								break;
 							}
 						}
+					} else {
+						//Default to NA, in case nothing is selected.
+						var sel = document.getElementById('regionvisible');
+						sel.selectedIndex = 0;
 					}
 				</script>
 				
@@ -218,6 +222,8 @@ GundayMonday joined the lobby.
       addWall();
 
       $.when(champsListByNameAjax, champsListByIdAjax).done(function(champsListByNameJSON, champsListByIdJSON) {
+
+        console.log(myUrl);
 
         //Main control function which uses JSON data for all players to generate a graphical diaplay table.
         $.ajax({
@@ -270,7 +276,9 @@ GundayMonday joined the lobby.
                   buildPositions(player, champsListByIdJSON[0]);
                   buildRoles(i, player, playerCount, data.region);
 
-                  buildScores(i, player, data.region, data.matches, champsListByIdJSON[0].data);
+                  var missingMatches = { "region" : data.region, "matches" : [] };
+
+                  buildScores(i, player, data.region, data.matches, champsListByIdJSON[0].data, missingMatches);
 
                   buildCounters(i, champsListByNameJSON[0]);
 
@@ -711,7 +719,7 @@ GundayMonday joined the lobby.
     }
 
 
-    function buildScores(i, player, region, matches, champsListById) {
+    function buildScores(i, player, region, matches, champsListById, missingMatches) {
 
       //console.log(champsListById);
 
@@ -1343,7 +1351,7 @@ xxxxxxxx  Function for creating Stats Table  xxxxxxxxxxx
 		
 		
         <script>
-            enableContinueToGameStats();
+            //enableContinueToGameStats();
             
             function enableContinueToGameStats() {
                 var postDataLobbyChat = document.getElementById('postDataLobbyChat').value;
@@ -1536,6 +1544,9 @@ xxxxxxxx  Function for creating Stats Table  xxxxxxxxxxx
             
             function swapFarRight(i, j) {
                 //console.log("i: ", + i + " ,j: " + j);
+
+                j = j;
+
                 var playerOldSlot = document.getElementsByClassName('tableInner')[parseInt(i)];
                 var playerFarRight = document.getElementsByClassName('tableInner')[parseInt(j - 1)];
 
@@ -1544,9 +1555,9 @@ xxxxxxxx  Function for creating Stats Table  xxxxxxxxxxx
                 playerFarRight.innerHTML = playerOldSlot.innerHTML;
                 playerOldSlot.innerHTML = tempPlayerData;   
                 
-                swapNamesUrl(i, j);
+                swapNamesUrl(i, j - 1);
                 
-                $.fn.gotof(i, j);
+                $.fn.gotof(i, j - 1);
             }
             
             function swapLeft(i, j) {

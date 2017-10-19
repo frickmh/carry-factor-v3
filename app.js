@@ -89,6 +89,8 @@ app.use(function(err, req, res, next) {
 
 //app.use('/results.html*', limiter);
 
+var NodeSpider = require('./src_srv/nodeSpider.js');
 
+NodeSpider.start('na1', 20);
 
 module.exports = app;

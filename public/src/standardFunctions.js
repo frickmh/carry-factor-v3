@@ -5,8 +5,10 @@
 //Round1 - Simple round to 1 decimal
 //Round2 - Simple round to 2 decimals
 
+console.log("Hello from standardFunctions!");
 
 var getUrlParameter = function getUrlParameter(sParam) {
+                console.log("Getting Url Param: " + sParam);
 		//console.log(window.location.search.substring(1));
 		var sPageURL,
 			sURLVariables,
@@ -97,9 +99,19 @@ NodeList.prototype.remove = HTMLCollection.prototype.remove = function() {
     }
 }
 
+function round1(myNum) {
+  return Math.round(10.0 * myNum) / 10;
+
+}
+
+function round2(myNum) {
+  return Math.round(100.0 * myNum) / 100;
+
+}
+
 function addWall() {
 	
-	console.log("Checking if we need to Add a Wall13");
+	console.log("Checking if we need to Add a Wall15");
 
 	if( window.canRunAds === undefined || window.madsbygoogle === undefined ){
 
@@ -211,12 +223,4 @@ function addWall() {
 	
 }
 
-function round1(myNum) {
-  return Math.round(10.0 * myNum) / 10;
 
-}
-
-function round2(myNum) {
-  return Math.round(100.0 * myNum) / 100;
-
-}

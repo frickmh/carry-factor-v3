@@ -35,7 +35,9 @@
         <script src="src/standardFunctions.js"></script>
         <script src="src/counterPicks.js"></script>
 
-        <script src="/reload/reload.js"></script>
+        <script src="/ads.js"></script>
+        <script src="/adsbygoogle.js"></script>
+        <!--<script src="/reload/reload.js"></script>-->
 
 
 
@@ -446,6 +448,8 @@ GundayMonday joined the lobby.
     $( document ).ready(function() {
       console.log("Document ready!");
 
+      addWall();
+
       //Main control function which uses JSON data for all players to generate a graphical diaplay table.
       $.ajax({
           url: myUrl,
@@ -560,7 +564,7 @@ GundayMonday joined the lobby.
                   //Build Recent Roles played in the last 20 games.
                   buildPositions(player, champsListByIdJSON[0]);
 
-                  console.log(player);
+                  //console.log(player);
 
                   $(".recentRoles:eq(" + i + ")").html('');
 
@@ -589,7 +593,7 @@ GundayMonday joined the lobby.
                   
                   $(".seasonWinLoss:eq(" + i + ")").html(player.leagues.wins + "/" + player.leagues.losses);
 
-                  console.log(player);
+                  //console.log(player);
                   
   
 
@@ -633,7 +637,7 @@ GundayMonday joined the lobby.
 		  playerMatches = playerMatches.slice(0,10);
 
 
-		  console.log(playerMatches);
+		  //console.log(playerMatches);
 
 
 		  var matchList = (player.matchList != undefined && player.matchList.status == undefined ) ? player.matchList.matches : {};
@@ -644,14 +648,14 @@ GundayMonday joined the lobby.
 		    for (var k = 0; k < playerMatches.length; k++) {
 		      if (playerMatches[k].gameId == matchList[j].gameId) {
 			matchFound = true;
-			console.log("Found!");
+			//console.log("Found!");
 
 		      }
 		    }
 		    if (!matchFound) {
 		      var match = { "champ" : champsListByIdJSON[0].data[matchList[j].champion], "gameCreation" : matchList[j].timestamp / 1000, "gameId" : matchList[j].gameId, "toUpdate" : true};
 
-		      console.log("Not found, adding!");
+		      //console.log("Not found, adding!");
 
 		      playerMatches.push(match);
 		    }
@@ -740,7 +744,7 @@ GundayMonday joined the lobby.
                   $(".recentWins:eq(" + i + ") > tbody").append(trRecentWins);
 
 
-                  console.log(playerMatchesFull);
+                  //console.log(playerMatchesFull);
 
 
 		  var playerChamps = {};
@@ -763,7 +767,7 @@ GundayMonday joined the lobby.
 		  }
 
 
-                  console.log(playerChamps);
+                  //console.log(playerChamps);
 
 
                   //Build stats - KDA, games played, Win Percent
@@ -778,9 +782,9 @@ GundayMonday joined the lobby.
                   var assists = playerChamps[player.champion.key] != undefined ? playerChamps[player.champion.key].assists : 0;
 
 
-                  console.log(games);
+                  //console.log(games);
 
-                  console.log(gamesPlayedContainer[0]);
+                  //console.log(gamesPlayedContainer[0]);
 
                   //gamesPlayedContainer.html("(" + games + ")");
                   gamesPlayedContainer.html("(" + games + ")");
@@ -824,7 +828,7 @@ GundayMonday joined the lobby.
                   //Build Runes display.
                   var tableRunesDisplay = $('<table></table>').addClass('tableRunesDisplay');
 
-                  console.log(runeJSON);
+                  //console.log(runeJSON);
 
                   $.each(player.runes, function(j, rune) {
                       var tr = $('<tr></tr>');
@@ -833,7 +837,7 @@ GundayMonday joined the lobby.
                       var span = $('<span></span>').html(rune.count + "x " + runeJSON[0].data[rune.runeId].description);
 
 
-                      console.log(rune);
+                      //console.log(rune);
 
                        var img = $('<img>');
 
@@ -924,7 +928,7 @@ GundayMonday joined the lobby.
                   //console.log(cooldownDisplay);
                   //console.log(champSpellJSON[0]);
 
-                  console.log(champSpellJSON[0]);
+                  //console.log(champSpellJSON[0]);
                   //console.log(champSpellJSON[0].data[player.champion.key]);
                   $.each(champSpellJSON[0].data[player.champion.key].spells, function(j, spell) {
                       //console.log(spell.key);
@@ -1126,14 +1130,14 @@ GundayMonday joined the lobby.
 
    function buildAverageRank(allPlayersJSON) {
 
-     console.log(allPlayersJSON);
+     //console.log(allPlayersJSON);
 
      var rankSum = 0;
      var rankedPlayerCount = 0;
 
      $.each(allPlayersJSON.players, function(playerKey, playerValue) {
 
-         console.log(playerValue);
+         //console.log(playerValue);
 
          if (playerValue.leagues == undefined || playerValue.leagues.tier == undefined || playerValue.leagues.tier.toLowerCase() == "unranked") {
            return true;
