@@ -21,6 +21,8 @@ import os
 
 import logging
 
+import signal
+
 #This spider crawls Matches in the Riot API.
 #Region must be provided when calling from command line.
 class GetMatches5Spider(scrapy.Spider):
@@ -38,6 +40,158 @@ class GetMatches5Spider(scrapy.Spider):
     lastSuccess = match
 
     soloQcount = 0
+
+    gameId_buffer = []
+    responseCode_buffer = []
+    gameCreation_buffer = []
+    isPlatinum_buffer = []
+
+    summonerId0_buffer = []
+    champId0_buffer = []
+    kills0_buffer = []
+    deaths0_buffer = []
+    assists0_buffer = []
+    win0_buffer = []
+
+    summonerId1_buffer = []
+    champId1_buffer = []
+    kills1_buffer = []
+    deaths1_buffer = []
+    assists1_buffer = []
+    win1_buffer = []
+
+    summonerId2_buffer = []
+    champId2_buffer = []
+    kills2_buffer = []
+    deaths2_buffer = []
+    assists2_buffer = []
+    win2_buffer = []
+
+    summonerId3_buffer = []
+    champId3_buffer = []
+    kills3_buffer = []
+    deaths3_buffer = []
+    assists3_buffer = []
+    win3_buffer = []
+
+    summonerId4_buffer = []
+    champId4_buffer = []
+    kills4_buffer = []
+    deaths4_buffer = []
+    assists4_buffer = []
+    win4_buffer = []
+
+    summonerId5_buffer = []
+    champId5_buffer = []
+    kills5_buffer = []
+    deaths5_buffer = []
+    assists5_buffer = []
+    win5_buffer = []
+
+    summonerId6_buffer = []
+    champId6_buffer = []
+    kills6_buffer = []
+    deaths6_buffer = []
+    assists6_buffer = []
+    win6_buffer = []
+
+    summonerId7_buffer = []
+    champId7_buffer = []
+    kills7_buffer = []
+    deaths7_buffer = []
+    assists7_buffer = []
+    win7_buffer = []
+
+    summonerId8_buffer = []
+    champId8_buffer = []
+    kills8_buffer = []
+    deaths8_buffer = []
+    assists8_buffer = []
+    win8_buffer = []
+
+    summonerId9_buffer = []
+    champId9_buffer = []
+    kills9_buffer = []
+    deaths9_buffer = []
+    assists9_buffer = []
+    win9_buffer = []
+
+    def clearBuffers(self):
+      self.gameId_buffer = []
+      self.responseCode_buffer = []
+      self.gameCreation_buffer = []
+      self.isPlatinum_buffer = []
+
+      self.summonerId0_buffer = []
+      self.champId0_buffer = []
+      self.kills0_buffer = []
+      self.deaths0_buffer = []
+      self.assists0_buffer = []
+      self.win0_buffer = []
+
+      self.summonerId1_buffer = []
+      self.champId1_buffer = []
+      self.kills1_buffer = []
+      self.deaths1_buffer = []
+      self.assists1_buffer = []
+      self.win1_buffer = []
+
+      self.summonerId2_buffer = []
+      self.champId2_buffer = []
+      self.kills2_buffer = []
+      self.deaths2_buffer = []
+      self.assists2_buffer = []
+      self.win2_buffer = []
+
+      self.summonerId3_buffer = []
+      self.champId3_buffer = []
+      self.kills3_buffer = []
+      self.deaths3_buffer = []
+      self.assists3_buffer = []
+      self.win3_buffer = []
+
+      self.summonerId4_buffer = []
+      self.champId4_buffer = []
+      self.kills4_buffer = []
+      self.deaths4_buffer = []
+      self.assists4_buffer = []
+      self.win4_buffer = []
+
+      self.summonerId5_buffer = []
+      self.champId5_buffer = []
+      self.kills5_buffer = []
+      self.deaths5_buffer = []
+      self.assists5_buffer = []
+      self.win5_buffer = []
+
+      self.summonerId6_buffer = []
+      self.champId6_buffer = []
+      self.kills6_buffer = []
+      self.deaths6_buffer = []
+      self.assists6_buffer = []
+      self.win6_buffer = []
+
+      self.summonerId7_buffer = []
+      self.champId7_buffer = []
+      self.kills7_buffer = []
+      self.deaths7_buffer = []
+      self.assists7_buffer = []
+      self.win7_buffer = []
+
+      self.summonerId8_buffer = []
+      self.champId8_buffer = []
+      self.kills8_buffer = []
+      self.deaths8_buffer = []
+      self.assists8_buffer = []
+      self.win8_buffer = []
+
+      self.summonerId9_buffer = []
+      self.champId9_buffer = []
+      self.kills9_buffer = []
+      self.deaths9_buffer = []
+      self.assists9_buffer = []
+      self.win9_buffer = []
+
 
 
     def __init__(self, region=''):
@@ -128,11 +282,83 @@ class GetMatches5Spider(scrapy.Spider):
        
         print("STARTED!")        
 
+        class GracefulKiller:
+          kill_now = False
+          def __init__(self):
+            signal.signal(signal.SIGINT, self.exit_gracefully)
+            signal.signal(signal.SIGTERM, self.exit_gracefully)
+
+          def exit_gracefully(self,signum, frame):
+            print('You pressed Ctrl+C! getMatches5_spider Killing gracefully...')
+            self.kill_now = True
+
+        killer = GracefulKiller()
+
  
         for i in range(startMatchFile, endMatchFile):
+
+          if killer.kill_now:
+            break
+
           url = "https://" + self.region + ".api.riotgames.com/lol/match/v3/matches/" + str(i) + "?api_key=" + self.api_key
           
-          #print(url)
+          #print(url
+          
+          if len(self.gameId_buffer) >= 10:
+            print(self.gameId_buffer)
+
+
+
+            sqlInsertInto = "INSERT INTO `matches` (gameId, responseCode, gameCreation, " +\
+              "summonerId0, champId0, kills0, deaths0, assists0, win0, " +\
+              "summonerId1, champId1, kills1, deaths1, assists1, win1, " +\
+              "summonerId2, champId2, kills2, deaths2, assists2, win2, " +\
+              "summonerId3, champId3, kills3, deaths3, assists3, win3, " +\
+              "summonerId4, champId4, kills4, deaths4, assists4, win4, " +\
+              "summonerId5, champId5, kills5, deaths5, assists5, win5, " +\
+              "summonerId6, champId6, kills6, deaths6, assists6, win6, " +\
+              "summonerId7, champId7, kills7, deaths7, assists7, win7, " +\
+              "summonerId8, champId8, kills8, deaths8, assists8, win8, " +\
+              "summonerId9, champId9, kills9, deaths9, assists9, win9, " +\
+              "isPlatinum) "
+            sqlValues = "VALUES "
+
+            for j in range(0, len(self.gameId_buffer)):
+               sqlValues = ''.join((sqlValues, "(", self.gameId_buffer[j], ", ", self.responseCode_buffer[j], ", ", self.gameCreation_buffer[j], ", ",\
+                 self.summonerId0_buffer[j], ", ", self.champId0_buffer[j], ", ", self.kills0_buffer[j], ", ", self.deaths0_buffer[j], ", ", self.assists0_buffer[j], ", ", self.win0_buffer[j], ", ",\
+                 self.summonerId1_buffer[j], ", ", self.champId1_buffer[j], ", ", self.kills1_buffer[j], ", ", self.deaths1_buffer[j], ", ", self.assists1_buffer[j], ", ", self.win1_buffer[j], ", ",\
+                 self.summonerId2_buffer[j], ", ", self.champId2_buffer[j], ", ", self.kills2_buffer[j], ", ", self.deaths2_buffer[j], ", ", self.assists2_buffer[j], ", ", self.win2_buffer[j], ", ",\
+                 self.summonerId3_buffer[j], ", ", self.champId3_buffer[j], ", ", self.kills3_buffer[j], ", ", self.deaths3_buffer[j], ", ", self.assists3_buffer[j], ", ", self.win3_buffer[j], ", ",\
+                 self.summonerId4_buffer[j], ", ", self.champId4_buffer[j], ", ", self.kills4_buffer[j], ", ", self.deaths4_buffer[j], ", ", self.assists4_buffer[j], ", ", self.win4_buffer[j], ", ",\
+                 self.summonerId5_buffer[j], ", ", self.champId5_buffer[j], ", ", self.kills5_buffer[j], ", ", self.deaths5_buffer[j], ", ", self.assists5_buffer[j], ", ", self.win5_buffer[j], ", ",\
+                 self.summonerId6_buffer[j], ", ", self.champId6_buffer[j], ", ", self.kills6_buffer[j], ", ", self.deaths6_buffer[j], ", ", self.assists6_buffer[j], ", ", self.win6_buffer[j], ", ",\
+                 self.summonerId7_buffer[j], ", ", self.champId7_buffer[j], ", ", self.kills7_buffer[j], ", ", self.deaths7_buffer[j], ", ", self.assists7_buffer[j], ", ", self.win7_buffer[j], ", ",\
+                 self.summonerId8_buffer[j], ", ", self.champId8_buffer[j], ", ", self.kills8_buffer[j], ", ", self.deaths8_buffer[j], ", ", self.assists8_buffer[j], ", ", self.win8_buffer[j], ", ",\
+                 self.summonerId9_buffer[j], ", ", self.champId9_buffer[j], ", ", self.kills9_buffer[j], ", ", self.deaths9_buffer[j], ", ", self.assists9_buffer[j], ", ", self.win9_buffer[j], ", ",\
+                 self.isPlatinum_buffer[j], ")"));
+               if j < len(self.gameId_buffer) - 1:
+                 sqlValues += ", "
+           
+
+            sqlOnDuplicate = " ON DUPLICATE KEY UPDATE responseCode = VALUES(responseCode), gameCreation = VALUES(gameCreation), " +\
+              "summonerId0 = VALUES(summonerId0), champId0 = VALUES(champId0), kills0 = VALUES(kills0), deaths0 = VALUES(deaths0), assists0 = VALUES(assists0), win0 = VALUES(win0), " +\
+              "summonerId1 = VALUES(summonerId1), champId1 = VALUES(champId1), kills1 = VALUES(kills1), deaths1 = VALUES(deaths1), assists1 = VALUES(assists1), win1 = VALUES(win1), " +\
+              "summonerId2 = VALUES(summonerId2), champId2 = VALUES(champId2), kills2 = VALUES(kills2), deaths2 = VALUES(deaths2), assists2 = VALUES(assists2), win2 = VALUES(win2), " +\
+              "summonerId3 = VALUES(summonerId3), champId3 = VALUES(champId3), kills3 = VALUES(kills3), deaths3 = VALUES(deaths3), assists3 = VALUES(assists3), win3 = VALUES(win3), " +\
+              "summonerId4 = VALUES(summonerId4), champId4 = VALUES(champId4), kills4 = VALUES(kills4), deaths4 = VALUES(deaths4), assists4 = VALUES(assists4), win4 = VALUES(win4), " +\
+              "summonerId5 = VALUES(summonerId5), champId5 = VALUES(champId5), kills5 = VALUES(kills5), deaths5 = VALUES(deaths5), assists5 = VALUES(assists5), win5 = VALUES(win5), " +\
+              "summonerId6 = VALUES(summonerId6), champId6 = VALUES(champId6), kills6 = VALUES(kills6), deaths6 = VALUES(deaths6), assists6 = VALUES(assists6), win6 = VALUES(win6), " +\
+              "summonerId7 = VALUES(summonerId7), champId7 = VALUES(champId7), kills7 = VALUES(kills7), deaths7 = VALUES(deaths7), assists7 = VALUES(assists7), win7 = VALUES(win7), " +\
+              "summonerId8 = VALUES(summonerId8), champId8 = VALUES(champId8), kills8 = VALUES(kills8), deaths8 = VALUES(deaths8), assists8 = VALUES(assists8), win8 = VALUES(win8), " +\
+              "summonerId9 = VALUES(summonerId9), champId9 = VALUES(champId9), kills9 = VALUES(kills9), deaths9 = VALUES(deaths9), assists9 = VALUES(assists9), win9 = VALUES(win9), " +\
+              "isPlatinum = VALUES(isPlatinum);"
+
+            sql = sqlInsertInto + sqlValues + sqlOnDuplicate
+
+            print(sql)
+
+            self.clearBuffers()
+            
 
           #time.sleep(5)
           yield scrapy.Request(url=url, callback=self.parse, errback=self.process_exception, meta={'match':i})
@@ -179,6 +405,11 @@ class GetMatches5Spider(scrapy.Spider):
             sqlValues = "VALUES (" + str(gameId) + ", " + str(response.status) + ", " + str(gameCreation)
             sqlOnDuplicate = "ON DUPLICATE KEY UPDATE responseCode = " + str(response.status) + ", gameCreation = " + str(gameCreation)
 
+            self.gameId_buffer.append(str(gameId))
+            self.responseCode_buffer.append(str(response.status))
+            self.gameCreation_buffer.append(str(gameCreation))
+
+
             for participantIdentity in body["participantIdentities"]:
               #print(participantIdentity)
               participantId = participantIdentity['participantId']
@@ -199,6 +430,7 @@ class GetMatches5Spider(scrapy.Spider):
 #                  print(championId)
 
                   pid = str(participantId - 1)
+                  pidInt = participantId - 1
 
 
 #                  print("Win:" + str(win))
@@ -207,6 +439,87 @@ class GetMatches5Spider(scrapy.Spider):
                   sqlInsertInto += ", summonerId" + pid + ", champId" + pid + ", kills" + pid + ", deaths" + pid + ", assists" + pid + ", win" + pid
                   sqlValues += ", " + str(summonerId) + ", " + str(championId) + ", " + str(kills) + ", " + str(deaths)  + ", " + str(assists) + ", " + ("b'1'" if win == True else "b'0'")
                   sqlOnDuplicate += ", summonerId" + pid + " = " + str(summonerId) + ", champId" + pid + " = " + str(championId) + ", kills" + pid + " = " + str(kills) + ", deaths" + pid + " = " + str(deaths) + ", assists" + pid + " = " + str(assists) + ", win" + pid + " = " + ("b'1'" if win == True else "b'0'")
+
+                  if pidInt == 0:
+                    self.summonerId0_buffer.append(str(summonerId))
+                    self.champId0_buffer.append(str(championId))
+                    self.kills0_buffer.append(str(kills))
+                    self.deaths0_buffer.append(str(deaths))
+                    self.assists0_buffer.append(str(assists))
+                    self.win0_buffer.append("b'1'" if win == True else "b'0'")
+
+                  if pidInt == 1:
+                    self.summonerId1_buffer.append(str(summonerId))
+                    self.champId1_buffer.append(str(championId))
+                    self.kills1_buffer.append(str(kills))
+                    self.deaths1_buffer.append(str(deaths))
+                    self.assists1_buffer.append(str(assists))
+                    self.win1_buffer.append("b'1'" if win == True else "b'0'")
+
+                  if pidInt == 2:
+                    self.summonerId2_buffer.append(str(summonerId))
+                    self.champId2_buffer.append(str(championId))
+                    self.kills2_buffer.append(str(kills))
+                    self.deaths2_buffer.append(str(deaths))
+                    self.assists2_buffer.append(str(assists))
+                    self.win2_buffer.append("b'1'" if win == True else "b'0'")
+
+                  if pidInt == 3:
+                    self.summonerId3_buffer.append(str(summonerId))
+                    self.champId3_buffer.append(str(championId))
+                    self.kills3_buffer.append(str(kills))
+                    self.deaths3_buffer.append(str(deaths))
+                    self.assists3_buffer.append(str(assists))
+                    self.win3_buffer.append("b'1'" if win == True else "b'0'")
+
+                  if pidInt == 4:
+                    self.summonerId4_buffer.append(str(summonerId))
+                    self.champId4_buffer.append(str(championId))
+                    self.kills4_buffer.append(str(kills))
+                    self.deaths4_buffer.append(str(deaths))
+                    self.assists4_buffer.append(str(assists))
+                    self.win4_buffer.append("b'1'" if win == True else "b'0'")
+
+                  if pidInt == 5:
+                    self.summonerId5_buffer.append(str(summonerId))
+                    self.champId5_buffer.append(str(championId))
+                    self.kills5_buffer.append(str(kills))
+                    self.deaths5_buffer.append(str(deaths))
+                    self.assists5_buffer.append(str(assists))
+                    self.win5_buffer.append("b'1'" if win == True else "b'0'")
+
+                  if pidInt == 6:
+                    self.summonerId6_buffer.append(str(summonerId))
+                    self.champId6_buffer.append(str(championId))
+                    self.kills6_buffer.append(str(kills))
+                    self.deaths6_buffer.append(str(deaths))
+                    self.assists6_buffer.append(str(assists))
+                    self.win6_buffer.append("b'1'" if win == True else "b'0'")
+
+                  if pidInt == 7:
+                    self.summonerId7_buffer.append(str(summonerId))
+                    self.champId7_buffer.append(str(championId))
+                    self.kills7_buffer.append(str(kills))
+                    self.deaths7_buffer.append(str(deaths))
+                    self.assists7_buffer.append(str(assists))
+                    self.win7_buffer.append("b'1'" if win == True else "b'0'")
+
+                  if pidInt == 8:
+                    self.summonerId8_buffer.append(str(summonerId))
+                    self.champId8_buffer.append(str(championId))
+                    self.kills8_buffer.append(str(kills))
+                    self.deaths8_buffer.append(str(deaths))
+                    self.assists8_buffer.append(str(assists))
+                    self.win8_buffer.append("b'1'" if win == True else "b'0'")
+
+                  if pidInt == 9:
+                    self.summonerId9_buffer.append(str(summonerId))
+                    self.champId9_buffer.append(str(championId))
+                    self.kills9_buffer.append(str(kills))
+                    self.deaths9_buffer.append(str(deaths))
+                    self.assists9_buffer.append(str(assists))
+                    self.win9_buffer.append("b'1'" if win == True else "b'0'")
+
 
                   #Now it's time to do database stuff!
 
@@ -247,10 +560,12 @@ class GetMatches5Spider(scrapy.Spider):
                 sqlInsertInto += ", isPlatinum"
                 sqlValues += ", 1"
                 sqlOnDuplicate += ", isPlatinum = 1"
+                self.isPlatinum_buffer.append("b'1'")
             else: 
                 sqlInsertInto += ", isPlatinum"
                 sqlValues += ", 0"
                 sqlOnDuplicate += ", isPlatinum = 0"
+                self.isPlatinum_buffer.append("b'0'")
            
                 #More Plat Stuff (Possibly replace Champion.gg in the future)
 
