@@ -1,5 +1,5 @@
 /public/datadragon/img
 /public/datadragon/[0-9]*
-/src_srv/cfspider/cfspider/__pycache__/
-/src_srv/cfspider/cfspider/spiders/__pycache__/
+/src_srv/cfspider/cfspider/__pycache__/*
+/src_srv/cfspider/cfspider/spiders/__pycache__/*
 /src_srv/cfspider/cfspider/limits/*
