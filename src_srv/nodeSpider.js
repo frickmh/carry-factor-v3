@@ -34,11 +34,14 @@ module.exports = {
 
               var match = parseInt(pieces[pieces.length - 1].split('?')[0]) + 1;
 
-              currentMatch ++;
+              module.currentMatch ++;
 
-              var myUrl = "https://" + region + ".api.riotgames.com/lol/match/v3/matches/" + currentMatch + "?api_key=" + api_key;
+              var myUrl = "https://" + region + ".api.riotgames.com/lol/match/v3/matches/" + module.currentMatch + "?api_key=" + api_key;
               console.log(myUrl);
-              if (currentMatch <= endMatch) {
+ 
+              console.log(err);
+
+              if (module.currentMatch <= endMatch) {
                 spider.queue(myUrl, handleRequest);
               } else {
                 console.log("Sleeping, then continuing...");                
@@ -62,6 +65,7 @@ module.exports = {
             // new page crawled
             //console.log(doc.res); // response object
             console.log(doc.url); // page url
+            console.log(doc.res.statusCode);
             // uses cheerio, check its docs for more info
 
             var matchData = BuildMatch.build(doc.res);
@@ -87,17 +91,23 @@ module.exports = {
             }
 
 
-            curentMatch++;
+            module.currentMatch++;
 
-            var url = "https://" + region + ".api.riotgames.com/lol/match/v3/matches/" + currentMatch + "?api_key=" + api_key;
-            spider.queue(url, handleRequest);
+            var url = "https://" + region + ".api.riotgames.com/lol/match/v3/matches/" + module.currentMatch + "?api_key=" + api_key;
 
+            if ([403, 429, 502, 503, 504].includes(doc.res.statusCode)) {
+              setTimeout(function(){
+                spider.queue(url, handleRequest);
+              }, 30000);
+            } else {
+              spider.queue(url, handleRequest);
+            }
     };
 
-    var currentMatch = MatchLimits.readStart(region);
+    module.currentMatch = MatchLimits.readStart(region);
     var endMatch = MatchLimits.readStart(region);
 
-    console.log("Start: " + currentMatch + ", End: " + endMatch);
+    console.log("Start: " + module.currentMatch + ", End: " + endMatch);
 
     var api_key = 'RGAPI-5b0d8123-1e60-9d93-5d4e-a937592128e3';
 
@@ -112,7 +122,7 @@ module.exports = {
 
     // start crawling
     for (var i = 0; i < threads; i++) {
-      spider.queue("https://" + region + ".api.riotgames.com/lol/match/v3/matches/" + currentMatch + "?api_key=" + api_key, handleRequest);
+      spider.queue("https://" + region + ".api.riotgames.com/lol/match/v3/matches/" + module.currentMatch + "?api_key=" + api_key, handleRequest);
     }
   }
 }

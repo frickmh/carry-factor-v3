@@ -10,6 +10,8 @@ module.exports = {
 
     output = {};
 
+    console.log("Game ID: " + data.gameId + ", Queue ID:" + data.queueId);
+
     if (data.queueId == 420) {
       output.gameId = data.gameId;
       output.responseCode = response.statusCode;
@@ -35,6 +37,8 @@ module.exports = {
       output.isPlatinum = platCount > 5 ? "b'1'" : "b'0'";
 
     } 
+
+    console.log(output);
 
     return output;
   }
