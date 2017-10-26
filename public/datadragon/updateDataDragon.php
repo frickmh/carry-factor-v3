@@ -1,13 +1,27 @@
 <?php
 
 	//The path to DataDragon.
-	chdir("~/carry-factor-v3/public/datadragon");
+	//chdir("~/carry-factor-v3/public/datadragon/");
+	chdir("~/carry-factor-v3/public/datadragon/");
 
 	$url = "https://na1.api.riotgames.com/lol/static-data/v3/versions?api_key=RGAPI-5b0d8123-1e60-9d93-5d4e-a937592128e3";
-	
+
+        echo "\n";
+        echo "URL: $url";	
+        echo "\n";
+        echo "\n";
+
 	$responseJSON = json_decode(get_web_page($url)['body']);
-	
+ 	
+
+        echo "\n";
+        echo "\n";
+        echo "Response:$responseJSON";
+        echo "\n";
+        echo "\n";
+
 	$currentLOLVersion = $responseJSON[0];
+	//$currentLOLVersion = "7.20.3";
 
 	echo "<pre><div style='text-align: left'><br>Current Patch:"; print_r($currentLOLVersion); echo "</div></pre>";	
 	
@@ -30,6 +44,7 @@
         
 	//DataDragon patch!
 	$url = "http://ddragon.leagueoflegends.com/cdn/dragontail-$currentLOLVersion.tgz";
+        //$url = "datadragon-new-807633007.us-east-1.elb.amazonaws.com/cdn/dragontail-$currentLOLVersion.tgz";
 	
         $currentPieces = explode(".", $currentLOLVersion);
         $currentLOLVersionShort = "$currentPieces[0].$currentPieces[1]";

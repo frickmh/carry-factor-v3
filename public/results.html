@@ -806,7 +806,7 @@ GundayMonday joined the lobby.
 
         //console.log(outcome);
 
-        //console.log(champKey);
+        console.log(match.champ);
 
         var matchScoresHolder = $(".matchScoresHolder.slot" + slot);
 
@@ -818,7 +818,10 @@ GundayMonday joined the lobby.
 
         var imgChamp = $("<img/>").addClass('champ');
 
-        imgChamp.attr("src", "/datadragon/" + document.getElementById('patchDisplay').innerHTML + "/img/champion/" + champKey + ".png");
+        var imgUrl = "/datadragon/" + document.getElementById('patchDisplay').innerHTML + "/img/champion/" + champKey + ".png";
+        console.log(imgUrl);
+
+        imgChamp.attr("src", imgUrl);
         imgChamp.attr("alt", champKey + ".png");
         imgChamp.attr("title", champKey + " " + outcome + " at " + dateString);
         imgChamp.attr("style", "width:1.4vw;cursor:pointer;display:block;box-shadow: 1.5px 1.5px .75px grey; border-radius:3px;");

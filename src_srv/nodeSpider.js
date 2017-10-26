@@ -41,13 +41,13 @@ module.exports = {
  
               console.log(err);
 
-              if (module.currentMatch <= endMatch) {
+              if (module.currentMatch <= module.endMatch) {
                 spider.queue(myUrl, handleRequest);
               } else {
                 console.log("Sleeping, then continuing...");                
                 setTimeout(function() {
-                    endMatch = MatchLimits.readEnd(region);
-                    console.log("End Match: " + endMatch);
+                    module.endMatch = MatchLimits.readEnd(region);
+                    console.log("End Match: " + module.endMatch);
                     spider.queue(myUrl, handleRequest);
                 }, 5000);
               }
@@ -95,8 +95,10 @@ module.exports = {
 
             var url = "https://" + region + ".api.riotgames.com/lol/match/v3/matches/" + module.currentMatch + "?api_key=" + api_key;
 
-            if ([403, 429, 502, 503, 504].includes(doc.res.statusCode)) {
+            if ([403, 429, 502, 503, 504].includes(doc.res.statusCode) || module.currentMatch > module.endMatch) {
               setTimeout(function(){
+                console.log("");
+                console.log("Module sleeping! Status Code: " + doc.res.statusCode + ", module.currentMatch: " + module.currentMatch + ", module.endMatch: " + module.endMatch);
                 spider.queue(url, handleRequest);
               }, 30000);
             } else {
@@ -105,9 +107,9 @@ module.exports = {
     };
 
     module.currentMatch = MatchLimits.readStart(region);
-    var endMatch = MatchLimits.readStart(region);
+    module.endMatch = MatchLimits.readStart(region);
 
-    console.log("Start: " + module.currentMatch + ", End: " + endMatch);
+    console.log("Start: " + module.currentMatch + ", End: " + module.endMatch);
 
     var api_key = 'RGAPI-5b0d8123-1e60-9d93-5d4e-a937592128e3';
 
