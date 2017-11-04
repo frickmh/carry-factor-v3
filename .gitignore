@@ -1,5 +1,6 @@
 /public/datadragon/img
 /public/datadragon/[0-9]*
+/public/datadragon/dragontail*
 /src_srv/cfspider/cfspider/__pycache__/*
 /src_srv/cfspider/cfspider/spiders/__pycache__/*
 /src_srv/cfspider/cfspider/limits/*
