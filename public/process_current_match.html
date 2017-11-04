@@ -608,15 +608,15 @@ GundayMonday joined the lobby.
 		  //Iterate through the matches, adding any matches where the player fits to playerMatches.
 		  for (var j = 0; j < matches.length; j++) {
 		    for (var k = 0; k < 10; k++) {
-                      //console.log("k loop");
-                      //console.log(matches[j]["summonerId" + k]);
+            //console.log("k loop");
+            //console.log(matches[j]["summonerId" + k]);
 		      if (matches[j]["summonerId" + k] == player.summonerId) {
-                        //console.log(champsListByIdJSON[0]);
-                        //console.log(matches[j]["champId" + k]);
+            //console.log(champsListByIdJSON[0]);
+            //console.log(matches[j]["champId" + k]);
 
-			var match = { "champ" : champsListByIdJSON[0].data[matches[j]["champId" + k]], "kills" : matches[j]["kills" + k], "deaths" : matches[j]["deaths" + k], "assists" : matches[j]["assists" + k], "win" : matches[j]["win" + k].data[0], "gameCreation" : matches[j].gameCreation, "gameId" : matches[j].gameId}; 
-			//console.log(match);
-			playerMatches.push(match);
+            var match = { "champ" : champsListByIdJSON[0].data[matches[j]["champId" + k]], "kills" : matches[j]["kills" + k], "deaths" : matches[j]["deaths" + k], "assists" : matches[j]["assists" + k], "win" : matches[j]["win" + k].data[0], "gameCreation" : matches[j].gameCreation, "gameId" : matches[j].gameId}; 
+            //console.log(match);
+            playerMatches.push(match);
 
 		      }
 		    }
@@ -632,12 +632,12 @@ GundayMonday joined the lobby.
 
 		  playerMatchesFull = playerMatches;
                   
-                  playerMatches.sort(compare);
+      playerMatches.sort(compare);
 
 		  playerMatches = playerMatches.slice(0,10);
 
 
-		  //console.log(playerMatches);
+      var playerMatchesToUpdate = [];
 
 
 		  var matchList = (player.matchList != undefined && player.matchList.status == undefined ) ? player.matchList.matches : {};
@@ -657,6 +657,7 @@ GundayMonday joined the lobby.
 
 		      //console.log("Not found, adding!");
 
+          match.slot = j;
 		      playerMatches.push(match);
 		    }
 
@@ -673,6 +674,9 @@ GundayMonday joined the lobby.
 
 
                   $.each(playerMatches, function(j, match) {
+
+                      if (match.toUpdate == true)
+                        playerMatchesToUpdate.push(match);
 
                       var outcome = match.win != undefined ? (match.win ? "win" : "loss") : "unknown";
 
@@ -700,25 +704,27 @@ GundayMonday joined the lobby.
 
                       trRecentWins.append(td);
 
-		      if (match.toUpdate != undefined) {
+                      if (match.toUpdate != undefined) {
 
-			console.log(match);
+                        console.log(match);
 
-			urlUpdate = "enterGameAndRetrieve?region=" + data.region + "&match=" + match.gameId + "&champ=" + match.champ.id;
+                        urlUpdate = "enterGameAndRetrieve?region=" + data.region + "&match=" + match.gameId + "&champ=" + match.champ.id;
 
-			$.ajax({
-			  url: urlUpdate,
-			  type: 'GET',
-			  slot: i,
-			  index: j,
+                        /*
+
+                        $.ajax({
+                          url: urlUpdate,
+                          type: 'GET',
+                          slot: i,
+                          index: j,
                           champname: match.champ.name,
                           dateString: dateString,
-			  success: function(data) {
-			    //console.log(data);
-                            //console.log(this);
-			    var tdMatch = $(".tableRecentWins.slot" + this.slot + " td:eq(" + (this.index) + ")");
+                          success: function(data) {
+                            //console.log(data);
+                                              //console.log(this);
+                            var tdMatch = $(".tableRecentWins.slot" + this.slot + " td:eq(" + (this.index) + ")");
 
-			    //console.log(data.match.win);
+                            //console.log(data.match.win);
 
                             if (data.match != undefined) {
                               tdMatch.removeClass("unknown");
@@ -731,18 +737,117 @@ GundayMonday joined the lobby.
                             }
 
 
-			    //console.log(tdMatch[0]);
+                            //console.log(tdMatch[0]);
 
-			  }
+                          }
 
-			});
+                        });
+
+                        */
+
                       }
 
 
                   });
 
-                  $(".recentWins:eq(" + i + ") > tbody").append(trRecentWins);
+ 
+                  console.log(data.region);
+                  console.log(playerMatchesToUpdate);
 
+                  var urlUpdate = "enterMultipleGamesAndRetrieve?region=" + data.region + "&matches=" + JSON.stringify(playerMatchesToUpdate);
+
+                  console.log(urlUpdate);
+
+                  
+                  $.ajax({
+                    url: urlUpdate,
+                    type: 'GET',
+                    slot: i,
+                    matches: playerMatches,
+                    //dateString: dateString,
+                    success: function(data) {
+
+											console.log("Ajax Success!");
+											console.log(data);
+											console.log(this.slot);
+											console.log(this.matches);
+  
+											for (match in this.matches) {
+
+												//console.log(data[this.matches[match].gameId].champIds[this.matches[match].champ.id]);
+
+												var gameId = this.matches[match].gameId;
+
+												//console.log(match);
+												//console.log(gameId);
+
+												if (data.matches[gameId] == undefined)
+													continue;
+
+												var ajaxMatchData = data.matches[gameId].champIds[this.matches[match].champ.id];
+
+												//console.log(ajaxMatchData);
+
+												this.matches[match].kills = ajaxMatchData.kills;
+												this.matches[match].deaths = ajaxMatchData.deaths;
+												this.matches[match].assists = ajaxMatchData.assists;
+												this.matches[match].win = ajaxMatchData.win;
+												this.matches[match].toUpdate = false;
+
+                        var tdMatch = $(".tableRecentWins.slot" + this.slot + " td:eq(" + (ajaxMatchData.slot) + ")");
+
+                        //console.log(tdMatch);
+
+                        if (data.matches[gameId] == undefined)
+                          continue;
+
+												//tdMatch.find("img:eq(0)").attr("title", tdMatch.find("img:eq(0)").attr("title").replace("unknown", ajaxMatchData.win == 1 ? "win" : "loss"));
+												tdMatch.removeClass("unknown");
+												tdMatch.addClass(ajaxMatchData.win == 1 ? "win" : "loss");
+
+                        var titleOld = tdMatch.attr("title");
+
+                        var titleNew = titleOld.replace("No match data for game", ajaxMatchData.kills + "/" + ajaxMatchData.deaths + "/" + ajaxMatchData.assists + " " + this.matches[match].champ.name + (ajaxMatchData.win == 1 ? " win" : " loss"));
+
+                        tdMatch.attr("title", titleNew);
+
+												//tdMatch.attr("title", data.match.kills + "/" + data.match.deaths + "/" + data.match.assists + " " + this.champname + " " + (data.match.win == 1 ? "win" : "loss"));
+
+
+
+
+
+                        /*
+												var tdMatch = $(".matchScoresHolder.slot" + this.slot + " td:eq(" + (ajaxMatchData.slot + 1) + ")");
+
+
+
+												tdMatch.removeClass("unknown");
+												tdMatch.addClass(ajaxMatchData.win == 1 ? "win" : "loss");
+
+												tdMatch.find("div:eq(1)").html(ajaxMatchData.kills + "<br>" + ajaxMatchData.deaths + "<br>" + ajaxMatchData.assists);
+
+												tdMatch.find("img:eq(0)").attr("title", tdMatch.find("img:eq(0)").attr("title").replace("unknown", ajaxMatchData.win == 1 ? "win" : "loss"));
+
+												console.log(tdMatch);
+
+                        */
+
+											}
+
+                    
+                    
+                    }
+                  });
+
+                  
+                
+
+
+
+
+
+                  $(".recentWins:eq(" + i + ") > tbody").append(trRecentWins);
 
                   //console.log(playerMatchesFull);
 

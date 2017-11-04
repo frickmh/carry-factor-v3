@@ -792,6 +792,8 @@ GundayMonday joined the lobby.
 
       function drawMatch(slot, match, region, playerId, index) {
 
+        console.log(index);
+
         var outcome = match.win != undefined ? (match.win == 1 ? 'win' : 'loss') : "unknown";
         
         var champKey = match.champ.key;
@@ -848,7 +850,11 @@ GundayMonday joined the lobby.
 
           console.log(match);
 
-          urlUpdate = "enterGameAndRetrieve?region=" + region + "&match=" + match.gameId + "&champ=" + match.champ.id;
+          //Temporarily commented so I can use my app while I play today.
+          return match;
+
+          /*
+          var urlUpdate = "enterGameAndRetrieve?region=" + region + "&match=" + match.gameId + "&champ=" + match.champ.id;
 
           $.ajax({
             url: urlUpdate,
@@ -874,12 +880,15 @@ GundayMonday joined the lobby.
             }
             
           });
+          */
 
 
         }
       
 
       } 
+
+      var matchesToUpdate = [];
 
       for (var j = 0; j < 10; j++) {
 
@@ -890,15 +899,91 @@ GundayMonday joined the lobby.
 
         var match = playerMatches[j];
 
-        drawMatch(i, match, region, player.id, j);
+        match.slot = j;
 
+        console.log(match);
 
+        var matchResult = drawMatch(i, match, region, player.id, j);
 
+        if (matchResult != undefined)
+          matchesToUpdate.push(matchResult);
 
       }
+
+      console.log(matchesToUpdate);
+
+
+      if (matchesToUpdate.length > 0) {
+
+        var urlUpdate = "enterMultipleGamesAndRetrieve?region=" + region + "&matches=" + JSON.stringify(matchesToUpdate);
+
+        console.log(urlUpdate);     
+
+
+        
+        $.ajax({
+          url: urlUpdate,
+          type: 'GET',
+          slot: i,
+          matches: playerMatches,
+          success: function(data) {
+
+            console.log("Ajax Success!");
+            console.log(data);
+            console.log(this.slot);
+            console.log(this.matches);
+
+            for (match in this.matches) {
+
+              //console.log(data[this.matches[match].gameId].champIds[this.matches[match].champ.id]);
+
+              var gameId = this.matches[match].gameId;
+
+              console.log(match);
+              console.log(gameId);
+
+              if (data.matches[gameId] == undefined)
+                continue;
+
+              var ajaxMatchData = data.matches[gameId].champIds[this.matches[match].champ.id];
+
+              console.log(ajaxMatchData);
+
+              this.matches[match].kills = ajaxMatchData.kills;
+              this.matches[match].deaths = ajaxMatchData.deaths;
+              this.matches[match].assists = ajaxMatchData.assists;
+              this.matches[match].win = ajaxMatchData.win;
+              this.matches[match].toUpdate = false;
+
+              var tdMatch = $(".matchScoresHolder.slot" + this.slot + " td:eq(" + (ajaxMatchData.slot + 1) + ")");
+
+
+
+              tdMatch.removeClass("unknown");
+              tdMatch.addClass(ajaxMatchData.win == 1 ? "win" : "loss");
+
+              tdMatch.find("div:eq(1)").html(ajaxMatchData.kills + "<br>" + ajaxMatchData.deaths + "<br>" + ajaxMatchData.assists);
+
+              tdMatch.find("img:eq(0)").attr("title", tdMatch.find("img:eq(0)").attr("title").replace("unknown", ajaxMatchData.win == 1 ? "win" : "loss"));
+
+              console.log(tdMatch);
+
+
+            }
+
+            console.log(this.matches);
+
+
+          }
+
+        });
+
+      }
+
     }
 
     //Sort 'Recent Roles' Table such that the most frequent roles are on top, and the most frequent champs are to the left.
+
     function sortRoles() {
 
       //Sort rows by frequency.

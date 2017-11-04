@@ -19,7 +19,11 @@ module.exports = {
 		  //console.log(result);
 		  //console.log(result[0].kills);
 		  console.log("Query result:");
-		  console.log(result);
+
+      if (result.length > 200)
+   		  console.log(result.slice(0,200) + " ...");
+      else
+        console.log(result);
 
 
 		} else {

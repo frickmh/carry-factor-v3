@@ -107,7 +107,7 @@ module.exports = {
     };
 
     module.currentMatch = MatchLimits.readStart(region);
-    module.endMatch = MatchLimits.readStart(region);
+    module.endMatch = MatchLimits.readEnd(region);
 
     console.log("Start: " + module.currentMatch + ", End: " + module.endMatch);
 

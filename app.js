@@ -57,6 +57,7 @@ var getPatch= require("./src_srv/getPatch.js");
 var getChampStats= require("./src_srv/getChampStats.js");
 var checkForLiveGame = require("./src_srv/checkForLiveGame.js");
 var enterGameAndRetrieve = require("./src_srv/enterGameAndRetrieve.js");
+var enterMultipleGamesAndRetrieve = require("./src_srv/enterMultipleGamesAndRetrieve.js");
 
 app.use('/getPreGameJSON*', getPreGameJSON.getPreGameJSON);
 app.use('/getCurrentGameJSON*', getCurrentGameJSON.getCurrentGameJSON);
@@ -65,6 +66,7 @@ app.use('/getPatchFull', getPatch.getPatchFull);
 app.use('/checkGame', checkForLiveGame.checkGame);
 app.use('/getChampStats*', getChampStats.getStats);
 app.use('/enterGameAndRetrieve*', enterGameAndRetrieve.enter);
+app.use('/enterMultipleGamesAndRetrieve*', enterMultipleGamesAndRetrieve.enter);
 
 
 
