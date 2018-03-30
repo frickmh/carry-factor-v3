@@ -358,6 +358,7 @@ module.exports = {
 
         currentPlayer.masteries = data.participants[i].masteries;
         currentPlayer.runes = data.participants[i].runes;
+        currentPlayer.perks = data.participants[i].perks;
 
         currentPlayer.spells = {};
         currentPlayer.spells[0] = data.participants[i].spell1Id;

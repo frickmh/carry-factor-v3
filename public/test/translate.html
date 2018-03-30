@@ -1,0 +1,42 @@
+<html>
+  <body>
+
+    <textarea id="myTextarea"></textarea>
+
+    <button onclick='mTranslate();'>Button</button>
+
+    <h3>Output</h3>
+
+    <div id='outputBox' style="background-color: #EEEEEE;">Output will go here.</div>
+
+    <script
+			  src="https://code.jquery.com/jquery-3.2.1.js"
+			  integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
+			  crossorigin="anonymous"></script>
+
+    <script>
+
+      function mTranslate() {
+
+        var myText = document.getElementById("myTextarea").value;
+
+        console.log(myText);
+
+        $.ajax({
+          url: "https://translate.google.com/#en/de/hello",
+          success: function(data) {
+            console.log(data);
+
+          }
+        });
+
+      }
+
+			$( document ).ready(function() {
+					console.log( "ready!" );
+			});
+
+    </script>
+
+  </body>
+</html>

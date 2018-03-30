@@ -466,12 +466,13 @@ GundayMonday joined the lobby.
               //Gather all JSON at the beginning of the Ajax call.
               var sspellAjax = $.getJSON("/datadragon/" + data.patch + "/data/en_US/summoner.json");
               var runeAjax = $.getJSON("/datadragon/" + data.patch + "/data/en_US/rune.json");
+              var perkAjax = $.getJSON("/datadragon/perksById.json");
               var masteryAjax = $.getJSON("/datadragon/" + data.patch + "/data/en_US/mastery.json");
               var champSpellAjax = $.getJSON("/data/champSpells.json");
               var championsSummaryAjax = $.getJSON("/data/championsSummary.json");
               var champsListByIdAjax = $.getJSON("./data/champsList.json");
               
-              $.when(sspellAjax, runeAjax, masteryAjax, champSpellAjax, championsSummaryAjax, champsListByIdAjax).done(function(sspellJSON, runeJSON, masteryJSON, champSpellJSON, championsSummaryJSON, champsListByIdJSON){
+              $.when(sspellAjax, runeAjax, perkAjax, masteryAjax, champSpellAjax, championsSummaryAjax, champsListByIdAjax).done(function(sspellJSON, runeJSON, perkJSON, masteryJSON, champSpellJSON, championsSummaryJSON, champsListByIdJSON){
                 console.log(sspellJSON);                  
               
                 var tableTeam = $(".tableTeam:eq(0)").clone();
@@ -934,6 +935,68 @@ GundayMonday joined the lobby.
                   var tableRunesDisplay = $('<table></table>').addClass('tableRunesDisplay');
 
                   //console.log(runeJSON);
+
+                  console.log(perkJSON[0]);
+                  console.log(player.perks);
+                  
+
+                  $.each(player.perks.perkIds, function(j, perk) {
+                    console.log(perk);
+                    console.log(perkJSON[0][perk + ""]);
+
+                    var mPerk = perkJSON[0][perk + ""];
+
+                    var tr = $('<tr></tr>');
+
+                    var span = $('<span></span>').html(mPerk.name);
+
+                    var tooltipPerk = $('<span></span>').addClass('tooltip');
+
+                    tooltipPerk.attr("title", perk + " " + mPerk.longDesc);
+
+                    var style = 0;
+
+                    if (j < 4) 
+                      style = player.perks.perkStyle;
+                    else
+                      style = player.perks.perkSubStyle;
+
+                    console.log(style);
+
+                    switch(style) {
+                      case 8000: //Precision, Yellow
+                        tooltipPerk.css("background-color", "#BBBB00");
+                        break;
+                      case 8100: //Domination, Red
+                        tooltipPerk.css("background-color", "#AA0000");
+                        break;
+                      case 8200: //Sorcery, Blue
+                        tooltipPerk.css("background-color", "#110099");
+                        break;
+                      case 8300: //Inspiration, Cyan
+                        tooltipPerk.css("background-color", "#00EEEE");
+                        break;
+                      case 8400: //Resolve, Green
+                        tooltipPerk.css("background-color", "#008800");
+                        break;
+                      default:
+                        break;
+
+
+                    }
+
+
+                    tooltipPerk.css("width", "10px");
+                    tooltipPerk.css("height", "10px");
+
+                    tr.append(tooltipPerk);
+
+                    tr.append(span);
+
+                    tableRunesDisplay.append(tr);
+
+									});
+
 
                   $.each(player.runes, function(j, rune) {
                       var tr = $('<tr></tr>');

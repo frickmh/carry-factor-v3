@@ -1,6 +1,6 @@
 module.exports = {
   //Requires a valid region (e.g. 'na1') and a valid number of threads (20 threads is about 2400 matches/min, which is about what I want)
-  start: function(region, threads) {
+  start: function(region, threads, verbose) {
     var Spider = require('node-spider');
 
     var BuildMatch = require('./nodeSpiderModules/buildMatchData.js');
@@ -17,7 +17,8 @@ module.exports = {
             // How long to wait after each request
             delay: 0,
             // A stream to where internal logs are sent, optional
-            logs: process.stderr,
+            //logs: process.stderr,
+            logs: null,
             // Re-visit visited URLs, false by default
             allowDuplicates: true,
             // If `true` all queued handlers will be try-catch'd, errors go to `error` callback
@@ -37,17 +38,27 @@ module.exports = {
               module.currentMatch ++;
 
               var myUrl = "https://" + region + ".api.riotgames.com/lol/match/v3/matches/" + module.currentMatch + "?api_key=" + api_key;
-              console.log(myUrl);
+
+              if (verbose) {
+                console.log(myUrl);
  
-              console.log(err);
+                console.log(err);
+              }
 
               if (module.currentMatch <= module.endMatch) {
                 spider.queue(myUrl, handleRequest);
               } else {
-                console.log("Sleeping, then continuing...");                
+                if (verbose) {
+                  console.log("Sleeping, then continuing...");                
+                }
+
                 setTimeout(function() {
                     module.endMatch = MatchLimits.readEnd(region);
-                    console.log("End Match: " + module.endMatch);
+                    
+                    if (verbose) {
+                      console.log("End Match: " + module.endMatch);
+                    }
+
                     spider.queue(myUrl, handleRequest);
                 }, 5000);
               }
@@ -64,22 +75,28 @@ module.exports = {
     var handleRequest = function(doc) {
             // new page crawled
             //console.log(doc.res); // response object
-            console.log(doc.url); // page url
-            console.log(doc.res.statusCode);
+            if (verbose) {
+              console.log(doc.url); // page url
+              console.log(doc.res.statusCode);
             // uses cheerio, check its docs for more info
+            }
 
-            var matchData = BuildMatch.build(doc.res);
+            var matchData = BuildMatch.build(doc.res, verbose);
 
             if (matchData.gameId != undefined) {
               buffer.push(matchData);
             }
 
-            console.log("Buffer Length: " + buffer.length);
+            if (verbose) {
+              console.log("Buffer Length: " + buffer.length);
+            }
 
             if (buffer.length > 10) {
               var bufferData = ReadBuffer.read(buffer);
 
-              console.log(bufferData);
+              if (verbose) {
+                console.log(bufferData);
+              }
 
               BasicQuery.query(con, bufferData.sql);
 
@@ -97,8 +114,11 @@ module.exports = {
 
             if ([403, 429, 502, 503, 504].includes(doc.res.statusCode) || module.currentMatch > module.endMatch) {
               setTimeout(function(){
-                console.log("");
-                console.log("Module sleeping! Status Code: " + doc.res.statusCode + ", module.currentMatch: " + module.currentMatch + ", module.endMatch: " + module.endMatch);
+                if (verbose) {
+                  console.log("");
+                  console.log("Module sleeping! Status Code: " + doc.res.statusCode + ", module.currentMatch: " + module.currentMatch + ", module.endMatch: " + module.endMatch);
+                }
+
                 spider.queue(url, handleRequest);
               }, 30000);
             } else {

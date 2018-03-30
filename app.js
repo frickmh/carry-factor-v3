@@ -93,6 +93,7 @@ app.use(function(err, req, res, next) {
 
 var NodeSpider = require('./src_srv/nodeSpider.js');
 
-NodeSpider.start('na1', 10);
+//Region, threads (speed), verbose
+NodeSpider.start('na1', 15, false);
 
 module.exports = app;

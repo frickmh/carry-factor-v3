@@ -2,15 +2,22 @@ module.exports = {
   init: function() {
 
   },
-  build: function(response) {
+  build: function(response, verbose) {
 
-    console.log("Building!");
 
     var data = JSON.parse(response.body);
 
     output = {};
 
-    console.log("Game ID: " + data.gameId + ", Queue ID:" + data.queueId);
+    if (verbose) {
+      console.log("Building!");
+      console.log("Game ID: " + data.gameId + ", Queue ID:" + data.queueId);
+    } else if (data.gameId % 100 == 0) {
+      console.log("Game ID: " + data.gameId);
+    }
+
+
+
 
     if (data.queueId == 420) {
       output.gameId = data.gameId;
@@ -38,7 +45,9 @@ module.exports = {
 
     } 
 
-    console.log(output);
+    if (verbose) {
+      console.log(output);
+    }
 
     return output;
   }
